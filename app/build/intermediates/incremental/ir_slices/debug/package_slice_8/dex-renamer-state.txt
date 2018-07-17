@@ -1,0 +1,4 @@
+#Mon Jul 16 18:14:25 BST 2018
+base.0=/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/transforms/dexMerger/debug/60
+path.0=classes.dex
+renamed.0=classes.dex

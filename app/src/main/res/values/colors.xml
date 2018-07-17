@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#b0b1fd</color>
+    <color name="colorAccent">#f77172c1</color>
+    <color name="colorNavBackground">#f7f7f7</color>
+    <color name="colorToDoBackground">#f2f2f2</color>
+    <color name="colorFontStyle">#777777</color>
+    <color name="colorTint">#555555</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorDelete">#ff90a8</color>
+    <color name="colorCompleted">#e2bbce</color>
+
+    <color name="colorGradient1">#ceb8ff</color>
+    <color name="colorGradient2">#a38cf7</color>
+    <color name="colorPrimaryDark">#16b398</color>
+
+</resources>

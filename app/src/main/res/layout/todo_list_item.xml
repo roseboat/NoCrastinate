@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/to_do_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/margin_small"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="@dimen/margin_small"
+    android:background="@color/colorToDoBackground"
+    android:gravity="center">
+
+    <CheckBox
+        android:id="@+id/toDoCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="center"
+        android:layout_row="0" />
+
+    <LinearLayout
+        android:id="@+id/toDoLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/toDoName"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:text="ToDoName"
+            android:textColor="@color/colorBlack"
+            android:textSize="17dp" />
+
+
+        <TextView
+            android:id="@+id/toDoDueDate"
+            android:layout_width="280dp"
+            android:layout_height="25dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="8dp"
+            android:text="due date"
+            android:textSize="14dp"
+            android:textStyle="italic"
+            app:layout_constraintTop_toBottomOf="@+id/toDoName" />
+
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/toDoStar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:button="@drawable/star_selector"
+        android:layout_row="0" />
+
+</android.widget.LinearLayout>
+
