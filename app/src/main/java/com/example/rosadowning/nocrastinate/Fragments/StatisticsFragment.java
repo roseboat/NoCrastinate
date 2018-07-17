@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.joda.time.DateTime;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -56,7 +58,6 @@ public class StatisticsFragment extends Fragment {
     private Button mOpenUsageSettingButton;
     private Spinner mSpinner;
     private LinearLayout mUsagePopUp;
-
 
     @Nullable
     @Override
@@ -113,9 +114,18 @@ public class StatisticsFragment extends Fragment {
                             getUsageStatistics(statsUsageInterval.mInterval);
                     Collections.sort(usageStatsList, new LastTimeLaunchedComparatorDesc());
                     updateAppsList(usageStatsList);
+                    long totalTime = 0;
+                    for (UsageStats stats : usageStatsList){
+                        totalTime += stats.getTotalTimeInForeground();
+                    }
+                    Log.d(TAG, "total time = " + totalTime);
+                    SharedPreferences sharedPreferences = getContext().getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putLong("overallTime", totalTime);
+                    editor.apply();
+
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -125,6 +135,8 @@ public class StatisticsFragment extends Fragment {
     public void onResume(){
         super.onResume();
         getIconStatsData();
+//        FragmentTransaction ft = getFragmentManager().beginTransaction();
+//        ft.detach(this).attach(this).commit();
     }
 
     public List<UsageStats> getUsageStatistics(int intervalType) {
@@ -155,10 +167,28 @@ public class StatisticsFragment extends Fragment {
         }
         return queryUsageStats;
     }
+
     public void getIconStatsData(){
 
-        // Number of unlocks
+        // Overall time spent in hours/minutes
         SharedPreferences sharedPreferences = this.getContext().getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
+        long overallTime = sharedPreferences.getLong("overallTime",0);
+        DateTime overallTimeDT = new DateTime(overallTime);
+        int seconds = overallTimeDT.getSecondOfMinute();
+        int minutes = overallTimeDT.getMinuteOfHour();
+        int hour = overallTimeDT.getHourOfDay();
+        String time = null;
+        if (minutes < 1){
+            time = seconds + " secs";
+        } else if (hour < 1){
+            time = minutes + " mins";
+        } else {
+            time = hour + "hrs + " + minutes + " mins";
+        }
+        TextView textViewOverallTime = (TextView) getView().findViewById(R.id.text_view_overall_time);
+        textViewOverallTime.setText(time);
+
+        // Number of unlocks
         int unlocks = sharedPreferences.getInt("noOfUnlocks",0);
         Log.d("STATS", "SHARED PREFERENCES UNLOCKS = " + unlocks, null);
         TextView textViewUnlocks = (TextView) getView().findViewById(R.id.text_view_no_of_unlocks);

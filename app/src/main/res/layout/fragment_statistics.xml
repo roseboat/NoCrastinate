@@ -137,6 +137,7 @@
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:text=" mins"
+                    android:id="@+id/text_view_overall_time"
                     android:textAlignment="center" />
             </LinearLayout>
 

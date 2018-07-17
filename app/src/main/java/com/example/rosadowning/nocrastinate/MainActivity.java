@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         final IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
         filter.addAction(Intent.ACTION_SCREEN_OFF);
         filter.addAction(Intent.ACTION_USER_PRESENT);
-        filter.addAction(Intent.ACTION_MY_PACKAGE_SUSPENDED);
         registerReceiver(mReceiver, filter);
 
         createNotificationChannel();

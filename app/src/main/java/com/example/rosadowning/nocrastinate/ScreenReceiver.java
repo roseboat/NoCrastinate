@@ -30,12 +30,12 @@ public class ScreenReceiver extends BroadcastReceiver {
             editor.putInt("noOfUnlocks", ++unlocks);
             editor.apply();
 
+            long currentTime = System.currentTimeMillis();
+            editor.putLong("startTime", currentTime);
+
+
+
             Log.e("SCREEN RECEIVER", "USER IS PRESENT. UNLOCKS = " + unlocks);
-        } else if (intent.getAction().equals(Intent.ACTION_MY_PACKAGE_SUSPENDED)){
-
-
-            Log.e("SCREEN RECEIVER", "PACKAGE SUSPENDED");
-
         }
     }
 }
