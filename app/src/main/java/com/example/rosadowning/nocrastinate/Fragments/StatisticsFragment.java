@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -16,8 +17,13 @@ import android.view.ViewGroup;
 
 import com.example.rosadowning.nocrastinate.Adapters.AppStatisticsAdapter;
 import com.example.rosadowning.nocrastinate.CustomUsageStats;
+import com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract;
+import com.example.rosadowning.nocrastinate.MainActivity;
 import com.example.rosadowning.nocrastinate.R;
 import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
+import com.example.rosadowning.nocrastinate.StatsComponent;
+import com.example.rosadowning.nocrastinate.StatsComposite;
+import com.example.rosadowning.nocrastinate.StatsLeaf;
 
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
@@ -37,12 +43,16 @@ import android.widget.TextView;
 
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class StatisticsFragment extends Fragment {
 
@@ -55,6 +65,7 @@ public class StatisticsFragment extends Fragment {
     private Button mOpenUsageSettingButton;
     private Spinner mSpinner;
     private LinearLayout mUsagePopUp;
+    private StatsLeaf dailyStats;
 
     @Nullable
     @Override
@@ -74,9 +85,8 @@ public class StatisticsFragment extends Fragment {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mUsageStatsManager = (UsageStatsManager) getActivity().getSystemService(Context.USAGE_STATS_SERVICE);
     }
 
@@ -93,7 +103,7 @@ public class StatisticsFragment extends Fragment {
         mOpenUsageSettingButton = (Button) rootView.findViewById(R.id.button_open_usage_setting);
         mSpinner = (Spinner) rootView.findViewById(R.id.spinner_time_span);
 
-        getIconStatsData();
+        getDailyIconData();
 
         SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.action_list, android.R.layout.simple_spinner_dropdown_item);
@@ -112,6 +122,18 @@ public class StatisticsFragment extends Fragment {
                     Collections.sort(usageStatsList, new MostUsedComparatorDesc());
                     updateAppsList(usageStatsList);
                 }
+                if (!statsUsageInterval.mStringRepresentation.equals("Daily")){
+
+                StatsDBContract.StatsDBHelper statsHelper = new StatsDBContract.StatsDBHelper(getContext());
+                SQLiteDatabase db = statsHelper.getReadableDatabase();
+                StatsComponent composite = statsHelper.getStatsForInterval(statsUsageInterval.mStringRepresentation);
+
+                int compositeUnlocks = dailyStats.getNoOfUnlocks() + composite.getNoOfUnlocks();
+                long compositeOverallTime = dailyStats.getOverallTime() + composite.getOverallTime();
+                long compositeTasksCompleted = dailyStats.getTasksCompleted() + composite.getTasksCompleted();
+                setIconStats(compositeUnlocks, compositeOverallTime, compositeTasksCompleted);
+                }
+
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -121,9 +143,7 @@ public class StatisticsFragment extends Fragment {
 
     public void onResume(){
         super.onResume();
-        getIconStatsData();
-//        FragmentTransaction ft = getFragmentManager().beginTransaction();
-//        ft.detach(this).attach(this).commit();
+        getDailyIconData();
     }
 
     public List<UsageStats> getUsageStatistics(int intervalType) {
@@ -156,31 +176,33 @@ public class StatisticsFragment extends Fragment {
         return queryUsageStats;
     }
 
-    public void getIconStatsData(){
+    public void getDailyIconData(){
 
-        SharedPreferences sharedPreferences = this.getContext().getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
-        long overallTime = sharedPreferences.getLong("totalDuration", 0);
-        String time = timeToString(overallTime);
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
 
-
-
-
-
-
-        Log.d(TAG, "String time = " + time);
-        TextView textViewOverallTime = (TextView) getView().findViewById(R.id.text_view_overall_time);
-        textViewOverallTime.setText(time);
-
-        // Number of unlocks
         int unlocks = sharedPreferences.getInt("noOfUnlocks",0);
-        Log.d("STATS", "SHARED PREFERENCES UNLOCKS = " + unlocks, null);
+        long overallTime = calculateOverallTime();
+
+        ToDoReaderContract.ToDoListDbHelper toDoHelper = new ToDoReaderContract.ToDoListDbHelper(getContext());
+        SQLiteDatabase sql = toDoHelper.getWritableDatabase();
+        long tasksCompleted = toDoHelper.getNoOfCompletedToDos("Daily");
+        setIconStats(unlocks, overallTime, tasksCompleted);
+
+        dailyStats = new StatsLeaf();
+        dailyStats.setTasksCompleted(tasksCompleted);
+        dailyStats.setNoOfUnlocks(unlocks);
+        dailyStats.setOverallTime(overallTime);
+    }
+
+    public void setIconStats(int unlocks, long time, long tasksCompleted){
+
         TextView textViewUnlocks = (TextView) getView().findViewById(R.id.text_view_no_of_unlocks);
         textViewUnlocks.setText(unlocks + " unlocks");
 
-        // Tasks Completed
-        ToDoReaderContract.ToDoListDbHelper dbHelper = new ToDoReaderContract.ToDoListDbHelper(getContext());
-        SQLiteDatabase sql = dbHelper.getWritableDatabase();
-        long tasksCompleted = dbHelper.getNoOfCompletedToDos("DAILY");
+        String timeString = timeToString(time);
+        TextView textViewOverallTime = (TextView) getView().findViewById(R.id.text_view_overall_time);
+        textViewOverallTime.setText(timeString);
+
         TextView textViewTasks = (TextView) getView().findViewById(R.id.text_view_tasks_completed);
         textViewTasks.setText(tasksCompleted + " tasks");
 
@@ -188,42 +210,41 @@ public class StatisticsFragment extends Fragment {
 
     public String timeToString(long duration) {
 
-        StringBuilder builder = new StringBuilder("");
         Duration dur = new Duration(duration);
 
-        long days = dur.getStandardDays();
-        Log.d(TAG, "DAYS = " + days);
-        if (days > 0) {
-            builder.append(days + " days ");
-            dur.minus(days);
-        }
-        long hours = dur.getStandardHours();
-        Log.d(TAG, "HOURS = " + hours);
-        if (hours > 0) {
-            builder.append(hours + " hrs ");
-            dur.minus(hours);
-        }
-        long mins = dur.getStandardMinutes();
-        Log.d(TAG, "MINS = " + mins);
-        if (mins > 0) {
-            builder.append(mins + " mins ");
-            dur.minus(mins);
-        }
-
-        return builder.toString().trim();
-    }
-
-
-    public void calculateOverallTime(){
-
-
-
-
-
+        PeriodFormatter formatter = new PeriodFormatterBuilder()
+                .appendDays()
+                .appendSuffix("d")
+                .appendHours()
+                .appendSuffix("h")
+                .appendMinutes()
+                .appendSuffix("m")
+                .toFormatter();
+        String formatted = formatter.print(dur.toPeriod());
+        System.out.println(formatted);
+        return formatted;
 
     }
 
+    public long calculateOverallTime(){
 
+        SharedPreferences sharedPreferences = this.getContext().getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        long screenOn = sharedPreferences.getLong("screenOn", 0);
+        long newDuration = 0;
+
+        if (screenOn != 0) {
+            long currentTime = System.currentTimeMillis();
+            long difference = currentTime - screenOn;
+            long currentDuration = sharedPreferences.getLong("totalDuration", 0);
+            newDuration = difference + currentDuration;
+            editor.putLong("totalDuration", newDuration);
+            editor.putLong("screenOn", System.currentTimeMillis());
+        } else
+            newDuration = 0;
+
+        return newDuration;
+    }
 
     void updateAppsList(List<UsageStats> usageStatsList) {
         List<CustomUsageStats> customUsageStatsList = new ArrayList<>();
@@ -277,8 +298,5 @@ public class StatisticsFragment extends Fragment {
             return null;
         }
     }
-
-
-
 
 }

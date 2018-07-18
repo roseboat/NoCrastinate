@@ -8,7 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 import android.util.Log;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import com.example.rosadowning.nocrastinate.StatsComponent;
@@ -16,6 +18,7 @@ import com.example.rosadowning.nocrastinate.StatsComposite;
 import com.example.rosadowning.nocrastinate.StatsLeaf;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 
 import static com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract.StatsEntry.TABLE_NAME;
 
@@ -138,21 +141,24 @@ public class StatsDBContract {
 
         public StatsComponent getStatsForInterval(String intervalString){
 
-            DateTime now = new DateTime(System.currentTimeMillis());
+            long now = System.currentTimeMillis();
 
-            DateTime queryTime = null;
+            Calendar query = Calendar.getInstance();
 
             switch (intervalString) {
-                case "WEEKLY":
-                    queryTime = now.minusWeeks(1);
+                case "Weekly":
+                    query.add(Calendar.DAY_OF_MONTH, -7);
                     break;
-                case "MONTHLY":
-                    queryTime = now.minusMonths(1);
+                case "Monthly":
+                    query.add(Calendar.MONTH, -1);
                     break;
-                case "YEARLY":
-                    queryTime = now.minusYears(1);
+                case "Yearly":
+                    query.add(Calendar.YEAR, -1);
                     break;
             }
+
+            long queryTime = query.getTimeInMillis();
+
 
             SQLiteDatabase db = getReadableDatabase();
             Cursor cursor = db.rawQuery("SELECT * FROM " + StatsEntry.TABLE_NAME + " WHERE " + StatsEntry.COLUMN_NAME_DATE + " BETWEEN " + now + " AND " + queryTime, null);

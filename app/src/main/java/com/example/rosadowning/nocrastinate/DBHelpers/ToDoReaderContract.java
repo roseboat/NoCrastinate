@@ -145,16 +145,16 @@ public class ToDoReaderContract {
             long completedDate = calendar.getTimeInMillis();
 
             switch (timeInterval) {
-                case "DAILY":
+                case "Daily":
                     calendar.add(Calendar.HOUR_OF_DAY, -24);
                     break;
-                case "WEEKLY":
+                case "Weekly":
                     calendar.add(Calendar.WEEK_OF_MONTH, -1);
                     break;
-                case "MONTHLY":
+                case "Monthly":
                     calendar.add(Calendar.MONTH, -1);
                     break;
-                case "YEARLY":
+                case "Yearly":
                     calendar.add(Calendar.YEAR, -1);
                     break;
             }

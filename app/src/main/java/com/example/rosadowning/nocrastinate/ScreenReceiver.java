@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -40,29 +41,24 @@ public class ScreenReceiver extends BroadcastReceiver {
         } else if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
             Log.e("SCREEN RECEIVER", "PHONE UNLOCKED");
 
-//            long screenOn = sharedPreferences.getLong("screenOn", 0);
-
-//            long screenOff = sharedPreferences.getLong("screenOff", 0);
-//            long durationSeconds = (screenOn-screenOff);
-//
-//            DateTime on = new DateTime(screenOn);
-//            DateTime off = new DateTime(screenOff);
-//
-//            Duration duration = new Duration(off, on);
-//            System.out.println(duration.getStandardDays());
-//            System.out.println(duration.getStandardHours());
-//            System.out.println(duration.getStandardMinutes());
-//
-//
-//            editor.putLong("totalDuration", ++durationSeconds);
-//            editor.apply();
-
             int unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
             editor.putInt("noOfUnlocks", ++unlocks);
 
-            long screenOn = System.currentTimeMillis();
+            long screenOn = sharedPreferences.getLong("screenOn", 0);
+
+            if(screenOn != 0){
+            long screenOff = sharedPreferences.getLong("screenOff", 0);
+            long duration = (screenOff - screenOn);
+            long currentDuration = sharedPreferences.getLong("totalDuration", 0);
+            long newDuration = currentDuration + duration;
+                editor.putLong("totalDuration", newDuration);
+            }
+
+            screenOn = System.currentTimeMillis();
             editor.putLong("screenOn", screenOn);
             editor.apply();
+
+
         }
     }
 
