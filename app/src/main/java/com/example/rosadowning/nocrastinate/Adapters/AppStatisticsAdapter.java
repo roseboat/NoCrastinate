@@ -22,6 +22,8 @@ import android.widget.TextView;
 import com.example.rosadowning.nocrastinate.CustomUsageStats;
 import com.example.rosadowning.nocrastinate.R;
 
+import org.joda.time.DateTime;
+
 public class AppStatisticsAdapter extends RecyclerView.Adapter<AppStatisticsAdapter.ViewHolder> {
 
     private List<CustomUsageStats> mCustomUsageStatsList = new ArrayList<>();
@@ -51,10 +53,26 @@ public class AppStatisticsAdapter extends RecyclerView.Adapter<AppStatisticsAdap
         }
         viewHolder.getPackageName().setText(appName);
 
-        long lastTimeUsed = mCustomUsageStatsList.get(position).usageStats.getLastTimeUsed();
+//        long lastTimeUsed = mCustomUsageStatsList.get(position).usageStats.getLastTimeUsed();
 //        viewHolder.getLastTimeUsed().setText(mDateFormat.format(new Date(lastTimeUsed)));
         viewHolder.getAppIcon().setImageDrawable(mCustomUsageStatsList.get(position).appIcon);
-        viewHolder.mOverallTime.setText(DateUtils.formatElapsedTime(mCustomUsageStatsList.get(position).usageStats.getTotalTimeInForeground() / 1000));
+
+//        String meh = DateUtils.formatElapsedTime(mCustomUsageStatsList.get(position).usageStats.getTotalTimeInForeground() / 1000);
+        DateTime appTime = new DateTime (mCustomUsageStatsList.get(position).usageStats.getTotalTimeInForeground());
+        int seconds = appTime.getSecondOfMinute();
+        int minutes = appTime.getMinuteOfHour();
+        int hour = appTime.getHourOfDay();
+        String time = null;
+        if (minutes < 1){
+            time = seconds + " secs";
+        } else if (hour < 1){
+            time = minutes + " mins";
+        } else {
+            time = hour + "hrs + " + minutes + " mins";
+        }
+//        viewHolder.mOverallTime.setText(DateUtils.formatElapsedTime(mCustomUsageStatsList.get(position).usageStats.getTotalTimeInForeground() / 1000));
+    viewHolder.mOverallTime.setText(time);
+
     }
 
     @Override

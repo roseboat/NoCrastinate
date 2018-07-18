@@ -2,7 +2,6 @@ package com.example.rosadowning.nocrastinate.Fragments;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -22,7 +21,7 @@ import android.widget.Toast;
 
 import com.example.rosadowning.nocrastinate.R;
 import com.example.rosadowning.nocrastinate.ToDoItem;
-import com.example.rosadowning.nocrastinate.ToDoReaderContract;
+import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -1,14 +1,7 @@
 package com.example.rosadowning.nocrastinate.Adapters;
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
-import com.example.rosadowning.nocrastinate.Fragments.ToDoFragment;
-import com.example.rosadowning.nocrastinate.Fragments.ViewToDoFragment;
 import com.example.rosadowning.nocrastinate.R;
 import com.example.rosadowning.nocrastinate.ToDoItem;
-import com.example.rosadowning.nocrastinate.ToDoReaderContract;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

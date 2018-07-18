@@ -1,5 +1,6 @@
 package com.example.rosadowning.nocrastinate;
 
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -26,6 +27,10 @@ import android.widget.TextView;
 
 import com.example.rosadowning.nocrastinate.Fragments.*;
 
+import org.joda.time.LocalTime;
+
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private BroadcastReceiver mReceiver;
@@ -49,6 +54,16 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         filter.addAction(Intent.ACTION_SCREEN_OFF);
         filter.addAction(Intent.ACTION_USER_PRESENT);
         registerReceiver(mReceiver, filter);
+
+        Calendar midnightCalendar = Calendar.getInstance();
+        midnightCalendar.set(Calendar.HOUR_OF_DAY, 0);
+        midnightCalendar.set(Calendar.MINUTE, 0);
+        midnightCalendar.set(Calendar.SECOND, 0);
+
+        AlarmManager am = (AlarmManager) this.getSystemService(ALARM_SERVICE);
+        Intent midnightIntent = new Intent(this, MidnightDataResetReceiver.class);
+        PendingIntent midnightPI = PendingIntent.getBroadcast(this, 0, midnightIntent, 0);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, midnightCalendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, midnightPI);
 
         createNotificationChannel();
     }

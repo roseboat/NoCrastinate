@@ -12,10 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.rosadowning.nocrastinate.Adapters.CompletedToDoListAdapter;
-import com.example.rosadowning.nocrastinate.Adapters.ToDoListAdapter;
 import com.example.rosadowning.nocrastinate.R;
 import com.example.rosadowning.nocrastinate.ToDoItem;
-import com.example.rosadowning.nocrastinate.ToDoReaderContract;
+import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
 
 import java.util.ArrayList;
 

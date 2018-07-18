@@ -10,32 +10,60 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import org.joda.time.DateTime;
+import org.joda.time.Duration;
+import org.joda.time.Minutes;
+
 import static com.example.rosadowning.nocrastinate.MainActivity.CHANNEL_ID;
 
 public class ScreenReceiver extends BroadcastReceiver {
 
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
+
     @Override
     public void onReceive(final Context context, final Intent intent) {
         Log.e("test", "onReceive");
+        sharedPreferences = context.getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
         if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
             Log.e("SCREEN RECEIVER", "PHONE LOCKED");
+            long screenOff = System.currentTimeMillis();
+            editor.putLong("screenOff", screenOff);
+            editor.apply();
 
         } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
             Log.e("SCREEN RECEIVER", "SCREEN ON");
 
         } else if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
-            SharedPreferences sharedPreferences = context.getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
+            Log.e("SCREEN RECEIVER", "PHONE UNLOCKED");
+
+//            long screenOn = sharedPreferences.getLong("screenOn", 0);
+
+//            long screenOff = sharedPreferences.getLong("screenOff", 0);
+//            long durationSeconds = (screenOn-screenOff);
+//
+//            DateTime on = new DateTime(screenOn);
+//            DateTime off = new DateTime(screenOff);
+//
+//            Duration duration = new Duration(off, on);
+//            System.out.println(duration.getStandardDays());
+//            System.out.println(duration.getStandardHours());
+//            System.out.println(duration.getStandardMinutes());
+//
+//
+//            editor.putLong("totalDuration", ++durationSeconds);
+//            editor.apply();
+
             int unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
             editor.putInt("noOfUnlocks", ++unlocks);
+
+            long screenOn = System.currentTimeMillis();
+            editor.putLong("screenOn", screenOn);
             editor.apply();
-
-            long currentTime = System.currentTimeMillis();
-            editor.putLong("startTime", currentTime);
-
-
-
-            Log.e("SCREEN RECEIVER", "USER IS PRESENT. UNLOCKS = " + unlocks);
         }
     }
+
 }

@@ -106,6 +106,41 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+
+            <LinearLayout
+                android:id="@+id/icon_group_no_of_unlocks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/stats_page_margin_between_icons"
+                android:layout_marginStart="@dimen/stats_page_margin_between_icons"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/icon_group_overall_time_spent">
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_lock_open_black_24dp"
+                    android:contentDescription="Number of unlocks"/>
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stats_icon_unlocks"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/small_font_size" />
+
+                <TextView
+                    style="@style/LargeFont"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_view_no_of_unlocks"
+                    android:text=" unlocks"
+                    android:textAlignment="center" />
+            </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/icon_group_overall_time_spent"
                 android:layout_width="wrap_content"
@@ -113,9 +148,9 @@
                 android:layout_marginEnd="@dimen/stats_page_margin_between_icons"
                 android:layout_marginStart="@dimen/stats_page_margin_between_icons"
                 android:orientation="vertical"
-                app:layout_constraintEnd_toStartOf="@id/icon_group_no_of_unlocks"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/button_open_usage_setting">
+                app:layout_constraintEnd_toStartOf="@id/icon_group_tasks_achieved"
+                app:layout_constraintStart_toEndOf="@id/icon_group_no_of_unlocks"
+                >
 
                 <ImageView
                     android:layout_width="70dp"
@@ -143,42 +178,6 @@
 
 
             <LinearLayout
-                android:id="@+id/icon_group_no_of_unlocks"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/stats_page_margin_between_icons"
-                android:layout_marginStart="@dimen/stats_page_margin_between_icons"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toStartOf="@id/icon_group_tasks_achieved"
-                app:layout_constraintStart_toEndOf="@id/icon_group_overall_time_spent"
-                app:layout_constraintTop_toBottomOf="@id/button_open_usage_setting">
-
-                <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_gravity="center"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_lock_open_black_24dp"
-                    android:contentDescription="Number of unlocks"/>
-
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/stats_icon_unlocks"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/small_font_size" />
-
-                <TextView
-                    style="@style/LargeFont"
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/text_view_no_of_unlocks"
-                    android:text=" unlocks"
-                    android:textAlignment="center" />
-            </LinearLayout>
-
-
-            <LinearLayout
                 android:id="@+id/icon_group_tasks_achieved"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -186,8 +185,7 @@
                 android:layout_marginStart="@dimen/stats_page_margin_between_icons"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/icon_group_no_of_unlocks"
-                app:layout_constraintTop_toBottomOf="@id/button_open_usage_setting">
+                app:layout_constraintStart_toEndOf="@id/icon_group_overall_time_spent">
 
                 <ImageView
                     android:layout_width="70dp"

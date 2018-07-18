@@ -7,25 +7,18 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.example.rosadowning.nocrastinate.R;
 import com.example.rosadowning.nocrastinate.ToDoItem;
 import com.example.rosadowning.nocrastinate.Adapters.ToDoListAdapter;
-import com.example.rosadowning.nocrastinate.ToDoReaderContract;
+import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-
-import javax.xml.datatype.Duration;
 
 
 public class ToDoFragment extends Fragment {

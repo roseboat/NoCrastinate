@@ -3,7 +3,6 @@ package com.example.rosadowning.nocrastinate.Fragments;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +17,7 @@ import android.view.ViewGroup;
 import com.example.rosadowning.nocrastinate.Adapters.AppStatisticsAdapter;
 import com.example.rosadowning.nocrastinate.CustomUsageStats;
 import com.example.rosadowning.nocrastinate.R;
-import com.example.rosadowning.nocrastinate.ToDoReaderContract;
+import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
 
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
@@ -36,10 +34,9 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.joda.time.DateTime;
-import org.w3c.dom.Text;
+import org.joda.time.Duration;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -112,18 +109,8 @@ public class StatisticsFragment extends Fragment {
                 if (statsUsageInterval != null) {
                     List<UsageStats> usageStatsList =
                             getUsageStatistics(statsUsageInterval.mInterval);
-                    Collections.sort(usageStatsList, new LastTimeLaunchedComparatorDesc());
+                    Collections.sort(usageStatsList, new MostUsedComparatorDesc());
                     updateAppsList(usageStatsList);
-                    long totalTime = 0;
-                    for (UsageStats stats : usageStatsList){
-                        totalTime += stats.getTotalTimeInForeground();
-                    }
-                    Log.d(TAG, "total time = " + totalTime);
-                    SharedPreferences sharedPreferences = getContext().getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putLong("overallTime", totalTime);
-                    editor.apply();
-
                 }
             }
             @Override
@@ -162,6 +149,7 @@ public class StatisticsFragment extends Fragment {
 
                     startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
 
+
                 }
             });
         }
@@ -170,21 +158,16 @@ public class StatisticsFragment extends Fragment {
 
     public void getIconStatsData(){
 
-        // Overall time spent in hours/minutes
         SharedPreferences sharedPreferences = this.getContext().getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
-        long overallTime = sharedPreferences.getLong("overallTime",0);
-        DateTime overallTimeDT = new DateTime(overallTime);
-        int seconds = overallTimeDT.getSecondOfMinute();
-        int minutes = overallTimeDT.getMinuteOfHour();
-        int hour = overallTimeDT.getHourOfDay();
-        String time = null;
-        if (minutes < 1){
-            time = seconds + " secs";
-        } else if (hour < 1){
-            time = minutes + " mins";
-        } else {
-            time = hour + "hrs + " + minutes + " mins";
-        }
+        long overallTime = sharedPreferences.getLong("totalDuration", 0);
+        String time = timeToString(overallTime);
+
+
+
+
+
+
+        Log.d(TAG, "String time = " + time);
         TextView textViewOverallTime = (TextView) getView().findViewById(R.id.text_view_overall_time);
         textViewOverallTime.setText(time);
 
@@ -202,6 +185,44 @@ public class StatisticsFragment extends Fragment {
         textViewTasks.setText(tasksCompleted + " tasks");
 
     }
+
+    public String timeToString(long duration) {
+
+        StringBuilder builder = new StringBuilder("");
+        Duration dur = new Duration(duration);
+
+        long days = dur.getStandardDays();
+        Log.d(TAG, "DAYS = " + days);
+        if (days > 0) {
+            builder.append(days + " days ");
+            dur.minus(days);
+        }
+        long hours = dur.getStandardHours();
+        Log.d(TAG, "HOURS = " + hours);
+        if (hours > 0) {
+            builder.append(hours + " hrs ");
+            dur.minus(hours);
+        }
+        long mins = dur.getStandardMinutes();
+        Log.d(TAG, "MINS = " + mins);
+        if (mins > 0) {
+            builder.append(mins + " mins ");
+            dur.minus(mins);
+        }
+
+        return builder.toString().trim();
+    }
+
+
+    public void calculateOverallTime(){
+
+
+
+
+
+
+    }
+
 
 
     void updateAppsList(List<UsageStats> usageStatsList) {
@@ -225,11 +246,11 @@ public class StatisticsFragment extends Fragment {
         mRecyclerView.scrollToPosition(0);
     }
 
-    private static class LastTimeLaunchedComparatorDesc implements Comparator<UsageStats> {
+    private static class MostUsedComparatorDesc implements Comparator<UsageStats> {
 
         @Override
         public int compare(UsageStats left, UsageStats right) {
-            return Long.compare(right.getLastTimeUsed(), left.getLastTimeUsed());
+            return Long.compare(right.getTotalTimeInForeground(), left.getTotalTimeInForeground());
         }
     }
 

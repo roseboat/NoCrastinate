@@ -22,7 +22,7 @@ import android.widget.EditText;
 
 import com.example.rosadowning.nocrastinate.R;
 import com.example.rosadowning.nocrastinate.ToDoItem;
-import com.example.rosadowning.nocrastinate.ToDoReaderContract;
+import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
