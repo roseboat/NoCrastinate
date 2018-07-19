@@ -6,19 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
-import android.util.Log;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.example.rosadowning.nocrastinate.StatsComponent;
-import com.example.rosadowning.nocrastinate.StatsComposite;
-import com.example.rosadowning.nocrastinate.StatsLeaf;
-
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
+import com.example.rosadowning.nocrastinate.StatsIconData;
 
 import static com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract.StatsEntry.TABLE_NAME;
 
@@ -73,7 +66,7 @@ public class StatsDBContract {
             onUpgrade(db, oldVersion, newVersion);
         }
 
-        public void insertNewStat(StatsLeaf stats) {
+        public void insertNewStat(StatsIconData stats) {
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put(StatsEntry.COLUMN_NAME_DATE, stats.getDate().getTime());
@@ -85,15 +78,15 @@ public class StatsDBContract {
             db.close();
         }
 
-        public void deleteStat(StatsLeaf statsComponent) {
+        public void deleteStat(StatsIconData statsComponent) {
             SQLiteDatabase db = this.getWritableDatabase();
             db.delete(TABLE_NAME, StatsEntry.COLUMN_NAME_DATE + " = ?", new String[]{String.valueOf(statsComponent.getDate())});
             db.close();
         }
 
-        public ArrayList<StatsComponent> getAllStats() {
+        public ArrayList<StatsIconData> getAllStats() {
 
-        ArrayList<StatsComponent> allStats = new ArrayList<>();
+        ArrayList<StatsIconData> allStats = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
             Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
@@ -104,7 +97,7 @@ public class StatsDBContract {
 
             if (cursor.moveToFirst()) {
                 do {
-                    StatsLeaf newestStat = new StatsLeaf();
+                    StatsIconData newestStat = new StatsIconData();
                     newestStat.setNoOfUnlocks(cursor.getInt(unlocksIndex));
                     newestStat.setDate(new Date(cursor.getLong(dateIndex)));
                     newestStat.setTasksCompleted(cursor.getLong(tasksIndex));
@@ -118,7 +111,7 @@ public class StatsDBContract {
             return allStats;
         }
 
-        public StatsComponent getStat(Date date){
+        public StatsIconData getStat(Date date){
 
             SQLiteDatabase db = this.getReadableDatabase();
             Cursor cursor = db.rawQuery("SELECT *  FROM " + StatsEntry.TABLE_NAME + " WHERE " + StatsEntry.COLUMN_NAME_DATE + " = " + date.getTime(), null);
@@ -126,7 +119,7 @@ public class StatsDBContract {
             int timeIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_OVERALL_TIME);
             int unlocksIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_UNLOCKS);
             int tasksIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_TASKS_COMPLETED);
-            StatsLeaf stat = new StatsLeaf();
+            StatsIconData stat = new StatsIconData();
 
             if (cursor.moveToFirst()) {
                 do {
@@ -140,9 +133,9 @@ public class StatsDBContract {
             return stat;
         }
 
-        public ArrayList<StatsComponent> getStatsForInterval(String intervalString){
+        public ArrayList<StatsIconData> getStatsForInterval(String intervalString){
 
-            ArrayList<StatsComponent> statsForInterval = new ArrayList<>();
+            ArrayList<StatsIconData> statsForInterval = new ArrayList<>();
 
             long now = System.currentTimeMillis();
 
@@ -171,7 +164,7 @@ public class StatsDBContract {
 
             if (cursor.moveToFirst()) {
                 do {
-                    StatsLeaf stat = new StatsLeaf();
+                    StatsIconData stat = new StatsIconData();
                     stat.setNoOfUnlocks(cursor.getInt(unlocksIndex));
                     stat.setDate(new Date(cursor.getLong(dateIndex)));
                     stat.setTasksCompleted(cursor.getLong(tasksIndex));

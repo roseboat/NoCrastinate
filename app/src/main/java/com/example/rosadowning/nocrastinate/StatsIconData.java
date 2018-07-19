@@ -1,17 +1,26 @@
 package com.example.rosadowning.nocrastinate;
 
+
+import android.app.usage.UsageStats;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
+import java.util.ArrayList;
 import java.util.Date;
 
-public class StatsLeaf extends StatsComponent {
-
+public class StatsIconData {
 
     protected Date date;
     protected int noOfUnlocks;
     protected long overallTime;
     protected long tasksCompleted;
 
-    public StatsLeaf(){
-       super();
+    public StatsIconData(){
+
+        date = null;
+        noOfUnlocks = 0;
+        overallTime = 0;
+        tasksCompleted = 0;
     }
 
     public void setDate(Date date){
@@ -45,4 +54,6 @@ public class StatsLeaf extends StatsComponent {
     public long getTasksCompleted(){
         return tasksCompleted;
     }
+
+
 }

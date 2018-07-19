@@ -42,13 +42,13 @@ public class ScreenReceiver extends BroadcastReceiver {
             Log.e("SCREEN RECEIVER", "SCREEN ON");
         }else if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
             Log.e("SCREEN RECEIVER", "PHONE UNLOCKED");
-
-            Fragment frg = null;
-            frg = context.getFragmentManager().findFragmentByTag("STATISTICS_FRAGMENT");
-            final FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.detach(frg);
-            ft.attach(frg);
-            ft.commit();
+//
+//            Fragment frg = null;
+//            frg = context.getFragmentManager().findFragmentByTag("STATISTICS_FRAGMENT");
+//            final FragmentTransaction ft = getFragmentManager().beginTransaction();
+//            ft.detach(frg);
+//            ft.attach(frg);
+//            ft.commit();
 
 
             int unlocks = sharedPreferences.getInt("noOfUnlocks", 0);

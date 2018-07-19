@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract;
 import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
@@ -20,7 +19,7 @@ public class MidnightDataResetReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        StatsLeaf midnightStat = new StatsLeaf();
+        StatsIconData midnightStat = new StatsIconData();
 
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.MINUTE, -1);

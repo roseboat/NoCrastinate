@@ -4,10 +4,8 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -19,12 +17,9 @@ import android.view.ViewGroup;
 import com.example.rosadowning.nocrastinate.Adapters.AppStatisticsAdapter;
 import com.example.rosadowning.nocrastinate.CustomUsageStats;
 import com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract;
-import com.example.rosadowning.nocrastinate.MainActivity;
 import com.example.rosadowning.nocrastinate.R;
 import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
-import com.example.rosadowning.nocrastinate.StatsComponent;
-import com.example.rosadowning.nocrastinate.StatsComposite;
-import com.example.rosadowning.nocrastinate.StatsLeaf;
+import com.example.rosadowning.nocrastinate.StatsIconData;
 
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
@@ -42,7 +37,6 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
-import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
@@ -52,8 +46,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class StatisticsFragment extends Fragment {
 
@@ -65,7 +57,7 @@ public class StatisticsFragment extends Fragment {
     private Button mOpenUsageSettingButton;
     private Spinner mSpinner;
     private LinearLayout mUsagePopUp;
-    private StatsLeaf dailyStats;
+    private StatsIconData dailyStats;
 
     @Nullable
     @Override
@@ -141,12 +133,12 @@ public class StatisticsFragment extends Fragment {
                 SQLiteDatabase db = statsHelper.getReadableDatabase();
 
                 Log.d(TAG, statsUsageInterval.mStringRepresentation);
-                ArrayList<StatsComponent> statsFromInterval = statsHelper.getStatsForInterval(statsUsageInterval.mStringRepresentation);
+                ArrayList<StatsIconData> statsFromInterval = statsHelper.getStatsForInterval(statsUsageInterval.mStringRepresentation);
                 int collectedUnlocks = dailyStats.getNoOfUnlocks();
                 long collectedCompleted = dailyStats.getTasksCompleted();
                 long collectedTime = dailyStats.getOverallTime();
 
-                for (StatsComponent stats: statsFromInterval){
+                for (StatsIconData stats: statsFromInterval){
                     collectedUnlocks += stats.getNoOfUnlocks();
                     collectedCompleted += stats.getTasksCompleted();
                     collectedTime += stats.getOverallTime();
@@ -203,7 +195,7 @@ public class StatisticsFragment extends Fragment {
         long tasksCompleted = toDoHelper.getNoOfCompletedToDos();
         setIconStats(unlocks, overallTime, tasksCompleted);
 
-        dailyStats = new StatsLeaf();
+        dailyStats = new StatsIconData();
         dailyStats.setTasksCompleted(tasksCompleted);
         dailyStats.setNoOfUnlocks(unlocks);
         dailyStats.setOverallTime(overallTime);
