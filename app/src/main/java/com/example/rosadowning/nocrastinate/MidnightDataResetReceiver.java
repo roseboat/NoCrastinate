@@ -17,16 +17,13 @@ public class MidnightDataResetReceiver extends BroadcastReceiver {
 
     public static final String TAG = "MIDNIGHT RECEIVER";
 
-
     @Override
     public void onReceive(Context context, Intent intent) {
-
-        // write everything to database then reset
 
         StatsLeaf midnightStat = new StatsLeaf();
 
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.HOUR, -1);
+        cal.add(Calendar.MINUTE, -1);
         Date yesterdayDate = cal.getTime();
 
         SharedPreferences sharedPreferences = context.getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
@@ -35,7 +32,7 @@ public class MidnightDataResetReceiver extends BroadcastReceiver {
 
         ToDoReaderContract.ToDoListDbHelper toDoHelper = new ToDoReaderContract.ToDoListDbHelper(context);
         SQLiteDatabase sqlToDo = toDoHelper.getReadableDatabase();
-        long tasksCompleted = toDoHelper.getNoOfCompletedToDos("DAILY");
+        long tasksCompleted = toDoHelper.getNoOfCompletedToDos();
 
         midnightStat.setDate(yesterdayDate);
         midnightStat.setOverallTime(overallTime);
@@ -50,5 +47,6 @@ public class MidnightDataResetReceiver extends BroadcastReceiver {
         editor.putInt("noOfUnlocks", 0);
         editor.putLong("totalDuration", 0);
         editor.apply();
+
     }
 }

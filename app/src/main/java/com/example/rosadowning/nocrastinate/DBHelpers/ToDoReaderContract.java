@@ -11,6 +11,8 @@ import android.util.Log;
 
 import com.example.rosadowning.nocrastinate.ToDoItem;
 
+import org.joda.time.DateTime;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -138,29 +140,15 @@ public class ToDoReaderContract {
             db.close();
         }
 
-        public long getNoOfCompletedToDos(String timeInterval) {
+        public long getNoOfCompletedToDos() {
 
             long noOfCompletedToDos = 0;
-            Calendar calendar = Calendar.getInstance();
-            long completedDate = calendar.getTimeInMillis();
+            DateTime today = new DateTime().withTimeAtStartOfDay();
+            DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
+            long todayLong = today.getMillis();
+            long tomorrowLong = tomorrow.getMillis();
 
-            switch (timeInterval) {
-                case "Daily":
-                    calendar.add(Calendar.HOUR_OF_DAY, -24);
-                    break;
-                case "Weekly":
-                    calendar.add(Calendar.WEEK_OF_MONTH, -1);
-                    break;
-                case "Monthly":
-                    calendar.add(Calendar.MONTH, -1);
-                    break;
-                case "Yearly":
-                    calendar.add(Calendar.YEAR, -1);
-                    break;
-            }
-
-            long queryDate = calendar.getTimeInMillis();
-            String newQuery = FeedEntry.COLUMN_NAME_COMPLETED_DATE + " BETWEEN " + queryDate + " AND " + completedDate + ";";
+            String newQuery = FeedEntry.COLUMN_NAME_COMPLETED_DATE + " BETWEEN " + todayLong + " AND " + tomorrowLong + ";";
             SQLiteDatabase db = this.getReadableDatabase();
             noOfCompletedToDos = DatabaseUtils.queryNumEntries(db, TABLE_NAME, newQuery);
             db.close();

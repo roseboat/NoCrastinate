@@ -52,6 +52,7 @@ public class StatsDBContract {
         // If you change the database schema, you must increment the database version.
         public static final int DATABASE_VERSION = 4;
         public static final String DATABASE_NAME = "StatsList.db";
+        public static final String TAG = "STATS DB";
 
         public StatsDBHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -92,8 +93,8 @@ public class StatsDBContract {
 
         public ArrayList<StatsComponent> getAllStats() {
 
-            ArrayList<StatsComponent> allStats = new ArrayList<>();
-            SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<StatsComponent> allStats = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
 
             Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
             int dateIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_DATE);
@@ -139,7 +140,9 @@ public class StatsDBContract {
             return stat;
         }
 
-        public StatsComponent getStatsForInterval(String intervalString){
+        public ArrayList<StatsComponent> getStatsForInterval(String intervalString){
+
+            ArrayList<StatsComponent> statsForInterval = new ArrayList<>();
 
             long now = System.currentTimeMillis();
 
@@ -147,27 +150,24 @@ public class StatsDBContract {
 
             switch (intervalString) {
                 case "Weekly":
-                    query.add(Calendar.DAY_OF_MONTH, -7);
+                    query.set(Calendar.DAY_OF_MONTH, -7);
                     break;
                 case "Monthly":
-                    query.add(Calendar.MONTH, -1);
+                    query.set(Calendar.MONTH, -1);
                     break;
                 case "Yearly":
-                    query.add(Calendar.YEAR, -1);
+                    query.set(Calendar.YEAR, -1);
                     break;
             }
 
             long queryTime = query.getTimeInMillis();
-
-
             SQLiteDatabase db = getReadableDatabase();
-            Cursor cursor = db.rawQuery("SELECT * FROM " + StatsEntry.TABLE_NAME + " WHERE " + StatsEntry.COLUMN_NAME_DATE + " BETWEEN " + now + " AND " + queryTime, null);
+            Cursor cursor = db.rawQuery("SELECT * FROM " + StatsEntry.TABLE_NAME + " WHERE " + StatsEntry.COLUMN_NAME_DATE + " BETWEEN " + queryTime + " AND " + now, null);
 
             int dateIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_DATE);
             int timeIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_OVERALL_TIME);
             int unlocksIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_UNLOCKS);
             int tasksIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_TASKS_COMPLETED);
-            StatsComposite composite = new StatsComposite();
 
             if (cursor.moveToFirst()) {
                 do {
@@ -176,11 +176,11 @@ public class StatsDBContract {
                     stat.setDate(new Date(cursor.getLong(dateIndex)));
                     stat.setTasksCompleted(cursor.getLong(tasksIndex));
                     stat.setOverallTime(cursor.getLong(timeIndex));
-                    composite.addStat(stat);
+                    statsForInterval.add(stat);
                 } while (cursor.moveToNext());
             }
             db.close();
-            return composite;
+            return statsForInterval;
         }
 
 

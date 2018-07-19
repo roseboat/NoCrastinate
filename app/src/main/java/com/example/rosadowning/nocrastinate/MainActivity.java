@@ -8,6 +8,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.sqlite.SQLiteDatabase;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -20,14 +21,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract;
 import com.example.rosadowning.nocrastinate.Fragments.*;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalTime;
+import org.joda.time.Seconds;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
+    public static final String TAG = "MAINACTIVITY";
     private BroadcastReceiver mReceiver;
     public static final String CHANNEL_ID = "4855";
     public static final CharSequence CHANNEL_NAME = "com.example.rosadowning.nocrastinate";
@@ -50,18 +58,22 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         filter.addAction(Intent.ACTION_USER_PRESENT);
         registerReceiver(mReceiver, filter);
 
-        Calendar midnightCalendar = Calendar.getInstance();
-        midnightCalendar.set(Calendar.HOUR_OF_DAY, 0);
-        midnightCalendar.set(Calendar.MINUTE, 0);
-        midnightCalendar.set(Calendar.SECOND, 0);
+        scheduleMidnightAlarm();
+        createNotificationChannel();
+    }
+
+
+    private void scheduleMidnightAlarm(){
+        DateTimeFormatter dtf = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm:ss");
+        DateTime today = new DateTime().withTimeAtStartOfDay();
+        DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
 
         AlarmManager am = (AlarmManager) this.getSystemService(ALARM_SERVICE);
         Intent midnightIntent = new Intent(this, MidnightDataResetReceiver.class);
         PendingIntent midnightPI = PendingIntent.getBroadcast(this, 0, midnightIntent, 0);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, midnightCalendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, midnightPI);
-
-        createNotificationChannel();
+        am.setRepeating(AlarmManager.RTC_WAKEUP, tomorrow.getMillis(), AlarmManager.INTERVAL_DAY, midnightPI);
     }
+
 
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

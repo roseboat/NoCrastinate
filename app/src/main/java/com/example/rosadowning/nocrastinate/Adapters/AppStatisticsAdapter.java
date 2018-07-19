@@ -6,10 +6,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.zip.CheckedOutputStream;
 
 import android.app.usage.UsageStats;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.FeatureInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PermissionInfo;
+import android.content.pm.ResolveInfo;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -23,22 +30,29 @@ import com.example.rosadowning.nocrastinate.CustomUsageStats;
 import com.example.rosadowning.nocrastinate.R;
 
 import org.joda.time.DateTime;
+import org.joda.time.Duration;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
+
+import static java.security.AccessController.getContext;
 
 public class AppStatisticsAdapter extends RecyclerView.Adapter<AppStatisticsAdapter.ViewHolder> {
 
     private List<CustomUsageStats> mCustomUsageStatsList = new ArrayList<>();
     private DateFormat mDateFormat = new SimpleDateFormat();
     private PackageManager packageManager;
+    private Context context;
 
 
-    public AppStatisticsAdapter(){
-
+    public AppStatisticsAdapter(Context context){
+        this.context = context;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.app_statistics_item, viewGroup, false);
+
         return new ViewHolder(v);
     }
 
@@ -46,33 +60,37 @@ public class AppStatisticsAdapter extends RecyclerView.Adapter<AppStatisticsAdap
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
         String appName = mCustomUsageStatsList.get(position).usageStats.getPackageName();
-        if (appName.length() > 12) {
-            String longAppName = appName;
-            String firstLetter = String.valueOf(longAppName.charAt(12));
-            appName = firstLetter.toUpperCase() + longAppName.substring(13);
+
+        List<PackageInfo> installedPackages = context.getPackageManager()
+                .getInstalledPackages(0);
+
+        for (int i = 0; i < installedPackages.size(); i++) {
+            PackageInfo packageInfo = installedPackages.get(i);
+            if (packageInfo.packageName.equals(appName)) {
+                appName = packageInfo.applicationInfo.loadLabel(context.getPackageManager()).toString();
+            }
         }
+
         viewHolder.getPackageName().setText(appName);
-
-//        long lastTimeUsed = mCustomUsageStatsList.get(position).usageStats.getLastTimeUsed();
-//        viewHolder.getLastTimeUsed().setText(mDateFormat.format(new Date(lastTimeUsed)));
         viewHolder.getAppIcon().setImageDrawable(mCustomUsageStatsList.get(position).appIcon);
+        long dur = mCustomUsageStatsList.get(position).usageStats.getTotalTimeInForeground();
+        String time = timeToString(dur);
+        viewHolder.mOverallTime.setText(time);
 
-//        String meh = DateUtils.formatElapsedTime(mCustomUsageStatsList.get(position).usageStats.getTotalTimeInForeground() / 1000);
-        DateTime appTime = new DateTime (mCustomUsageStatsList.get(position).usageStats.getTotalTimeInForeground());
-        int seconds = appTime.getSecondOfMinute();
-        int minutes = appTime.getMinuteOfHour();
-        int hour = appTime.getHourOfDay();
-        String time = null;
-        if (minutes < 1){
-            time = seconds + " secs";
-        } else if (hour < 1){
-            time = minutes + " mins";
-        } else {
-            time = hour + "hrs + " + minutes + " mins";
-        }
-//        viewHolder.mOverallTime.setText(DateUtils.formatElapsedTime(mCustomUsageStatsList.get(position).usageStats.getTotalTimeInForeground() / 1000));
-    viewHolder.mOverallTime.setText(time);
+    }
+    public String timeToString(long duration) {
 
+        Duration dur = new Duration(duration);
+        PeriodFormatter formatter = new PeriodFormatterBuilder()
+                .appendDays()
+                .appendSuffix("d")
+                .appendHours()
+                .appendSuffix("h")
+                .appendMinutes()
+                .appendSuffix("m")
+                .toFormatter();
+        String formatted = formatter.print(dur.toPeriod());
+        return formatted;
     }
 
     @Override
@@ -87,21 +105,16 @@ public class AppStatisticsAdapter extends RecyclerView.Adapter<AppStatisticsAdap
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView mPackageName;
-//        private final TextView mLastTimeUsed;
         private final ImageView mAppIcon;
         private final TextView mOverallTime;
 
         public ViewHolder(View v) {
             super(v);
             mPackageName = (TextView) v.findViewById(R.id.textview_package_name);
-//            mLastTimeUsed = (TextView) v.findViewById(R.id.textview_last_time_used);
             mOverallTime = (TextView) v.findViewById(R.id.text_view_app_time_spent);
             mAppIcon = (ImageView) v.findViewById(R.id.app_icon);
         }
 
-//        public TextView getLastTimeUsed() {
-//            return mLastTimeUsed;
-//        }
 
         public TextView getmOverallTime() { return mOverallTime; }
 

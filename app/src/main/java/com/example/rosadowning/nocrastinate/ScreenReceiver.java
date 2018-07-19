@@ -7,9 +7,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+
+import com.example.rosadowning.nocrastinate.Fragments.StatisticsFragment;
 
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
@@ -37,9 +40,16 @@ public class ScreenReceiver extends BroadcastReceiver {
 
         } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
             Log.e("SCREEN RECEIVER", "SCREEN ON");
-
-        } else if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
+        }else if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
             Log.e("SCREEN RECEIVER", "PHONE UNLOCKED");
+
+            Fragment frg = null;
+            frg = context.getFragmentManager().findFragmentByTag("STATISTICS_FRAGMENT");
+            final FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.detach(frg);
+            ft.attach(frg);
+            ft.commit();
+
 
             int unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
             editor.putInt("noOfUnlocks", ++unlocks);

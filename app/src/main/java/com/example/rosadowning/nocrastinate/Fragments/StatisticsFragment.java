@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -56,8 +57,7 @@ import java.util.TimerTask;
 
 public class StatisticsFragment extends Fragment {
 
-    private static final String TAG = "Statistics Screen";
-
+    private static final String TAG = "STATISTICS FRAGMENT";
     private UsageStatsManager mUsageStatsManager;
     private AppStatisticsAdapter mUsageListAdapter;
     private RecyclerView mRecyclerView;
@@ -83,6 +83,16 @@ public class StatisticsFragment extends Fragment {
     }
 
 
+    public void onStart(){
+        super.onStart();
+        getDailyIconData();
+    }
+
+    public void onResume(){
+        super.onResume();
+        getDailyIconData();
+    }
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void onCreate(final Bundle savedInstanceState) {
@@ -94,7 +104,7 @@ public class StatisticsFragment extends Fragment {
     public void onViewCreated(View rootView, Bundle savedInstanceState) {
         super.onViewCreated(rootView, savedInstanceState);
 
-        mUsageListAdapter = new AppStatisticsAdapter();
+        mUsageListAdapter = new AppStatisticsAdapter(getContext());
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview_app_usage);
         mLayoutManager = mRecyclerView.getLayoutManager();
         mRecyclerView.scrollToPosition(0);
@@ -119,19 +129,29 @@ public class StatisticsFragment extends Fragment {
                 if (statsUsageInterval != null) {
                     List<UsageStats> usageStatsList =
                             getUsageStatistics(statsUsageInterval.mInterval);
-                    Collections.sort(usageStatsList, new MostUsedComparatorDesc());
+                    Collections.sort(usageStatsList, new UsedMostOftenComparatorDesc());
+                    usageStatsList = usageStatsList.subList(0,20);
                     updateAppsList(usageStatsList);
                 }
-                if (!statsUsageInterval.mStringRepresentation.equals("Daily")){
+                if (statsUsageInterval.mStringRepresentation.equals("Daily")){
+                    getDailyIconData();
+                } else {
 
                 StatsDBContract.StatsDBHelper statsHelper = new StatsDBContract.StatsDBHelper(getContext());
                 SQLiteDatabase db = statsHelper.getReadableDatabase();
-                StatsComponent composite = statsHelper.getStatsForInterval(statsUsageInterval.mStringRepresentation);
 
-                int compositeUnlocks = dailyStats.getNoOfUnlocks() + composite.getNoOfUnlocks();
-                long compositeOverallTime = dailyStats.getOverallTime() + composite.getOverallTime();
-                long compositeTasksCompleted = dailyStats.getTasksCompleted() + composite.getTasksCompleted();
-                setIconStats(compositeUnlocks, compositeOverallTime, compositeTasksCompleted);
+                Log.d(TAG, statsUsageInterval.mStringRepresentation);
+                ArrayList<StatsComponent> statsFromInterval = statsHelper.getStatsForInterval(statsUsageInterval.mStringRepresentation);
+                int collectedUnlocks = dailyStats.getNoOfUnlocks();
+                long collectedCompleted = dailyStats.getTasksCompleted();
+                long collectedTime = dailyStats.getOverallTime();
+
+                for (StatsComponent stats: statsFromInterval){
+                    collectedUnlocks += stats.getNoOfUnlocks();
+                    collectedCompleted += stats.getTasksCompleted();
+                    collectedTime += stats.getOverallTime();
+                }
+                setIconStats(collectedUnlocks, collectedTime, collectedCompleted);
                 }
 
             }
@@ -141,10 +161,7 @@ public class StatisticsFragment extends Fragment {
         });
     }
 
-    public void onResume(){
-        super.onResume();
-        getDailyIconData();
-    }
+
 
     public List<UsageStats> getUsageStatistics(int intervalType) {
         // Get the app statistics since one year ago from the current time.
@@ -166,10 +183,8 @@ public class StatisticsFragment extends Fragment {
             mOpenUsageSettingButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
-
-
+                    mUsagePopUp.setVisibility(View.GONE);
                 }
             });
         }
@@ -185,7 +200,7 @@ public class StatisticsFragment extends Fragment {
 
         ToDoReaderContract.ToDoListDbHelper toDoHelper = new ToDoReaderContract.ToDoListDbHelper(getContext());
         SQLiteDatabase sql = toDoHelper.getWritableDatabase();
-        long tasksCompleted = toDoHelper.getNoOfCompletedToDos("Daily");
+        long tasksCompleted = toDoHelper.getNoOfCompletedToDos();
         setIconStats(unlocks, overallTime, tasksCompleted);
 
         dailyStats = new StatsLeaf();
@@ -221,7 +236,6 @@ public class StatisticsFragment extends Fragment {
                 .appendSuffix("m")
                 .toFormatter();
         String formatted = formatter.print(dur.toPeriod());
-        System.out.println(formatted);
         return formatted;
 
     }
@@ -267,7 +281,7 @@ public class StatisticsFragment extends Fragment {
         mRecyclerView.scrollToPosition(0);
     }
 
-    private static class MostUsedComparatorDesc implements Comparator<UsageStats> {
+    private static class UsedMostOftenComparatorDesc implements Comparator<UsageStats> {
 
         @Override
         public int compare(UsageStats left, UsageStats right) {
@@ -298,5 +312,4 @@ public class StatisticsFragment extends Fragment {
             return null;
         }
     }
-
 }

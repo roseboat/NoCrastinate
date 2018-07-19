@@ -48,68 +48,6 @@
 
 </android.support.constraint.ConstraintLayout>
 
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="60sp"-->
-    <!--&gt;-->
-
-    <!--<LinearLayout android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:gravity="center_vertical"-->
-        <!--&gt;-->
-        <!--<ImageView android:id="@+id/app_icon"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--/>-->
-        <!--<LinearLayout android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="@dimen/margin_small"-->
-            <!--android:orientation="vertical"-->
-            <!--&gt;-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/textview_package_name"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--/>-->
-
-            <!--<LinearLayout android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal"-->
-                <!--&gt;-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/textview_last_time_used_label"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Last Time Used: "-->
-                    <!--/>-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/textview_last_time_used"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--/>-->
-            <!--</LinearLayout>-->
-        <!--</LinearLayout>-->
-        <!--<TextView-->
-            <!--android:layout_width="50dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:text="mins"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:textAlignment="center"-->
-            <!--android:id="@+id/text_view_app_time_spent"/>-->
-    <!--</LinearLayout>-->
-
-    <!--<View android:id="@+id/divider"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="1dp"-->
-        <!--android:background="#bbbbbb"/>-->
-
-<!--</RelativeLayout>-->
 
 
 
