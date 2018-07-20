@@ -60,6 +60,7 @@ public class StatisticsFragment extends Fragment {
     private LinearLayout mUsagePopUp;
     private String intervalString;
     private Context context;
+    private TimerTask timerTaskAsync;
 
     @Nullable
     @Override
@@ -81,6 +82,13 @@ public class StatisticsFragment extends Fragment {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUsageStatsManager = (UsageStatsManager) getActivity().getSystemService(Context.USAGE_STATS_SERVICE);
+    }
+
+    public void onPause(){
+        super.onPause();
+
+        synchronized (timerTaskAsync){
+      timerTaskAsync.cancel();}
     }
 
     @Override
@@ -112,12 +120,15 @@ public class StatisticsFragment extends Fragment {
                     Collections.sort(usageStatsList, new UsedMostOftenComparatorDesc());
                     updateAppsList(usageStatsList);
 
+
+
                     Timer timerAsync = new Timer();
-                    TimerTask timerTaskAsync = new TimerTask() {
+                    timerTaskAsync = new TimerTask() {
                         @Override
                         public void run() {
                             UpdateIcons newIcons = new UpdateIcons();
-                            newIcons.execute(intervalString);
+                            synchronized (newIcons){
+                            newIcons.execute(intervalString);}
                         }
                     };
                     timerAsync.schedule(timerTaskAsync, 0, 5000);
