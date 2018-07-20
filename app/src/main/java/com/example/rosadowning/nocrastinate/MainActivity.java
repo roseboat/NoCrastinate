@@ -25,6 +25,8 @@ import com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract;
 import com.example.rosadowning.nocrastinate.Fragments.*;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
 import org.joda.time.Seconds;
 import org.joda.time.format.DateTimeFormat;
@@ -32,6 +34,8 @@ import org.joda.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -64,7 +68,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
 
     private void scheduleMidnightAlarm(){
-        DateTimeFormatter dtf = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm:ss");
         DateTime today = new DateTime().withTimeAtStartOfDay();
         DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
 
@@ -72,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         Intent midnightIntent = new Intent(this, MidnightDataResetReceiver.class);
         PendingIntent midnightPI = PendingIntent.getBroadcast(this, 0, midnightIntent, 0);
         am.setRepeating(AlarmManager.RTC_WAKEUP, tomorrow.getMillis(), AlarmManager.INTERVAL_DAY, midnightPI);
+
     }
 
 

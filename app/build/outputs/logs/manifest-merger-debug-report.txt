@@ -98,9 +98,11 @@ ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifes
 	android:name
 		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:21:27-74
 receiver#com.example.rosadowning.nocrastinate.MidnightDataResetReceiver
-ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:25:9-63
+ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:25:9-89
+	android:process
+		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:25:19-44
 	android:name
-		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:25:19-60
+		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:25:45-86
 uses-sdk
 INJECTED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml

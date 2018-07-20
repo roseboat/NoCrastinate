@@ -5,9 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract;
 import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
+
+import org.joda.time.DateTime;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -19,11 +22,13 @@ public class MidnightDataResetReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
+        Log.d(TAG, "Midnight Receiver reached");
+
         StatsIconData midnightStat = new StatsIconData();
 
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.MINUTE, -1);
-        Date yesterdayDate = cal.getTime();
+        DateTime today = new DateTime().withTimeAtStartOfDay();
+        DateTime yesterday = today.minusDays(1).withTimeAtStartOfDay();
+        Date yesterdayDate = new Date (yesterday.getMillis());
 
         SharedPreferences sharedPreferences = context.getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
         long overallTime = sharedPreferences.getLong("totalDuration", 0);
@@ -43,9 +48,9 @@ public class MidnightDataResetReceiver extends BroadcastReceiver {
         statsHelper.insertNewStat(midnightStat);
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("noOfUnlocks", 0);
-        editor.putLong("totalDuration", 0);
+        editor.clear();
         editor.apply();
+
 
     }
 }

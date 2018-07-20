@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         
-        <receiver android:name=".MidnightDataResetReceiver" />
+        <receiver android:process=":remote" android:name=".MidnightDataResetReceiver" />
 
     </application>
 
