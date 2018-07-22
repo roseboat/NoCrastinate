@@ -6,7 +6,7 @@ import org.joda.time.format.PeriodFormatterBuilder;
 
 public class TimeHelper {
 
-    public static String formatTime(long duration){
+    public static String formatDuration(long duration){
 
         Duration dur = new Duration(duration);
         PeriodFormatter formatter = new PeriodFormatterBuilder()
@@ -20,7 +20,4 @@ public class TimeHelper {
         String formatted = formatter.print(dur.toPeriod());
         return formatted;
     }
-
-
-
 }

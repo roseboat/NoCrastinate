@@ -21,8 +21,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        <receiver android:process=":remote" android:name=".MidnightDataResetReceiver" />
+
+        <receiver android:name="com.example.rosadowning.nocrastinate.MidnightDataResetReceiver">
+
+        </receiver>
+
+
+        <!--<receiver android:process=":remote" android:name=".MidnightDataResetReceiver" />-->
 
     </application>
 

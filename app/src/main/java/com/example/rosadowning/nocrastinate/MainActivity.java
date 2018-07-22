@@ -18,6 +18,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.MenuItem;
 
@@ -34,6 +35,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
@@ -70,11 +72,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private void scheduleMidnightAlarm(){
         DateTime today = new DateTime().withTimeAtStartOfDay();
         DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
+        Log.d(TAG, "time = " + tomorrow.toString());
 
-        AlarmManager am = (AlarmManager) this.getSystemService(ALARM_SERVICE);
         Intent midnightIntent = new Intent(this, MidnightDataResetReceiver.class);
-        PendingIntent midnightPI = PendingIntent.getBroadcast(this, 0, midnightIntent, 0);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, tomorrow.getMillis(), AlarmManager.INTERVAL_DAY, midnightPI);
+        PendingIntent startPIntent = PendingIntent.getBroadcast(this, 0, midnightIntent, 0);
+        AlarmManager alarm = (AlarmManager) this.getSystemService(ALARM_SERVICE);
+        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, tomorrow.getMillis(), startPIntent);
 
     }
 

@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -52,6 +53,7 @@ import java.util.TimerTask;
 public class StatisticsFragment extends Fragment {
 
     private static final String TAG = "STATISTICS FRAGMENT";
+    private static final String STATS_PREF_NAME = "StatisticsInfo";
     private UsageStatsManager mUsageStatsManager;
     private AppStatisticsAdapter mUsageListAdapter;
     private RecyclerView mRecyclerView;
@@ -61,6 +63,9 @@ public class StatisticsFragment extends Fragment {
     private String intervalString;
     private Context context;
     private TimerTask timerTaskAsync;
+    private SharedPreferences sharedPreferences;
+    private View statsView;
+
 
     @Nullable
     @Override
@@ -81,21 +86,24 @@ public class StatisticsFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.intervalString = "Daily";
+        this.context = getContext();
+        this.sharedPreferences = context.getSharedPreferences(STATS_PREF_NAME, Context.MODE_PRIVATE);
         mUsageStatsManager = (UsageStatsManager) getActivity().getSystemService(Context.USAGE_STATS_SERVICE);
     }
 
-    public void onPause(){
+    public void onPause() {
         super.onPause();
-
-        synchronized (timerTaskAsync){
-      timerTaskAsync.cancel();}
+        synchronized (timerTaskAsync) {
+            timerTaskAsync.cancel();
+        }
     }
 
     @Override
     public void onViewCreated(View rootView, Bundle savedInstanceState) {
         super.onViewCreated(rootView, savedInstanceState);
-        this.context = getContext();
-        mUsageListAdapter = new AppStatisticsAdapter(getContext());
+        this.statsView = getView();
+        mUsageListAdapter = new AppStatisticsAdapter(context);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview_app_usage);
         mRecyclerView.scrollToPosition(0);
         mRecyclerView.setAdapter(mUsageListAdapter);
@@ -120,15 +128,14 @@ public class StatisticsFragment extends Fragment {
                     Collections.sort(usageStatsList, new UsedMostOftenComparatorDesc());
                     updateAppsList(usageStatsList);
 
-
-
                     Timer timerAsync = new Timer();
                     timerTaskAsync = new TimerTask() {
                         @Override
                         public void run() {
                             UpdateIcons newIcons = new UpdateIcons();
-                            synchronized (newIcons){
-                            newIcons.execute(intervalString);}
+                            synchronized (newIcons) {
+                                newIcons.execute(intervalString);
+                            }
                         }
                     };
                     timerAsync.schedule(timerTaskAsync, 0, 5000);
@@ -137,6 +144,7 @@ public class StatisticsFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }
@@ -221,76 +229,87 @@ public class StatisticsFragment extends Fragment {
     private class UpdateIcons extends AsyncTask<String, Void, StatsIconData> {
 
         @Override
-        protected StatsIconData doInBackground(String... strings) {
+        protected synchronized StatsIconData doInBackground(String... strings) {
 
             String timeInterval = strings[0];
             StatsIconData stats = new StatsIconData();
 
-            SharedPreferences sharedPreferences = getContext().getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
+            if (sharedPreferences != null) {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
 
-            int unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
-            long screenOn = sharedPreferences.getLong("screenOn", 0);
-            long overallTime = 0;
+                int unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
+                long screenOn = sharedPreferences.getLong("screenOn", 0);
+                long overallTime = 0;
 
-            if (screenOn != 0) {
-                long currentTime = System.currentTimeMillis();
-                long difference = currentTime - screenOn;
-                long currentDuration = sharedPreferences.getLong("totalDuration", 0);
-                overallTime = difference + currentDuration;
-                editor.putLong("totalDuration", overallTime);
-                editor.putLong("screenOn", System.currentTimeMillis());
+                if (screenOn != 0) {
+                    long currentTime = System.currentTimeMillis();
+                    long difference = currentTime - screenOn;
+                    long currentDuration = sharedPreferences.getLong("totalDuration", 0);
+                    overallTime = difference + currentDuration;
+                    editor.putLong("totalDuration", overallTime);
+                    editor.putLong("screenOn", System.currentTimeMillis());
 
-            } else {
-                editor.putLong("screenOn", System.currentTimeMillis());
-            }
-            editor.apply();
-
-            ToDoReaderContract.ToDoListDbHelper toDoHelper = new ToDoReaderContract.ToDoListDbHelper(getContext());
-            SQLiteDatabase sql = toDoHelper.getWritableDatabase();
-            long tasksCompleted = toDoHelper.getNoOfCompletedToDos();
-
-            stats.setTasksCompleted(tasksCompleted);
-            stats.setNoOfUnlocks(unlocks);
-            stats.setOverallTime(overallTime);
-
-            if (!timeInterval.equals("Daily")) {
-
-                StatsDBContract.StatsDBHelper statsHelper = new StatsDBContract.StatsDBHelper(getContext());
-                SQLiteDatabase db = statsHelper.getReadableDatabase();
-                ArrayList<StatsIconData> statsFromInterval = statsHelper.getStatsForInterval(timeInterval);
-
-                int collectedUnlocks = stats.getNoOfUnlocks();
-                long collectedCompleted = stats.getTasksCompleted();
-                long collectedTime = stats.getOverallTime();
-
-                for (StatsIconData queriedStats : statsFromInterval) {
-                    collectedUnlocks += queriedStats.getNoOfUnlocks();
-                    collectedCompleted += queriedStats.getTasksCompleted();
-                    collectedTime += queriedStats.getOverallTime();
+                } else {
+                    editor.putLong("screenOn", System.currentTimeMillis());
                 }
+                editor.apply();
 
-                stats.setTasksCompleted(collectedCompleted);
-                stats.setNoOfUnlocks(collectedUnlocks);
-                stats.setOverallTime(collectedTime);
+                ToDoReaderContract.ToDoListDbHelper toDoHelper = new ToDoReaderContract.ToDoListDbHelper(context);
+                SQLiteDatabase sql = toDoHelper.getWritableDatabase();
+                long tasksCompleted = toDoHelper.getNoOfCompletedToDos();
+
+                stats.setTasksCompleted(tasksCompleted);
+                stats.setNoOfUnlocks(unlocks);
+                stats.setOverallTime(overallTime);
+
+                if (!timeInterval.equals("Daily")) {
+
+                    StatsDBContract.StatsDBHelper statsHelper = new StatsDBContract.StatsDBHelper(context);
+                    SQLiteDatabase db = statsHelper.getReadableDatabase();
+                    ArrayList<StatsIconData> statsFromInterval = statsHelper.getStatsForInterval(timeInterval);
+
+                    int collectedUnlocks = stats.getNoOfUnlocks();
+                    long collectedCompleted = stats.getTasksCompleted();
+                    long collectedTime = stats.getOverallTime();
+
+                    for (StatsIconData queriedStats : statsFromInterval) {
+                        collectedUnlocks += queriedStats.getNoOfUnlocks();
+                        collectedCompleted += queriedStats.getTasksCompleted();
+                        collectedTime += queriedStats.getOverallTime();
+                    }
+
+                    stats.setTasksCompleted(collectedCompleted);
+                    stats.setNoOfUnlocks(collectedUnlocks);
+                    stats.setOverallTime(collectedTime);
+                    return stats;
+                }
                 return stats;
-            }
-            return stats;
+            } else return null;
+
         }
 
+
         @Override
-        protected void onPostExecute(StatsIconData iconData) {
+        protected synchronized void onPostExecute(StatsIconData iconData) {
 
-            TextView textViewUnlocks = (TextView) getView().findViewById(R.id.text_view_no_of_unlocks);
-            textViewUnlocks.setText(iconData.getNoOfUnlocks() + "");
+            if (getView() == statsView) {
 
-            String timeString = TimeHelper.formatTime(iconData.getOverallTime());
-            TextView textViewOverallTime = (TextView) getView().findViewById(R.id.text_view_overall_time);
-            textViewOverallTime.setText(timeString);
+                if ((Integer) iconData.getNoOfUnlocks() != null) {
+                    TextView textViewUnlocks = (TextView) getView().findViewById(R.id.text_view_no_of_unlocks);
+                    textViewUnlocks.setText(iconData.getNoOfUnlocks() + "");
+                }
 
-            TextView textViewTasks = (TextView) getView().findViewById(R.id.text_view_tasks_completed);
-            textViewTasks.setText(iconData.getTasksCompleted() + "");
+                if ((Long) iconData.getOverallTime() != null) {
+                    String timeString = TimeHelper.formatDuration(iconData.getOverallTime());
+                    TextView textViewOverallTime = (TextView) getView().findViewById(R.id.text_view_overall_time);
+                    textViewOverallTime.setText(timeString);
+                }
 
+                if ((Long) iconData.getTasksCompleted() != null) {
+                    TextView textViewTasks = (TextView) getView().findViewById(R.id.text_view_tasks_completed);
+                    textViewTasks.setText(iconData.getTasksCompleted() + "");
+                }
+            }
         }
     }
 }

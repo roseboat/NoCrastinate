@@ -1,5 +1,7 @@
 package com.example.rosadowning.nocrastinate;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +16,8 @@ import org.joda.time.DateTime;
 
 import java.util.Calendar;
 import java.util.Date;
+
+import static android.content.Context.ALARM_SERVICE;
 
 public class MidnightDataResetReceiver extends BroadcastReceiver {
 
@@ -51,6 +55,11 @@ public class MidnightDataResetReceiver extends BroadcastReceiver {
         editor.clear();
         editor.apply();
 
+        DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
+        Intent midnightIntent = new Intent(context, MidnightDataResetReceiver.class);
+        PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, midnightIntent, 0);
+        AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, tomorrow.getMillis(), startPIntent);
 
     }
 }

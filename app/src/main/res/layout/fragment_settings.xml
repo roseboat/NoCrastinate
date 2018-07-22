@@ -37,71 +37,46 @@
     <LinearLayout
         android:layout_width="360dp"
         android:layout_height="454dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/navigation_bar"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         tools:layout_editor_absoluteX="0dp">
 
         <TextView
+            android:id="@+id/help_center"
+            style="@style/SettingsButtons"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="About NoCrastinate"
-            android:backgroundTint="@color/colorToDoBackground"
-            android:textColor="@color/colorFontStyle"
-            android:fontFamily="@font/lato_reg"
-            android:textSize="20dp"
-            android:gravity="center_vertical"
-            android:layout_margin="@dimen/margin_large"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="?android:attr/listDivider"
-            android:outlineSpotShadowColor="@color/colorFontStyle"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="Help Center"
-            android:backgroundTint="@color/colorToDoBackground"
-            android:textColor="@color/colorFontStyle"
-            android:fontFamily="@font/lato_reg"
-            android:textSize="20dp"
-            android:gravity="center_vertical"
-            android:layout_margin="@dimen/margin_large"/>
+            android:text="Help Center" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
             android:background="?android:attr/listDivider"
-            android:outlineSpotShadowColor="@color/colorFontStyle"/>
+            android:outlineSpotShadowColor="@color/colorFontStyle" />
+
         <TextView
+            android:id="@+id/notification_settings"
+            style="@style/SettingsButtons"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="Notification Settings"
-            android:backgroundTint="@color/colorToDoBackground"
-            android:textColor="@color/colorFontStyle"
-            android:fontFamily="@font/lato_reg"
-            android:textSize="20dp"
-            android:gravity="center_vertical"
-            android:layout_margin="@dimen/margin_large"/>
+            android:text="Notification Settings" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
             android:background="?android:attr/listDivider"
-            android:outlineSpotShadowColor="@color/colorFontStyle"/>
+            android:outlineSpotShadowColor="@color/colorFontStyle" />
+
         <TextView
+            android:id="@+id/block_apps"
+            style="@style/SettingsButtons"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="Block Applications"
-            android:backgroundTint="@color/colorToDoBackground"
-            android:textColor="@color/colorFontStyle"
-            android:fontFamily="@font/lato_reg"
-            android:textSize="20dp"
-            android:gravity="center_vertical"
-            android:layout_margin="@dimen/margin_large"/>
+            android:text="Block Applications" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
@@ -110,7 +85,6 @@
 
 
     </LinearLayout>
-
 
 
 </android.support.constraint.ConstraintLayout>
