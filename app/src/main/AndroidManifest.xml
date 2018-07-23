@@ -22,12 +22,10 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="com.example.rosadowning.nocrastinate.MidnightDataResetReceiver">
+        <receiver android:name="com.example.rosadowning.nocrastinate.MidnightDataResetReceiver"/>
+        <receiver android:name="com.example.rosadowning.nocrastinate.ToDoAlarmReceiver" />
 
-        </receiver>
 
-
-        <!--<receiver android:process=":remote" android:name=".MidnightDataResetReceiver" />-->
 
     </application>
 

@@ -72,29 +72,6 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/toDoDueDateLayout"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginTop="@dimen/margin_small"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addToDoNameLayout"
-                android:focusable="false">
-
-                <EditText
-                    android:id="@+id/toDoDueDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/add_to_do_due_date"
-                    android:textColorHint="@color/colorFontStyle"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:focusable="false"
-                    />
-            </android.support.design.widget.TextInputLayout>
-
-
-            <android.support.design.widget.TextInputLayout
                 android:id="@+id/toDoNoteLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -112,6 +89,50 @@
                     android:textColorHint="@color/colorFontStyle"
                     android:inputType="text"
                     android:singleLine="false" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/toDoDueDateLayout"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="@dimen/margin_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/addToDoNoteLayout"
+                android:focusable="false">
+
+                <EditText
+                    android:id="@+id/toDoDueDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/add_to_do_due_date"
+                    android:textColorHint="@color/colorFontStyle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:focusable="false"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/toDoDueAlarmLayout"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="@dimen/margin_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toDoDueDateLayout"
+                android:focusable="false">
+
+                <EditText
+                    android:id="@+id/toDoAlarmDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/add_to_do_alarm_date"
+                    android:textColorHint="@color/colorFontStyle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:focusable="false"
+                    />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.v7.widget.AppCompatCheckBox

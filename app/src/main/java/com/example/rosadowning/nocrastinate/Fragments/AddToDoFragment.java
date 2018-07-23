@@ -1,7 +1,12 @@
 package com.example.rosadowning.nocrastinate.Fragments;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -17,27 +22,37 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.rosadowning.nocrastinate.R;
+import com.example.rosadowning.nocrastinate.ToDoAlarmReceiver;
 import com.example.rosadowning.nocrastinate.ToDoItem;
 import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
 
+import org.joda.time.DateTime;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 public class AddToDoFragment extends Fragment {
 
-    private String name, dueDateString, note;
+    private String name, dueDateString, note, format, alarmDateString;
     private Date dueDateDate;
-    private EditText et_name, et_dueDate, et_note;
-    private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private EditText et_name, et_dueDate, et_note, et_alarm;
+    private TimePickerDialog.OnTimeSetListener mTimeSetListener;
+    private DatePickerDialog.OnDateSetListener mDueDateSetListener, mAlarmDateSetListener;
     private static final String TAG = "AddToDoFragment";
     private ToDoReaderContract.ToDoListDbHelper dbHelper;
     private ToDoItem addToDo;
+    private final long ONE_DAY_LONG = 86400000;
+    private Context context;
+    private Calendar todaysDate, alarmDate;
+    private int day, month, year, hour, minute, alarmDay, alarmMonth, alarmYear, alarmHour, alarmMinute, alarmID;
 
 
     @Nullable
@@ -45,12 +60,22 @@ public class AddToDoFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_add_todo_screen, null);
-
+        this.context = getContext();
         et_name = (EditText) view.findViewById(R.id.addToDoName);
         et_dueDate = (EditText) view.findViewById(R.id.addToDoDueDate);
         et_note = (EditText) view.findViewById(R.id.addToDoNote);
+        et_alarm = (EditText) view.findViewById(R.id.addToDoAlarm);
+
         dueDateDate = null;
         dueDateString = null;
+        alarmDate = null;
+
+        this.todaysDate = Calendar.getInstance();
+        this.year = todaysDate.get(Calendar.YEAR);
+        this.month = todaysDate.get(Calendar.MONTH);
+        this.day = todaysDate.get(Calendar.DAY_OF_MONTH);
+        this.hour = todaysDate.get(Calendar.HOUR_OF_DAY);
+        this.minute = todaysDate.get(Calendar.MINUTE);
 
         Button saveToDoButton = (Button) view.findViewById(R.id.button_save_new_to_do);
         saveToDoButton.setOnClickListener(new View.OnClickListener() {
@@ -63,32 +88,28 @@ public class AddToDoFragment extends Fragment {
         et_dueDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Calendar todaysDate = Calendar.getInstance();
-                int year = todaysDate.get(Calendar.YEAR);
-                int month = todaysDate.get(Calendar.MONTH);
-                int day = todaysDate.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog dialog = new DatePickerDialog(getContext(), android.R.style.Theme_DeviceDefault_Dialog_MinWidth,
-                        mDateSetListener, year, month, day);
+                DatePickerDialog dialog = new DatePickerDialog(context, android.R.style.Theme_DeviceDefault_Dialog_MinWidth,
+                        mDueDateSetListener, year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
 
             }
         });
 
-        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+        mDueDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month++;
+
                 dueDateString = day + "/" + month + "/" + year;
 
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 try {
                     dueDateDate = sdf.parse(dueDateString);
 
-                    if ((System.currentTimeMillis() - 86400000) > dueDateDate.getTime()) {
-                        Log.d("ERROR", "date is not valid", null);
-                        AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+                    if ((todaysDate.getTimeInMillis() - ONE_DAY_LONG) > dueDateDate.getTime()) {
+                        AlertDialog alertDialog = new AlertDialog.Builder(context)
                                 .setMessage(R.string.dialog_message_input_error_date)
                                 .setTitle(R.string.dialog_title_input_error_date)
                                 .setPositiveButton("Ok!", null).create();
@@ -103,32 +124,102 @@ public class AddToDoFragment extends Fragment {
                 }
             }
         };
+
+        // ALARM HERE
+
+        et_alarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog dialog = new DatePickerDialog(context, android.R.style.Theme_DeviceDefault_Dialog_MinWidth,
+                        mAlarmDateSetListener, year, month, day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+
+            }
+        });
+
+        mAlarmDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+
+                alarmDay = day;
+                alarmMonth = month;
+                alarmYear = year;
+
+                alarmDate = Calendar.getInstance();
+                alarmDate.clear();
+                alarmDate.set(alarmYear, alarmMonth, alarmDay);
+
+                try {
+
+                    if ((todaysDate.getTimeInMillis() - ONE_DAY_LONG) > alarmDate.getTimeInMillis()) {
+                        AlertDialog alertDialog = new AlertDialog.Builder(context)
+                                .setMessage(R.string.dialog_message_input_error_date)
+                                .setTitle(R.string.dialog_title_input_error_date)
+                                .setPositiveButton("Ok!", null).create();
+                        alertDialog.show();
+                        alarmDate = null;
+                    } else {
+                        TimePickerDialog timeDialog = new TimePickerDialog(context, android.R.style.Theme_DeviceDefault_Dialog_MinWidth, new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker timePicker, int hourOfDay, int minuteOfDay) {
+
+                                alarmHour = hourOfDay;
+                                alarmMinute = minuteOfDay;
+
+                                if (alarmDate != null && (Integer) alarmHour != null && (Integer) alarmMinute != null) {
+
+                                    alarmDate.clear();
+                                    alarmDate.set(alarmYear, alarmMonth, alarmDay, alarmHour, alarmMinute);
+
+                                    if (System.currentTimeMillis() > alarmDate.getTimeInMillis()) {
+                                        AlertDialog alertDialog = new AlertDialog.Builder(context)
+                                                .setMessage(R.string.dialog_message_input_error_time)
+                                                .setTitle(R.string.dialog_title_input_error_time)
+                                                .setPositiveButton("Ok!", null).create();
+                                        alertDialog.show();
+                                        alarmDate = null;
+                                    }
+                                    else {
+                                        alarmMonth++;
+                                        alarmDateString = alarmDay + "/" + alarmMonth + "/" + alarmYear + ", "+ alarmHour + ":" + alarmMinute;
+                                        et_alarm.setText(alarmDateString);
+                                    }
+                                }
+                            }
+                        }, hour, minute, true);
+                        timeDialog.show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
         return view;
     }
 
-
     public void addToDo() {
 
-        dbHelper = new ToDoReaderContract.ToDoListDbHelper(getContext());
+        dbHelper = new ToDoReaderContract.ToDoListDbHelper(context);
         SQLiteDatabase dbRead = dbHelper.getReadableDatabase();
         ArrayList<String> names = dbHelper.getToDoNames();
-
 
         name = et_name.getText().toString();
 
         if (name.equals(null) || name.equals("")) {
             Log.d("ERROR", "name is not valid", null);
-            AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+            AlertDialog alertDialog = new AlertDialog.Builder(context)
                     .setMessage(R.string.dialog_message_input_error_name)
                     .setTitle(R.string.dialog_title_input_error_name)
                     .setPositiveButton("Ok!", null).create();
             alertDialog.show();
         } else {
             boolean nameConflict = false;
-            for (String dbName: names){
-                if (name.equals(dbName)){
+            for (String dbName : names) {
+                if (name.equals(dbName)) {
                     nameConflict = true;
-                    AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+                    AlertDialog alertDialog = new AlertDialog.Builder(context)
                             .setMessage(R.string.dialog_message_name_conflict)
                             .setTitle(R.string.dialog_title_name_conflict)
                             .setPositiveButton("Ok!", null).create();
@@ -147,10 +238,27 @@ public class AddToDoFragment extends Fragment {
                     addToDo.setDueDate(dueDateDate);
                 }
 
-                dbHelper = new ToDoReaderContract.ToDoListDbHelper(getContext());
+                if (alarmDate.getTimeInMillis() != 0){
+                    addToDo.setAlarmDate(new Date(alarmDate.getTimeInMillis()));
+                }
+
+                dbHelper = new ToDoReaderContract.ToDoListDbHelper(context);
                 SQLiteDatabase dbWrite = dbHelper.getWritableDatabase();
                 dbHelper.insertNewToDo(addToDo);
-                Toast.makeText(getContext(), "To do \"" + name + "\" added", Toast.LENGTH_LONG).show();
+
+                if (alarmDate.getTimeInMillis() != 0) {
+
+                    int alarmID = dbHelper.getID(addToDo);
+                    Intent intent = new Intent(context, ToDoAlarmReceiver.class);
+                    intent.putExtra("ToDoName", name);
+                    intent.putExtra("AlarmID", alarmID);
+                    AlarmManager alarm = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+                    alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmDate.getTimeInMillis(), pendingIntent);
+                }
+
+
+                Toast.makeText(context, "To do \"" + name + "\" added", Toast.LENGTH_LONG).show();
 
                 ToDoFragment newFragment = new ToDoFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -159,8 +267,5 @@ public class AddToDoFragment extends Fragment {
                 transaction.commit();
             }
         }
-
     }
-
-
 }

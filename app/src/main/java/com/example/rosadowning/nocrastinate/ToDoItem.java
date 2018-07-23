@@ -6,13 +6,10 @@ import java.util.Date;
 
 public class ToDoItem implements Serializable {
 
-    private String name;
-    private String note;
-    private Boolean isStarred;
-    private Boolean isCompleted;
-    private Date dueDate;
+    private String name, note;
+    private Boolean isStarred, isCompleted;
+    private Date dueDate, completedDate, alarmDate;
     private Double estimatedTime;
-    private Date completedDate;
 
 
     public ToDoItem(String name) {
@@ -23,6 +20,7 @@ public class ToDoItem implements Serializable {
         this.isStarred = false;
         this.estimatedTime = null;
         this.completedDate = null;
+        this.alarmDate = null;
     }
 
     public String getName() {
@@ -67,13 +65,17 @@ public class ToDoItem implements Serializable {
 
     public Date getCompletedDate(){ return completedDate; }
 
+    public Date getAlarmDate(){ return alarmDate; }
+
+    public void setAlarmDate(Date alarmDate){ this.alarmDate = alarmDate;}
+
     public void setCompletedDate(Date completedDate){ this.completedDate = completedDate; }
 
     public boolean equals(ToDoItem otherItem) {
         boolean isEqual = false;
         if (name.equals(otherItem.getName()) && note.equals(otherItem.getNote())){
             if (isStarred = otherItem.getStarred() && isCompleted == otherItem.getCompleted()) {
-                if (dueDate == otherItem.getDueDate()) {
+                if (dueDate == otherItem.getDueDate() && alarmDate == otherItem.getAlarmDate()) {
                     isEqual = true;
                 }
             }

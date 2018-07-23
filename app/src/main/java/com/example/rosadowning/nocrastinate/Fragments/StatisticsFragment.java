@@ -138,7 +138,7 @@ public class StatisticsFragment extends Fragment {
                             }
                         }
                     };
-                    timerAsync.schedule(timerTaskAsync, 0, 5000);
+                    timerAsync.schedule(timerTaskAsync, 0, 3000);
                 }
             }
 
@@ -167,6 +167,7 @@ public class StatisticsFragment extends Fragment {
                 queryTime = new DateTime().minusYears(1).getMillis();
                 break;
         }
+        Log.d(TAG, "query time = " + queryTime);
 
         Map<String, UsageStats> usageStats = mUsageStatsManager.queryAndAggregateUsageStats(queryTime, System.currentTimeMillis());
         List<UsageStats> queryUsageStats = new ArrayList<>();
@@ -180,7 +181,6 @@ public class StatisticsFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
-                    mUsagePopUp.setVisibility(View.GONE);
                 }
             });
         }
@@ -209,7 +209,7 @@ public class StatisticsFragment extends Fragment {
             } catch (PackageManager.NameNotFoundException e) {
                 Log.w(TAG, String.format("App Icon is not found for %s",
                         customUsageStats.usageStats.getPackageName()));
-                customUsageStats.appIcon = getActivity().getDrawable(R.drawable.ic_launcher_background);
+                customUsageStats.appIcon = getActivity().getDrawable(R.drawable.brain);
             }
             customUsageStatsList.add(customUsageStats);
         }

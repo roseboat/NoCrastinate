@@ -17,6 +17,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -78,9 +79,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         PendingIntent startPIntent = PendingIntent.getBroadcast(this, 0, midnightIntent, 0);
         AlarmManager alarm = (AlarmManager) this.getSystemService(ALARM_SERVICE);
         alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, tomorrow.getMillis(), startPIntent);
-
     }
-
 
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -89,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             channel.setDescription(CHANNEL_DESCRIPTION);
             channel.enableLights(false);
             channel.enableVibration(true);
-            channel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+            channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
@@ -124,7 +123,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return loadFragment(fragment);
     }
 
-    public void onDestroy(){
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mReceiver);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         Intent intent = new Intent(this, MainActivity.class);
@@ -140,10 +141,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
 
-        Log.d("Main Activity", "Notification built", null);
-        mBuilder.build();
-
-        unregisterReceiver(mReceiver);
-        super.onDestroy();
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        notificationManager.notify(0, mBuilder.build());
     }
 }

@@ -52,6 +52,7 @@ public class MidnightDataResetReceiver extends BroadcastReceiver {
         statsHelper.insertNewStat(midnightStat);
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("totalDuration", 0);
         editor.clear();
         editor.apply();
 

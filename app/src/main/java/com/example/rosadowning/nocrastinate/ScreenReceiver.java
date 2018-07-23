@@ -61,8 +61,6 @@ public class ScreenReceiver extends BroadcastReceiver {
             editor.putLong("screenOn", screenOn);
             editor.apply();
 
-
         }
     }
-
 }

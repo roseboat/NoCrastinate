@@ -15,11 +15,19 @@
     <string name="title_alarm">Set a To Do Alarm</string>
     <string name="title_view_to_do">View To Do</string>
     <string name="title_help_center">Help Center</string>
-    <string name="title_notification_settings">Notification Settings</string>
+    <string name="title_notification_settings">Notify Me...</string>
     <string name="title_block_apps">Block Applications</string>
 
-
-
+    <string name="dialog_message_input_error_name">Please enter a name for your to-do.</string>
+    <string name="dialog_title_input_error_name">Enter Name</string>
+    <string name="dialog_message_input_error_date">Please enter a date in the future.</string>
+    <string name="dialog_title_input_error_date">Enter Valid Date</string>
+    <string name="dialog_message_input_error_time">Please enter a time in the future.</string>
+    <string name="dialog_title_input_error_time">Enter Valid Time</string>
+    <string name="dialog_message_confirm_delete">Are you sure you want to delete this to do?</string>
+    <string name="dialog_title_confirm_delete">Confirm Deletion</string>
+    <string name="dialog_message_name_conflict">There is already a to-do with this name. Please choose another!</string>
+    <string name="dialog_title_name_conflict">Naming Conflict</string>
 
     <string name="stats_icon_overall_time">Time on Phone</string>
     <string name="stats_icon_unlocks">No. of Unlocks</string>
@@ -27,7 +35,7 @@
 
     <string name="add_to_do_name">Name of To Do:</string>
     <string name="add_to_do_due_date">Due Date:</string>
-    <string name="add_to_do_estimated_time">Estimated Time:</string>
+    <string name="add_to_do_alarm_date">Alarm:</string>
     <string name="add_to_do_note">Notes:</string>
     <string name="add_to_do_alarm">Add an Alarm</string>
     <string name="save_new_to_do">Save New To Do</string>
@@ -37,20 +45,12 @@
     <string name="save_to_do">Save To Do</string>
     <string name="delete_to_do">Delete To Do</string>
 
-
-
-    <string name="dialog_message_input_error_name">Please enter a name for your to-do.</string>
-    <string name="dialog_title_input_error_name">Enter Name</string>
-    <string name="dialog_message_input_error_date">Please enter a date in the future.</string>
-    <string name="dialog_title_input_error_date">Enter Valid Date</string>
-    <string name="dialog_message_confirm_delete">Are you sure you want to delete this to do?</string>
-    <string name="dialog_title_confirm_delete">Confirm Deletion</string>
-    <string name="dialog_message_name_conflict">There is already a to-do with this name. Please choose another!</string>
-    <string name="dialog_title_name_conflict">Naming Conflict</string>
-
-
     <string name="notification_title_on_destroy">You Closed NoCrastinate! :(</string>
     <string name="notification_message_on_destroy">All phone usage monitoring will now be paused. Click me to resume usage monitoring!</string>
 
+    <string name="notification_frequency_1">When I\'m on my phone a lot</string>
+    <string name="notification_frequency_2">When I keep checking my phone</string>
+    <string name="notification_frequency_3">Once Daily</string>
+    <string name="notification_frequency_4">Once Weekly</string>
 
 </resources>

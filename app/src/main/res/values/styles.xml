@@ -23,4 +23,13 @@
         <item name="android:layout_margin">@dimen/margin_large</item>
     </style>
 
+    <style name = "NotificationButtons" parent = "Theme.AppCompat">
+        <item name="android:backgroundTint">@color/colorToDoBackground</item>
+        <item name="android:textColor">@color/colorFontStyle</item>
+        <item name="android:fontFamily">@font/lato_reg</item>
+        <item name="android:textSize">17dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_margin">@dimen/margin_large</item>
+    </style>
+
 </resources>

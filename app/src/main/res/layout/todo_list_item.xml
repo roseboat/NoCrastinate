@@ -28,7 +28,7 @@
 
         <TextView
             android:id="@+id/toDoName"
-            android:layout_width="280dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center_vertical"
@@ -40,7 +40,7 @@
 
         <TextView
             android:id="@+id/toDoDueDate"
-            android:layout_width="280dp"
+            android:layout_width="250dp"
             android:layout_height="25dp"
             android:paddingBottom="8dp"
             android:paddingLeft="8dp"
@@ -55,6 +55,7 @@
         android:id="@+id/toDoStar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/small_font_size"
         android:layout_gravity="center"
         android:button="@drawable/star_selector"
         android:layout_row="0" />
