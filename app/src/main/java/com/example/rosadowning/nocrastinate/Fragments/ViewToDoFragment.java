@@ -16,6 +16,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,8 +28,8 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 
 import com.example.rosadowning.nocrastinate.R;
-import com.example.rosadowning.nocrastinate.ToDoAlarmReceiver;
-import com.example.rosadowning.nocrastinate.ToDoItem;
+import com.example.rosadowning.nocrastinate.BroadcastReceivers.ToDoAlarmReceiver;
+import com.example.rosadowning.nocrastinate.DataModels.ToDoItem;
 import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
 
 import java.text.ParseException;
@@ -136,14 +137,11 @@ public class ViewToDoFragment extends Fragment {
                         dbHelper = new ToDoReaderContract.ToDoListDbHelper(getContext());
                         SQLiteDatabase sql = dbHelper.getWritableDatabase();
 
-                        Intent intent = new Intent(context, ToDoAlarmReceiver.class);
-                        intent.putExtra("ToDoName", name);
-
-
                         if (oldAlarm.getTime() != 0) {
                             int oldAlarmId = dbHelper.getID(toDoItem);
-                            Log.d(TAG, "old alarm id = " + oldAlarmId);
-                            intent.putExtra("OldAlarmId", oldAlarmId);
+                            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+                            notificationManager.cancel(oldAlarmId);
+                            Log.d(TAG, "old alarm = " + oldAlarmId + " deleted");
                         }
 
                         if (!toDoItem.equals(editedToDo)) {
@@ -151,10 +149,13 @@ public class ViewToDoFragment extends Fragment {
                             dbHelper.insertNewToDo(editedToDo);
                         }
 
+                        Intent intent = new Intent(context, ToDoAlarmReceiver.class);
+                        intent.putExtra("ToDoName", name);
+                        int alarmId = dbHelper.getID(editedToDo);
+                        intent.putExtra("AlarmID", alarmId);
                         AlarmManager alarm = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
                         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
                         alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmDate.getTime(), pendingIntent);
-
 
                         ToDoFragment newFragment = new ToDoFragment();
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -176,6 +177,9 @@ public class ViewToDoFragment extends Fragment {
                             public void onClick(DialogInterface dialog, int id) {
                                 dbHelper = new ToDoReaderContract.ToDoListDbHelper(getContext());
                                 SQLiteDatabase sql = dbHelper.getWritableDatabase();
+                                int deletedToDoAlarmID = dbHelper.getID(toDoItem);
+                                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+                                notificationManager.cancel(deletedToDoAlarmID);
                                 dbHelper.deleteToDo(toDoItem);
                                 ToDoFragment newFragment = new ToDoFragment();
                                 FragmentTransaction transaction = getFragmentManager().beginTransaction();

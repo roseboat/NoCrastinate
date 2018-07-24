@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 
 import com.example.rosadowning.nocrastinate.R;
-import com.example.rosadowning.nocrastinate.ToDoItem;
+import com.example.rosadowning.nocrastinate.DataModels.ToDoItem;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

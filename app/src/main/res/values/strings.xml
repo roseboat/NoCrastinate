@@ -49,8 +49,9 @@
     <string name="notification_message_on_destroy">All phone usage monitoring will now be paused. Click me to resume usage monitoring!</string>
 
     <string name="notification_frequency_1">When I\'m on my phone a lot</string>
-    <string name="notification_frequency_2">When I keep checking my phone</string>
-    <string name="notification_frequency_3">Once Daily</string>
-    <string name="notification_frequency_4">Once Weekly</string>
+    <string name="notification_frequency_2">Once - with an evening report</string>
+    <string name="notification_frequency_3">Once Weekly</string>
+    <string name="notification_frequency_4">Never!</string>
+
 
 </resources>

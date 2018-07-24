@@ -14,9 +14,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.rosadowning.nocrastinate.CustomUsageStats;
+import com.example.rosadowning.nocrastinate.DataModels.CustomUsageStats;
 import com.example.rosadowning.nocrastinate.R;
-import com.example.rosadowning.nocrastinate.TimeHelper;
+import com.example.rosadowning.nocrastinate.DataModels.TimeHelper;
 
 public class AppStatisticsAdapter extends RecyclerView.Adapter<AppStatisticsAdapter.ViewHolder> {
 

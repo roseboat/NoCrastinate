@@ -31,8 +31,9 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="com.example.rosadowning.nocrastinate.MidnightDataResetReceiver" />
-        <receiver android:name="com.example.rosadowning.nocrastinate.ToDoAlarmReceiver" />
+        <receiver android:name="com.example.rosadowning.nocrastinate.BroadcastReceivers.MidnightDataResetReceiver" />
+        <receiver android:name="com.example.rosadowning.nocrastinate.BroadcastReceivers.ToDoAlarmReceiver" />
+        <receiver android:name="com.example.rosadowning.nocrastinate.BroadcastReceivers.NotificationReceiver" />
 
         <provider
             android:name="com.android.tools.ir.server.InstantRunContentProvider"

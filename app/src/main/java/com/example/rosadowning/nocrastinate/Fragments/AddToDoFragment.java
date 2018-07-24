@@ -26,15 +26,12 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.rosadowning.nocrastinate.R;
-import com.example.rosadowning.nocrastinate.ToDoAlarmReceiver;
-import com.example.rosadowning.nocrastinate.ToDoItem;
+import com.example.rosadowning.nocrastinate.BroadcastReceivers.ToDoAlarmReceiver;
+import com.example.rosadowning.nocrastinate.DataModels.ToDoItem;
 import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
-
-import org.joda.time.DateTime;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;

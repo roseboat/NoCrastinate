@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -18,12 +17,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.rosadowning.nocrastinate.Adapters.AppStatisticsAdapter;
-import com.example.rosadowning.nocrastinate.CustomUsageStats;
+import com.example.rosadowning.nocrastinate.DataModels.CustomUsageStats;
 import com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract;
 import com.example.rosadowning.nocrastinate.R;
 import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
-import com.example.rosadowning.nocrastinate.StatsIconData;
-import com.example.rosadowning.nocrastinate.TimeHelper;
+import com.example.rosadowning.nocrastinate.DataModels.StatsIconData;
+import com.example.rosadowning.nocrastinate.DataModels.TimeHelper;
 
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;

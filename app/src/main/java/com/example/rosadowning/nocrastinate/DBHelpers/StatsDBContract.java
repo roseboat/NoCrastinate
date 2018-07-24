@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.example.rosadowning.nocrastinate.StatsIconData;
+import com.example.rosadowning.nocrastinate.DataModels.StatsIconData;
 
 import static com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract.StatsEntry.TABLE_NAME;
 

@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.rosadowning.nocrastinate.R;
-import com.example.rosadowning.nocrastinate.ToDoItem;
+import com.example.rosadowning.nocrastinate.DataModels.ToDoItem;
 import com.example.rosadowning.nocrastinate.Adapters.ToDoListAdapter;
 import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
 

@@ -9,12 +9,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 import android.util.Log;
 
-import com.example.rosadowning.nocrastinate.ToDoItem;
+import com.example.rosadowning.nocrastinate.DataModels.ToDoItem;
 
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 import static com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract.FeedEntry.TABLE_NAME;
