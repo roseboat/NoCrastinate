@@ -10,9 +10,16 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorDelete">#ff90a8</color>
     <color name="colorCompleted">#e2bbce</color>
+    <color name="colorDivider">#bbbbbb</color>
 
     <color name="colorGradient1">#ceb8ff</color>
     <color name="colorGradient2">#a38cf7</color>
     <color name="colorPrimaryDark">#16b398</color>
+
+
+    <color name="colorTurqLight">#1916b398</color>
+    <color name="colorTurqMedium">#3616b398</color>
+    <color name="colorTurqDark">#5716b398</color>
+
 
 </resources>

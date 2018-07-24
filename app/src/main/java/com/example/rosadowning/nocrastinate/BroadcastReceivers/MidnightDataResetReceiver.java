@@ -34,19 +34,20 @@ public class MidnightDataResetReceiver extends BroadcastReceiver {
         DateTime yesterday = today.minusDays(1).withTimeAtStartOfDay();
         Date yesterdayDate = new Date (yesterday.getMillis());
 
-        SharedPreferences sharedPreferences = context.getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
-        long overallTime = sharedPreferences.getLong("totalDuration", 0);
-        int unlocks = sharedPreferences.getInt("noOfUnlocks",0);
+        synchronized (this) {
+            SharedPreferences sharedPreferences = context.getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
+            long overallTime = sharedPreferences.getLong("totalDuration", 0);
+            int unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
 
-        ToDoReaderContract.ToDoListDbHelper toDoHelper = new ToDoReaderContract.ToDoListDbHelper(context);
-        SQLiteDatabase sqlToDo = toDoHelper.getReadableDatabase();
-        long tasksCompleted = toDoHelper.getNoOfCompletedToDos();
+            ToDoReaderContract.ToDoListDbHelper toDoHelper = new ToDoReaderContract.ToDoListDbHelper(context);
+            SQLiteDatabase sqlToDo = toDoHelper.getReadableDatabase();
+            long tasksCompleted = toDoHelper.getNoOfCompletedToDos();
 
-        midnightStat.setDate(yesterdayDate);
-        midnightStat.setOverallTime(overallTime);
-        midnightStat.setNoOfUnlocks(unlocks);
-        midnightStat.setTasksCompleted(tasksCompleted);
-
+            midnightStat.setDate(yesterdayDate);
+            midnightStat.setOverallTime(overallTime);
+            midnightStat.setNoOfUnlocks(unlocks);
+            midnightStat.setTasksCompleted(tasksCompleted);
+        }
         StatsDBContract.StatsDBHelper statsHelper = new StatsDBContract.StatsDBHelper(context);
         SQLiteDatabase sqlStats = statsHelper.getWritableDatabase();
         statsHelper.insertNewStat(midnightStat);

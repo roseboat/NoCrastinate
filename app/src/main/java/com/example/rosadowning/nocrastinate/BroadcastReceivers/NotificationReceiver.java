@@ -45,32 +45,24 @@ public class NotificationReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         this.context = context;
-        int alarmID = 0;
-
         Bundle extras = intent.getExtras();
         int type = extras.getInt("Type");
         String title = extras.getString("Title");
+        int alarmID = extras.getInt("AlarmID");
 
         if (type == 1){
-            Log.d(TAG, "Alarm type 1");
-
+            content = extras.getString("Content", "Not found");
         } else if (type == 2){
-            Log.d(TAG, "Alarm type 2");
             freq2setUp();
-            alarmID = 0201;
         } else if (type == 3){
-            Log.d(TAG, "Alarm type 3");
             freq3setUp();
-            alarmID = 0301;
-
         }
 
-
-        Bitmap brainLogo = BitmapFactory.decodeResource(context.getResources(), R.drawable.brain_graphic);
+        Bitmap brainLogo = BitmapFactory.decodeResource(context.getResources(), R.drawable.brain);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         Intent alarmIntent = new Intent(context, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        alarmIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, CHANNEL_ID)
@@ -85,11 +77,9 @@ public class NotificationReceiver extends BroadcastReceiver {
                         .bigText(content));
                 mBuilder.build();
 
-
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         notificationManager.notify(alarmID, mBuilder.build());
     }
-
 
     public void freq2setUp(){
 
@@ -117,7 +107,6 @@ public class NotificationReceiver extends BroadcastReceiver {
         alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, daily.getMillis(), startPIntent);
 
     }
-
 
     public void freq3setUp(){
 
@@ -161,6 +150,5 @@ public class NotificationReceiver extends BroadcastReceiver {
         alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, weeklyReport.getMillis(), startPIntent);
 
     }
-
 
 }

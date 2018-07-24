@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/margin_small"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
+    android:layout_marginLeft="@dimen/margin_small"
+    android:layout_marginRight="@dimen/margin_small"
     android:layout_marginTop="@dimen/margin_small"
     android:background="@color/colorToDoBackground"
     android:gravity="center">
@@ -36,7 +36,6 @@
             android:text="ToDoName"
             android:textColor="@color/colorBlack"
             android:textSize="17dp" />
-
 
         <TextView
             android:id="@+id/toDoDueDate"

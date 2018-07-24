@@ -27,6 +27,8 @@ import com.example.rosadowning.nocrastinate.Fragments.*;
 
 import org.joda.time.DateTime;
 
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     public static final String TAG = "MAINACTIVITY";
@@ -47,8 +49,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         loadFragment(new StatisticsFragment());
 
         mReceiver = new ScreenReceiver();
-        final IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
-        filter.addAction(Intent.ACTION_SCREEN_OFF);
+        final IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
         filter.addAction(Intent.ACTION_USER_PRESENT);
         registerReceiver(mReceiver, filter);
 
@@ -62,10 +63,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
         Log.d(TAG, "time = " + tomorrow.toString());
 
+
         Intent midnightIntent = new Intent(this, MidnightDataResetReceiver.class);
         PendingIntent startPIntent = PendingIntent.getBroadcast(this, 0, midnightIntent, 0);
         AlarmManager alarm = (AlarmManager) this.getSystemService(ALARM_SERVICE);
         alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, tomorrow.getMillis(), startPIntent);
+
     }
 
     private void createNotificationChannel() {

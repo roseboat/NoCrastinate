@@ -9,26 +9,15 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@drawable/gradient_drawable"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+        style="@style/Toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/toolBarHeaderToDo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_small"
-        android:layout_marginEnd="@dimen/margin_small"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginTop="@dimen/margin_small"
         android:text="@string/title_activity_settings"
-        android:textAlignment="center"
-        android:textSize="@dimen/top_toolbar_font_size"
+        style="@style/ToolbarText"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,11 +40,7 @@
             android:layout_height="60dp"
             android:text="Help Center" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="?android:attr/listDivider"
-            android:outlineSpotShadowColor="@color/colorFontStyle" />
+        <View style="@style/SettingsDivider"/>
 
         <TextView
             android:id="@+id/notification_settings"
@@ -64,11 +49,7 @@
             android:layout_height="60dp"
             android:text="Notification Settings" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="?android:attr/listDivider"
-            android:outlineSpotShadowColor="@color/colorFontStyle" />
+        <View style="@style/SettingsDivider"/>
 
         <TextView
             android:id="@+id/block_apps"
@@ -77,14 +58,6 @@
             android:layout_height="60dp"
             android:text="Block Applications" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="?android:attr/listDivider"
-            android:outlineSpotShadowColor="@color/colorFontStyle" />
-
-
+        <View style="@style/SettingsDivider"/>
     </LinearLayout>
-
-
 </android.support.constraint.ConstraintLayout>

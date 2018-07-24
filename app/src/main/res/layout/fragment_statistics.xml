@@ -9,31 +9,19 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@drawable/gradient_drawable"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+        style="@style/Toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/toolBarHeaderToDo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_small"
-        android:layout_marginEnd="@dimen/margin_small"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginTop="@dimen/margin_small"
         android:text="@string/title_activity_statistics"
-        android:textAlignment="center"
-        android:textSize="@dimen/top_toolbar_font_size"
+        style="@style/ToolbarText"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -109,106 +97,66 @@
 
             <LinearLayout
                 android:id="@+id/icon_group_no_of_unlocks"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/stats_page_margin_between_icons"
-                android:layout_marginStart="@dimen/stats_page_margin_between_icons"
-                android:orientation="vertical"
+                style="@style/StatsIconLayout"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/icon_group_overall_time_spent">
 
                 <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_gravity="center"
-                    android:scaleType="fitXY"
+                    style="@style/StatsIconImage"
                     android:src="@drawable/ic_lock_open_black_24dp"
                     android:contentDescription="Number of unlocks"/>
 
                 <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
                     android:text="@string/stats_icon_unlocks"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/small_font_size" />
+                    style="@style/StatsIconTopText" />
 
                 <TextView
-                    style="@style/LargeFont"
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
+                    style="@style/StatsIconBottomText"
                     android:id="@+id/text_view_no_of_unlocks"
-                    android:text=" unlocks"
-                    android:textAlignment="center" />
+                    android:text=" unlocks"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/icon_group_overall_time_spent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/stats_page_margin_between_icons"
-                android:layout_marginStart="@dimen/stats_page_margin_between_icons"
-                android:orientation="vertical"
+                style="@style/StatsIconLayout"
                 app:layout_constraintEnd_toStartOf="@id/icon_group_tasks_achieved"
-                app:layout_constraintStart_toEndOf="@id/icon_group_no_of_unlocks"
-                >
+                app:layout_constraintStart_toEndOf="@id/icon_group_no_of_unlocks">
 
                 <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_gravity="center"
-                    android:scaleType="fitXY"
+                    style="@style/StatsIconImage"
                     android:src="@drawable/ic_access_time_black_24dp"
                     android:contentDescription="Overall time on phone" />
 
                 <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
                     android:text="@string/stats_icon_overall_time"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/small_font_size" />
+                    style="@style/StatsIconTopText" />
 
                 <TextView
-                    style="@style/LargeFont"
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
+                    style="@style/StatsIconBottomText"
                     android:text=" mins"
-                    android:id="@+id/text_view_overall_time"
-                    android:textAlignment="center" />
+                    android:id="@+id/text_view_overall_time" />
             </LinearLayout>
 
 
             <LinearLayout
                 android:id="@+id/icon_group_tasks_achieved"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/stats_page_margin_between_icons"
-                android:layout_marginStart="@dimen/stats_page_margin_between_icons"
-                android:orientation="vertical"
+                style="@style/StatsIconLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/icon_group_overall_time_spent">
 
                 <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_gravity="center"
-                    android:scaleType="fitXY"
+                    style="@style/StatsIconImage"
                     android:src="@drawable/ic_thumb_up_black_24dp"
                     android:contentDescription="Tasks achieved" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:text="@string/stats_icon_tasks_achieved"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/small_font_size" />
+                    style="@style/StatsIconTopText" />
 
                 <TextView
-                    style="@style/LargeFont"
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
+                    style="@style/StatsIconBottomText"
                     android:text=" tasks"
-                    android:id="@+id/text_view_tasks_completed"
-                    android:textAlignment="center" />
+                    android:id="@+id/text_view_tasks_completed"/>
             </LinearLayout>
         </LinearLayout>
 

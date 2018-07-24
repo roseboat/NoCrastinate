@@ -91,13 +91,6 @@ public class StatisticsFragment extends Fragment {
         mUsageStatsManager = (UsageStatsManager) getActivity().getSystemService(Context.USAGE_STATS_SERVICE);
     }
 
-    public void onPause() {
-        super.onPause();
-        synchronized (timerTaskAsync) {
-            timerTaskAsync.cancel();
-        }
-    }
-
     @Override
     public void onViewCreated(View rootView, Bundle savedInstanceState) {
         super.onViewCreated(rootView, savedInstanceState);
@@ -238,20 +231,22 @@ public class StatisticsFragment extends Fragment {
 
                 int unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
                 long screenOn = sharedPreferences.getLong("screenOn", 0);
+                long screenOff = sharedPreferences.getLong("screenOff", 0);
                 long overallTime = 0;
 
                 if (screenOn != 0) {
-                    long currentTime = System.currentTimeMillis();
-                    long difference = currentTime - screenOn;
-                    long currentDuration = sharedPreferences.getLong("totalDuration", 0);
-                    overallTime = difference + currentDuration;
-                    editor.putLong("totalDuration", overallTime);
-                    editor.putLong("screenOn", System.currentTimeMillis());
-
+                    if (screenOn > screenOff) {
+                        long currentTime = System.currentTimeMillis();
+                        long difference = currentTime - screenOn;
+                        long currentDuration = sharedPreferences.getLong("totalDuration", 0);
+                        overallTime = difference + currentDuration;
+                        editor.putLong("totalDuration", overallTime);
+                        editor.putLong("screenOn", System.currentTimeMillis());
+                    }
                 } else {
                     editor.putLong("screenOn", System.currentTimeMillis());
                 }
-                editor.apply();
+                editor.commit();
 
                 ToDoReaderContract.ToDoListDbHelper toDoHelper = new ToDoReaderContract.ToDoListDbHelper(context);
                 SQLiteDatabase sql = toDoHelper.getWritableDatabase();

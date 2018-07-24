@@ -9,26 +9,15 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@drawable/gradient_drawable"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+        style="@style/Toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/toolBarHeaderToDo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_small"
-        android:layout_marginEnd="@dimen/margin_small"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginTop="@dimen/margin_small"
         android:text="@string/title_notification_settings"
-        android:textAlignment="center"
-        android:textSize="@dimen/top_toolbar_font_size"
+        style="@style/ToolbarText"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,12 +35,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_margin="@dimen/margin_small">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@color/colorTurqDark">
 
                 <CheckBox
                     android:id="@+id/notification_checkbox_1"
@@ -60,25 +51,33 @@
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/margin_large" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="@dimen/margin_small">
                 <TextView
                     android:id="@+id/notification_frequency_1"
                     style="@style/NotificationButtons"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="@string/notification_frequency_1" />
-
+                    <TextView
+                        android:id="@+id/notification_description_1"
+                        style="@style/NotificationDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/notification_description_1" />
+                </LinearLayout>
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:background="?android:attr/listDivider"
-                android:outlineSpotShadowColor="@color/colorFontStyle" />
+            <View style="@style/SettingsDivider"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@color/colorTurqMedium">
 
                 <CheckBox
                     android:id="@+id/notification_checkbox_2"
@@ -86,25 +85,33 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/margin_large" />
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="@dimen/margin_small">
                 <TextView
                     android:id="@+id/notification_frequency_2"
                     style="@style/NotificationButtons"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:text="@string/notification_frequency_2" />
+                    <TextView
+                        android:id="@+id/notification_description_2"
+                        style="@style/NotificationDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:text="@string/notification_description_2" />
+                </LinearLayout>
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:background="?android:attr/listDivider"
-                android:outlineSpotShadowColor="@color/colorFontStyle" />
+            <View style="@style/SettingsDivider"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@color/colorTurqLight">
 
                 <CheckBox
                     android:id="@+id/notification_checkbox_3"
@@ -112,20 +119,27 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/margin_large" />
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="@dimen/margin_small">
                 <TextView
                     android:id="@+id/notification_frequency_3"
                     style="@style/NotificationButtons"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:text="@string/notification_frequency_3" />
+                    <TextView
+                        android:id="@+id/notification_description_3"
+                        style="@style/NotificationDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:text="@string/notification_description_3" />
+            </LinearLayout>
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:background="?android:attr/listDivider"
-                android:outlineSpotShadowColor="@color/colorFontStyle" />
+            <View style="@style/SettingsDivider"/>
 
 
 

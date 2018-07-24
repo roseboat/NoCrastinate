@@ -14,7 +14,7 @@
         <item name="android:textColor">@color/colorPrimaryDark</item>
     </style>
 
-    <style name = "SettingsButtons" parent = "Theme.AppCompat">
+    <style name="SettingsButtons" parent="Theme.AppCompat">
         <item name="android:backgroundTint">@color/colorToDoBackground</item>
         <item name="android:textColor">@color/colorFontStyle</item>
         <item name="android:fontFamily">@font/lato_reg</item>
@@ -23,13 +23,81 @@
         <item name="android:layout_margin">@dimen/margin_large</item>
     </style>
 
-    <style name = "NotificationButtons" parent = "Theme.AppCompat">
+    <style name="NotificationButtons" parent="Theme.AppCompat">
         <item name="android:backgroundTint">@color/colorToDoBackground</item>
         <item name="android:textColor">@color/colorFontStyle</item>
-        <item name="android:fontFamily">@font/lato_reg</item>
+        <item name="android:fontFamily">@font/lato_bold</item>
         <item name="android:textSize">20dp</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:layout_margin">@dimen/margin_large</item>
+        <item name="android:layout_margin">@dimen/margin_small</item>
+    </style>
+
+    <style name="NotificationDescription" parent="Theme.AppCompat">
+        <item name="android:backgroundTint">@color/colorToDoBackground</item>
+        <item name="android:textColor">@color/colorFontStyle</item>
+        <item name="android:fontFamily">@font/lato_italic</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:layout_margin">@dimen/margin_small</item>
+        <item name="android:layout_marginBottom">@dimen/margin_large</item>
+    </style>
+
+    <style name="Toolbar" parent="Theme.AppCompat">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:background">@drawable/gradient_drawable</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:theme">?attr/actionBarTheme</item>
+    </style>
+
+
+    <style name="ToolbarText" parent="Theme.AppCompat">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">@dimen/margin_small</item>
+        <item name="android:layout_marginEnd">@dimen/margin_small</item>
+        <item name="android:layout_marginStart">@dimen/margin_small</item>
+        <item name="android:layout_marginTop">@dimen/margin_small</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/top_toolbar_font_size</item>
+        <item name="android:textColor">@color/colorTint</item>
+        <item name="android:fontFamily">@font/lato_reg</item>
+    </style>
+
+    <style name="SettingsDivider" parent="Theme.AppCompat">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">3dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
+
+
+    <style name="StatsIconLayout" parent="Theme.AppCompat">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">@dimen/stats_page_margin_between_icons</item>
+        <item name="android:layout_marginStart">@dimen/stats_page_margin_between_icons</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="StatsIconImage" parent="Theme.AppCompat">
+        <item name="android:layout_width">70dp</item>
+        <item name="android:layout_height">70dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+    <style name="StatsIconTopText" parent="Theme.AppCompat">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/small_font_size</item>
+        <item name="android:textColor">@color/colorFontStyle</item>
+    </style>
+
+    <style name="StatsIconBottomText" parent="Theme.AppCompat">
+        <item name="android:textSize">@dimen/large_font_size</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:layout_width">70dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAlignment">center</item>
     </style>
 
 </resources>
