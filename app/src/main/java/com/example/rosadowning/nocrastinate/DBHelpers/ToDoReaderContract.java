@@ -156,7 +156,7 @@ public class ToDoReaderContract {
 
         public void setStarred(ToDoItem toDoItem, boolean isStarred) {
             int isStarredInt = 0;
-            if (isStarred = true) {
+            if (isStarred) {
                 isStarredInt = 1;
             }
             SQLiteDatabase db = this.getReadableDatabase();
@@ -164,15 +164,10 @@ public class ToDoReaderContract {
             db.close();
         }
 
-        public long getNoOfCompletedToDos() {
+        public long getNoOfCompletedToDos(long beginTime, long endTime) {
 
             long noOfCompletedToDos = 0;
-            DateTime today = new DateTime().withTimeAtStartOfDay();
-            DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
-            long todayLong = today.getMillis();
-            long tomorrowLong = tomorrow.getMillis();
-
-            String newQuery = FeedEntry.COLUMN_NAME_COMPLETED_DATE + " BETWEEN " + todayLong + " AND " + tomorrowLong + ";";
+            String newQuery = FeedEntry.COLUMN_NAME_COMPLETED_DATE + " BETWEEN " + beginTime + " AND " + endTime + ";";
             SQLiteDatabase db = this.getReadableDatabase();
             noOfCompletedToDos = DatabaseUtils.queryNumEntries(db, TABLE_NAME, newQuery);
             db.close();
@@ -227,6 +222,7 @@ public class ToDoReaderContract {
                 query = "SELECT * FROM " + TABLE_NAME + " WHERE " + FeedEntry.COLUMN_NAME_COMPLETED + " = 1 ORDER BY (CASE WHEN " + FeedEntry.COLUMN_NAME_DUE_DATE + " IS NULL THEN 1 ELSE 0 END), " + FeedEntry.COLUMN_NAME_DUE_DATE + " DESC;";
             } else {
                 query = "SELECT * FROM " + TABLE_NAME + " WHERE " + FeedEntry.COLUMN_NAME_COMPLETED + " = 0 ORDER BY (CASE WHEN " + FeedEntry.COLUMN_NAME_DUE_DATE + " IS NULL THEN 1 ELSE 0 END), " + FeedEntry.COLUMN_NAME_DUE_DATE + ";";
+
             }
 
             ArrayList<ToDoItem> toDoList = new ArrayList<>();

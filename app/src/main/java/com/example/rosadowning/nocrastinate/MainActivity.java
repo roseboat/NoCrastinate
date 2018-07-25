@@ -6,8 +6,10 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -62,7 +64,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         DateTime today = new DateTime().withTimeAtStartOfDay();
         DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
         Log.d(TAG, "time = " + tomorrow.toString());
-
 
         Intent midnightIntent = new Intent(this, MidnightDataResetReceiver.class);
         PendingIntent startPIntent = PendingIntent.getBroadcast(this, 0, midnightIntent, 0);

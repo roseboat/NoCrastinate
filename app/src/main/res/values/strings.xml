@@ -28,6 +28,11 @@
     <string name="dialog_title_confirm_delete">Confirm Deletion</string>
     <string name="dialog_message_name_conflict">There is already a to-do with this name. Please choose another!</string>
     <string name="dialog_title_name_conflict">Naming Conflict</string>
+    <string name="dialog_message_due_date_past">This due date is no longer valid and will be cleared.</string>
+    <string name="dialog_title_due_date_past">Old due date</string>
+    <string name="dialog_message_alarm_date_past">Your alarm is no longer valid and will be cleared.</string>
+    <string name="dialog_title_alarm_date_past">Old alarm time</string>
+
 
     <string name="stats_icon_overall_time">Time on Phone</string>
     <string name="stats_icon_unlocks">No. of Unlocks</string>

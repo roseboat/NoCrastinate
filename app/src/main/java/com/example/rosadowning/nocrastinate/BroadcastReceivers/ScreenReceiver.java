@@ -25,6 +25,8 @@ import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.Minutes;
 
+import java.util.concurrent.locks.ReentrantLock;
+
 import static android.content.Context.ALARM_SERVICE;
 import static com.example.rosadowning.nocrastinate.MainActivity.CHANNEL_ID;
 
@@ -33,12 +35,15 @@ public class ScreenReceiver extends BroadcastReceiver {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private Context context;
+    private ReentrantLock reentrantLock;
+    private final int FREQ_1_ALARM_2 = 10002;
 
 
     @Override
     public void onReceive(final Context context, final Intent intent) {
 
         this.context = context;
+        this.reentrantLock = new ReentrantLock();
 
         Log.e("test", "onReceive");
         sharedPreferences = context.getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
@@ -46,21 +51,31 @@ public class ScreenReceiver extends BroadcastReceiver {
 
         if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
             Log.e("SCREEN RECEIVER", "PHONE LOCKED");
+
             long screenOff = System.currentTimeMillis();
-            editor.putLong("screenOff", screenOff);
-            editor.commit();
+
+            try {
+                reentrantLock.lock();
+                editor.putLong("screenOff", screenOff);
+                editor.apply();
+            } finally {
+                reentrantLock.lock();
+            }
 
         } else if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
             Log.e("SCREEN RECEIVER", "PHONE UNLOCKED");
-            synchronized (this) {
+
+            try {
+                reentrantLock.lock();
+
                 int unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
                 editor.putInt("noOfUnlocks", ++unlocks);
                 editor.apply();
                 unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
                 if (unlocks % 25 == 0) {
                     SharedPreferences notiPreferences = context.getSharedPreferences("NotificationCheckboxes", Context.MODE_PRIVATE);
-                    boolean settings1 = notiPreferences.getBoolean("checkbox1", false);
-                    if (settings1) {
+                    boolean notiSettings = notiPreferences.getBoolean("checkbox1", false);
+                    if (notiSettings) {
                         unlockNotification();
                     }
                 }
@@ -78,7 +93,10 @@ public class ScreenReceiver extends BroadcastReceiver {
 
                 screenOn = System.currentTimeMillis();
                 editor.putLong("screenOn", screenOn);
-                editor.commit();
+                editor.apply();
+
+            } finally{
+                reentrantLock.unlock();
             }
         }
     }
@@ -87,9 +105,8 @@ public class ScreenReceiver extends BroadcastReceiver {
 
         int unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
         Intent intent = new Intent(context, NotificationReceiver.class);
-        intent.putExtra("Type", 1);
         intent.putExtra("Title", "NoCrastinate Unlock Alert!");
-        intent.putExtra("AlarmID", 0102);
+        intent.putExtra("AlarmID", FREQ_1_ALARM_2);
         intent.putExtra("Content", "You've unlocked your phone " + unlocks + " times today! :(");
         PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
         AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);

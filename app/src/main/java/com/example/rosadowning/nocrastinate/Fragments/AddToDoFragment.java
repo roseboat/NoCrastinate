@@ -235,7 +235,7 @@ public class AddToDoFragment extends Fragment {
                     addToDo.setDueDate(dueDateDate);
                 }
 
-                if (alarmDate.getTimeInMillis() != 0){
+                if (alarmDate != null){
                     addToDo.setAlarmDate(new Date(alarmDate.getTimeInMillis()));
                 }
 
@@ -243,7 +243,7 @@ public class AddToDoFragment extends Fragment {
                 SQLiteDatabase dbWrite = dbHelper.getWritableDatabase();
                 dbHelper.insertNewToDo(addToDo);
 
-                if (alarmDate.getTimeInMillis() != 0) {
+                if (alarmDate != null) {
 
                     int alarmID = dbHelper.getID(addToDo);
                     Intent intent = new Intent(context, ToDoAlarmReceiver.class);

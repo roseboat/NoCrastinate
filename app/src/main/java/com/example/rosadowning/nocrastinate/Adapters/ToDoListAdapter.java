@@ -1,5 +1,6 @@
 package com.example.rosadowning.nocrastinate.Adapters;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -43,7 +44,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
 
         String name = toDoList.get(position).getName();
         Date date = toDoList.get(position).getDueDate();
-        Boolean star = toDoList.get(position).getStarred();
+        Boolean starred = toDoList.get(position).getStarred();
         Boolean completed = toDoList.get(position).getCompleted();
         viewHolder.isCompleted.setOnCheckedChangeListener(null);
         viewHolder.isStarred.setOnCheckedChangeListener(null);
@@ -73,9 +74,13 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
             }
         });
 
-        if (star == true)
+        if (starred) {
             viewHolder.getIsStarred().setChecked(true);
-        else viewHolder.getIsStarred().setChecked(false);
+            viewHolder.wholeToDoItem.setBackgroundResource(R.color.colorStarred);
+        } else {
+            viewHolder.getIsStarred().setChecked(false);
+            viewHolder.wholeToDoItem.setBackgroundResource(R.color.colorToDoBackground);
+        }
 
         viewHolder.isStarred.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -83,9 +88,13 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
                 if (b) {
                     toDoList.get(viewHolder.getAdapterPosition()).setStarred(true);
                     listeners.onStarCheck(toDoList.get(viewHolder.getAdapterPosition()));
+                    viewHolder.wholeToDoItem.setBackgroundResource(R.color.colorStarred);
+
                 } else {
                     toDoList.get(viewHolder.getAdapterPosition()).setStarred(false);
                     listeners.onStarUncheck(toDoList.get(viewHolder.getAdapterPosition()));
+                    viewHolder.wholeToDoItem.setBackgroundResource(R.color.colorToDoBackground);
+
                 }
             }
         });
@@ -111,20 +120,20 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        CheckBox isCompleted;
-        CheckBox isStarred;
-        TextView name;
-        TextView dueDate;
-        LinearLayout linearLayout;
+        CheckBox isCompleted, isStarred;
+        TextView name, dueDate;
+        LinearLayout linearLayout, wholeToDoItem;
 
         public ViewHolder(View itemView) {
             super(itemView);
+
 
             name = (TextView) itemView.findViewById(R.id.toDoName);
             dueDate = (TextView) itemView.findViewById(R.id.toDoDueDate);
             isCompleted = (CheckBox) itemView.findViewById(R.id.toDoCheckBox);
             isStarred = (CheckBox) itemView.findViewById(R.id.toDoStar);
             linearLayout = (LinearLayout) itemView.findViewById(R.id.toDoLinearLayout);
+            wholeToDoItem = (LinearLayout) itemView.findViewById(R.id.to_do_item);
 
         }
 
@@ -140,6 +149,10 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
         public TextView getDueDate() {
             return dueDate;
         }
+        public LinearLayout getWholeToDoItem() {
+            return wholeToDoItem;
+        }
+
         public void bind(final ToDoItem item, final OnItemClickListener listener) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

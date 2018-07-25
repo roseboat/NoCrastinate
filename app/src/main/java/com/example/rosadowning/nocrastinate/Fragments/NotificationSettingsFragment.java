@@ -24,11 +24,14 @@ import org.joda.time.DateTime;
 import org.joda.time.Duration;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static android.content.Context.ALARM_SERVICE;
+import static java.util.Calendar.SECOND;
 
 public class NotificationSettingsFragment extends Fragment {
 
@@ -40,16 +43,19 @@ public class NotificationSettingsFragment extends Fragment {
     private SharedPreferences notiPreferences, statsPreferences;
     private SharedPreferences.Editor editor;
     private TimerTask timerTaskAsync;
-    private static final int FREQ_1_ALARM_1 = 0101;
-    private static final int FREQ_1_ALARM_2 = 0102;
-    private final int FREQ_2_ALARM_1 = 0201;
-    private final int FREQ_3_ALARM_1 = 0301;
+    private final int FREQ_1_ALARM_1 = 10001;
+    private final int FREQ_1_ALARM_2 = 10002;
+    private final int FREQ_2_ALARM_1 = 20001;
+    private final int FREQ_3_ALARM_1 = 30001;
+    private ReentrantLock reentrantLock;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notifications, null);
         this.context = getContext();
+        this.reentrantLock = new ReentrantLock();
+
         notiPreferences = getContext().getSharedPreferences("NotificationCheckboxes", Context.MODE_PRIVATE);
         editor = notiPreferences.edit();
 
@@ -62,56 +68,65 @@ public class NotificationSettingsFragment extends Fragment {
         freq3 = (CheckBox) view.findViewById(R.id.notification_checkbox_3);
         freq3.setChecked(notiPreferences.getBoolean("checkbox3", false));
 
-        if (freq1.isChecked()){
-            freqOneNotificationSetUp();
-        }
-
 
         freq1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    Log.d(TAG, "Freq 1 selected");
-                    editor.putBoolean("checkbox1", true);
-                    editor.putBoolean("checkbox2", false);
-                    editor.putBoolean("checkbox3", false);
-                    editor.commit();
-                    freq2.setChecked(false);
-                    freq3.setChecked(false);
-                    freqOneNotificationSetUp();
-
+                    try {
+                        reentrantLock.lock();
+                        Log.d(TAG, "Freq 1 selected");
+                        editor.putBoolean("checkbox1", true);
+                        editor.putBoolean("checkbox2", false);
+                        editor.putBoolean("checkbox3", false);
+                        editor.commit();
+                        freq2.setChecked(false);
+                        freq3.setChecked(false);
+                    } finally {
+                        reentrantLock.unlock();
+                        freqOneNotificationSetUp();
+                    }
                 } else {
+                    Log.d(TAG, "1 unchecked");
                     notificationManager.cancel(FREQ_1_ALARM_1);
                     notificationManager.cancel(FREQ_1_ALARM_2);
-                    if (timerTaskAsync != null){
+                    if (timerTaskAsync != null) {
                         timerTaskAsync.cancel();
                     }
+                    reentrantLock.lock();
                     editor.putBoolean("checkbox1", false);
                     editor.commit();
+                    reentrantLock.unlock();
                 }
-
             }
         });
-        ;
+
         freq2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    Log.d(TAG, "Freq 2 selected");
-                    editor.putBoolean("checkbox1", false);
-                    editor.putBoolean("checkbox2", true);
-                    editor.putBoolean("checkbox3", false);
-                    editor.commit();
-                    freq1.setChecked(false);
-                    freq3.setChecked(false);
-                    freqTwoNotificationSetUp();
 
-                }else {
+                if (b) {
+                    try {
+                        reentrantLock.lock();
+                        Log.d(TAG, "Freq 2 selected");
+                        editor.putBoolean("checkbox1", false);
+                        editor.putBoolean("checkbox2", true);
+                        editor.putBoolean("checkbox3", false);
+                        editor.commit();
+                        freq1.setChecked(false);
+                        freq3.setChecked(false);
+                    } finally {
+                        reentrantLock.unlock();
+                        freqTwoNotificationSetUp();
+                    }
+                } else {
+                    Log.d(TAG, "2 unchecked");
                     notificationManager.cancel(FREQ_2_ALARM_1);
+                    reentrantLock.lock();
                     editor.putBoolean("checkbox2", false);
                     editor.commit();
+                    reentrantLock.unlock();
                 }
-
             }
         });
 
@@ -119,31 +134,35 @@ public class NotificationSettingsFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    Log.d(TAG, "Freq 3 selected");
-                    editor.putBoolean("checkbox1", false);
-                    editor.putBoolean("checkbox2", false);
-                    editor.putBoolean("checkbox3", true);
-                    editor.commit();
-                    freq1.setChecked(false);
-                    freq2.setChecked(false);
-                    freqThreeNotificationSetUp();
+                    try {
+                        reentrantLock.lock();
+                        Log.d(TAG, "Freq 3 selected");
+                        editor.putBoolean("checkbox1", false);
+                        editor.putBoolean("checkbox2", false);
+                        editor.putBoolean("checkbox3", true);
+                        editor.commit();
+                        freq1.setChecked(false);
+                        freq2.setChecked(false);
+                    } finally {
+                        reentrantLock.unlock();
+                        freqThreeNotificationSetUp();
+                    }
 
                 } else {
+                    Log.d(TAG, "3 unchecked");
                     notificationManager.cancel(FREQ_3_ALARM_1);
+                    reentrantLock.lock();
                     editor.putBoolean("checkbox3", false);
                     editor.commit();
-
+                    reentrantLock.unlock();
                 }
-
             }
         });
-
         return view;
     }
 
     public void freqOneNotificationSetUp() {
-
-       statsPreferences = context.getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
+        statsPreferences = context.getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
         long overallTime = statsPreferences.getLong("totalDuration", 0);
         Duration remainingTime = Duration.millis(overallTime);
         hours = remainingTime.getStandardHours();
@@ -153,23 +172,25 @@ public class NotificationSettingsFragment extends Fragment {
         TimerTask timerTaskAsync = new TimerTask() {
             @Override
             public void run() {
-                synchronized (this) {
+
+                try {
+                    reentrantLock.lock();
                     long overallTime = statsPreferences.getLong("totalDuration", 0);
                     Duration remainingTime = Duration.millis(overallTime);
                     hours = remainingTime.getStandardHours();
-                    if (preHours != hours){
-                        Log.d(TAG, "UPDATE : prehours = "+ preHours + " hours = " + hours);
+                    if (preHours != hours) {
+                        Log.d(TAG, "UPDATE : prehours = " + preHours + " hours = " + hours);
                         Intent intent = new Intent(context, NotificationReceiver.class);
-                        intent.putExtra("Type", 1);
                         intent.putExtra("Title", "NoCrastinate Usage Time Alert!");
                         intent.putExtra("AlarmID", FREQ_1_ALARM_1);
                         intent.putExtra("Content", "You've been using your phone for " + hours + " hours today! :(");
-                        PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+                        PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
                         AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
                         alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
                         preHours = hours;
                     }
-
+                } finally {
+                    reentrantLock.unlock();
                 }
             }
         };
@@ -179,18 +200,19 @@ public class NotificationSettingsFragment extends Fragment {
     public void freqTwoNotificationSetUp() {
 
 //        DateTime dailyReport = new DateTime().withTime(22, 0, 0, 0);
-        DateTime dailyReport = new DateTime().withTime(18, 40, 0, 0);
 
+        Calendar dailyReport = Calendar.getInstance();
+        dailyReport.add(SECOND, 5);
 
+        Intent freq2intent = new Intent(getContext(), NotificationReceiver.class);
+        freq2intent.putExtra("Title", "NoCrastinate Daily Report");
+        freq2intent.putExtra("AlarmID", FREQ_2_ALARM_1);
 
-        Intent intent = new Intent(getContext(), NotificationReceiver.class);
-        intent.putExtra("Type", 2);
-        intent.putExtra("Title", "NoCrastinate Daily Report");
-        intent.putExtra("AlarmID", FREQ_2_ALARM_1);
-
-        PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+        PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, freq2intent, PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, dailyReport.getMillis(), startPIntent);
+        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, dailyReport.getTimeInMillis(), startPIntent);
+
+//        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, dailyReport.getMillis(), startPIntent);
     }
 
     public void freqThreeNotificationSetUp() {
@@ -202,14 +224,16 @@ public class NotificationSettingsFragment extends Fragment {
         SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy, hh:MM:ss");
         Log.d(TAG, "next week date = " + sdf2.format(week));
 
-        Intent intent = new Intent(getContext(), NotificationReceiver.class);
-        intent.putExtra("Type", 3);
-        intent.putExtra("Title", "NoCrastinate Weekly Report");
-        intent.putExtra("AlarmID", FREQ_3_ALARM_1);
-        PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+        Calendar weekly = Calendar.getInstance();
+        weekly.add(SECOND, 5);
+
+        Intent freq3intent = new Intent(getContext(), NotificationReceiver.class);
+        freq3intent.putExtra("Title", "NoCrastinate Weekly Report");
+        freq3intent.putExtra("AlarmID", FREQ_3_ALARM_1);
+        PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, freq3intent, PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, weeklyReport.getMillis(), startPIntent);
+//        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, weeklyReport.getMillis(), startPIntent);
+        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, weekly.getTimeInMillis(), startPIntent);
 
     }
-
 }

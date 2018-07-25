@@ -207,11 +207,12 @@
     <color name="colorNavBackground">#f7f7f7</color>
     <color name="colorPrimary">#b0b1fd</color>
     <color name="colorPrimaryDark">#16b398</color>
+    <color name="colorStarred">#46ffc700</color>
     <color name="colorTint">#555555</color>
     <color name="colorToDoBackground">#f2f2f2</color>
-    <color name="colorTurqDark">#5716b398</color>
-    <color name="colorTurqLight">#1916b398</color>
-    <color name="colorTurqMedium">#3616b398</color>
+    <color name="colorTurqDark">#576c6c6c</color>
+    <color name="colorTurqLight">#0d6c6c6c</color>
+    <color name="colorTurqMedium">#356c6c6c</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="design_bottom_navigation_shadow_color">#14000000</color>
     <color name="design_default_color_primary">#3F51B5</color>
@@ -1024,12 +1025,16 @@
     <string name="character_counter_content_description">Character limit exceeded %1$d of %2$d</string>
     <string name="character_counter_pattern" translatable="false">%1$d / %2$d</string>
     <string name="delete_to_do">Delete To Do</string>
+    <string name="dialog_message_alarm_date_past">Your alarm is no longer valid and will be cleared.</string>
     <string name="dialog_message_confirm_delete">Are you sure you want to delete this to do?</string>
+    <string name="dialog_message_due_date_past">This due date is no longer valid and will be cleared.</string>
     <string name="dialog_message_input_error_date">Please enter a date in the future.</string>
     <string name="dialog_message_input_error_name">Please enter a name for your to-do.</string>
     <string name="dialog_message_input_error_time">Please enter a time in the future.</string>
     <string name="dialog_message_name_conflict">There is already a to-do with this name. Please choose another!</string>
+    <string name="dialog_title_alarm_date_past">Old alarm time</string>
     <string name="dialog_title_confirm_delete">Confirm Deletion</string>
+    <string name="dialog_title_due_date_past">Old due date</string>
     <string name="dialog_title_input_error_date">Enter Valid Date</string>
     <string name="dialog_title_input_error_name">Enter Name</string>
     <string name="dialog_title_input_error_time">Enter Valid Time</string>
@@ -1083,7 +1088,7 @@
     <item name="android:windowExitAnimation">@anim/design_bottom_sheet_slide_out</item>
   </style>
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+        
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>

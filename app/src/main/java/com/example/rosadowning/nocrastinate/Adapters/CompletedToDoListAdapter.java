@@ -72,7 +72,6 @@ public class CompletedToDoListAdapter extends RecyclerView.Adapter<CompletedToDo
         return toDoList.size();
     }
 
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         CheckBox isCompleted;

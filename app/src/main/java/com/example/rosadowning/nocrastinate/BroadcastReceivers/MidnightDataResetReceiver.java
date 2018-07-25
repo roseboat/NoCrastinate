@@ -16,6 +16,7 @@ import com.example.rosadowning.nocrastinate.DataModels.StatsIconData;
 import org.joda.time.DateTime;
 
 import java.util.Date;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static android.content.Context.ALARM_SERVICE;
 
@@ -27,38 +28,43 @@ public class MidnightDataResetReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         Log.d(TAG, "Midnight Receiver reached");
-
+        ReentrantLock reentrantLock = new ReentrantLock();
         StatsIconData midnightStat = new StatsIconData();
 
         DateTime today = new DateTime().withTimeAtStartOfDay();
-        DateTime yesterday = today.minusDays(1).withTimeAtStartOfDay();
-        Date yesterdayDate = new Date (yesterday.getMillis());
+        Date yesterday = today.minusDays(1).withTimeAtStartOfDay().toDate();
 
-        synchronized (this) {
-            SharedPreferences sharedPreferences = context.getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
-            long overallTime = sharedPreferences.getLong("totalDuration", 0);
-            int unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
+        long overallTime;
+        long tasksCompleted;
+        int unlocks;
+
+        try {
+            reentrantLock.lock();
 
             ToDoReaderContract.ToDoListDbHelper toDoHelper = new ToDoReaderContract.ToDoListDbHelper(context);
             SQLiteDatabase sqlToDo = toDoHelper.getReadableDatabase();
-            long tasksCompleted = toDoHelper.getNoOfCompletedToDos();
+            tasksCompleted = toDoHelper.getNoOfCompletedToDos(yesterday.getTime(), today.getMillis());
 
-            midnightStat.setDate(yesterdayDate);
-            midnightStat.setOverallTime(overallTime);
-            midnightStat.setNoOfUnlocks(unlocks);
-            midnightStat.setTasksCompleted(tasksCompleted);
+            SharedPreferences sharedPreferences = context.getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            overallTime = sharedPreferences.getLong("totalDuration", 0);
+            unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
+
+            editor.clear();
+            editor.commit();
+
+        } finally {
+            reentrantLock.unlock();
         }
+
+        midnightStat.setDate(yesterday);
+        midnightStat.setOverallTime(overallTime);
+        midnightStat.setNoOfUnlocks(unlocks);
+        midnightStat.setTasksCompleted(tasksCompleted);
+
         StatsDBContract.StatsDBHelper statsHelper = new StatsDBContract.StatsDBHelper(context);
         SQLiteDatabase sqlStats = statsHelper.getWritableDatabase();
         statsHelper.insertNewStat(midnightStat);
-
-        SharedPreferences preferences = context.getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.remove("totalDuration");
-        editor.remove("screenOn");
-        editor.remove("screenOff");
-        editor.remove("noOfUnlocks");
-        editor.commit();
 
         DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
         Intent midnightIntent = new Intent(context, MidnightDataResetReceiver.class);

@@ -30,6 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static android.content.Context.ALARM_SERVICE;
 import static com.example.rosadowning.nocrastinate.MainActivity.CHANNEL_ID;
@@ -38,24 +39,35 @@ import static com.example.rosadowning.nocrastinate.MainActivity.CHANNEL_ID;
 public class NotificationReceiver extends BroadcastReceiver {
 
     private static String TAG = "NOTIFICATION RECEIVER";
+    private ReentrantLock reentrantLock;
     private Context context;
-    private String content;
+    private long tasksCompleted, overallTime;
+    private int unlocks;
+    private final int FREQ_1_ALARM_1 = 10001;
+    private final int FREQ_1_ALARM_2 = 10002;
+    private final int FREQ_2_ALARM_1 = 20001;
+    private final int FREQ_3_ALARM_1 = 30001;
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
         this.context = context;
+        this.reentrantLock = new ReentrantLock();
+
         Bundle extras = intent.getExtras();
-        int type = extras.getInt("Type");
         String title = extras.getString("Title");
         int alarmID = extras.getInt("AlarmID");
+        extras.clear();
+        Log.d(TAG, "alarmid = " + alarmID);
+        String content = "";
 
-        if (type == 1){
+
+        if (alarmID == FREQ_1_ALARM_1 || alarmID == FREQ_1_ALARM_2){
             content = extras.getString("Content", "Not found");
-        } else if (type == 2){
-            freq2setUp();
-        } else if (type == 3){
-            freq3setUp();
+        } else if (alarmID == FREQ_2_ALARM_1){
+            content = freq2setUp();
+        } else if (alarmID == FREQ_3_ALARM_1){
+            content = freq3setUp();
         }
 
         Bitmap brainLogo = BitmapFactory.decodeResource(context.getResources(), R.drawable.brain);
@@ -81,20 +93,36 @@ public class NotificationReceiver extends BroadcastReceiver {
         notificationManager.notify(alarmID, mBuilder.build());
     }
 
-    public void freq2setUp(){
+    public void getDailyStatsSoFar() {
 
+        try {
+            reentrantLock.lock();
+            SharedPreferences sharedPreferences = context.getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
+            this.overallTime = sharedPreferences.getLong("totalDuration", 0);
+            this.unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
+            ToDoReaderContract.ToDoListDbHelper toDoHelper = new ToDoReaderContract.ToDoListDbHelper(context);
+            SQLiteDatabase sqlToDo = toDoHelper.getReadableDatabase();
+            DateTime today = new DateTime().withTimeAtStartOfDay();
+            DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
+            long beginTime = today.getMillis();
+            long endTime = tomorrow.getMillis();
+            this.tasksCompleted = toDoHelper.getNoOfCompletedToDos(beginTime, endTime);
+        } finally {
+            reentrantLock.unlock();
+        }
+    }
+
+    public String freq2setUp(){
+
+        Log.d(TAG, "in frequency 2 setup");
+
+
+        getDailyStatsSoFar();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date dateDate = new Date();
         String date = sdf.format(dateDate);
 
-        SharedPreferences sharedPreferences = context.getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
-        long overallTime = sharedPreferences.getLong("totalDuration", 0);
-        int unlocks = sharedPreferences.getInt("noOfUnlocks",0);
-        ToDoReaderContract.ToDoListDbHelper toDoHelper = new ToDoReaderContract.ToDoListDbHelper(context);
-        SQLiteDatabase sqlToDo = toDoHelper.getReadableDatabase();
-        long tasksCompleted = toDoHelper.getNoOfCompletedToDos();
-
-        content = date + " - You have spent " + TimeHelper.formatDuration(overallTime) + " on your phone, unlocked your phone "+ unlocks + " times and completed " + tasksCompleted + " of your tasks.";
+        String content = date + " - You have spent " + TimeHelper.formatDuration(this.overallTime) + " on your phone, unlocked your phone "+ this.unlocks + " times and completed " + this.tasksCompleted + " of your tasks.";
 
         DateTime daily = new DateTime().withTime(22,0,0,0);
         Date dailyDate = daily.plusHours(24).toDate();
@@ -102,14 +130,21 @@ public class NotificationReceiver extends BroadcastReceiver {
         Log.d(TAG, "next time = "+ sdf2.format(dailyDate));
 
         Intent nextIntent = new Intent(context, NotificationReceiver.class);
+        nextIntent.putExtra("Type", 2);
+        nextIntent.putExtra("Title", "NoCrastinate Daily Report");
+        nextIntent.putExtra("AlarmID", FREQ_2_ALARM_1);
         PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, nextIntent, 0);
         AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
         alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, daily.getMillis(), startPIntent);
 
+        return content;
+
     }
 
-    public void freq3setUp(){
+    public String freq3setUp(){
+        Log.d(TAG, "in frequency 3 setup");
 
+        getDailyStatsSoFar();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date now = new Date();
         String nowString = sdf.format(now);
@@ -117,14 +152,6 @@ public class NotificationReceiver extends BroadcastReceiver {
         String lastWeekString = sdf.format(lastWeek);
         String date = lastWeekString + " - " + nowString;
         Log.d(TAG, "Dates = "+ date);
-
-        SharedPreferences sharedPreferences = context.getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
-        long overallTime = sharedPreferences.getLong("totalDuration", 0);
-        int unlocks = sharedPreferences.getInt("noOfUnlocks",0);
-        ToDoReaderContract.ToDoListDbHelper toDoHelper = new ToDoReaderContract.ToDoListDbHelper(context);
-        SQLiteDatabase sqlToDo = toDoHelper.getReadableDatabase();
-        long tasksCompleted = toDoHelper.getNoOfCompletedToDos();
-
 
         StatsDBContract.StatsDBHelper statsHelper = new StatsDBContract.StatsDBHelper(context);
         SQLiteDatabase statsDB = statsHelper.getReadableDatabase();
@@ -136,7 +163,7 @@ public class NotificationReceiver extends BroadcastReceiver {
             overallTime += queriedStats.getOverallTime();
         }
 
-        content = date + " - This week, you spent " + TimeHelper.formatDuration(overallTime) + " on your phone, unlocked your phone "+ unlocks + " times and completed " + tasksCompleted + " of your tasks.";
+        String content = date + " - This week, you spent " + TimeHelper.formatDuration(overallTime) + " on your phone, unlocked your phone "+ unlocks + " times and completed " + tasksCompleted + " of your tasks.";
 
         DateTime weeklyReport = new DateTime().withTime(22,0,0,0);
         weeklyReport = weeklyReport.plusWeeks(1);
@@ -145,10 +172,13 @@ public class NotificationReceiver extends BroadcastReceiver {
         Log.d(TAG, "next alarm date = "+ sdf2.format(week));
 
         Intent nextIntent = new Intent(context, NotificationReceiver.class);
+        nextIntent.putExtra("Title", "NoCrastinate Weekly Report");
+        nextIntent.putExtra("AlarmID", FREQ_3_ALARM_1);
         PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, nextIntent, 0);
         AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
         alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, weeklyReport.getMillis(), startPIntent);
 
+        return content;
     }
 
 }

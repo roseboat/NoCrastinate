@@ -43,7 +43,7 @@ public class ViewToDoFragment extends Fragment {
     private ToDoItem toDoItem;
     private String name, note, alarmDateString;
     private Date dueDate, oldAlarm, alarmDate;
-    private Boolean isCompleted;
+    private Boolean isCompleted, isStarred;
     private EditText et_name, et_dueDate, et_note, et_alarm;
     private CheckBox completed_checkBox;
     private Button editButton, deleteButton;
@@ -124,20 +124,46 @@ public class ViewToDoFragment extends Fragment {
                         name = et_name.getText().toString();
                         note = et_note.getText().toString();
                         isCompleted = completed_checkBox.isChecked();
+                        isStarred = toDoItem.getStarred();
 
-                        Boolean star = toDoItem.getStarred();
+
+                        if (dueDate.getTime() > 0 && dueDate.getTime() < System.currentTimeMillis()){
+                            AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+                                    .setMessage(R.string.dialog_message_due_date_past)
+                                    .setTitle(R.string.dialog_title_due_date_past)
+                                    .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dueDate = null;
+                                            et_dueDate.setText("");
+                                        }
+                                    }).create();
+                            alertDialog.show();
+                        }
+
+                        if (alarmDate.getTime() > 0 && alarmDate.getTime() < System.currentTimeMillis()){
+                            AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+                                    .setMessage(R.string.dialog_message_alarm_date_past)
+                                    .setTitle(R.string.dialog_title_alarm_date_past)
+                                    .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            alarmDate = null;
+                                            et_alarm.setText("");
+                                        }
+                                    }).create();
+                            alertDialog.show();
+                        }
 
                         ToDoItem editedToDo = new ToDoItem(name);
                         editedToDo.setDueDate(dueDate);
                         editedToDo.setAlarmDate(alarmDate);
                         editedToDo.setNote(note);
                         editedToDo.setCompleted(isCompleted);
-                        editedToDo.setStarred(star);
+                        editedToDo.setStarred(isStarred);
 
                         dbHelper = new ToDoReaderContract.ToDoListDbHelper(getContext());
                         SQLiteDatabase sql = dbHelper.getWritableDatabase();
 
-                        if (oldAlarm.getTime() != 0) {
+                        if (oldAlarm != null) {
                             int oldAlarmId = dbHelper.getID(toDoItem);
                             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
                             notificationManager.cancel(oldAlarmId);

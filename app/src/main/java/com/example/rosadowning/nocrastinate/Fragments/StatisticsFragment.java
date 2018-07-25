@@ -48,6 +48,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class StatisticsFragment extends Fragment {
 
@@ -64,6 +65,7 @@ public class StatisticsFragment extends Fragment {
     private TimerTask timerTaskAsync;
     private SharedPreferences sharedPreferences;
     private View statsView;
+    private ReentrantLock reentrantLock;
 
 
     @Nullable
@@ -85,6 +87,7 @@ public class StatisticsFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.reentrantLock = new ReentrantLock();
         this.intervalString = "Daily";
         this.context = getContext();
         this.sharedPreferences = context.getSharedPreferences(STATS_PREF_NAME, Context.MODE_PRIVATE);
@@ -130,7 +133,7 @@ public class StatisticsFragment extends Fragment {
                             }
                         }
                     };
-                    timerAsync.schedule(timerTaskAsync, 0, 3000);
+                    timerAsync.schedule(timerTaskAsync, 0, 5000);
                 }
             }
 
@@ -159,7 +162,7 @@ public class StatisticsFragment extends Fragment {
                 queryTime = new DateTime().minusYears(1).getMillis();
                 break;
         }
-        Log.d(TAG, "query time = " + queryTime);
+        Log.d(TAG, "query time = " + TimeHelper.formatDuration(queryTime));
 
         Map<String, UsageStats> usageStats = mUsageStatsManager.queryAndAggregateUsageStats(queryTime, System.currentTimeMillis());
         List<UsageStats> queryUsageStats = new ArrayList<>();
@@ -221,67 +224,72 @@ public class StatisticsFragment extends Fragment {
     private class UpdateIcons extends AsyncTask<String, Void, StatsIconData> {
 
         @Override
-        protected synchronized StatsIconData doInBackground(String... strings) {
+        protected StatsIconData doInBackground(String... strings) {
 
             String timeInterval = strings[0];
             StatsIconData stats = new StatsIconData();
 
-            if (sharedPreferences != null) {
-                SharedPreferences.Editor editor = sharedPreferences.edit();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
 
+            try {
+                reentrantLock.lock();
                 int unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
                 long screenOn = sharedPreferences.getLong("screenOn", 0);
                 long screenOff = sharedPreferences.getLong("screenOff", 0);
-                long overallTime = 0;
+                long overallTime = sharedPreferences.getLong("totalDuration", 0);
 
                 if (screenOn != 0) {
                     if (screenOn > screenOff) {
                         long currentTime = System.currentTimeMillis();
                         long difference = currentTime - screenOn;
-                        long currentDuration = sharedPreferences.getLong("totalDuration", 0);
-                        overallTime = difference + currentDuration;
+                        overallTime = difference + overallTime;
                         editor.putLong("totalDuration", overallTime);
                         editor.putLong("screenOn", System.currentTimeMillis());
                     }
                 } else {
                     editor.putLong("screenOn", System.currentTimeMillis());
+                    editor.putLong("totalDuration", 0);
                 }
-                editor.commit();
+                editor.apply();
 
                 ToDoReaderContract.ToDoListDbHelper toDoHelper = new ToDoReaderContract.ToDoListDbHelper(context);
                 SQLiteDatabase sql = toDoHelper.getWritableDatabase();
-                long tasksCompleted = toDoHelper.getNoOfCompletedToDos();
+                DateTime today = new DateTime().withTimeAtStartOfDay();
+                DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
+                long beginTime = today.getMillis();
+                long endTime = tomorrow.getMillis();
+
+                long tasksCompleted = toDoHelper.getNoOfCompletedToDos(beginTime, endTime);
 
                 stats.setTasksCompleted(tasksCompleted);
                 stats.setNoOfUnlocks(unlocks);
                 stats.setOverallTime(overallTime);
+            } finally {
+                reentrantLock.unlock();
+            }
 
-                if (!timeInterval.equals("Daily")) {
+            if (!timeInterval.equals("Daily")) {
 
-                    StatsDBContract.StatsDBHelper statsHelper = new StatsDBContract.StatsDBHelper(context);
-                    SQLiteDatabase db = statsHelper.getReadableDatabase();
-                    ArrayList<StatsIconData> statsFromInterval = statsHelper.getStatsForInterval(timeInterval);
+                StatsDBContract.StatsDBHelper statsHelper = new StatsDBContract.StatsDBHelper(context);
+                SQLiteDatabase db = statsHelper.getReadableDatabase();
+                ArrayList<StatsIconData> statsFromInterval = statsHelper.getStatsForInterval(timeInterval);
 
-                    int collectedUnlocks = stats.getNoOfUnlocks();
-                    long collectedCompleted = stats.getTasksCompleted();
-                    long collectedTime = stats.getOverallTime();
+                int collectedUnlocks = stats.getNoOfUnlocks();
+                long collectedCompleted = stats.getTasksCompleted();
+                long collectedTime = stats.getOverallTime();
 
-                    for (StatsIconData queriedStats : statsFromInterval) {
-                        collectedUnlocks += queriedStats.getNoOfUnlocks();
-                        collectedCompleted += queriedStats.getTasksCompleted();
-                        collectedTime += queriedStats.getOverallTime();
-                    }
-
-                    stats.setTasksCompleted(collectedCompleted);
-                    stats.setNoOfUnlocks(collectedUnlocks);
-                    stats.setOverallTime(collectedTime);
-                    return stats;
+                for (StatsIconData queriedStats : statsFromInterval) {
+                    collectedUnlocks += queriedStats.getNoOfUnlocks();
+                    collectedCompleted += queriedStats.getTasksCompleted();
+                    collectedTime += queriedStats.getOverallTime();
                 }
-                return stats;
-            } else return null;
 
+                stats.setTasksCompleted(collectedCompleted);
+                stats.setNoOfUnlocks(collectedUnlocks);
+                stats.setOverallTime(collectedTime);
+            }
+            return stats;
         }
-
 
         @Override
         protected synchronized void onPostExecute(StatsIconData iconData) {
@@ -294,7 +302,12 @@ public class StatisticsFragment extends Fragment {
                 }
 
                 if ((Long) iconData.getOverallTime() != null) {
-                    String timeString = TimeHelper.formatDuration(iconData.getOverallTime());
+                    String timeString = "";
+                    if (iconData.getOverallTime() < 60000) {
+                        timeString = "0m";
+                    } else {
+                        timeString = TimeHelper.formatDuration(iconData.getOverallTime());
+                    }
                     TextView textViewOverallTime = (TextView) getView().findViewById(R.id.text_view_overall_time);
                     textViewOverallTime.setText(timeString);
                 }
