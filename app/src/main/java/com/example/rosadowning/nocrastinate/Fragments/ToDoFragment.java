@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +57,9 @@ public class ToDoFragment extends Fragment {
             public void onItemCheck(ToDoItem item) {
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
                 dbHelper.setCompleted(item, true);
+                int id = dbHelper.getID(item);
+                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getContext());
+                notificationManager.cancel(id);
                 refreshScreen();
             }
 

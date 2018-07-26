@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         mReceiver = new ScreenReceiver();
         final IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
+        filter.addAction(Intent.ACTION_BOOT_COMPLETED);
+        filter.addAction(Intent.ACTION_SHUTDOWN);
         filter.addAction(Intent.ACTION_USER_PRESENT);
         registerReceiver(mReceiver, filter);
 

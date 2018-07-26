@@ -6,12 +6,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import com.example.rosadowning.nocrastinate.DataModels.StatsIconData;
+
+import org.joda.time.DateTime;
 
 import static com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract.StatsEntry.TABLE_NAME;
 
@@ -137,23 +140,23 @@ public class StatsDBContract {
 
             ArrayList<StatsIconData> statsForInterval = new ArrayList<>();
 
-            long now = System.currentTimeMillis();
+            DateTime today = new DateTime().withTimeAtStartOfDay();
+            long now = today.toDate().getTime();
 
-            Calendar query = Calendar.getInstance();
+            long queryTime = 0;
 
             switch (intervalString) {
                 case "Weekly":
-                    query.set(Calendar.DAY_OF_MONTH, -7);
+                    queryTime = today.minusDays(7).toDate().getTime();
                     break;
                 case "Monthly":
-                    query.set(Calendar.MONTH, -1);
+                    queryTime = today.minusMonths(1).toDate().getTime();
                     break;
                 case "Yearly":
-                    query.set(Calendar.YEAR, -1);
+                    queryTime = today.minusYears(1).toDate().getTime();
                     break;
             }
 
-            long queryTime = query.getTimeInMillis();
             SQLiteDatabase db = getReadableDatabase();
             Cursor cursor = db.rawQuery("SELECT * FROM " + StatsEntry.TABLE_NAME + " WHERE " + StatsEntry.COLUMN_NAME_DATE + " BETWEEN " + queryTime + " AND " + now, null);
 

@@ -10,10 +10,10 @@ import java.util.Date;
 
 public class StatsIconData {
 
-    protected Date date;
-    protected int noOfUnlocks;
-    protected long overallTime;
-    protected long tasksCompleted;
+    private Date date;
+    private int noOfUnlocks;
+    private long overallTime;
+    private long tasksCompleted;
 
     public StatsIconData(){
 

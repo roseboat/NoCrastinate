@@ -9,8 +9,6 @@ public class ToDoItem implements Serializable {
     private String name, note;
     private Boolean isStarred, isCompleted;
     private Date dueDate, completedDate, alarmDate;
-    private Double estimatedTime;
-
 
     public ToDoItem(String name) {
         this.setName(name);
@@ -18,7 +16,6 @@ public class ToDoItem implements Serializable {
         this.dueDate = null;
         this.isCompleted = false;
         this.isStarred = false;
-        this.estimatedTime = null;
         this.completedDate = null;
         this.alarmDate = null;
     }

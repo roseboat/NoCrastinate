@@ -7,6 +7,7 @@
     <dimen name="margin_large">15dp</dimen>
     <dimen name="container_size">440dp</dimen>
     <dimen name="large_font_size">17sp</dimen>
+    <dimen name="x_large_font_size">24sp</dimen>
     <dimen name="small_font_size">12sp</dimen>
     <dimen name="stats_page_margin_between_icons">15dp</dimen>
 

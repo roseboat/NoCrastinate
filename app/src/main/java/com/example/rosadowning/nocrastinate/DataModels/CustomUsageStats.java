@@ -8,5 +8,4 @@ public class CustomUsageStats {
     public Drawable appIcon;
     public String appName;
 
-
 }

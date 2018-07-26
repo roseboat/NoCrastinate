@@ -119,75 +119,103 @@ public class ViewToDoFragment extends Fragment {
                 alarmPickerSetUp();
                 editButton.setText("Save To Do");
                 editButton.setOnClickListener(new View.OnClickListener() {
+
                     @Override
                     public void onClick(View view) {
                         name = et_name.getText().toString();
                         note = et_note.getText().toString();
                         isCompleted = completed_checkBox.isChecked();
                         isStarred = toDoItem.getStarred();
+                        boolean proceed = false;
 
+                        if (!isCompleted) {
+                            if (dueDate != null) {
+                                Log.d(TAG, "due date is not null");
+                                if (dueDate.getTime() > 0 && dueDate.getTime() < System.currentTimeMillis()) {
+                                    Log.d(TAG, "due date old");
+                                    AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+                                            .setMessage(R.string.dialog_message_due_date_past)
+                                            .setTitle(R.string.dialog_title_due_date_past)
+                                            .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    dueDate = null;
+                                                    et_dueDate.setText(null);
 
-                        if (dueDate.getTime() > 0 && dueDate.getTime() < System.currentTimeMillis()){
-                            AlertDialog alertDialog = new AlertDialog.Builder(getContext())
-                                    .setMessage(R.string.dialog_message_due_date_past)
-                                    .setTitle(R.string.dialog_title_due_date_past)
-                                    .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            dueDate = null;
-                                            et_dueDate.setText("");
-                                        }
-                                    }).create();
-                            alertDialog.show();
+                                                }
+                                            }).create();
+                                    alertDialog.show();
+                                } else {
+                                    proceed = true;
+                                }
+                            }
+
+                            if (alarmDate != null) {
+                                Log.d(TAG, "alarm date is not null");
+
+                                if (alarmDate.getTime() > 0 && alarmDate.getTime() < System.currentTimeMillis()) {
+                                    Log.d(TAG, "alarm date is old");
+                                    proceed = false;
+                                    AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+                                            .setMessage(R.string.dialog_message_alarm_date_past)
+                                            .setTitle(R.string.dialog_title_alarm_date_past)
+                                            .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    alarmDate = null;
+                                                    et_alarm.setText(null);
+                                                }
+                                            }).create();
+                                    alertDialog.show();
+                                } else {
+                                    proceed = true;
+                                }
+                            }
+                        } else {
+                            proceed = true;
                         }
 
-                        if (alarmDate.getTime() > 0 && alarmDate.getTime() < System.currentTimeMillis()){
-                            AlertDialog alertDialog = new AlertDialog.Builder(getContext())
-                                    .setMessage(R.string.dialog_message_alarm_date_past)
-                                    .setTitle(R.string.dialog_title_alarm_date_past)
-                                    .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            alarmDate = null;
-                                            et_alarm.setText("");
-                                        }
-                                    }).create();
-                            alertDialog.show();
+                        if (proceed) {
+                            Log.d(TAG, "due date and alarm date are fine");
+
+                            ToDoItem editedToDo = new ToDoItem(name);
+                            editedToDo.setDueDate(dueDate);
+                            editedToDo.setAlarmDate(alarmDate);
+                            editedToDo.setNote(note);
+                            editedToDo.setCompleted(isCompleted);
+                            editedToDo.setStarred(isStarred);
+
+                            dbHelper = new ToDoReaderContract.ToDoListDbHelper(getContext());
+                            SQLiteDatabase sql = dbHelper.getWritableDatabase();
+
+                            if (oldAlarm != null) {
+                                int oldAlarmId = dbHelper.getID(toDoItem);
+                                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+                                notificationManager.cancel(oldAlarmId);
+                                Log.d(TAG, "old alarm = " + oldAlarmId + " deleted");
+                            }
+
+                            if (!toDoItem.equals(editedToDo)) {
+                                dbHelper.deleteToDo(toDoItem);
+                                dbHelper.insertNewToDo(editedToDo);
+                            }
+
+
+                            if (alarmDate != null && !isCompleted) {
+                                Intent intent = new Intent(context, ToDoAlarmReceiver.class);
+                                intent.putExtra("ToDoName", name);
+                                int alarmId = dbHelper.getID(editedToDo);
+                                intent.putExtra("AlarmID", alarmId);
+                                AlarmManager alarm = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+                                PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+                                alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmDate.getTime(), pendingIntent);
+                            }
+
+                            ToDoFragment newFragment = new ToDoFragment();
+                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                            transaction.replace(R.id.fragment_container, newFragment);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
                         }
 
-                        ToDoItem editedToDo = new ToDoItem(name);
-                        editedToDo.setDueDate(dueDate);
-                        editedToDo.setAlarmDate(alarmDate);
-                        editedToDo.setNote(note);
-                        editedToDo.setCompleted(isCompleted);
-                        editedToDo.setStarred(isStarred);
-
-                        dbHelper = new ToDoReaderContract.ToDoListDbHelper(getContext());
-                        SQLiteDatabase sql = dbHelper.getWritableDatabase();
-
-                        if (oldAlarm != null) {
-                            int oldAlarmId = dbHelper.getID(toDoItem);
-                            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-                            notificationManager.cancel(oldAlarmId);
-                            Log.d(TAG, "old alarm = " + oldAlarmId + " deleted");
-                        }
-
-                        if (!toDoItem.equals(editedToDo)) {
-                            dbHelper.deleteToDo(toDoItem);
-                            dbHelper.insertNewToDo(editedToDo);
-                        }
-
-                        Intent intent = new Intent(context, ToDoAlarmReceiver.class);
-                        intent.putExtra("ToDoName", name);
-                        int alarmId = dbHelper.getID(editedToDo);
-                        intent.putExtra("AlarmID", alarmId);
-                        AlarmManager alarm = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
-                        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-                        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmDate.getTime(), pendingIntent);
-
-                        ToDoFragment newFragment = new ToDoFragment();
-                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                        transaction.replace(R.id.fragment_container, newFragment);
-                        transaction.addToBackStack(null);
-                        transaction.commit();
                     }
                 });
             }

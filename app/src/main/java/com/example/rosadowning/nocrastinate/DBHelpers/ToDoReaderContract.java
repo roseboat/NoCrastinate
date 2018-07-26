@@ -11,12 +11,10 @@ import android.util.Log;
 
 import com.example.rosadowning.nocrastinate.DataModels.ToDoItem;
 
-import org.joda.time.DateTime;
-
 import java.util.ArrayList;
 import java.util.Date;
 
-import static com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract.FeedEntry.TABLE_NAME;
+import static com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract.TableEntry.TABLE_NAME;
 
 public class ToDoReaderContract {
 
@@ -27,7 +25,7 @@ public class ToDoReaderContract {
     }
 
     /* Inner class that defines the table contents */
-    public static class FeedEntry implements BaseColumns {
+    public static class TableEntry implements BaseColumns {
         public static final String TABLE_NAME = "toDoList";
         public static final String COLUMN_NAME_NAME = "name";
         public static final String COLUMN_NAME_DUE_DATE = "due_date";
@@ -39,14 +37,14 @@ public class ToDoReaderContract {
 
         private static final String SQL_CREATE_ENTRIES =
                 "CREATE TABLE " + TABLE_NAME + "(" +
-                        FeedEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        FeedEntry.COLUMN_NAME_NAME + " TEXT NOT NULL," +
-                        FeedEntry.COLUMN_NAME_NOTE + " TEXT," +
-                        FeedEntry.COLUMN_NAME_DUE_DATE + " LONG," +
-                        FeedEntry.COLUMN_NAME_COMPLETED_DATE + " LONG," +
-                        FeedEntry.COLUMN_NAME_COMPLETED + " BOOLEAN," +
-                        FeedEntry.COLUMN_NAME_ALARM + " LONG," +
-                        FeedEntry.COLUMN_NAME_STARRED + " BOOLEAN);";
+                        TableEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        TableEntry.COLUMN_NAME_NAME + " TEXT NOT NULL," +
+                        TableEntry.COLUMN_NAME_NOTE + " TEXT," +
+                        TableEntry.COLUMN_NAME_DUE_DATE + " LONG," +
+                        TableEntry.COLUMN_NAME_COMPLETED_DATE + " LONG," +
+                        TableEntry.COLUMN_NAME_COMPLETED + " BOOLEAN," +
+                        TableEntry.COLUMN_NAME_ALARM + " LONG," +
+                        TableEntry.COLUMN_NAME_STARRED + " BOOLEAN);";
 
         private static final String SQL_DELETE_ENTRIES =
                 "DROP TABLE IF EXISTS " + TABLE_NAME;
@@ -62,13 +60,13 @@ public class ToDoReaderContract {
         }
 
         public void onCreate(SQLiteDatabase db) {
-            db.execSQL(FeedEntry.SQL_CREATE_ENTRIES);
+            db.execSQL(TableEntry.SQL_CREATE_ENTRIES);
         }
 
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // This database is only a cache for online data, so its upgrade policy is
             // to simply to discard the data and start over
-            db.execSQL(FeedEntry.SQL_DELETE_ENTRIES);
+            db.execSQL(TableEntry.SQL_DELETE_ENTRIES);
             onCreate(db);
         }
 
@@ -79,7 +77,7 @@ public class ToDoReaderContract {
         public int getID(ToDoItem toDoItem) {
 
             SQLiteDatabase db = this.getReadableDatabase();
-            Cursor cursor = db.rawQuery("SELECT " + FeedEntry._ID + " FROM " + TABLE_NAME + " WHERE " + FeedEntry.COLUMN_NAME_NAME + " = ?", new String[]{String.valueOf(toDoItem.getName())});
+            Cursor cursor = db.rawQuery("SELECT " + TableEntry._ID + " FROM " + TABLE_NAME + " WHERE " + TableEntry.COLUMN_NAME_NAME + " = ?", new String[]{String.valueOf(toDoItem.getName())});
             int id = -1;
             if (cursor != null) {
                 cursor.moveToFirst();
@@ -87,7 +85,7 @@ public class ToDoReaderContract {
             if (cursor == null) {
             } else if (cursor.moveToFirst()) {
                 do {
-                    id = cursor.getInt(cursor.getColumnIndex(FeedEntry._ID));
+                    id = cursor.getInt(cursor.getColumnIndex(TableEntry._ID));
                 } while (cursor.moveToNext());
                 cursor.close();
             }
@@ -98,23 +96,23 @@ public class ToDoReaderContract {
         public void insertNewToDo(ToDoItem toDo) {
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
-            values.put(FeedEntry.COLUMN_NAME_NAME, toDo.getName());
-            values.put(FeedEntry.COLUMN_NAME_NOTE, toDo.getNote());
-            values.put(FeedEntry.COLUMN_NAME_COMPLETED, toDo.getCompleted());
-            values.put(FeedEntry.COLUMN_NAME_STARRED, toDo.getStarred());
+            values.put(TableEntry.COLUMN_NAME_NAME, toDo.getName());
+            values.put(TableEntry.COLUMN_NAME_NOTE, toDo.getNote());
+            values.put(TableEntry.COLUMN_NAME_COMPLETED, toDo.getCompleted());
+            values.put(TableEntry.COLUMN_NAME_STARRED, toDo.getStarred());
 
 
             if (toDo.getDueDate() != null) {
-                values.put(FeedEntry.COLUMN_NAME_DUE_DATE, toDo.getDueDate().getTime());
+                values.put(TableEntry.COLUMN_NAME_DUE_DATE, toDo.getDueDate().getTime());
             }
             if (toDo.getAlarmDate() != null) {
-                values.put(FeedEntry.COLUMN_NAME_ALARM, toDo.getAlarmDate().getTime());
+                values.put(TableEntry.COLUMN_NAME_ALARM, toDo.getAlarmDate().getTime());
             }
 
 
             if (toDo.getStarred() == true && toDo.getCompletedDate() == null){
                 long completedTime = System.currentTimeMillis();
-                values.put(FeedEntry.COLUMN_NAME_COMPLETED_DATE, completedTime);
+                values.put(TableEntry.COLUMN_NAME_COMPLETED_DATE, completedTime);
             }
 
             db.insertWithOnConflict(TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
@@ -125,8 +123,8 @@ public class ToDoReaderContract {
 
             ArrayList<String> names = new ArrayList<>();
             SQLiteDatabase db = this.getReadableDatabase();
-            Cursor cursor = db.rawQuery("SELECT " + FeedEntry.COLUMN_NAME_NAME + " FROM " + TABLE_NAME + " WHERE " + FeedEntry.COLUMN_NAME_COMPLETED + " = " + 0, null);
-            int nameIndex = cursor.getColumnIndex(FeedEntry.COLUMN_NAME_NAME);
+            Cursor cursor = db.rawQuery("SELECT " + TableEntry.COLUMN_NAME_NAME + " FROM " + TABLE_NAME + " WHERE " + TableEntry.COLUMN_NAME_COMPLETED + " = " + 0, null);
+            int nameIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_NAME);
 
             if (cursor.moveToFirst()) {
                 do {
@@ -148,8 +146,8 @@ public class ToDoReaderContract {
                 isCompletedInt = 1;
                 completedTime = System.currentTimeMillis();
             }
-            db.execSQL("UPDATE " + TABLE_NAME + " SET " + FeedEntry.COLUMN_NAME_COMPLETED_DATE + " = " + completedTime + " WHERE " + FeedEntry.COLUMN_NAME_NAME + " = '" + toDoItem.getName() + "';");
-            db.execSQL("UPDATE " + TABLE_NAME + " SET " + FeedEntry.COLUMN_NAME_COMPLETED + " = " + isCompletedInt + " WHERE " + FeedEntry.COLUMN_NAME_NAME + " = '" + toDoItem.getName() + "';");
+            db.execSQL("UPDATE " + TABLE_NAME + " SET " + TableEntry.COLUMN_NAME_COMPLETED_DATE + " = " + completedTime + " WHERE " + TableEntry.COLUMN_NAME_NAME + " = '" + toDoItem.getName() + "';");
+            db.execSQL("UPDATE " + TABLE_NAME + " SET " + TableEntry.COLUMN_NAME_COMPLETED + " = " + isCompletedInt + " WHERE " + TableEntry.COLUMN_NAME_NAME + " = '" + toDoItem.getName() + "';");
             db.close();
         }
 
@@ -160,14 +158,14 @@ public class ToDoReaderContract {
                 isStarredInt = 1;
             }
             SQLiteDatabase db = this.getReadableDatabase();
-            db.execSQL("UPDATE " + TABLE_NAME + " SET " + FeedEntry.COLUMN_NAME_STARRED + " = " + isStarredInt + " WHERE " + FeedEntry.COLUMN_NAME_NAME + " = '" + toDoItem.getName() + "';");
+            db.execSQL("UPDATE " + TABLE_NAME + " SET " + TableEntry.COLUMN_NAME_STARRED + " = " + isStarredInt + " WHERE " + TableEntry.COLUMN_NAME_NAME + " = '" + toDoItem.getName() + "';");
             db.close();
         }
 
         public long getNoOfCompletedToDos(long beginTime, long endTime) {
 
             long noOfCompletedToDos = 0;
-            String newQuery = FeedEntry.COLUMN_NAME_COMPLETED_DATE + " BETWEEN " + beginTime + " AND " + endTime + ";";
+            String newQuery = TableEntry.COLUMN_NAME_COMPLETED_DATE + " BETWEEN " + beginTime + " AND " + endTime + ";";
             SQLiteDatabase db = this.getReadableDatabase();
             noOfCompletedToDos = DatabaseUtils.queryNumEntries(db, TABLE_NAME, newQuery);
             db.close();
@@ -176,7 +174,7 @@ public class ToDoReaderContract {
 
         public void deleteToDo(ToDoItem toDoItem) {
             SQLiteDatabase db = this.getWritableDatabase();
-            db.delete(TABLE_NAME, FeedEntry.COLUMN_NAME_NAME + " = ?", new String[]{String.valueOf(toDoItem.getName())});
+            db.delete(TABLE_NAME, TableEntry.COLUMN_NAME_NAME + " = ?", new String[]{String.valueOf(toDoItem.getName())});
             db.close();
         }
 
@@ -186,13 +184,13 @@ public class ToDoReaderContract {
             SQLiteDatabase db = this.getReadableDatabase();
 
             Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-            int nameIndex = cursor.getColumnIndex(FeedEntry.COLUMN_NAME_NAME);
-            int noteIndex = cursor.getColumnIndex(FeedEntry.COLUMN_NAME_NOTE);
-            int dateIndex = cursor.getColumnIndex(FeedEntry.COLUMN_NAME_DUE_DATE);
-            int starIndex = cursor.getColumnIndex(FeedEntry.COLUMN_NAME_STARRED);
-            int completedIndex = cursor.getColumnIndex(FeedEntry.COLUMN_NAME_COMPLETED);
-            int completedDateIndex = cursor.getColumnIndex(FeedEntry.COLUMN_NAME_COMPLETED_DATE);
-            int alarmDateIndex = cursor.getColumnIndex(FeedEntry.COLUMN_NAME_ALARM);
+            int nameIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_NAME);
+            int noteIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_NOTE);
+            int dateIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_DUE_DATE);
+            int starIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_STARRED);
+            int completedIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_COMPLETED);
+            int completedDateIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_COMPLETED_DATE);
+            int alarmDateIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_ALARM);
 
 
             if (cursor.moveToFirst()) {
@@ -219,9 +217,9 @@ public class ToDoReaderContract {
             String query = null;
 
             if (isCompleted) {
-                query = "SELECT * FROM " + TABLE_NAME + " WHERE " + FeedEntry.COLUMN_NAME_COMPLETED + " = 1 ORDER BY (CASE WHEN " + FeedEntry.COLUMN_NAME_DUE_DATE + " IS NULL THEN 1 ELSE 0 END), " + FeedEntry.COLUMN_NAME_DUE_DATE + " DESC;";
+                query = "SELECT * FROM " + TABLE_NAME + " WHERE " + TableEntry.COLUMN_NAME_COMPLETED + " = 1 ORDER BY (CASE WHEN " + TableEntry.COLUMN_NAME_DUE_DATE + " IS NULL THEN 1 ELSE 0 END), " + TableEntry.COLUMN_NAME_DUE_DATE + " DESC;";
             } else {
-                query = "SELECT * FROM " + TABLE_NAME + " WHERE " + FeedEntry.COLUMN_NAME_COMPLETED + " = 0 ORDER BY (CASE WHEN " + FeedEntry.COLUMN_NAME_DUE_DATE + " IS NULL THEN 1 ELSE 0 END), " + FeedEntry.COLUMN_NAME_DUE_DATE + ";";
+                query = "SELECT * FROM " + TABLE_NAME + " WHERE " + TableEntry.COLUMN_NAME_COMPLETED + " = 0 ORDER BY (CASE WHEN " + TableEntry.COLUMN_NAME_DUE_DATE + " IS NULL THEN 1 ELSE 0 END), " + TableEntry.COLUMN_NAME_DUE_DATE + ";";
 
             }
 
@@ -230,13 +228,13 @@ public class ToDoReaderContract {
 
             Cursor cursor = db.rawQuery(query, null);
 
-            int nameIndex = cursor.getColumnIndex(FeedEntry.COLUMN_NAME_NAME);
-            int noteIndex = cursor.getColumnIndex(FeedEntry.COLUMN_NAME_NOTE);
-            int dateIndex = cursor.getColumnIndex(FeedEntry.COLUMN_NAME_DUE_DATE);
-            int starIndex = cursor.getColumnIndex(FeedEntry.COLUMN_NAME_STARRED);
-            int completedIndex = cursor.getColumnIndex(FeedEntry.COLUMN_NAME_COMPLETED);
-            int completedDateIndex = cursor.getColumnIndex(FeedEntry.COLUMN_NAME_COMPLETED_DATE);
-            int alarmDateIndex = cursor.getColumnIndex(FeedEntry.COLUMN_NAME_ALARM);
+            int nameIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_NAME);
+            int noteIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_NOTE);
+            int dateIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_DUE_DATE);
+            int starIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_STARRED);
+            int completedIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_COMPLETED);
+            int completedDateIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_COMPLETED_DATE);
+            int alarmDateIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_ALARM);
 
             if (cursor.moveToFirst()) {
 

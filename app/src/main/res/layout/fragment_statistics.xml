@@ -28,9 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="442dp"
         android:layout_marginBottom="65dp"
-        android:layout_marginEnd="@dimen/margin_small"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginTop="@dimen/margin_small"
+
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:padding="8dp"
@@ -38,7 +36,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
 
         <LinearLayout
             android:id="@+id/settings_popup"
@@ -87,13 +84,36 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@id/spinner_group"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/StatsPageDateHeader"
+                    android:id="@+id/stats_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Today's Date = "
+                    android:layout_margin="@dimen/margin_small"
+                    android:paddingBottom="@dimen/margin_small"
+                    android:textAlignment="center"
+                    android:gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/margin_small"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/margin_small"
+                >
 
             <LinearLayout
                 android:id="@+id/icon_group_no_of_unlocks"
@@ -159,6 +179,7 @@
                     android:id="@+id/text_view_tasks_completed"/>
             </LinearLayout>
         </LinearLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/spinner_group"
@@ -193,6 +214,7 @@
             android:layout_width="match_parent"
             android:layout_height="275dp"
             android:scrollbars="vertical"
+            android:layout_margin="@dimen/margin_small"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/navigation_bar"
             app:layout_constraintEnd_toEndOf="parent"

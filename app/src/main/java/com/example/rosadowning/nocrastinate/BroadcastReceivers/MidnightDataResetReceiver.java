@@ -28,8 +28,19 @@ public class MidnightDataResetReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         Log.d(TAG, "Midnight Receiver reached");
+
         ReentrantLock reentrantLock = new ReentrantLock();
         StatsIconData midnightStat = new StatsIconData();
+
+        SharedPreferences bootPreferences = context.getSharedPreferences("BootData", Context.MODE_PRIVATE);
+        SharedPreferences.Editor bootEditor = bootPreferences.edit();
+
+        try{
+            reentrantLock.lock();
+            bootEditor.putLong("MidnightReceiver", System.currentTimeMillis());
+        } finally {
+            reentrantLock.unlock();
+        }
 
         DateTime today = new DateTime().withTimeAtStartOfDay();
         Date yesterday = today.minusDays(1).withTimeAtStartOfDay().toDate();

@@ -44,6 +44,7 @@ import org.joda.time.DateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
@@ -66,6 +67,7 @@ public class StatisticsFragment extends Fragment {
     private SharedPreferences sharedPreferences;
     private View statsView;
     private ReentrantLock reentrantLock;
+    private Date todayDate;
 
 
     @Nullable
@@ -223,10 +225,12 @@ public class StatisticsFragment extends Fragment {
 
     private class UpdateIcons extends AsyncTask<String, Void, StatsIconData> {
 
+        private String timeInterval;
+
         @Override
         protected StatsIconData doInBackground(String... strings) {
 
-            String timeInterval = strings[0];
+            this.timeInterval = strings[0];
             StatsIconData stats = new StatsIconData();
 
             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -254,11 +258,8 @@ public class StatisticsFragment extends Fragment {
 
                 ToDoReaderContract.ToDoListDbHelper toDoHelper = new ToDoReaderContract.ToDoListDbHelper(context);
                 SQLiteDatabase sql = toDoHelper.getWritableDatabase();
-                DateTime today = new DateTime().withTimeAtStartOfDay();
-                DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
-                long beginTime = today.getMillis();
-                long endTime = tomorrow.getMillis();
-
+                long beginTime = new DateTime().withTimeAtStartOfDay().getMillis();
+                long endTime =  new DateTime().plusDays(1).withTimeAtStartOfDay().getMillis();
                 long tasksCompleted = toDoHelper.getNoOfCompletedToDos(beginTime, endTime);
 
                 stats.setTasksCompleted(tasksCompleted);
@@ -295,6 +296,9 @@ public class StatisticsFragment extends Fragment {
         protected synchronized void onPostExecute(StatsIconData iconData) {
 
             if (getView() == statsView) {
+
+                TextView timeHeader = (TextView) getView().findViewById(R.id.stats_header);
+                timeHeader.setText(TimeHelper.getHeadingString(timeInterval));
 
                 if ((Integer) iconData.getNoOfUnlocks() != null) {
                     TextView textViewUnlocks = (TextView) getView().findViewById(R.id.text_view_no_of_unlocks);
