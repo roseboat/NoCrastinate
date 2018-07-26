@@ -1,6 +1,5 @@
 package com.example.rosadowning.nocrastinate.Adapters;
 
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -122,7 +122,8 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
 
         CheckBox isCompleted, isStarred;
         TextView name, dueDate;
-        LinearLayout linearLayout, wholeToDoItem;
+        LinearLayout toDoLayout;
+        RelativeLayout wholeToDoItem;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -132,8 +133,8 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
             dueDate = (TextView) itemView.findViewById(R.id.toDoDueDate);
             isCompleted = (CheckBox) itemView.findViewById(R.id.toDoCheckBox);
             isStarred = (CheckBox) itemView.findViewById(R.id.toDoStar);
-            linearLayout = (LinearLayout) itemView.findViewById(R.id.toDoLinearLayout);
-            wholeToDoItem = (LinearLayout) itemView.findViewById(R.id.to_do_item);
+            toDoLayout = (LinearLayout) itemView.findViewById(R.id.toDoLinearLayout);
+            wholeToDoItem = (RelativeLayout) itemView.findViewById(R.id.to_do_item);
 
         }
 
@@ -149,7 +150,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
         public TextView getDueDate() {
             return dueDate;
         }
-        public LinearLayout getWholeToDoItem() {
+        public RelativeLayout getWholeToDoItem() {
             return wholeToDoItem;
         }
 

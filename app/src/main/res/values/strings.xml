@@ -39,10 +39,9 @@
     <string name="stats_icon_tasks_achieved">Tasks Achieved</string>
 
     <string name="add_to_do_name">Name of To Do:</string>
-    <string name="add_to_do_due_date">Due Date:</string>
-    <string name="add_to_do_alarm_date">Alarm:</string>
-    <string name="add_to_do_note">Notes:</string>
-    <string name="add_to_do_alarm">Add an Alarm</string>
+    <string name="add_to_do_due_date">Due Date: (Optional)</string>
+    <string name="add_to_do_alarm_date">Alarm: (Optional)</string>
+    <string name="add_to_do_note">Notes: (Optional)</string>
     <string name="save_new_to_do">Save New To Do</string>
     <string name="view_completed_to_dos">View Completed To Do\'s</string>
 

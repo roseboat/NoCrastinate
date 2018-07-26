@@ -478,29 +478,29 @@ public final class R {
         public static final int hint_alpha_material_light = 0x7f07008d;
         public static final int hint_pressed_alpha_material_dark = 0x7f07008e;
         public static final int hint_pressed_alpha_material_light = 0x7f07008f;
-        public static final int notification_action_icon_size = 0x7f0700c4;
-        public static final int notification_action_text_size = 0x7f0700c5;
-        public static final int notification_big_circle_margin = 0x7f0700c6;
-        public static final int notification_content_margin_start = 0x7f0700c7;
-        public static final int notification_large_icon_height = 0x7f0700c8;
-        public static final int notification_large_icon_width = 0x7f0700c9;
-        public static final int notification_main_column_padding_top = 0x7f0700ca;
-        public static final int notification_media_narrow_margin = 0x7f0700cb;
-        public static final int notification_right_icon_size = 0x7f0700cc;
-        public static final int notification_right_side_padding_top = 0x7f0700cd;
-        public static final int notification_small_icon_background_padding = 0x7f0700ce;
-        public static final int notification_small_icon_size_as_large = 0x7f0700cf;
-        public static final int notification_subtext_size = 0x7f0700d0;
-        public static final int notification_top_pad = 0x7f0700d1;
-        public static final int notification_top_pad_large_text = 0x7f0700d2;
-        public static final int tooltip_corner_radius = 0x7f0700d5;
-        public static final int tooltip_horizontal_padding = 0x7f0700d6;
-        public static final int tooltip_margin = 0x7f0700d7;
-        public static final int tooltip_precise_anchor_extra_offset = 0x7f0700d8;
-        public static final int tooltip_precise_anchor_threshold = 0x7f0700d9;
-        public static final int tooltip_vertical_padding = 0x7f0700da;
-        public static final int tooltip_y_offset_non_touch = 0x7f0700db;
-        public static final int tooltip_y_offset_touch = 0x7f0700dc;
+        public static final int notification_action_icon_size = 0x7f0700c5;
+        public static final int notification_action_text_size = 0x7f0700c6;
+        public static final int notification_big_circle_margin = 0x7f0700c7;
+        public static final int notification_content_margin_start = 0x7f0700c8;
+        public static final int notification_large_icon_height = 0x7f0700c9;
+        public static final int notification_large_icon_width = 0x7f0700ca;
+        public static final int notification_main_column_padding_top = 0x7f0700cb;
+        public static final int notification_media_narrow_margin = 0x7f0700cc;
+        public static final int notification_right_icon_size = 0x7f0700cd;
+        public static final int notification_right_side_padding_top = 0x7f0700ce;
+        public static final int notification_small_icon_background_padding = 0x7f0700cf;
+        public static final int notification_small_icon_size_as_large = 0x7f0700d0;
+        public static final int notification_subtext_size = 0x7f0700d1;
+        public static final int notification_top_pad = 0x7f0700d2;
+        public static final int notification_top_pad_large_text = 0x7f0700d3;
+        public static final int tooltip_corner_radius = 0x7f0700d6;
+        public static final int tooltip_horizontal_padding = 0x7f0700d7;
+        public static final int tooltip_margin = 0x7f0700d8;
+        public static final int tooltip_precise_anchor_extra_offset = 0x7f0700d9;
+        public static final int tooltip_precise_anchor_threshold = 0x7f0700da;
+        public static final int tooltip_vertical_padding = 0x7f0700db;
+        public static final int tooltip_y_offset_non_touch = 0x7f0700dc;
+        public static final int tooltip_y_offset_touch = 0x7f0700dd;
     }
     public static final class drawable {
         public static final int abc_ab_share_pack_mtrl_alpha = 0x7f080007;
@@ -796,8 +796,8 @@ public final class R {
         public static final int abc_shareactionprovider_share_with = 0x7f100024;
         public static final int abc_shareactionprovider_share_with_application = 0x7f100025;
         public static final int abc_toolbar_collapse_description = 0x7f100026;
-        public static final int search_menu_title = 0x7f100055;
-        public static final int status_bar_notification_info_overflow = 0x7f100059;
+        public static final int search_menu_title = 0x7f100054;
+        public static final int status_bar_notification_info_overflow = 0x7f100058;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat = 0x7f110000;

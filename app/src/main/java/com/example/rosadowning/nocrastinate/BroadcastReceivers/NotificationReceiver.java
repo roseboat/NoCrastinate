@@ -60,14 +60,19 @@ public class NotificationReceiver extends BroadcastReceiver {
         extras.clear();
         Log.d(TAG, "alarmid = " + alarmID);
         String content = "";
+        String subheading = "";
 
 
         if (alarmID == FREQ_1_ALARM_1 || alarmID == FREQ_1_ALARM_2){
             content = extras.getString("Content", "Not found");
+            subheading = content;
         } else if (alarmID == FREQ_2_ALARM_1){
             content = freq2setUp();
+            subheading = "Click here to view your Daily Report";
         } else if (alarmID == FREQ_3_ALARM_1){
             content = freq3setUp();
+            subheading = "Click here to view your Weekly Report";
+
         }
 
         Bitmap brainLogo = BitmapFactory.decodeResource(context.getResources(), R.drawable.brain);
@@ -81,6 +86,7 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .setSmallIcon(R.drawable.brain_graphic)
                 .setLargeIcon(brainLogo)
                 .setContentTitle(title)
+                .setContentText(subheading)
                 .setSound(defaultSoundUri)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)

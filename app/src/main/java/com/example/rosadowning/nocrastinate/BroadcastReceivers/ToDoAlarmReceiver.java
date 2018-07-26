@@ -35,13 +35,12 @@ private Context context;
 
             Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
             Intent alarmIntent = new Intent(context, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, CHANNEL_ID)
                     .setSmallIcon(R.drawable.brain_graphic)
                     .setContentTitle("NoCrastinate Alarm!")
-                    .setContentText("Reminder: Don't forget about your to do, " + toDoName + "!")
+                    .setContentText("Reminder: Don't forget about your to do, \"" + toDoName + "\"!")
                     .setSound(defaultSoundUri)
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                     .setContentIntent(pendingIntent)

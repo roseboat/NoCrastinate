@@ -92,7 +92,7 @@ public class ToDoFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddToDoFragment()).commit();
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddToDoFragment()).addToBackStack(null).commit();
 
             }
         });
@@ -101,7 +101,7 @@ public class ToDoFragment extends Fragment {
         completedToDos.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new CompletedToDoFragment()).commit();
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new CompletedToDoFragment()).addToBackStack(null).commit();
             }
         });
         return view;

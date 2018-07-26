@@ -28,21 +28,21 @@ public class SettingsFragment extends Fragment {
         helpCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new HelpCenterFragment()).commit();
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new HelpCenterFragment()).addToBackStack(null).commit();
             }
         });
 
         notiSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new NotificationSettingsFragment()).commit();
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new NotificationSettingsFragment()).addToBackStack(null).commit();
             }
         });
 
         blockApps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new BlockAppsFragment()).commit();
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new BlockAppsFragment()).addToBackStack(null).commit();
             }
         });
         return view;

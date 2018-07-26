@@ -3,8 +3,11 @@ package com.example.rosadowning.nocrastinate.Fragments;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
+import android.content.pm.ResolveInfo;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -190,30 +193,64 @@ public class StatisticsFragment extends Fragment {
         List<PackageInfo> installedPackages = context.getPackageManager()
                 .getInstalledPackages(0);
 
-        for (int i = 0; i < usageStatsList.size(); i++) {
-            CustomUsageStats customUsageStats = new CustomUsageStats();
-            customUsageStats.usageStats = usageStatsList.get(i);
+        for (PackageInfo packageInfo : installedPackages) {
 
-            for (int j = 0; j < installedPackages.size(); j++) {
-                PackageInfo packageInfo = installedPackages.get(j);
-                if (packageInfo.packageName.equals(usageStatsList.get(i).getPackageName())) {
-                    customUsageStats.appName = packageInfo.applicationInfo.loadLabel(context.getPackageManager()).toString();
+            if ((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
+
+                for (int i = 0; i < usageStatsList.size(); i++) {
+                    CustomUsageStats customUsageStats = new CustomUsageStats();
+                    customUsageStats.usageStats = usageStatsList.get(i);
+                    if (packageInfo.packageName.equals(usageStatsList.get(i).getPackageName())) {
+                        customUsageStats.appName = packageInfo.applicationInfo.loadLabel(context.getPackageManager()).toString();
+                        try {
+                            customUsageStats.appIcon = getActivity().getPackageManager()
+                                    .getApplicationIcon(customUsageStats.usageStats.getPackageName());
+                        } catch (PackageManager.NameNotFoundException e) {
+                            Log.w(TAG, String.format("App Icon is not found for %s",
+                                    customUsageStats.usageStats.getPackageName()));
+                            customUsageStats.appIcon = getActivity().getDrawable(R.drawable.brain);
+                        }
+                        customUsageStatsList.add(customUsageStats);
+                    }
                 }
             }
-            try {
-                customUsageStats.appIcon = getActivity().getPackageManager()
-                        .getApplicationIcon(customUsageStats.usageStats.getPackageName());
-            } catch (PackageManager.NameNotFoundException e) {
-                Log.w(TAG, String.format("App Icon is not found for %s",
-                        customUsageStats.usageStats.getPackageName()));
-                customUsageStats.appIcon = getActivity().getDrawable(R.drawable.brain);
-            }
-            customUsageStatsList.add(customUsageStats);
         }
         mUsageListAdapter.setCustomUsageStatsList(customUsageStatsList);
         mUsageListAdapter.notifyDataSetChanged();
         mRecyclerView.scrollToPosition(0);
     }
+
+
+//    void updateAppsList(List<UsageStats> usageStatsList) {
+//        List<CustomUsageStats> customUsageStatsList = new ArrayList<>();
+//
+//        List<PackageInfo> installedPackages = context.getPackageManager()
+//                .getInstalledPackages(0);
+//
+//        for (int i = 0; i < usageStatsList.size(); i++) {
+//            CustomUsageStats customUsageStats = new CustomUsageStats();
+//            customUsageStats.usageStats = usageStatsList.get(i);
+//
+//            for (int j = 0; j < installedPackages.size(); j++) {
+//                PackageInfo packageInfo = installedPackages.get(j);
+//                if (packageInfo.packageName.equals(usageStatsList.get(i).getPackageName())) {
+//                    customUsageStats.appName = packageInfo.applicationInfo.loadLabel(context.getPackageManager()).toString();
+//                }
+//            }
+//            try {
+//                customUsageStats.appIcon = getActivity().getPackageManager()
+//                        .getApplicationIcon(customUsageStats.usageStats.getPackageName());
+//            } catch (PackageManager.NameNotFoundException e) {
+//                Log.w(TAG, String.format("App Icon is not found for %s",
+//                        customUsageStats.usageStats.getPackageName()));
+//                customUsageStats.appIcon = getActivity().getDrawable(R.drawable.brain);
+//            }
+//            customUsageStatsList.add(customUsageStats);
+//        }
+//        mUsageListAdapter.setCustomUsageStatsList(customUsageStatsList);
+//        mUsageListAdapter.notifyDataSetChanged();
+//        mRecyclerView.scrollToPosition(0);
+//    }
 
     private static class UsedMostOftenComparatorDesc implements Comparator<UsageStats> {
 

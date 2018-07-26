@@ -25,11 +25,14 @@ import android.view.MenuItem;
 
 import com.example.rosadowning.nocrastinate.BroadcastReceivers.MidnightDataResetReceiver;
 import com.example.rosadowning.nocrastinate.BroadcastReceivers.ScreenReceiver;
+import com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract;
 import com.example.rosadowning.nocrastinate.Fragments.*;
 
 import org.joda.time.DateTime;
 
 import java.util.Calendar;
+
+import static com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract.ToDoListDbHelper.DATABASE_NAME;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -89,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private boolean loadFragment(Fragment fragment) {
         if (fragment != null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
             return true;
         }
         return false;

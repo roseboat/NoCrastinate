@@ -1,5 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:id="@+id/to_do_item"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="@dimen/margin_small"-->
+    <!--android:layout_marginLeft="@dimen/margin_small"-->
+    <!--android:layout_marginRight="@dimen/margin_small"-->
+    <!--android:layout_marginTop="@dimen/margin_small"-->
+    <!--android:background="@color/colorToDoBackground"-->
+    <!--android:gravity="center">-->
+
+    <!--<CheckBox-->
+        <!--android:id="@+id/toDoCheckBox"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_column="0"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_row="0" />-->
+
+    <!--<LinearLayout-->
+        <!--android:id="@+id/toDoLinearLayout"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/toDoName"-->
+            <!--android:layout_width="250dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:padding="8dp"-->
+            <!--android:text="ToDoName"-->
+            <!--android:textColor="@color/colorBlack"-->
+            <!--android:textSize="17dp" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/toDoDueDate"-->
+            <!--android:layout_width="255dp"-->
+            <!--android:layout_height="25dp"-->
+            <!--android:paddingBottom="8dp"-->
+            <!--android:paddingLeft="8dp"-->
+            <!--android:text="due date"-->
+            <!--android:textSize="14dp"-->
+            <!--android:textStyle="italic"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/toDoName" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--<CheckBox-->
+        <!--android:id="@+id/toDoStar"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_row="0"-->
+        <!--android:button="@drawable/star_selector"-->
+        <!--android:gravity="center" />-->
+
+<!--</android.widget.LinearLayout>-->
+
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/to_do_item"
     android:layout_width="match_parent"
@@ -15,20 +76,23 @@
         android:id="@+id/toDoCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_column="0"
         android:layout_gravity="center"
-        android:layout_row="0" />
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/margin_small"
 
+        />
     <LinearLayout
         android:id="@+id/toDoLinearLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true">
 
         <TextView
             android:id="@+id/toDoName"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center_vertical"
             android:padding="8dp"
@@ -38,12 +102,12 @@
 
         <TextView
             android:id="@+id/toDoDueDate"
-            android:layout_width="250dp"
-            android:layout_height="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:paddingBottom="8dp"
             android:paddingLeft="8dp"
             android:text="due date"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:textStyle="italic"
             app:layout_constraintTop_toBottomOf="@+id/toDoName" />
 
@@ -53,10 +117,10 @@
         android:id="@+id/toDoStar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/small_font_size"
-        android:layout_gravity="center"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
         android:button="@drawable/star_selector"
-        android:layout_row="0" />
+        android:gravity="center"
+        android:layout_marginEnd="@dimen/margin_small"/>
 
-</android.widget.LinearLayout>
-
+</android.widget.RelativeLayout>
