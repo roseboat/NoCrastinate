@@ -12,9 +12,9 @@
     <color name="colorCompleted">#e2bbce</color>
     <color name="colorDivider">#bbbbbb</color>
     <color name="colorStarred">#46ffc700</color>
-    <color name="colorGradient1">#ceb8ff</color>
-    <color name="colorGradient2">#a38cf7</color>
-    <color name="colorPrimaryDark">#16b398</color>
+    <color name="colorGradient1">#f9e8a6</color>
+    <color name="colorGradient2">#ffcc00</color>
+    <color name="colorPrimaryDark">#6148ff</color>
 
 
     <color name="colorTurqLight">#0d6c6c6c</color>

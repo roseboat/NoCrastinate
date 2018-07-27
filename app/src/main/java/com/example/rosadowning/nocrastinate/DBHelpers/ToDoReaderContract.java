@@ -217,9 +217,9 @@ public class ToDoReaderContract {
             String query = null;
 
             if (isCompleted) {
-                query = "SELECT * FROM " + TABLE_NAME + " WHERE " + TableEntry.COLUMN_NAME_COMPLETED + " = 1 ORDER BY (CASE WHEN " + TableEntry.COLUMN_NAME_DUE_DATE + " IS NULL THEN 1 ELSE 0 END), " + TableEntry.COLUMN_NAME_DUE_DATE + " DESC;";
+                query = "SELECT * FROM " + TABLE_NAME + " WHERE " + TableEntry.COLUMN_NAME_COMPLETED + " = 1 ORDER BY (CASE WHEN " + TableEntry.COLUMN_NAME_DUE_DATE + " IS NULL OR " + TableEntry.COLUMN_NAME_DUE_DATE + " = 0 THEN 1 ELSE 0 END), " + TableEntry.COLUMN_NAME_DUE_DATE + " DESC;";
             } else {
-                query = "SELECT * FROM " + TABLE_NAME + " WHERE " + TableEntry.COLUMN_NAME_COMPLETED + " = 0 ORDER BY (CASE WHEN " + TableEntry.COLUMN_NAME_DUE_DATE + " IS NULL THEN 1 ELSE 0 END), " + TableEntry.COLUMN_NAME_DUE_DATE + ";";
+                query = "SELECT * FROM " + TABLE_NAME + " WHERE " + TableEntry.COLUMN_NAME_COMPLETED + " = 0 ORDER BY (CASE WHEN " + TableEntry.COLUMN_NAME_DUE_DATE + " IS NULL OR " + TableEntry.COLUMN_NAME_DUE_DATE + " = 0 THEN 1 ELSE 0 END), " + TableEntry.COLUMN_NAME_DUE_DATE + ";";
 
             }
 

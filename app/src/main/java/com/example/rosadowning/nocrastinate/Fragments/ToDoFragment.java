@@ -55,6 +55,7 @@ public class ToDoFragment extends Fragment {
 
             @Override
             public void onItemCheck(ToDoItem item) {
+
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
                 dbHelper.setCompleted(item, true);
                 int id = dbHelper.getID(item);

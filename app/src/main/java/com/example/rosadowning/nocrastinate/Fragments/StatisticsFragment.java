@@ -1,6 +1,7 @@
 package com.example.rosadowning.nocrastinate.Fragments;
 
 import android.annotation.TargetApi;
+import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
@@ -15,6 +16,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,6 +102,13 @@ public class StatisticsFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        this.onCreate(null);
+    }
+
+
+    @Override
     public void onViewCreated(View rootView, Bundle savedInstanceState) {
         super.onViewCreated(rootView, savedInstanceState);
         this.statsView = getView();
@@ -125,6 +134,30 @@ public class StatisticsFragment extends Fragment {
 
                 if (intervalString != null) {
                     List<UsageStats> usageStatsList = getUsageStatistics(intervalString);
+
+                    SharedPreferences usagePref = context.getSharedPreferences("UsageSettings", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = usagePref.edit();
+
+                    if (usageStatsList.size() == 0 || usageStatsList.isEmpty()) {
+                        Log.i(TAG, "The user may not allow the access to apps usage. ");
+
+                        editor.putBoolean("SettingsOn", false);
+                        editor.apply();
+                        mUsagePopUp.setVisibility(View.VISIBLE);
+                        mUsagePopUp.bringToFront();
+                        mOpenUsageSettingButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+                            }
+
+                        });
+
+                    } else {
+                        editor.putBoolean("SettingsOn", true);
+                        editor.apply();
+                        mUsagePopUp.setVisibility(View.GONE);
+
                     Collections.sort(usageStatsList, new UsedMostOftenComparatorDesc());
                     updateAppsList(usageStatsList);
 
@@ -140,7 +173,7 @@ public class StatisticsFragment extends Fragment {
                     };
                     timerAsync.schedule(timerTaskAsync, 0, 5000);
                 }
-            }
+            }}
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -173,18 +206,60 @@ public class StatisticsFragment extends Fragment {
         List<UsageStats> queryUsageStats = new ArrayList<>();
         queryUsageStats.addAll(usageStats.values());
 
-        if (queryUsageStats.size() == 0) {
-            Log.i(TAG, "The user may not allow the access to apps usage. ");
-            mUsagePopUp.setVisibility(View.VISIBLE);
-            mUsagePopUp.bringToFront();
-            mOpenUsageSettingButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
-                }
-            });
-        }
+//        SharedPreferences usagePref = context.getSharedPreferences("UsageSettings", Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = usagePref.edit();
+//
+//        if (queryUsageStats.size() == 0 || queryUsageStats.isEmpty()) {
+//            Log.i(TAG, "The user may not allow the access to apps usage. ");
+//
+//            editor.putBoolean("SettingsOn", false);
+//            editor.apply();
+//            mUsagePopUp.setVisibility(View.VISIBLE);
+//            mUsagePopUp.bringToFront();
+//            mOpenUsageSettingButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+//                    if (hasPermission(context)){
+//                        mUsagePopUp.setVisibility(View.GONE);
+//                    }
+//                }
+//
+//            });
+//
+//        } else {
+//            editor.putBoolean("SettingsOn", true);
+//            editor.apply();
+//            mUsagePopUp.setVisibility(View.GONE);
+//
+//
+//        }
+
         return queryUsageStats;
+    }
+
+    public static boolean hasPermission(@NonNull final Context context) {
+        // Usage Stats is theoretically available on API v19+, but official/reliable support starts with API v21.
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return false;
+        }
+
+        final AppOpsManager appOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+
+        if (appOpsManager == null) {
+            return false;
+        }
+
+        final int mode = appOpsManager.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, android.os.Process.myUid(), context.getPackageName());
+        if (mode != AppOpsManager.MODE_ALLOWED) {
+            return false;
+        }
+
+        // Verify that access is possible. Some devices "lie" and return MODE_ALLOWED even when it's not.
+        final long now = System.currentTimeMillis();
+        final UsageStatsManager mUsageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
+        final List<UsageStats> stats = mUsageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, now - 1000 * 10, now);
+        return (stats != null && !stats.isEmpty());
     }
 
     void updateAppsList(List<UsageStats> usageStatsList) {

@@ -1,10 +1,13 @@
 package com.example.rosadowning.nocrastinate;
 
 import android.app.AlarmManager;
+import android.app.AppOpsManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.usage.UsageStats;
+import android.app.usage.UsageStatsManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -31,6 +34,7 @@ import com.example.rosadowning.nocrastinate.Fragments.*;
 import org.joda.time.DateTime;
 
 import java.util.Calendar;
+import java.util.List;
 
 import static com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract.ToDoListDbHelper.DATABASE_NAME;
 
@@ -45,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -63,7 +68,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         scheduleMidnightAlarm();
         createNotificationChannel();
     }
-
 
     private void scheduleMidnightAlarm(){
         DateTime today = new DateTime().withTimeAtStartOfDay();

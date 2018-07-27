@@ -1,11 +1,14 @@
 package com.example.rosadowning.nocrastinate.Fragments;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -36,7 +39,7 @@ import static java.util.Calendar.SECOND;
 public class NotificationSettingsFragment extends Fragment {
 
     private static final String TAG = "NOTIFICATIONSETTINGS";
-    private CheckBox freq1, freq2, freq3, freq4;
+    private CheckBox freq1, freq2, freq3;
     private Context context;
     private NotificationManagerCompat notificationManager;
     private long hours, preHours, minutes, preMinutes;
@@ -56,108 +59,134 @@ public class NotificationSettingsFragment extends Fragment {
         this.context = getContext();
         this.reentrantLock = new ReentrantLock();
 
-        notiPreferences = getContext().getSharedPreferences("NotificationCheckboxes", Context.MODE_PRIVATE);
-        editor = notiPreferences.edit();
+            notiPreferences = getContext().getSharedPreferences("NotificationCheckboxes", Context.MODE_PRIVATE);
+            editor = notiPreferences.edit();
 
-        notificationManager = NotificationManagerCompat.from(context);
+            notificationManager = NotificationManagerCompat.from(context);
 
-        freq1 = (CheckBox) view.findViewById(R.id.notification_checkbox_1);
-        freq1.setChecked(notiPreferences.getBoolean("checkbox1", false));
-        freq2 = (CheckBox) view.findViewById(R.id.notification_checkbox_2);
-        freq2.setChecked(notiPreferences.getBoolean("checkbox2", false));
-        freq3 = (CheckBox) view.findViewById(R.id.notification_checkbox_3);
-        freq3.setChecked(notiPreferences.getBoolean("checkbox3", false));
+            freq1 = (CheckBox) view.findViewById(R.id.notification_checkbox_1);
+            freq2 = (CheckBox) view.findViewById(R.id.notification_checkbox_2);
+            freq3 = (CheckBox) view.findViewById(R.id.notification_checkbox_3);
 
 
-        freq1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    try {
+        SharedPreferences usagePref = context.getSharedPreferences("UsageSettings", Context.MODE_PRIVATE);
+
+        if (!usagePref.getBoolean("SettingsOn", false)) {
+
+            freq1.setEnabled(false);
+            freq2.setEnabled(false);
+            freq3.setEnabled(false);
+
+            AlertDialog alertDialog = new AlertDialog.Builder(context)
+                    .setMessage(R.string.dialog_message_noti_settings_off)
+                    .setTitle(R.string.dialog_title_noti_settings_off)
+                    .setPositiveButton("Take me there!", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+                        }
+                    }).setNegativeButton("Cancel", null).create();
+            alertDialog.show();
+        }
+
+        else {
+
+            freq1.setChecked(notiPreferences.getBoolean("checkbox1", false));
+            freq2.setChecked(notiPreferences.getBoolean("checkbox2", false));
+            freq3.setChecked(notiPreferences.getBoolean("checkbox3", false));
+
+
+            freq1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (b) {
+                        try {
+                            reentrantLock.lock();
+                            Log.d(TAG, "Freq 1 selected");
+                            editor.putBoolean("checkbox1", true);
+                            editor.putBoolean("checkbox2", false);
+                            editor.putBoolean("checkbox3", false);
+                            editor.commit();
+                            freq2.setChecked(false);
+                            freq3.setChecked(false);
+                        } finally {
+                            reentrantLock.unlock();
+                            freqOneNotificationSetUp();
+                        }
+                    } else {
+                        Log.d(TAG, "1 unchecked");
+                        notificationManager.cancel(FREQ_1_ALARM_1);
+                        notificationManager.cancel(FREQ_1_ALARM_2);
+                        if (timerTaskAsync != null) {
+                            timerTaskAsync.cancel();
+                        }
                         reentrantLock.lock();
-                        Log.d(TAG, "Freq 1 selected");
-                        editor.putBoolean("checkbox1", true);
+                        editor.putBoolean("checkbox1", false);
+                        editor.commit();
+                        reentrantLock.unlock();
+                    }
+                }
+            });
+
+            freq2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                    if (b) {
+                        try {
+                            reentrantLock.lock();
+                            Log.d(TAG, "Freq 2 selected");
+                            editor.putBoolean("checkbox1", false);
+                            editor.putBoolean("checkbox2", true);
+                            editor.putBoolean("checkbox3", false);
+                            editor.commit();
+                            freq1.setChecked(false);
+                            freq3.setChecked(false);
+                        } finally {
+                            reentrantLock.unlock();
+                            freqTwoNotificationSetUp();
+                        }
+                    } else {
+                        Log.d(TAG, "2 unchecked");
+                        notificationManager.cancel(FREQ_2_ALARM_1);
+                        reentrantLock.lock();
                         editor.putBoolean("checkbox2", false);
+                        editor.commit();
+                        reentrantLock.unlock();
+                    }
+                }
+            });
+
+            freq3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (b) {
+                        try {
+                            reentrantLock.lock();
+                            Log.d(TAG, "Freq 3 selected");
+                            editor.putBoolean("checkbox1", false);
+                            editor.putBoolean("checkbox2", false);
+                            editor.putBoolean("checkbox3", true);
+                            editor.commit();
+                            freq1.setChecked(false);
+                            freq2.setChecked(false);
+                        } finally {
+                            reentrantLock.unlock();
+                            freqThreeNotificationSetUp();
+                        }
+
+                    } else {
+                        Log.d(TAG, "3 unchecked");
+                        notificationManager.cancel(FREQ_3_ALARM_1);
+                        reentrantLock.lock();
                         editor.putBoolean("checkbox3", false);
                         editor.commit();
-                        freq2.setChecked(false);
-                        freq3.setChecked(false);
-                    } finally {
                         reentrantLock.unlock();
-                        freqOneNotificationSetUp();
                     }
-                } else {
-                    Log.d(TAG, "1 unchecked");
-                    notificationManager.cancel(FREQ_1_ALARM_1);
-                    notificationManager.cancel(FREQ_1_ALARM_2);
-                    if (timerTaskAsync != null) {
-                        timerTaskAsync.cancel();
-                    }
-                    reentrantLock.lock();
-                    editor.putBoolean("checkbox1", false);
-                    editor.commit();
-                    reentrantLock.unlock();
                 }
-            }
-        });
+            });
+        }
 
-        freq2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
-                if (b) {
-                    try {
-                        reentrantLock.lock();
-                        Log.d(TAG, "Freq 2 selected");
-                        editor.putBoolean("checkbox1", false);
-                        editor.putBoolean("checkbox2", true);
-                        editor.putBoolean("checkbox3", false);
-                        editor.commit();
-                        freq1.setChecked(false);
-                        freq3.setChecked(false);
-                    } finally {
-                        reentrantLock.unlock();
-                        freqTwoNotificationSetUp();
-                    }
-                } else {
-                    Log.d(TAG, "2 unchecked");
-                    notificationManager.cancel(FREQ_2_ALARM_1);
-                    reentrantLock.lock();
-                    editor.putBoolean("checkbox2", false);
-                    editor.commit();
-                    reentrantLock.unlock();
-                }
-            }
-        });
-
-        freq3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    try {
-                        reentrantLock.lock();
-                        Log.d(TAG, "Freq 3 selected");
-                        editor.putBoolean("checkbox1", false);
-                        editor.putBoolean("checkbox2", false);
-                        editor.putBoolean("checkbox3", true);
-                        editor.commit();
-                        freq1.setChecked(false);
-                        freq2.setChecked(false);
-                    } finally {
-                        reentrantLock.unlock();
-                        freqThreeNotificationSetUp();
-                    }
-
-                } else {
-                    Log.d(TAG, "3 unchecked");
-                    notificationManager.cancel(FREQ_3_ALARM_1);
-                    reentrantLock.lock();
-                    editor.putBoolean("checkbox3", false);
-                    editor.commit();
-                    reentrantLock.unlock();
-                }
-            }
-        });
         return view;
     }
 

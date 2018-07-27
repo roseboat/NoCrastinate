@@ -32,6 +32,8 @@ import com.example.rosadowning.nocrastinate.BroadcastReceivers.ToDoAlarmReceiver
 import com.example.rosadowning.nocrastinate.DataModels.ToDoItem;
 import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
 
+import org.joda.time.DateTime;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -52,7 +54,6 @@ public class ViewToDoFragment extends Fragment {
     private Calendar todaysDate, alarmCal;
     private Context context;
     private int year, month, day, hour, minute, alarmDay, alarmMonth, alarmYear, alarmHour, alarmMinute, alarmID, oldAlarmID;
-    private final long ONE_DAY_LONG = 86400000;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -84,6 +85,7 @@ public class ViewToDoFragment extends Fragment {
         this.minute = todaysDate.get(Calendar.MINUTE);
 
         et_name.setText(name);
+        et_note.setText(note);
 
         if (dueDate.getTime() != 0) {
             SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy");
@@ -92,9 +94,6 @@ public class ViewToDoFragment extends Fragment {
         if (alarmDate.getTime() != 0) {
             SimpleDateFormat sdfAlarm = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
             et_alarm.setText(sdfAlarm.format(alarmDate));
-        }
-        if (!note.equals(null)) {
-            et_note.setText(note);
         }
         if (isCompleted) {
             completed_checkBox.setChecked(true);
@@ -177,11 +176,19 @@ public class ViewToDoFragment extends Fragment {
                             Log.d(TAG, "due date and alarm date are fine");
 
                             ToDoItem editedToDo = new ToDoItem(name);
+                            Log.d(TAG, "name = " + name);
                             editedToDo.setDueDate(dueDate);
+                            Log.d(TAG, "due date = " + dueDate.toString());
                             editedToDo.setAlarmDate(alarmDate);
+                            Log.d(TAG, "alarm date = " + alarmDate.toString());
                             editedToDo.setNote(note);
+                            Log.d(TAG, "note = "+ note);
                             editedToDo.setCompleted(isCompleted);
+                            Log.d(TAG, "completed = "+ isCompleted);
                             editedToDo.setStarred(isStarred);
+                            Log.d(TAG, "starred = "+ isStarred);
+
+                            Log.d(TAG, "due date and alarm date are fine");
 
                             dbHelper = new ToDoReaderContract.ToDoListDbHelper(getContext());
                             SQLiteDatabase sql = dbHelper.getWritableDatabase();
@@ -200,15 +207,16 @@ public class ViewToDoFragment extends Fragment {
 
 
                             if (alarmDate != null && !isCompleted) {
-                                Intent intent = new Intent(context, ToDoAlarmReceiver.class);
-                                intent.putExtra("ToDoName", name);
-                                int alarmId = dbHelper.getID(editedToDo);
-                                intent.putExtra("AlarmID", alarmId);
-                                AlarmManager alarm = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
-                                PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-                                alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmDate.getTime(), pendingIntent);
+                                if (alarmDate.getTime() > 0) {
+                                    Intent intent = new Intent(context, ToDoAlarmReceiver.class);
+                                    intent.putExtra("ToDoName", name);
+                                    int alarmId = dbHelper.getID(editedToDo);
+                                    intent.putExtra("AlarmID", alarmId);
+                                    AlarmManager alarm = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+                                    PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+                                    alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmDate.getTime(), pendingIntent);
+                                }
                             }
-
                             ToDoFragment newFragment = new ToDoFragment();
                             FragmentTransaction transaction = getFragmentManager().beginTransaction();
                             transaction.replace(R.id.fragment_container, newFragment);
@@ -273,7 +281,7 @@ public class ViewToDoFragment extends Fragment {
                 try {
                     dueDate = sdf.parse(dueDateString);
 
-                    if ((todaysDate.getTimeInMillis() - ONE_DAY_LONG) > dueDate.getTime()) {
+                    if ((new DateTime().withTimeAtStartOfDay().getMillis()) > dueDate.getTime()) {
                         AlertDialog alertDialog = new AlertDialog.Builder(context)
                                 .setMessage(R.string.dialog_message_input_error_date)
                                 .setTitle(R.string.dialog_title_input_error_date)
@@ -311,13 +319,16 @@ public class ViewToDoFragment extends Fragment {
                 alarmMonth = month;
                 alarmYear = year;
 
+                Log.d(TAG, "day = " + day + " , month = " + month + " , year = " + year);
+
+
                 alarmCal = Calendar.getInstance();
                 alarmCal.clear();
                 alarmCal.set(alarmYear, alarmMonth, alarmDay);
 
                 try {
 
-                    if ((todaysDate.getTimeInMillis() - ONE_DAY_LONG) > alarmCal.getTimeInMillis()) {
+                    if ((new DateTime().withTimeAtStartOfDay().getMillis()) > alarmCal.getTimeInMillis()) {
                         AlertDialog alertDialog = new AlertDialog.Builder(context)
                                 .setMessage(R.string.dialog_message_input_error_date)
                                 .setTitle(R.string.dialog_title_input_error_date)

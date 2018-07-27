@@ -32,6 +32,8 @@
     <string name="dialog_title_due_date_past">Old due date</string>
     <string name="dialog_message_alarm_date_past">Your alarm is no longer valid and will be cleared.</string>
     <string name="dialog_title_alarm_date_past">Old alarm time</string>
+    <string name="dialog_message_noti_settings_off">Please edit your usage access settings in order to setup notifications.</string>
+    <string name="dialog_title_noti_settings_off">Usage Settings Switched Off</string>
 
 
     <string name="stats_icon_overall_time">Time on Phone</string>

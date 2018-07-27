@@ -30,6 +30,8 @@ import com.example.rosadowning.nocrastinate.BroadcastReceivers.ToDoAlarmReceiver
 import com.example.rosadowning.nocrastinate.DataModels.ToDoItem;
 import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
 
+import org.joda.time.DateTime;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -46,7 +48,6 @@ public class AddToDoFragment extends Fragment {
     private static final String TAG = "AddToDoFragment";
     private ToDoReaderContract.ToDoListDbHelper dbHelper;
     private ToDoItem addToDo;
-    private final long ONE_DAY_LONG = 86400000;
     private Context context;
     private Calendar todaysDate, alarmDate;
     private int day, month, year, hour, minute, alarmDay, alarmMonth, alarmYear, alarmHour, alarmMinute, alarmID;
@@ -105,7 +106,7 @@ public class AddToDoFragment extends Fragment {
                 try {
                     dueDateDate = sdf.parse(dueDateString);
 
-                    if ((todaysDate.getTimeInMillis() - ONE_DAY_LONG) > dueDateDate.getTime()) {
+                    if ((new DateTime().withTimeAtStartOfDay().getMillis()) > dueDateDate.getTime()) {
                         AlertDialog alertDialog = new AlertDialog.Builder(context)
                                 .setMessage(R.string.dialog_message_input_error_date)
                                 .setTitle(R.string.dialog_title_input_error_date)
@@ -149,7 +150,7 @@ public class AddToDoFragment extends Fragment {
 
                 try {
 
-                    if ((todaysDate.getTimeInMillis() - ONE_DAY_LONG) > alarmDate.getTimeInMillis()) {
+                    if ((new DateTime().withTimeAtStartOfDay().getMillis()) > alarmDate.getTimeInMillis()) {
                         AlertDialog alertDialog = new AlertDialog.Builder(context)
                                 .setMessage(R.string.dialog_message_input_error_date)
                                 .setTitle(R.string.dialog_title_input_error_date)
@@ -232,19 +233,24 @@ public class AddToDoFragment extends Fragment {
                     addToDo.setNote(note);
                 }
                 if (dueDateDate != null) {
+                if (dueDateDate.getTime() > 0)
                     addToDo.setDueDate(dueDateDate);
+                } else {
+                    addToDo.setDueDate(null);
                 }
-
-                if (alarmDate != null){
+                if (alarmDate != null)
+                    if (alarmDate.getTimeInMillis() > 0)
                     addToDo.setAlarmDate(new Date(alarmDate.getTimeInMillis()));
-                }
+                } else {
+                alarmDate = null;
+                addToDo.setAlarmDate(null);
+            }
 
                 dbHelper = new ToDoReaderContract.ToDoListDbHelper(context);
                 SQLiteDatabase dbWrite = dbHelper.getWritableDatabase();
                 dbHelper.insertNewToDo(addToDo);
 
                 if (alarmDate != null) {
-
                     int alarmID = dbHelper.getID(addToDo);
                     Intent intent = new Intent(context, ToDoAlarmReceiver.class);
                     intent.putExtra("ToDoName", name);
@@ -253,8 +259,6 @@ public class AddToDoFragment extends Fragment {
                     PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
                     alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmDate.getTimeInMillis(), pendingIntent);
                 }
-
-
                 Toast.makeText(context, "To do \"" + name + "\" added", Toast.LENGTH_LONG).show();
 
                 ToDoFragment newFragment = new ToDoFragment();
@@ -265,4 +269,4 @@ public class AddToDoFragment extends Fragment {
             }
         }
     }
-}
+
