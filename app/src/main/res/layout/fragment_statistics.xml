@@ -99,7 +99,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Today's Date = "
                     android:layout_margin="@dimen/margin_small"
                     android:paddingBottom="@dimen/margin_small"
                     android:textAlignment="center"
@@ -130,8 +129,7 @@
 
                 <TextView
                     style="@style/StatsIconBottomText"
-                    android:id="@+id/text_view_no_of_unlocks"
-                    android:text=" unlocks"/>
+                    android:id="@+id/text_view_no_of_unlocks" />
             </LinearLayout>
 
             <LinearLayout
@@ -151,7 +149,6 @@
 
                 <TextView
                     style="@style/StatsIconBottomText"
-                    android:text=" mins"
                     android:id="@+id/text_view_overall_time" />
             </LinearLayout>
 
@@ -173,7 +170,6 @@
 
                 <TextView
                     style="@style/StatsIconBottomText"
-                    android:text=" tasks"
                     android:id="@+id/text_view_tasks_completed"/>
             </LinearLayout>
         </LinearLayout>

@@ -172,9 +172,13 @@ public class ToDoReaderContract {
             return noOfCompletedToDos;
         }
 
-        public void deleteToDo(ToDoItem toDoItem) {
+//        public void deleteToDo(ToDoItem toDoItem) {
+            public void deleteToDo(int toDoID) {
+
             SQLiteDatabase db = this.getWritableDatabase();
-            db.delete(TABLE_NAME, TableEntry.COLUMN_NAME_NAME + " = ?", new String[]{String.valueOf(toDoItem.getName())});
+//            db.delete(TABLE_NAME, TableEntry.COLUMN_NAME_NAME + " = ?", new String[]{String.valueOf(toDoItem.getName())});
+            db.delete(TABLE_NAME, TableEntry._ID + " = ?", new String[]{String.valueOf(toDoID)});
+
             db.close();
         }
 
@@ -217,7 +221,8 @@ public class ToDoReaderContract {
             String query = null;
 
             if (isCompleted) {
-                query = "SELECT * FROM " + TABLE_NAME + " WHERE " + TableEntry.COLUMN_NAME_COMPLETED + " = 1 ORDER BY (CASE WHEN " + TableEntry.COLUMN_NAME_DUE_DATE + " IS NULL OR " + TableEntry.COLUMN_NAME_DUE_DATE + " = 0 THEN 1 ELSE 0 END), " + TableEntry.COLUMN_NAME_DUE_DATE + " DESC;";
+                query = "SELECT * FROM " + TABLE_NAME + " WHERE " + TableEntry.COLUMN_NAME_COMPLETED + " = 1 ORDER BY " + TableEntry.COLUMN_NAME_COMPLETED_DATE + " DESC;";
+
             } else {
                 query = "SELECT * FROM " + TABLE_NAME + " WHERE " + TableEntry.COLUMN_NAME_COMPLETED + " = 0 ORDER BY (CASE WHEN " + TableEntry.COLUMN_NAME_DUE_DATE + " IS NULL OR " + TableEntry.COLUMN_NAME_DUE_DATE + " = 0 THEN 1 ELSE 0 END), " + TableEntry.COLUMN_NAME_DUE_DATE + ";";
 

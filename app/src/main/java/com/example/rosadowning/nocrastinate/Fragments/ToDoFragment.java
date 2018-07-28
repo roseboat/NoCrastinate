@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -21,7 +22,11 @@ import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
 
 import java.util.ArrayList;
 
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
+import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
+import jp.wasabeef.recyclerview.adapters.SlideInRightAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 
 public class ToDoFragment extends Fragment {
@@ -81,10 +86,11 @@ public class ToDoFragment extends Fragment {
         });
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.to_do_recycler_view);
-        mRecyclerView.setItemAnimator(new SlideInLeftAnimator());
-        mRecyclerView.getItemAnimator().setRemoveDuration(800);
         mLayoutManager = mRecyclerView.getLayoutManager();
-        mRecyclerView.setAdapter(mAdapter);
+        SlideInUpAnimator animator = new SlideInUpAnimator(new OvershootInterpolator(1f));
+        mRecyclerView.setItemAnimator(animator);
+        mRecyclerView.getItemAnimator().setRemoveDuration(800);
+        mRecyclerView.setAdapter(new AlphaInAnimationAdapter(mAdapter));
 
         ImageButton addButton = (ImageButton) view.findViewById(R.id.button_add_new_todo);
         addButton.setOnClickListener(new View.OnClickListener() {

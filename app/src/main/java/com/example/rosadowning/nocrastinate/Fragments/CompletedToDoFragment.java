@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 
 import com.example.rosadowning.nocrastinate.Adapters.CompletedToDoListAdapter;
 import com.example.rosadowning.nocrastinate.R;
@@ -17,6 +18,9 @@ import com.example.rosadowning.nocrastinate.DataModels.ToDoItem;
 import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
 
 import java.util.ArrayList;
+
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 public class CompletedToDoFragment extends Fragment {
 
@@ -51,7 +55,7 @@ public class CompletedToDoFragment extends Fragment {
             }});
         mRecyclerView = (RecyclerView) view.findViewById(R.id.completed_to_do_recycler_view);
         mLayoutManager = mRecyclerView.getLayoutManager();
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(new AlphaInAnimationAdapter(mAdapter));
         return view;
     }
 }

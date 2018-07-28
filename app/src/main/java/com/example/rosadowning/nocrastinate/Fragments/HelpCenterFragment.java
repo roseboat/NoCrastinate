@@ -18,5 +18,4 @@ public class HelpCenterFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_help_center, null);
         return view;
     }
-
 }

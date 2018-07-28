@@ -202,7 +202,8 @@ public class ViewToDoFragment extends Fragment {
                             }
 
                             if (!toDoItem.equals(editedToDo)) {
-                                dbHelper.deleteToDo(toDoItem);
+                                int id = dbHelper.getID(toDoItem);
+                                dbHelper.deleteToDo(id);
                                 dbHelper.insertNewToDo(editedToDo);
                             }
 
@@ -240,10 +241,10 @@ public class ViewToDoFragment extends Fragment {
                             public void onClick(DialogInterface dialog, int id) {
                                 dbHelper = new ToDoReaderContract.ToDoListDbHelper(getContext());
                                 SQLiteDatabase sql = dbHelper.getWritableDatabase();
-                                int deletedToDoAlarmID = dbHelper.getID(toDoItem);
+                                int deletedToDoID = dbHelper.getID(toDoItem);
                                 NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-                                notificationManager.cancel(deletedToDoAlarmID);
-                                dbHelper.deleteToDo(toDoItem);
+                                notificationManager.cancel(deletedToDoID);
+                                dbHelper.deleteToDo(deletedToDoID);
                                 ToDoFragment newFragment = new ToDoFragment();
                                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                 transaction.replace(R.id.fragment_container, newFragment);
