@@ -49,6 +49,16 @@ public class ScreenReceiver extends BroadcastReceiver {
         } else if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
             Log.e("SCREEN RECEIVER", "PHONE UNLOCKED");
 
+            long twelveAM = new DateTime().withTimeAtStartOfDay().getMillis();
+            long midnightReceiver = bootPreferences.getLong("MidnightReceiver", 0);
+
+            if (midnightReceiver < twelveAM){
+                Intent midnightIntent = new Intent(context, MidnightDataResetReceiver.class);
+                PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, midnightIntent, 0);
+                AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+                alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
+            }
+
             try {
                 reentrantLock.lock();
 
@@ -79,24 +89,12 @@ public class ScreenReceiver extends BroadcastReceiver {
                 statsEditor.putLong("screenOn", screenOn);
                 statsEditor.apply();
 
-            } finally{
+            } finally {
                 reentrantLock.unlock();
             }
-        } else if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)){
-
-            long twelveAM = new DateTime().withTimeAtStartOfDay().getMillis();
-            long midnightReceiver = bootPreferences.getLong("MidnightReceiver", 0);
-
-            if (midnightReceiver < twelveAM){
-                Intent midnightIntent = new Intent(context, MidnightDataResetReceiver.class);
-                PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, midnightIntent, 0);
-                AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-                alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
-            }
-        } else if (intent.getAction().equals(Intent.ACTION_SHUTDOWN)){
-
-//            bootEditor.putLong("ShutdownTime", System.currentTimeMillis());
+//        } else if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)){
         }
+
     }
 
     public void unlockNotification() {

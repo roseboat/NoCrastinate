@@ -21,6 +21,8 @@ import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
 
 import java.util.ArrayList;
 
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
+
 
 public class ToDoFragment extends Fragment {
 
@@ -54,21 +56,15 @@ public class ToDoFragment extends Fragment {
             }
 
             @Override
-            public void onItemCheck(ToDoItem item) {
+            public void onItemCheck(ToDoItem item, int position) {
 
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
                 dbHelper.setCompleted(item, true);
                 int id = dbHelper.getID(item);
                 NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getContext());
                 notificationManager.cancel(id);
-                refreshScreen();
-            }
+                mAdapter.notifyItemRemoved(position);
 
-            @Override
-            public void onItemUncheck(ToDoItem item) {
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
-                dbHelper.setCompleted(item, false);
-                refreshScreen();
             }
 
             @Override
@@ -85,6 +81,8 @@ public class ToDoFragment extends Fragment {
         });
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.to_do_recycler_view);
+        mRecyclerView.setItemAnimator(new SlideInLeftAnimator());
+        mRecyclerView.getItemAnimator().setRemoveDuration(800);
         mLayoutManager = mRecyclerView.getLayoutManager();
         mRecyclerView.setAdapter(mAdapter);
 

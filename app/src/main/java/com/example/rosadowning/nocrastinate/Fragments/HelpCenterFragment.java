@@ -16,8 +16,6 @@ public class HelpCenterFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_help_center, null);
-
-
         return view;
     }
 

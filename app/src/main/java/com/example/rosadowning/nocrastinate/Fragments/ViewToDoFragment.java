@@ -127,11 +127,12 @@ public class ViewToDoFragment extends Fragment {
                         isStarred = toDoItem.getStarred();
                         boolean proceed = false;
 
-                        if (!isCompleted) {
+                        if (isCompleted) {
                             if (dueDate != null) {
                                 Log.d(TAG, "due date is not null");
                                 if (dueDate.getTime() > 0 && dueDate.getTime() < System.currentTimeMillis()) {
                                     Log.d(TAG, "due date old");
+                                    proceed = false;
                                     AlertDialog alertDialog = new AlertDialog.Builder(getContext())
                                             .setMessage(R.string.dialog_message_due_date_past)
                                             .setTitle(R.string.dialog_title_due_date_past)

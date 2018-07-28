@@ -24,4 +24,23 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/container_size"
+        app:layout_constraintBottom_toTopOf="@+id/navigation_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+<TextView
+    style="@style/HelpCenterText"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/help_center_string"
+    android:breakStrategy="balanced"
+    android:justificationMode="inter_word"/>
+
+    </ScrollView>
+
+
 </android.support.constraint.ConstraintLayout>

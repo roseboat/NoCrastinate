@@ -65,11 +65,10 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    toDoList.get(viewHolder.getAdapterPosition()).setCompleted(true);
-                    listeners.onItemCheck(toDoList.get(viewHolder.getAdapterPosition()));
-                } else {
-                    toDoList.get(viewHolder.getAdapterPosition()).setCompleted(false);
-                    listeners.onItemUncheck(toDoList.get(viewHolder.getAdapterPosition()));
+                    int position = viewHolder.getAdapterPosition();
+                    toDoList.get(position).setCompleted(true);
+                    listeners.onItemCheck(toDoList.get(position), position);
+                    toDoList.remove(position);
                 }
             }
         });
@@ -100,6 +99,15 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
         });
     }
 
+    public void remove(int position){
+
+        toDoList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, toDoList.size());
+
+
+    }
+
     @Override
     public int getItemCount() {
         return toDoList.size();
@@ -108,9 +116,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
     public interface OnItemClickListener {
         void onItemClick(ToDoItem item);
 
-        void onItemCheck(ToDoItem item);
-
-        void onItemUncheck(ToDoItem item);
+        void onItemCheck(ToDoItem item, int position);
 
         void onStarCheck(ToDoItem item);
 
