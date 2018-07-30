@@ -69,7 +69,6 @@ public class ToDoFragment extends Fragment {
                 NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getContext());
                 notificationManager.cancel(id);
                 mAdapter.notifyItemRemoved(position);
-
             }
 
             @Override

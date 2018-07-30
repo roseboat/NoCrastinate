@@ -95,7 +95,6 @@ public class NotificationSettingsFragment extends Fragment {
             freq2.setChecked(notiPreferences.getBoolean("checkbox2", false));
             freq3.setChecked(notiPreferences.getBoolean("checkbox3", false));
 
-
             freq1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

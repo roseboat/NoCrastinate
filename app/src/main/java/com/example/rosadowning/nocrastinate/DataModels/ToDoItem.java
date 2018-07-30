@@ -8,7 +8,7 @@ public class ToDoItem implements Serializable {
 
     private String name, note;
     private Boolean isStarred, isCompleted;
-    private Date dueDate, completedDate, alarmDate;
+    private Date dueDate, completedDate, alarmDate, addedDate;
 
     public ToDoItem(String name) {
         this.setName(name);
@@ -18,6 +18,7 @@ public class ToDoItem implements Serializable {
         this.isStarred = false;
         this.completedDate = null;
         this.alarmDate = null;
+        this.addedDate = new Date(System.currentTimeMillis());
     }
 
     public String getName() {
@@ -60,19 +61,23 @@ public class ToDoItem implements Serializable {
         this.dueDate = dueDate;
     }
 
-    public Date getCompletedDate(){ return completedDate; }
-
     public Date getAlarmDate(){ return alarmDate; }
 
     public void setAlarmDate(Date alarmDate){ this.alarmDate = alarmDate;}
 
+    public Date getCompletedDate(){ return completedDate; }
+
     public void setCompletedDate(Date completedDate){ this.completedDate = completedDate; }
+
+    public Date getAddedDate() { return addedDate;}
+
+    public void setAddedDate(Date addDate){ this.addedDate = addDate;}
 
     public boolean equals(ToDoItem otherItem) {
         boolean isEqual = false;
         if (name.equals(otherItem.getName()) && note.equals(otherItem.getNote())){
             if (isStarred = otherItem.getStarred() && isCompleted == otherItem.getCompleted()) {
-                if (dueDate == otherItem.getDueDate() && alarmDate == otherItem.getAlarmDate()) {
+                if (dueDate == otherItem.getDueDate() && alarmDate == otherItem.getAlarmDate() && addedDate == otherItem.getAddedDate()) {
                     isEqual = true;
                 }
             }

@@ -8,18 +8,19 @@
     <color name="colorTint">#555555</color>
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
-    <color name="colorDelete">#ff90a8</color>
-    <color name="colorCompleted">#e2bbce</color>
+    <color name="colorDelete">#e25053</color>
+    <color name="colorCompleted">#b3d97476</color>
     <color name="colorDivider">#bbbbbb</color>
     <color name="colorStarred">#46ffc700</color>
     <color name="colorGradient1">#f9e8a6</color>
     <color name="colorGradient2">#ffcc00</color>
-    <color name="colorPrimaryDark">#6148ff</color>
+    <color name="colorPrimaryDark">#f54873ff</color>
+    <color name="colorGreen">#6a75d26c</color>
 
 
-    <color name="colorTurqLight">#0d6c6c6c</color>
-    <color name="colorTurqMedium">#356c6c6c</color>
-    <color name="colorTurqDark">#576c6c6c</color>
+    <color name="colorGreyLight">#0d6c6c6c</color>
+    <color name="colorGreyMedium">#356c6c6c</color>
+    <color name="colorGreyDark">#576c6c6c</color>
 
 
 </resources>

@@ -57,8 +57,6 @@ public class NotificationReceiver extends BroadcastReceiver {
         Bundle extras = intent.getExtras();
         String title = extras.getString("Title");
         int alarmID = extras.getInt("AlarmID");
-        extras.clear();
-        Log.d(TAG, "alarmid = " + alarmID);
         String content = "";
         String subheading = "";
 

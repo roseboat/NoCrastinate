@@ -21,10 +21,10 @@ public final class R {
         public static final int ttcIndex = 0x7f04020c;
     }
     public static final class color {
-        public static final int notification_action_color_filter = 0x7f06007a;
-        public static final int notification_icon_bg_color = 0x7f06007b;
-        public static final int ripple_material_light = 0x7f060085;
-        public static final int secondary_text_default_material_light = 0x7f060087;
+        public static final int notification_action_color_filter = 0x7f06007b;
+        public static final int notification_icon_bg_color = 0x7f06007c;
+        public static final int ripple_material_light = 0x7f060086;
+        public static final int secondary_text_default_material_light = 0x7f060088;
     }
     public static final class dimen {
         public static final int compat_button_inset_horizontal_material = 0x7f070050;
@@ -98,11 +98,11 @@ public final class R {
         public static final int text2 = 0x7f0a00d5;
         public static final int time = 0x7f0a00e2;
         public static final int title = 0x7f0a00e3;
-        public static final int transition_current_scene = 0x7f0a00f9;
-        public static final int transition_layout_save = 0x7f0a00fa;
-        public static final int transition_position = 0x7f0a00fb;
-        public static final int transition_scene_layoutid_cache = 0x7f0a00fc;
-        public static final int transition_transform = 0x7f0a00fd;
+        public static final int transition_current_scene = 0x7f0a00fa;
+        public static final int transition_layout_save = 0x7f0a00fb;
+        public static final int transition_position = 0x7f0a00fc;
+        public static final int transition_scene_layoutid_cache = 0x7f0a00fd;
+        public static final int transition_transform = 0x7f0a00fe;
     }
     public static final class integer {
         public static final int status_bar_notification_info_maxnum = 0x7f0b000e;

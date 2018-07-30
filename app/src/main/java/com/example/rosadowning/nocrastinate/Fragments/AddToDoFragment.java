@@ -177,10 +177,9 @@ public class AddToDoFragment extends Fragment {
                                                 .setPositiveButton("Ok!", null).create();
                                         alertDialog.show();
                                         alarmDate = null;
-                                    }
-                                    else {
+                                    } else {
                                         alarmMonth++;
-                                        alarmDateString = alarmDay + "/" + alarmMonth + "/" + alarmYear + ", "+ alarmHour + ":" + alarmMinute;
+                                        alarmDateString = alarmDay + "/" + alarmMonth + "/" + alarmYear + ", " + alarmHour + ":" + alarmMinute;
                                         et_alarm.setText(alarmDateString);
                                     }
                                 }
@@ -201,7 +200,6 @@ public class AddToDoFragment extends Fragment {
 
         dbHelper = new ToDoReaderContract.ToDoListDbHelper(context);
         SQLiteDatabase dbRead = dbHelper.getReadableDatabase();
-        ArrayList<String> names = dbHelper.getToDoNames();
 
         name = et_name.getText().toString();
 
@@ -213,60 +211,49 @@ public class AddToDoFragment extends Fragment {
                     .setPositiveButton("Ok!", null).create();
             alertDialog.show();
         } else {
-            boolean nameConflict = false;
-            for (String dbName : names) {
-                if (name.equals(dbName)) {
-                    nameConflict = true;
-                    AlertDialog alertDialog = new AlertDialog.Builder(context)
-                            .setMessage(R.string.dialog_message_name_conflict)
-                            .setTitle(R.string.dialog_title_name_conflict)
-                            .setPositiveButton("Ok!", null).create();
-                    alertDialog.show();
-                }
+
+            addToDo = new ToDoItem(name);
+            note = et_note.getText().toString();
+
+            if (!note.equals(null) || !note.equals("")) {
+                addToDo.setNote(note);
             }
-            if (!nameConflict) {
-
-                addToDo = new ToDoItem(name);
-                note = et_note.getText().toString();
-
-                if (!note.equals(null) || !note.equals("")) {
-                    addToDo.setNote(note);
-                }
-                if (dueDateDate != null) {
+            if (dueDateDate != null) {
                 if (dueDateDate.getTime() > 0)
                     addToDo.setDueDate(dueDateDate);
-                } else {
-                    addToDo.setDueDate(null);
-                }
-                if (alarmDate != null)
-                    if (alarmDate.getTimeInMillis() > 0)
+            } else {
+                addToDo.setDueDate(null);
+            }
+            if (alarmDate != null) {
+                if (alarmDate.getTimeInMillis() > 0)
                     addToDo.setAlarmDate(new Date(alarmDate.getTimeInMillis()));
-                } else {
+            } else {
                 alarmDate = null;
                 addToDo.setAlarmDate(null);
             }
 
-                dbHelper = new ToDoReaderContract.ToDoListDbHelper(context);
-                SQLiteDatabase dbWrite = dbHelper.getWritableDatabase();
-                dbHelper.insertNewToDo(addToDo);
+            dbHelper = new ToDoReaderContract.ToDoListDbHelper(context);
+            SQLiteDatabase dbWrite = dbHelper.getWritableDatabase();
+            dbHelper.insertNewToDo(addToDo);
 
-                if (alarmDate != null) {
-                    int alarmID = dbHelper.getID(addToDo);
-                    Intent intent = new Intent(context, ToDoAlarmReceiver.class);
-                    intent.putExtra("ToDoName", name);
-                    intent.putExtra("AlarmID", alarmID);
-                    AlarmManager alarm = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-                    alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmDate.getTimeInMillis(), pendingIntent);
-                }
-                Toast.makeText(context, "To do \"" + name + "\" added", Toast.LENGTH_LONG).show();
-
-                ToDoFragment newFragment = new ToDoFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_container, newFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+            if (alarmDate != null && alarmDate.getTimeInMillis() > 0) {
+                int alarmID = dbHelper.getID(addToDo);
+                Intent intent = new Intent(context, ToDoAlarmReceiver.class);
+                intent.putExtra("ToDoName", name);
+                intent.putExtra("AlarmID", alarmID);
+                AlarmManager alarm = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+                alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmDate.getTimeInMillis(), pendingIntent);
             }
+            Toast.makeText(context, "To do \"" + name + "\" added", Toast.LENGTH_LONG).show();
+
+            ToDoFragment newFragment = new ToDoFragment();
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, newFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+
         }
     }
+}
 
