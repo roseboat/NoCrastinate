@@ -36,6 +36,7 @@ import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.animation.OvershootInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -56,6 +57,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.locks.ReentrantLock;
 
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
+
 public class StatisticsFragment extends Fragment {
 
     private static final String TAG = "STATISTICS FRAGMENT";
@@ -72,8 +76,6 @@ public class StatisticsFragment extends Fragment {
     private SharedPreferences sharedPreferences;
     private View statsView;
     private ReentrantLock reentrantLock;
-    private Date todayDate;
-
 
     @Nullable
     @Override
@@ -82,12 +84,6 @@ public class StatisticsFragment extends Fragment {
     }
 
     public StatisticsFragment() {
-    }
-
-    // Factory method
-    public static StatisticsFragment newInstance() {
-        StatisticsFragment fragment = new StatisticsFragment();
-        return fragment;
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -107,19 +103,23 @@ public class StatisticsFragment extends Fragment {
         this.onCreate(null);
     }
 
-
     @Override
     public void onViewCreated(View rootView, Bundle savedInstanceState) {
         super.onViewCreated(rootView, savedInstanceState);
         this.statsView = getView();
-        mUsageListAdapter = new AppStatisticsAdapter(context);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview_app_usage);
-        mRecyclerView.scrollToPosition(0);
-        mRecyclerView.setAdapter(mUsageListAdapter);
+
+        // Gets the elements in the view
         mUsagePopUp = (LinearLayout) rootView.findViewById(R.id.settings_popup);
         mOpenUsageSettingButton = (Button) rootView.findViewById(R.id.button_open_usage_setting);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview_app_usage);
         mSpinner = (Spinner) rootView.findViewById(R.id.spinner_time_span);
 
+        // Sets the Recylcer view's Adapter and Animator
+        mUsageListAdapter = new AppStatisticsAdapter(context);
+        mRecyclerView.scrollToPosition(0);
+        mRecyclerView.setAdapter(new AlphaInAnimationAdapter(mUsageListAdapter));
+
+        // Sets the Spinner's Adapter and onClick listener
         SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.action_list, android.R.layout.simple_spinner_dropdown_item);
         mSpinner.setAdapter(spinnerAdapter);
@@ -154,26 +154,27 @@ public class StatisticsFragment extends Fragment {
                         });
 
                     } else {
+                        mUsagePopUp.setVisibility(View.GONE);
                         editor.putBoolean("SettingsOn", true);
                         editor.apply();
-                        mUsagePopUp.setVisibility(View.GONE);
 
-                    Collections.sort(usageStatsList, new UsedMostOftenComparatorDesc());
-                    updateAppsList(usageStatsList);
+                        Collections.sort(usageStatsList, new UsedMostOftenComparatorDesc());
+                        updateAppsList(usageStatsList);
 
-                    Timer timerAsync = new Timer();
-                    timerTaskAsync = new TimerTask() {
-                        @Override
-                        public void run() {
-                            UpdateIcons newIcons = new UpdateIcons();
-                            synchronized (newIcons) {
-                                newIcons.execute(intervalString);
+                        Timer timerAsync = new Timer();
+                        timerTaskAsync = new TimerTask() {
+                            @Override
+                            public void run() {
+                                UpdateIcons newIcons = new UpdateIcons();
+                                synchronized (newIcons) {
+                                    newIcons.execute(intervalString);
+                                }
                             }
-                        }
-                    };
-                    timerAsync.schedule(timerTaskAsync, 0, 5000);
+                        };
+                        timerAsync.schedule(timerTaskAsync, 0, 4000);
+                    }
                 }
-            }}
+            }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -200,66 +201,12 @@ public class StatisticsFragment extends Fragment {
                 queryTime = new DateTime().minusYears(1).getMillis();
                 break;
         }
-        Log.d(TAG, "query time = " + TimeHelper.formatDuration(queryTime));
+        Log.d(TAG, "Query time = " + new Date(queryTime).toString());
 
         Map<String, UsageStats> usageStats = mUsageStatsManager.queryAndAggregateUsageStats(queryTime, System.currentTimeMillis());
         List<UsageStats> queryUsageStats = new ArrayList<>();
         queryUsageStats.addAll(usageStats.values());
-
-//        SharedPreferences usagePref = context.getSharedPreferences("UsageSettings", Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = usagePref.edit();
-//
-//        if (queryUsageStats.size() == 0 || queryUsageStats.isEmpty()) {
-//            Log.i(TAG, "The user may not allow the access to apps usage. ");
-//
-//            editor.putBoolean("SettingsOn", false);
-//            editor.apply();
-//            mUsagePopUp.setVisibility(View.VISIBLE);
-//            mUsagePopUp.bringToFront();
-//            mOpenUsageSettingButton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
-//                    if (hasPermission(context)){
-//                        mUsagePopUp.setVisibility(View.GONE);
-//                    }
-//                }
-//
-//            });
-//
-//        } else {
-//            editor.putBoolean("SettingsOn", true);
-//            editor.apply();
-//            mUsagePopUp.setVisibility(View.GONE);
-//
-//
-//        }
-
         return queryUsageStats;
-    }
-
-    public static boolean hasPermission(@NonNull final Context context) {
-        // Usage Stats is theoretically available on API v19+, but official/reliable support starts with API v21.
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            return false;
-        }
-
-        final AppOpsManager appOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
-
-        if (appOpsManager == null) {
-            return false;
-        }
-
-        final int mode = appOpsManager.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, android.os.Process.myUid(), context.getPackageName());
-        if (mode != AppOpsManager.MODE_ALLOWED) {
-            return false;
-        }
-
-        // Verify that access is possible. Some devices "lie" and return MODE_ALLOWED even when it's not.
-        final long now = System.currentTimeMillis();
-        final UsageStatsManager mUsageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
-        final List<UsageStats> stats = mUsageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, now - 1000 * 10, now);
-        return (stats != null && !stats.isEmpty());
     }
 
     void updateAppsList(List<UsageStats> usageStatsList) {
@@ -283,7 +230,7 @@ public class StatisticsFragment extends Fragment {
                         } catch (PackageManager.NameNotFoundException e) {
                             Log.w(TAG, String.format("App Icon is not found for %s",
                                     customUsageStats.usageStats.getPackageName()));
-                            customUsageStats.appIcon = getActivity().getDrawable(R.drawable.brain);
+                            customUsageStats.appIcon = getActivity().getDrawable(R.drawable.ic_nocrastinate_logo_only_transparent);
                         }
                         customUsageStatsList.add(customUsageStats);
                     }
@@ -294,38 +241,6 @@ public class StatisticsFragment extends Fragment {
         mUsageListAdapter.notifyDataSetChanged();
         mRecyclerView.scrollToPosition(0);
     }
-
-
-//    void updateAppsList(List<UsageStats> usageStatsList) {
-//        List<CustomUsageStats> customUsageStatsList = new ArrayList<>();
-//
-//        List<PackageInfo> installedPackages = context.getPackageManager()
-//                .getInstalledPackages(0);
-//
-//        for (int i = 0; i < usageStatsList.size(); i++) {
-//            CustomUsageStats customUsageStats = new CustomUsageStats();
-//            customUsageStats.usageStats = usageStatsList.get(i);
-//
-//            for (int j = 0; j < installedPackages.size(); j++) {
-//                PackageInfo packageInfo = installedPackages.get(j);
-//                if (packageInfo.packageName.equals(usageStatsList.get(i).getPackageName())) {
-//                    customUsageStats.appName = packageInfo.applicationInfo.loadLabel(context.getPackageManager()).toString();
-//                }
-//            }
-//            try {
-//                customUsageStats.appIcon = getActivity().getPackageManager()
-//                        .getApplicationIcon(customUsageStats.usageStats.getPackageName());
-//            } catch (PackageManager.NameNotFoundException e) {
-//                Log.w(TAG, String.format("App Icon is not found for %s",
-//                        customUsageStats.usageStats.getPackageName()));
-//                customUsageStats.appIcon = getActivity().getDrawable(R.drawable.brain);
-//            }
-//            customUsageStatsList.add(customUsageStats);
-//        }
-//        mUsageListAdapter.setCustomUsageStatsList(customUsageStatsList);
-//        mUsageListAdapter.notifyDataSetChanged();
-//        mRecyclerView.scrollToPosition(0);
-//    }
 
     private static class UsedMostOftenComparatorDesc implements Comparator<UsageStats> {
 
@@ -371,7 +286,7 @@ public class StatisticsFragment extends Fragment {
                 ToDoReaderContract.ToDoListDbHelper toDoHelper = new ToDoReaderContract.ToDoListDbHelper(context);
                 SQLiteDatabase sql = toDoHelper.getWritableDatabase();
                 long beginTime = new DateTime().withTimeAtStartOfDay().getMillis();
-                long endTime =  new DateTime().plusDays(1).withTimeAtStartOfDay().getMillis();
+                long endTime = new DateTime().plusDays(1).withTimeAtStartOfDay().getMillis();
                 long tasksCompleted = toDoHelper.getNoOfCompletedToDos(beginTime, endTime);
 
                 stats.setTasksCompleted(tasksCompleted);
@@ -432,6 +347,7 @@ public class StatisticsFragment extends Fragment {
                     TextView textViewTasks = (TextView) getView().findViewById(R.id.text_view_tasks_completed);
                     textViewTasks.setText(iconData.getTasksCompleted() + "");
                 }
+
             }
         }
     }

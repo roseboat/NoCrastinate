@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -28,6 +29,7 @@ import android.view.MenuItem;
 
 import com.example.rosadowning.nocrastinate.BroadcastReceivers.MidnightDataResetReceiver;
 import com.example.rosadowning.nocrastinate.BroadcastReceivers.ScreenReceiver;
+import com.example.rosadowning.nocrastinate.DBHelpers.AlarmDBContract;
 import com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract;
 import com.example.rosadowning.nocrastinate.Fragments.*;
 
@@ -35,12 +37,13 @@ import org.joda.time.DateTime;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract.ToDoListDbHelper.DATABASE_NAME;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    public static final String TAG = "MAINACTIVITY";
+    public static final String TAG = "MAIN ACTIVITY";
     private BroadcastReceiver mReceiver;
     public static final String CHANNEL_ID = "4855";
     public static final CharSequence CHANNEL_NAME = "com.example.rosadowning.nocrastinate";
@@ -61,7 +64,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mReceiver = new ScreenReceiver();
         final IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
         filter.addAction(Intent.ACTION_BOOT_COMPLETED);
-        filter.addAction(Intent.ACTION_SHUTDOWN);
         filter.addAction(Intent.ACTION_USER_PRESENT);
         registerReceiver(mReceiver, filter);
 
@@ -72,13 +74,20 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private void scheduleMidnightAlarm(){
         DateTime today = new DateTime().withTimeAtStartOfDay();
         DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
-        Log.d(TAG, "time = " + tomorrow.toString());
 
         Intent midnightIntent = new Intent(this, MidnightDataResetReceiver.class);
         PendingIntent startPIntent = PendingIntent.getBroadcast(this, 0, midnightIntent, 0);
         AlarmManager alarm = (AlarmManager) this.getSystemService(ALARM_SERVICE);
         alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, tomorrow.getMillis(), startPIntent);
 
+        AlarmDBContract.AlarmDBHelper alarmDBHelper = new AlarmDBContract.AlarmDBHelper(this);
+        SQLiteDatabase sqlRead = alarmDBHelper.getReadableDatabase();
+
+        if (!alarmDBHelper.isAlarmSet(today.getMillis()) && alarmDBHelper.getAlarmEntries() > 0) {
+            alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
+        }
+
+        Log.d(TAG, "Midnight Alarm Set For = " + tomorrow.toString());
     }
 
     private void createNotificationChannel() {
@@ -96,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private boolean loadFragment(Fragment fragment) {
         if (fragment != null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
             return true;
         }
         return false;
@@ -119,7 +128,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 fragment = new SettingsFragment();
                 break;
         }
-
         return loadFragment(fragment);
     }
 
@@ -133,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.brain_graphic)
+                .setSmallIcon(R.drawable.ic_nocrastinate_logo_only_transparent)
                 .setContentTitle("You Closed NoCrastinate! :(")
                 .setContentText("All phone usage monitoring will now be paused. Click here to resume!")
                 .setSound(defaultSoundUri)

@@ -38,7 +38,7 @@ private Context context;
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                    .setSmallIcon(R.drawable.brain_graphic)
+                    .setSmallIcon(R.drawable.ic_nocrastinate_logo_only_transparent)
                     .setContentTitle("NoCrastinate Alarm!")
                     .setContentText("Reminder: Don't forget about your to do, \"" + toDoName + "\"!")
                     .setSound(defaultSoundUri)

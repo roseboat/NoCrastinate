@@ -1,6 +1,5 @@
 package com.example.rosadowning.nocrastinate.Adapters;
 
-import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -85,7 +84,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
 
         if (starred) {
             viewHolder.getIsStarred().setChecked(true);
-            viewHolder.wholeToDoItem.setBackgroundResource(R.color.colorGreen);
+            viewHolder.wholeToDoItem.setBackgroundResource(R.color.colorGrey);
         } else {
             viewHolder.getIsStarred().setChecked(false);
             viewHolder.wholeToDoItem.setBackgroundResource(R.color.colorToDoBackground);
@@ -97,7 +96,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
                 if (b) {
                     toDoList.get(viewHolder.getAdapterPosition()).setStarred(true);
                     listeners.onStarCheck(toDoList.get(viewHolder.getAdapterPosition()));
-                    viewHolder.wholeToDoItem.setBackgroundResource(R.color.colorGreen);
+                    viewHolder.wholeToDoItem.setBackgroundResource(R.color.colorGrey);
 
                 } else {
                     toDoList.get(viewHolder.getAdapterPosition()).setStarred(false);

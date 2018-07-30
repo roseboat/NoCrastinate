@@ -6,7 +6,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
+import com.example.rosadowning.nocrastinate.DBHelpers.AlarmDBContract;
+import com.example.rosadowning.nocrastinate.MainActivity;
 
 import org.joda.time.DateTime;
 
@@ -21,6 +25,7 @@ public class ScreenReceiver extends BroadcastReceiver {
     private Context context;
     private ReentrantLock reentrantLock;
     private final int FREQ_1_ALARM_2 = 10002;
+    private final String TAG = "SCREEN RECEIVER";
 
 
     @Override
@@ -34,7 +39,7 @@ public class ScreenReceiver extends BroadcastReceiver {
         bootEditor = bootPreferences.edit();
 
         if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
-            Log.e("SCREEN RECEIVER", "PHONE LOCKED");
+            Log.e(TAG, "PHONE LOCKED");
 
             long screenOff = System.currentTimeMillis();
 
@@ -47,17 +52,7 @@ public class ScreenReceiver extends BroadcastReceiver {
             }
 
         } else if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
-            Log.e("SCREEN RECEIVER", "PHONE UNLOCKED");
-
-            long twelveAM = new DateTime().withTimeAtStartOfDay().getMillis();
-            long midnightReceiver = bootPreferences.getLong("MidnightReceiver", 0);
-
-            if (midnightReceiver < twelveAM){
-                Intent midnightIntent = new Intent(context, MidnightDataResetReceiver.class);
-                PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, midnightIntent, 0);
-                AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-                alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
-            }
+            Log.e(TAG, "PHONE UNLOCKED");
 
             try {
                 reentrantLock.lock();
@@ -73,12 +68,11 @@ public class ScreenReceiver extends BroadcastReceiver {
                         unlockNotification();
                     }
                 }
-
                 long screenOn = statsPreferences.getLong("screenOn", 0);
 
                 if (screenOn != 0) {
                     long screenOff = statsPreferences.getLong("screenOff", 0);
-                    long duration = (screenOff - screenOn);
+                    long duration = screenOff - screenOn;
                     long currentDuration = statsPreferences.getLong("totalDuration", 0);
                     long newDuration = currentDuration + duration;
                     statsEditor.putLong("totalDuration", newDuration);
@@ -92,9 +86,21 @@ public class ScreenReceiver extends BroadcastReceiver {
             } finally {
                 reentrantLock.unlock();
             }
-//        } else if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)){
-        }
+        } else if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)){
+            Log.e(TAG, "PHONE TURNED ON");
 
+            DateTime today = new DateTime().withTimeAtStartOfDay();
+
+                AlarmDBContract.AlarmDBHelper alarmDBHelper = new AlarmDBContract.AlarmDBHelper(context);
+                SQLiteDatabase sqlRead = alarmDBHelper.getReadableDatabase();
+
+                if (!alarmDBHelper.isAlarmSet(today.getMillis()) && alarmDBHelper.getAlarmEntries() > 0) {
+                    Intent midnightIntent = new Intent(context, MidnightDataResetReceiver.class);
+                    PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, midnightIntent, 0);
+                    AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+                    alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
+            }
+        }
     }
 
     public void unlockNotification() {
@@ -107,6 +113,5 @@ public class ScreenReceiver extends BroadcastReceiver {
         PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
         AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
         alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
-
     }
 }

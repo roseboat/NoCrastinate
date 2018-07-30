@@ -109,7 +109,7 @@
         android:adjustViewBounds="true"
         android:background="@drawable/gradient_drawable"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_add_circle_big"
+        android:src="@drawable/ic_action_add_circle_outline"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="@+id/toolbar"
         app:layout_constraintTop_toTopOf="parent" />

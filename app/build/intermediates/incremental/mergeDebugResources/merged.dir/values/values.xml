@@ -203,8 +203,8 @@
     <color name="colorDivider">#bbbbbb</color>
     <color name="colorFontStyle">#777777</color>
     <color name="colorGradient1">#f9e8a6</color>
-    <color name="colorGradient2">#ffcc00</color>
-    <color name="colorGreen">#6a75d26c</color>
+    <color name="colorGradient2">#ffc64b</color>
+    <color name="colorGrey">#b7b7b7</color>
     <color name="colorGreyDark">#576c6c6c</color>
     <color name="colorGreyLight">#0d6c6c6c</color>
     <color name="colorGreyMedium">#356c6c6c</color>
@@ -1093,15 +1093,14 @@
     <item name="android:windowExitAnimation">@anim/design_bottom_sheet_slide_out</item>
   </style>
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        
-        <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
         <item name="android:colorBackground">@color/colorWhite</item>
         <item name="android:fontFamily">@font/lato_reg</item>
     </style>
     <style name="AppTheme.Launcher">
-    <item name="android:windowBackground">@drawable/launch_screen</item>
+     <item name="android:windowBackground">@drawable/launch_screen</item>
+        <item name="colorPrimaryDark">@color/colorGradient2</item>
+
     </style>
     <style name="Base.AlertDialog.AppCompat" parent="android:Widget">
         <item name="android:layout">@layout/abc_alert_dialog_material</item>
@@ -2500,8 +2499,6 @@
         <item name="android:fontFamily">@font/lato_reg</item>
         <item name="android:textSize">20sp</item>
         <item name="android:layout_margin">@dimen/margin_large</item>
-        
-        
     </style>
     <style name="LargeFont" parent="Theme.AppCompat">
         <item name="android:textSize">@dimen/large_font_size</item>

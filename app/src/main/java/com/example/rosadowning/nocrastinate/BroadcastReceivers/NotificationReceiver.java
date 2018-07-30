@@ -73,7 +73,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         }
 
-        Bitmap brainLogo = BitmapFactory.decodeResource(context.getResources(), R.drawable.brain);
+        Bitmap brainLogo = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_nocrastinate_logo_only_transparent);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         Intent alarmIntent = new Intent(context, MainActivity.class);
@@ -81,7 +81,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.drawable.brain_graphic)
+                .setSmallIcon(R.drawable.ic_nocrastinate_logo_only_transparent)
                 .setLargeIcon(brainLogo)
                 .setContentTitle(title)
                 .setContentText(subheading)
