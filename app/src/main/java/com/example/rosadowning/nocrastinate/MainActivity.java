@@ -35,6 +35,8 @@ import com.example.rosadowning.nocrastinate.Fragments.*;
 
 import org.joda.time.DateTime;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
@@ -83,10 +85,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         AlarmDBContract.AlarmDBHelper alarmDBHelper = new AlarmDBContract.AlarmDBHelper(this);
         SQLiteDatabase sqlRead = alarmDBHelper.getReadableDatabase();
 
-        if (!alarmDBHelper.isAlarmSet(today.getMillis()) && alarmDBHelper.getAlarmEntries() > 0) {
+        if (!alarmDBHelper.isAlarmSet(today.getMillis()) && alarmDBHelper.getNoAlarmEntries() > 0) {
             alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
         }
-
         Log.d(TAG, "Midnight Alarm Set For = " + tomorrow.toString());
     }
 

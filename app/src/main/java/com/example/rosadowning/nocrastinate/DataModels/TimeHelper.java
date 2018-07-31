@@ -38,23 +38,17 @@ public class TimeHelper {
 
         switch (interval) {
             case "Daily":
-                String todayDay = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(today.getTime());
-                headingString.append(String.format("%s %s", todayDay, todayDate));
+                String todayDay = new SimpleDateFormat("EEEE, MMMM, dd, yyyy").format(today.getTime());
+                headingString.append(todayDay);
                 break;
             case "Weekly":
-                Date lastWeek = now.minusDays(7).toDate();
-                String lastWeekDate = new SimpleDateFormat("dd/MM/yyyy").format(lastWeek);
-                headingString.append(String.format("%s - %s", lastWeekDate, todayDate));
+                headingString.append("The Past Week...");
                 break;
             case "Monthly":
-                Date lastMonth = now.minusMonths(1).toDate();
-                String lastMonthDate = new SimpleDateFormat("dd/MM/yyyy").format(lastMonth);
-                headingString.append(String.format("%s - %s", lastMonthDate, todayDate));
+                headingString.append("The Past Month...");
                 break;
             case "Yearly":
-                Date lastYear = now.minusYears(1).toDate();
-                String lastYearDate = new SimpleDateFormat("dd/MM/yyyy").format(lastYear);
-                headingString.append(String.format("%s - %s", lastYearDate, todayDate));
+                headingString.append("The Past Year...");
                 break;
         }
         return headingString.toString();

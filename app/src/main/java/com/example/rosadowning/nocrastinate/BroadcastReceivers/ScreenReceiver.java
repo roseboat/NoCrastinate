@@ -94,7 +94,7 @@ public class ScreenReceiver extends BroadcastReceiver {
                 AlarmDBContract.AlarmDBHelper alarmDBHelper = new AlarmDBContract.AlarmDBHelper(context);
                 SQLiteDatabase sqlRead = alarmDBHelper.getReadableDatabase();
 
-                if (!alarmDBHelper.isAlarmSet(today.getMillis()) && alarmDBHelper.getAlarmEntries() > 0) {
+                if (!alarmDBHelper.isAlarmSet(today.getMillis()) && alarmDBHelper.getNoAlarmEntries() > 0) {
                     Intent midnightIntent = new Intent(context, MidnightDataResetReceiver.class);
                     PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, midnightIntent, 0);
                     AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);

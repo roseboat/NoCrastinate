@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.rosadowning.nocrastinate.R;
 import com.example.rosadowning.nocrastinate.DataModels.ToDoItem;
@@ -66,6 +67,7 @@ public class ToDoFragment extends Fragment {
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
                 dbHelper.setCompleted(item, true);
                 int id = dbHelper.getID(item);
+                Toast.makeText(getContext(), "'"+ item.getName() + "' is completed!", Toast.LENGTH_LONG);
                 NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getContext());
                 notificationManager.cancel(id);
                 mAdapter.notifyItemRemoved(position);

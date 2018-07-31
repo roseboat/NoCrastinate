@@ -159,7 +159,7 @@
                 android:padding="@dimen/margin_large"
                 android:paddingLeft="150dp"
                 android:text="@string/delete_to_do"
-                android:backgroundTint="@color/colorDelete"
+                android:backgroundTint="@color/colorThird"
                 android:textAllCaps="false"
                 android:textSize="@dimen/large_font_size"
                 app:layout_constraintEnd_toEndOf="parent"

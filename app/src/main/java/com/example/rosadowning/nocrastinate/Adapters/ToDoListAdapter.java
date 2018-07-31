@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.rosadowning.nocrastinate.R;
@@ -78,16 +79,15 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
                     toDoList.get(position).setCompleted(true);
                     listeners.onItemCheck(toDoList.get(position), position);
                     toDoList.remove(position);
+
                 }
             }
         });
 
         if (starred) {
             viewHolder.getIsStarred().setChecked(true);
-            viewHolder.wholeToDoItem.setBackgroundResource(R.color.colorGrey);
         } else {
             viewHolder.getIsStarred().setChecked(false);
-            viewHolder.wholeToDoItem.setBackgroundResource(R.color.colorToDoBackground);
         }
 
         viewHolder.isStarred.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

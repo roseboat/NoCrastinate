@@ -7,6 +7,12 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
+import android.util.Log;
+
+import com.example.rosadowning.nocrastinate.DataModels.StatsIconData;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 import static com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract.TableEntry.TABLE_NAME;
 
@@ -65,16 +71,19 @@ public class AlarmDBContract {
         public boolean isAlarmSet(long date) {
 
             SQLiteDatabase db = this.getReadableDatabase();
+            boolean exists = false;
 
-            Cursor cursor = db.rawQuery("SELECT EXISTS (SELECT * FROM " + AlarmEntry.TABLE_NAME + " WHERE " + AlarmEntry.COLUMN_NAME_DATE + " = " + date + ");", null);
+            Cursor cursor = db.rawQuery("SELECT EXISTS (SELECT 1 FROM " + AlarmEntry.TABLE_NAME + " WHERE " + AlarmEntry.COLUMN_NAME_DATE + " = " + date + ");", null);
 
-            boolean exists = cursor.moveToFirst();
+            if (cursor.moveToFirst()) {
+                exists = cursor.getInt(0) != 0;
+            }
             cursor.close();
             db.close();
             return exists;
         }
 
-        public long getAlarmEntries(){
+        public long getNoAlarmEntries(){
 
             SQLiteDatabase db = this.getReadableDatabase();
             long noOfEntries = 0;
@@ -83,9 +92,25 @@ public class AlarmDBContract {
             return noOfEntries;
         }
 
+        public ArrayList<Long> getAlarmDates() {
+
+            ArrayList<Long> allAlarms = new ArrayList<>();
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            Cursor cursor = db.rawQuery("SELECT * FROM " + AlarmEntry.TABLE_NAME, null);
+            int dateIndex = cursor.getColumnIndex(AlarmEntry.COLUMN_NAME_DATE);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    allAlarms.add(cursor.getLong(dateIndex));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+            return allAlarms;
+        }
+
+        }
+
 
     }
-
-
-
-}

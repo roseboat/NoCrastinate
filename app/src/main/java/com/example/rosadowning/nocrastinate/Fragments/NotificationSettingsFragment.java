@@ -110,7 +110,6 @@ public class NotificationSettingsFragment extends Fragment {
                             freq3.setChecked(false);
                         } finally {
                             reentrantLock.unlock();
-                            freqOneNotificationSetUp();
                         }
                     } else {
                         Log.d(TAG, "1 unchecked");
@@ -187,42 +186,6 @@ public class NotificationSettingsFragment extends Fragment {
         }
 
         return view;
-    }
-
-    public void freqOneNotificationSetUp() {
-        statsPreferences = context.getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
-        long overallTime = statsPreferences.getLong("totalDuration", 0);
-        Duration remainingTime = Duration.millis(overallTime);
-        hours = remainingTime.getStandardHours();
-        preHours = hours;
-
-        Timer timerAsync = new Timer();
-        TimerTask timerTaskAsync = new TimerTask() {
-            @Override
-            public void run() {
-
-                try {
-                    reentrantLock.lock();
-                    long overallTime = statsPreferences.getLong("totalDuration", 0);
-                    Duration remainingTime = Duration.millis(overallTime);
-                    hours = remainingTime.getStandardHours();
-                    if (preHours != hours) {
-                        Log.d(TAG, "UPDATE : prehours = " + preHours + " hours = " + hours);
-                        Intent intent = new Intent(context, NotificationReceiver.class);
-                        intent.putExtra("Title", "NoCrastinate Usage Time Alert!");
-                        intent.putExtra("AlarmID", FREQ_1_ALARM_1);
-                        intent.putExtra("Content", "You've been using your phone for " + hours + " hours today! :(");
-                        PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-                        AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-                        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
-                        preHours = hours;
-                    }
-                } finally {
-                    reentrantLock.unlock();
-                }
-            }
-        };
-        timerAsync.schedule(timerTaskAsync, 0, 30000);
     }
 
     public void freqTwoNotificationSetUp() {

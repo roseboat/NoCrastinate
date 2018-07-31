@@ -1,7 +1,9 @@
 package com.example.rosadowning.nocrastinate.Fragments;
 
 import android.annotation.TargetApi;
+import android.app.AlarmManager;
 import android.app.AppOpsManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
@@ -22,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.rosadowning.nocrastinate.Adapters.AppStatisticsAdapter;
+import com.example.rosadowning.nocrastinate.BroadcastReceivers.NotificationReceiver;
 import com.example.rosadowning.nocrastinate.DataModels.CustomUsageStats;
 import com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract;
 import com.example.rosadowning.nocrastinate.R;
@@ -46,6 +49,7 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import org.joda.time.DateTime;
+import org.joda.time.Duration;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -59,6 +63,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
+
+import static android.content.Context.ALARM_SERVICE;
 
 public class StatisticsFragment extends Fragment {
 
@@ -76,6 +82,8 @@ public class StatisticsFragment extends Fragment {
     private SharedPreferences sharedPreferences;
     private View statsView;
     private ReentrantLock reentrantLock;
+    private long hours, preHours;
+    private boolean notiSettingsOne;
 
     @Nullable
     @Override
@@ -161,6 +169,15 @@ public class StatisticsFragment extends Fragment {
                         Collections.sort(usageStatsList, new UsedMostOftenComparatorDesc());
                         updateAppsList(usageStatsList);
 
+                        long overallTime = sharedPreferences.getLong("totalDuration", 0);
+                        SharedPreferences notiPreferences = context.getSharedPreferences("NotificationCheckboxes", Context.MODE_PRIVATE);
+                        notiSettingsOne = notiPreferences.getBoolean("checkbox1", false);
+
+                        if (notiSettingsOne) {
+                            Duration remainingTime = Duration.millis(overallTime);
+                            hours = remainingTime.getStandardHours();
+                            preHours = hours;
+                        }
                         Timer timerAsync = new Timer();
                         timerTaskAsync = new TimerTask() {
                             @Override
@@ -209,7 +226,7 @@ public class StatisticsFragment extends Fragment {
         return queryUsageStats;
     }
 
-    void updateAppsList(List<UsageStats> usageStatsList) {
+    private void updateAppsList(List<UsageStats> usageStatsList) {
         List<CustomUsageStats> customUsageStatsList = new ArrayList<>();
 
         List<PackageInfo> installedPackages = context.getPackageManager()
@@ -253,6 +270,7 @@ public class StatisticsFragment extends Fragment {
     private class UpdateIcons extends AsyncTask<String, Void, StatsIconData> {
 
         private String timeInterval;
+        private long hours, prehours;
 
         @Override
         protected StatsIconData doInBackground(String... strings) {
@@ -276,6 +294,22 @@ public class StatisticsFragment extends Fragment {
                         overallTime = difference + overallTime;
                         editor.putLong("totalDuration", overallTime);
                         editor.putLong("screenOn", System.currentTimeMillis());
+
+                        if (notiSettingsOne) {
+                            Duration remainingTime = Duration.millis(overallTime);
+                            hours = remainingTime.getStandardHours();
+                            if (preHours != hours && hours != 0) {
+                                Log.d(TAG, "UPDATE : prehours = " + preHours + " hours = " + hours);
+                                Intent intent = new Intent(context, NotificationReceiver.class);
+                                intent.putExtra("Title", "NoCrastinate Usage Time Alert!");
+                                intent.putExtra("AlarmID", 10001);
+                                intent.putExtra("Content", "You've been using your phone for " + hours + " hours today! :(");
+                                PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                                AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+                                alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
+                                preHours = hours;
+                            }
+                        }
                     }
                 } else {
                     editor.putLong("screenOn", System.currentTimeMillis());

@@ -972,6 +972,10 @@
         "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0-alpha3.aar/794540b23e835c4b6f02a7931ac8d7e5/res/drawable-xhdpi-v4/notification_bg_normal.9.png"
     },
     {
+        "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/layout_block_applications_item.xml.flat",
+        "source": "/Users/RosaDowning/Downloads/NoCrastinate/app/src/main/res/layout/block_applications_item.xml"
+    },
+    {
         "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable_ic_thumb_up_black_24dp.xml.flat",
         "source": "/Users/RosaDowning/Downloads/NoCrastinate/app/src/main/res/drawable/ic_thumb_up_black_24dp.xml"
     },
