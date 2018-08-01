@@ -12,7 +12,6 @@
 
     </style>
 
-
     <style name="LargeFont" parent="Theme.AppCompat">
         <item name="android:textSize">@dimen/large_font_size</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
@@ -21,14 +20,13 @@
     <style name="StatsPageDateHeader" parent="Theme.AppCompat">
         <item name="android:textSize">@dimen/x_large_font_size</item>
         <item name="android:textColor">@color/colorThird</item>
-        <item name="android:fontFamily">@font/lato_bold</item>
+        <item name="android:fontFamily">@font/lato_light</item>
     </style>
 
 
     <style name="SettingsButtons" parent="Theme.AppCompat">
         <item name="android:backgroundTint">@color/colorToDoBackground</item>
         <item name="android:textColor">@color/colorFontStyle</item>
-        <item name="android:fontFamily">@font/lato_reg</item>
         <item name="android:textSize">20dp</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:layout_margin">@dimen/margin_large</item>
@@ -53,7 +51,7 @@
 
     <style name="HelpCenterText" parent="Theme.AppCompat">
         <item name="android:textColor">@color/colorFontStyle</item>
-        <item name="android:fontFamily">@font/lato_reg</item>
+        <item name="android:fontFamily">@font/lato_light</item>
         <item name="android:textSize">20sp</item>
         <item name="android:layout_margin">@dimen/margin_large</item>
     </style>

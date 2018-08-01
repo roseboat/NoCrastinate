@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -86,7 +85,7 @@ public class CompletedToDoListAdapter extends RecyclerView.Adapter<CompletedToDo
             super(itemView);
 
             toDoLayout = (RelativeLayout) itemView.findViewById(R.id.to_do_item);
-            toDoLayout.setBackgroundResource(R.color.colorCompleted);
+            toDoLayout.setBackgroundResource(R.color.colorRed);
 
             name = (TextView) itemView.findViewById(R.id.toDoName);
             dueDate = (TextView) itemView.findViewById(R.id.toDoDueDate);

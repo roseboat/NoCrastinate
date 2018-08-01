@@ -22,7 +22,7 @@ import static com.example.rosadowning.nocrastinate.MainActivity.CHANNEL_ID;
 public class ToDoAlarmReceiver extends BroadcastReceiver {
 
     public static final String TAG = "TODOALARMRECEIVER";
-private Context context;
+    private Context context;
 
 
     @Override
@@ -33,23 +33,27 @@ private Context context;
         String toDoName = extras.getString("ToDoName");
         int alarmID = extras.getInt("AlarmID");
 
-            Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-            Intent alarmIntent = new Intent(context, MainActivity.class);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+        Intent alarmIntent = new Intent(context.getApplicationContext(), MainActivity.class);
+        alarmIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, alarmIntent, 0);
 
-            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                    .setSmallIcon(R.drawable.ic_nocrastinate_logo_only_transparent)
-                    .setContentTitle("NoCrastinate Alarm!")
-                    .setContentText("Reminder: Don't forget about your to do, \"" + toDoName + "\"!")
-                    .setSound(defaultSoundUri)
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                    .setContentIntent(pendingIntent)
-                    .setAutoCancel(true);
+        String text = "Don't forget about your to do, \"" + toDoName + "\"!";
 
-            mBuilder.build();
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_nocrastinate_logo_only_transparent)
+                .setContentTitle("NoCrastinate Alarm!")
+                .setContentText(text)
+                .setSound(defaultSoundUri)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(text));
+        mBuilder.build();
 
-      NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-            notificationManager.notify(alarmID, mBuilder.build());
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        notificationManager.notify(alarmID, mBuilder.build());
     }
 
 }

@@ -9,18 +9,13 @@
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorThird">#7b8f8e</color>
-    <color name="colorCompleted">#b3d97476</color>
+    <color name="colorRed">#b3d97476</color>
     <color name="colorDivider">#bbbbbb</color>
-    <color name="colorStarred">#46ffc700</color>
     <color name="colorGradient1">#f9e8a6</color>
     <color name="colorGradient2">#ffc64b</color>
     <color name="colorPrimaryDark">#02cbd2</color>
-    <color name="colorGrey">#b7b7b7</color>
-
-
+    <color name="colorStarredToDo">#caadf5</color>
     <color name="colorGreyLight">#0d6c6c6c</color>
     <color name="colorGreyMedium">#356c6c6c</color>
     <color name="colorGreyDark">#576c6c6c</color>
-
-
 </resources>

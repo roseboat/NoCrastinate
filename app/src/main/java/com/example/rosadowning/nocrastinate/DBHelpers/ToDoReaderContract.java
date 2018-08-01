@@ -160,7 +160,6 @@ public class ToDoReaderContract {
         public void deleteToDo(int toDoID) {
             SQLiteDatabase db = this.getWritableDatabase();
             db.delete(TABLE_NAME, TableEntry._ID + " = ?", new String[]{String.valueOf(toDoID)});
-
             db.close();
         }
 

@@ -190,10 +190,10 @@ public class NotificationSettingsFragment extends Fragment {
 
     public void freqTwoNotificationSetUp() {
 
-//        DateTime dailyReport = new DateTime().withTime(22, 0, 0, 0);
+        DateTime dailyReport = new DateTime().withTime(22, 0, 0, 0);
 
-        Calendar dailyReport = Calendar.getInstance();
-        dailyReport.add(SECOND, 5);
+//        Calendar dailyReport = Calendar.getInstance();
+//        dailyReport.add(SECOND, 5);
 
         Intent freq2intent = new Intent(getContext(), NotificationReceiver.class);
         freq2intent.putExtra("Title", "NoCrastinate Daily Report");
@@ -201,9 +201,9 @@ public class NotificationSettingsFragment extends Fragment {
 
         PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, freq2intent, PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, dailyReport.getTimeInMillis(), startPIntent);
+//        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, dailyReport.getTimeInMillis(), startPIntent);
 
-//        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, dailyReport.getMillis(), startPIntent);
+        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, dailyReport.getMillis(), startPIntent);
     }
 
     public void freqThreeNotificationSetUp() {

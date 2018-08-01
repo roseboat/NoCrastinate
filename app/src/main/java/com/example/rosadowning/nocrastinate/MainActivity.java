@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -57,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         BottomNavigationView navigation = findViewById(R.id.navigation_bar);
         navigation.setOnNavigationItemSelectedListener(this);
 
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         createNotificationChannel();
     }
 
-    private void scheduleMidnightAlarm(){
+    private void scheduleMidnightAlarm() {
         DateTime today = new DateTime().withTimeAtStartOfDay();
         DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
 
@@ -136,21 +136,23 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onDestroy();
         unregisterReceiver(mReceiver);
 
-        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+            Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_nocrastinate_logo_only_transparent)
-                .setContentTitle("You Closed NoCrastinate! :(")
-                .setContentText("All phone usage monitoring will now be paused. Click here to resume!")
-                .setSound(defaultSoundUri)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true);
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                    .setSmallIcon(R.drawable.ic_nocrastinate_logo_only_transparent)
+                    .setContentTitle("You Closed NoCrastinate! :(")
+                    .setContentText("All phone usage monitoring will now be paused. Click here to resume!")
+                    .setSound(defaultSoundUri)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true);
 
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(0, mBuilder.build());
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+            notificationManager.notify(0, mBuilder.build());
+
     }
 }
+

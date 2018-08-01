@@ -79,15 +79,16 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
                     toDoList.get(position).setCompleted(true);
                     listeners.onItemCheck(toDoList.get(position), position);
                     toDoList.remove(position);
-
                 }
             }
         });
 
         if (starred) {
             viewHolder.getIsStarred().setChecked(true);
+            viewHolder.wholeToDoItem.setBackgroundResource(R.color.colorStarredToDo);
         } else {
             viewHolder.getIsStarred().setChecked(false);
+            viewHolder.wholeToDoItem.setBackgroundResource(R.color.colorToDoBackground);
         }
 
         viewHolder.isStarred.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -96,7 +97,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
                 if (b) {
                     toDoList.get(viewHolder.getAdapterPosition()).setStarred(true);
                     listeners.onStarCheck(toDoList.get(viewHolder.getAdapterPosition()));
-                    viewHolder.wholeToDoItem.setBackgroundResource(R.color.colorGrey);
+                    viewHolder.wholeToDoItem.setBackgroundResource(R.color.colorStarredToDo);
 
                 } else {
                     toDoList.get(viewHolder.getAdapterPosition()).setStarred(false);

@@ -2,15 +2,12 @@ package com.example.rosadowning.nocrastinate.Fragments;
 
 import android.annotation.TargetApi;
 import android.app.AlarmManager;
-import android.app.AppOpsManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
-import android.content.pm.ResolveInfo;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,14 +15,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.rosadowning.nocrastinate.Adapters.AppStatisticsAdapter;
 import com.example.rosadowning.nocrastinate.BroadcastReceivers.NotificationReceiver;
-import com.example.rosadowning.nocrastinate.DataModels.CustomUsageStats;
+import com.example.rosadowning.nocrastinate.DataModels.CustomAppHolder;
 import com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract;
 import com.example.rosadowning.nocrastinate.R;
 import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
@@ -39,7 +35,6 @@ import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.animation.OvershootInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -62,7 +57,6 @@ import java.util.TimerTask;
 import java.util.concurrent.locks.ReentrantLock;
 
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
-import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 import static android.content.Context.ALARM_SERVICE;
 
@@ -166,7 +160,6 @@ public class StatisticsFragment extends Fragment {
                         editor.putBoolean("SettingsOn", true);
                         editor.apply();
 
-                        Collections.sort(usageStatsList, new UsedMostOftenComparatorDesc());
                         updateAppsList(usageStatsList);
 
                         long overallTime = sharedPreferences.getLong("totalDuration", 0);
@@ -227,7 +220,7 @@ public class StatisticsFragment extends Fragment {
     }
 
     private void updateAppsList(List<UsageStats> usageStatsList) {
-        List<CustomUsageStats> customUsageStatsList = new ArrayList<>();
+        List<CustomAppHolder> customAppHolders = new ArrayList<>();
 
         List<PackageInfo> installedPackages = context.getPackageManager()
                 .getInstalledPackages(0);
@@ -237,40 +230,41 @@ public class StatisticsFragment extends Fragment {
             if ((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
 
                 for (int i = 0; i < usageStatsList.size(); i++) {
-                    CustomUsageStats customUsageStats = new CustomUsageStats();
-                    customUsageStats.usageStats = usageStatsList.get(i);
+                    CustomAppHolder customAppHolder = new CustomAppHolder();
+                    customAppHolder.usageStats = usageStatsList.get(i);
                     if (packageInfo.packageName.equals(usageStatsList.get(i).getPackageName())) {
-                        customUsageStats.appName = packageInfo.applicationInfo.loadLabel(context.getPackageManager()).toString();
+                        customAppHolder.appName = packageInfo.applicationInfo.loadLabel(context.getPackageManager()).toString();
                         try {
-                            customUsageStats.appIcon = getActivity().getPackageManager()
-                                    .getApplicationIcon(customUsageStats.usageStats.getPackageName());
+                            customAppHolder.appIcon = getActivity().getPackageManager()
+                                    .getApplicationIcon(customAppHolder.usageStats.getPackageName());
                         } catch (PackageManager.NameNotFoundException e) {
                             Log.w(TAG, String.format("App Icon is not found for %s",
-                                    customUsageStats.usageStats.getPackageName()));
-                            customUsageStats.appIcon = getActivity().getDrawable(R.drawable.ic_nocrastinate_logo_only_transparent);
+                                    customAppHolder.usageStats.getPackageName()));
+                            customAppHolder.appIcon = getActivity().getDrawable(R.drawable.ic_nocrastinate_logo_only_transparent);
                         }
-                        customUsageStatsList.add(customUsageStats);
+                        customAppHolders.add(customAppHolder);
                     }
                 }
             }
         }
-        mUsageListAdapter.setCustomUsageStatsList(customUsageStatsList);
+        Collections.sort(customAppHolders, new UsedMostOftenComparatorDesc());
+        mUsageListAdapter.setCustomAppList(customAppHolders);
         mUsageListAdapter.notifyDataSetChanged();
         mRecyclerView.scrollToPosition(0);
     }
 
-    private static class UsedMostOftenComparatorDesc implements Comparator<UsageStats> {
+    private static class UsedMostOftenComparatorDesc implements Comparator<CustomAppHolder> {
 
         @Override
-        public int compare(UsageStats left, UsageStats right) {
-            return Long.compare(right.getTotalTimeInForeground(), left.getTotalTimeInForeground());
+        public int compare(CustomAppHolder left, CustomAppHolder right) {
+
+            return Long.compare(right.usageStats.getTotalTimeInForeground(), left.usageStats.getTotalTimeInForeground());
         }
     }
 
     private class UpdateIcons extends AsyncTask<String, Void, StatsIconData> {
 
         private String timeInterval;
-        private long hours, prehours;
 
         @Override
         protected StatsIconData doInBackground(String... strings) {
@@ -298,7 +292,7 @@ public class StatisticsFragment extends Fragment {
                         if (notiSettingsOne) {
                             Duration remainingTime = Duration.millis(overallTime);
                             hours = remainingTime.getStandardHours();
-                            if (preHours != hours && hours != 0) {
+                            if (preHours != hours && hours != 0 && hours - preHours == 1) {
                                 Log.d(TAG, "UPDATE : prehours = " + preHours + " hours = " + hours);
                                 Intent intent = new Intent(context, NotificationReceiver.class);
                                 intent.putExtra("Title", "NoCrastinate Usage Time Alert!");
@@ -309,6 +303,7 @@ public class StatisticsFragment extends Fragment {
                                 alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
                                 preHours = hours;
                             }
+                            else preHours = hours;
                         }
                     }
                 } else {

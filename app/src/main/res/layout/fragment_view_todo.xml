@@ -53,9 +53,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/add_to_do_name"
-                    android:textColorHint="@color/colorFontStyle"
                     android:inputType="text"
                     android:singleLine="true"
+                    android:textColorHint="@color/colorFontStyle"
                     android:textColorLink="@color/colorFontStyle" />
             </android.support.design.widget.TextInputLayout>
 
@@ -63,8 +63,8 @@
                 android:id="@+id/toDoNoteLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_small"
                 android:layout_marginBottom="@dimen/margin_large"
+                android:layout_marginTop="@dimen/margin_small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/addToDoNameLayout">
@@ -74,9 +74,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/add_to_do_note"
-                    android:textColorHint="@color/colorFontStyle"
                     android:inputType="text"
-                    android:singleLine="false" />
+                    android:singleLine="false"
+                    android:textColorHint="@color/colorFontStyle" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -84,21 +84,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginTop="@dimen/margin_small"
+                android:focusable="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addToDoNoteLayout"
-                android:focusable="false">
+                app:layout_constraintTop_toBottomOf="@id/addToDoNoteLayout">
 
                 <EditText
                     android:id="@+id/toDoDueDate"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:focusable="false"
                     android:hint="@string/add_to_do_due_date"
                     android:textColorHint="@color/colorFontStyle"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:focusable="false"
-                    />
+                    app:layout_constraintStart_toStartOf="parent" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -106,21 +105,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginTop="@dimen/margin_small"
+                android:focusable="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/toDoDueDateLayout"
-                android:focusable="false">
+                app:layout_constraintTop_toBottomOf="@id/toDoDueDateLayout">
 
                 <EditText
                     android:id="@+id/toDoAlarmDate"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:focusable="false"
                     android:hint="@string/add_to_do_alarm_date"
                     android:textColorHint="@color/colorFontStyle"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:focusable="false"
-                    />
+                    app:layout_constraintStart_toStartOf="parent" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.v7.widget.AppCompatCheckBox
@@ -128,11 +126,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Completed?"
-                android:layout_marginTop="@dimen/margin_small"
                 android:layout_marginBottom="@dimen/margin_large"
-                android:textColor="@color/colorFontStyle"
-                />
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="Completed?"
+                android:textColor="@color/colorFontStyle" />
 
             <Button
                 android:id="@+id/button_edit_to_do"
@@ -145,10 +142,9 @@
                 android:text="@string/view_to_do_edit_button"
                 android:textAllCaps="false"
                 android:textSize="@dimen/large_font_size"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/button_save_new_to_do"
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/button_delete_to_do"
@@ -156,16 +152,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/margin_small"
+                android:backgroundTint="@color/colorRed"
                 android:padding="@dimen/margin_large"
                 android:paddingLeft="150dp"
                 android:text="@string/delete_to_do"
-                android:backgroundTint="@color/colorThird"
                 android:textAllCaps="false"
                 android:textSize="@dimen/large_font_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/button_edit_to_do"
-                />
+                app:layout_constraintTop_toBottomOf="@id/button_edit_to_do" />
 
         </LinearLayout>
     </ScrollView>

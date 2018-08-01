@@ -219,11 +219,7 @@ public class ViewToDoFragment extends Fragment {
                                     alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmDate.getTime(), pendingIntent);
                                 }
                             }
-                            ToDoFragment newFragment = new ToDoFragment();
-                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                            transaction.replace(R.id.fragment_container, newFragment);
-                            transaction.addToBackStack(null);
-                            transaction.commit();
+                            getFragmentManager().beginTransaction().replace(R.id.fragment_container, new ToDoFragment()).addToBackStack(null).commit();
                         }
 
                     }
@@ -245,11 +241,7 @@ public class ViewToDoFragment extends Fragment {
                                 NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
                                 notificationManager.cancel(deletedToDoID);
                                 dbHelper.deleteToDo(deletedToDoID);
-                                ToDoFragment newFragment = new ToDoFragment();
-                                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                                transaction.replace(R.id.fragment_container, newFragment);
-                                transaction.addToBackStack(null);
-                                transaction.commit();
+                                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new ToDoFragment()).addToBackStack(null).commit();
                             }
                         }).setNegativeButton("Cancel", null).create();
                 alertDialog.show();

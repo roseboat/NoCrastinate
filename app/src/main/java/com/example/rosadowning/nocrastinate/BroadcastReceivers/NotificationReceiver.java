@@ -3,10 +3,12 @@ package com.example.rosadowning.nocrastinate.BroadcastReceivers;
 import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -72,17 +74,19 @@ public class NotificationReceiver extends BroadcastReceiver {
             subheading = "Click here to view your Weekly Report";
 
         }
-
-        Bitmap brainLogo = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_nocrastinate_logo_only_transparent);
+        Bitmap appLogo = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_nocrastinate_logo_only_transparent);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-        Intent alarmIntent = new Intent(context, MainActivity.class);
-        alarmIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        Intent alarmIntent = new Intent(context.getApplicationContext(), MainActivity.class);
+        alarmIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                |Intent.FLAG_ACTIVITY_SINGLE_TOP
+                |Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, CHANNEL_ID)
+        PendingIntent pendingIntent = PendingIntent.getActivity(context.getApplicationContext(), 0, alarmIntent, PendingIntent.FLAG_ONE_SHOT);
+
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context.getApplicationContext(), CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_nocrastinate_logo_only_transparent)
-                .setLargeIcon(brainLogo)
+                .setLargeIcon(appLogo)
                 .setContentTitle(title)
                 .setContentText(subheading)
                 .setSound(defaultSoundUri)
@@ -93,7 +97,7 @@ public class NotificationReceiver extends BroadcastReceiver {
                         .bigText(content));
                 mBuilder.build();
 
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context.getApplicationContext());
         notificationManager.notify(alarmID, mBuilder.build());
     }
 

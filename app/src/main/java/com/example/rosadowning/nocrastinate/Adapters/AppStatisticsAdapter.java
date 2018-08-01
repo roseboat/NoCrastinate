@@ -14,13 +14,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.rosadowning.nocrastinate.DataModels.CustomUsageStats;
+import com.example.rosadowning.nocrastinate.DataModels.CustomAppHolder;
 import com.example.rosadowning.nocrastinate.R;
 import com.example.rosadowning.nocrastinate.DataModels.TimeHelper;
 
 public class AppStatisticsAdapter extends RecyclerView.Adapter<AppStatisticsAdapter.ViewHolder> {
 
-    private List<CustomUsageStats> mCustomUsageStatsList = new ArrayList<>();
+    private List<CustomAppHolder> customAppHolders = new ArrayList<>();
     private DateFormat mDateFormat = new SimpleDateFormat();
     private PackageManager packageManager;
     private Context context;
@@ -41,20 +41,20 @@ public class AppStatisticsAdapter extends RecyclerView.Adapter<AppStatisticsAdap
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
-        viewHolder.getPackageName().setText(mCustomUsageStatsList.get(position).appName);
-        viewHolder.getAppIcon().setImageDrawable(mCustomUsageStatsList.get(position).appIcon);
-        long dur = mCustomUsageStatsList.get(position).usageStats.getTotalTimeInForeground();
+        viewHolder.getPackageName().setText(customAppHolders.get(position).appName);
+        viewHolder.getAppIcon().setImageDrawable(customAppHolders.get(position).appIcon);
+        long dur = customAppHolders.get(position).usageStats.getTotalTimeInForeground();
         String time = TimeHelper.formatDuration(dur);
         viewHolder.mOverallTime.setText(time);
     }
 
     @Override
     public int getItemCount() {
-        return mCustomUsageStatsList.size();
+        return customAppHolders.size();
     }
 
-    public void setCustomUsageStatsList(List<CustomUsageStats> customUsageStats) {
-        mCustomUsageStatsList = customUsageStats;
+    public void setCustomAppList(List<CustomAppHolder> customAppList) {
+        customAppHolders = customAppList;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

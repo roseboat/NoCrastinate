@@ -87,7 +87,7 @@ public class AlarmDBContract {
 
             SQLiteDatabase db = this.getReadableDatabase();
             long noOfEntries = 0;
-            noOfEntries = DatabaseUtils.queryNumEntries(db, TABLE_NAME, AlarmEntry.COLUMN_NAME_DATE + ";");
+            noOfEntries = DatabaseUtils.queryNumEntries(db, AlarmEntry.TABLE_NAME, AlarmEntry.COLUMN_NAME_DATE + ";");
             db.close();
             return noOfEntries;
         }
