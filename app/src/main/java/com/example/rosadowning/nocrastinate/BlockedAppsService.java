@@ -1,87 +1,128 @@
-//package com.example.rosadowning.nocrastinate;
-//
-//import android.app.ActivityManager;
-//import android.app.Service;
-//import android.content.Context;
-//import android.content.Intent;
-//import android.content.pm.ApplicationInfo;
-//import android.content.pm.PackageInfo;
-//import android.content.pm.PackageManager;
-//import android.content.pm.ResolveInfo;
-//import android.os.Handler;
-//import android.os.IBinder;
-//import android.os.Message;
-//import android.widget.Toast;
-//
-//import java.util.Collections;
-//import java.util.List;
-//import java.util.Timer;
-//import java.util.TimerTask;
-//
-//import static android.widget.Toast.*;
-//
-//public class BlockedAppsService extends Service {
-//
-//    private static Timer timer = new Timer();
-//    public Boolean userAuth = false;
-//    private Context ctx;
-//    public String pActivity = "";
-//
-//    public IBinder onBind(Intent arg0) {
-//        return null;
-//    }
-//
-//    public void onCreate() {
-//        super.onCreate();
-//        ctx = this;
-//        startService();
-//    }
-//
-//    private void startService() {
-//        timer.scheduleAtFixedRate(new mainTask(), 0, 500);
-//    }
-//
-//    @Override
-//    public int onStartCommand(Intent intent, int flags, int startId) {
-//
-//        PackageManager packageManager = getPackageManager();
-//        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
-//        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-//        List<ResolveInfo> appList = packageManager.queryIntentActivities(mainIntent, 0);
-//        Collections.sort(appList, new ResolveInfo.DisplayNameComparator(packageManager));
-//        List<PackageInfo> packs = packageManager.getInstalledPackages(0);
-//        for(int i=0; i < packs.size(); i++) {
-//            PackageInfo p = packs.get(i);
-//            ApplicationInfo a = p.applicationInfo;
-//            // skip system apps if they shall not be included
-//            //apps.add(p.packageName);
-//        }
-//
-//        ActivityManager mActivityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-//        List<ActivityManager.RunningTaskInfo> RunningTask = mActivityManager.getRunningTasks(1);
-//        ActivityManager.RunningTaskInfo ar = RunningTask.get(0);
-//        String activityOnTop = ar.topActivity.getClassName();
-//
-//
-//        if(!activityOnTop.equals("com.example.lock")){
-//            Intent lockIntent = new Intent(this, LockScreen.class);
-//            lockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            this.startActivity(lockIntent);
-//        }
-//        Toast.makeText(this, "My Service Running", Toast.LENGTH_LONG).show();
-//        return super.onStartCommand(intent, flags, startId);
-//    }
-//
-//    private class mainTask extends TimerTask {
-//        public void run() {
-//            toastHandler.sendEmptyMessage(0);
-//        }
-//    }
-//
-//    public void onDestroy() {
-//        super.onDestroy();
-//        makeText(this, "Service Stopped ...", LENGTH_SHORT).show();
-//    }
-//
-//
-//}
+package com.example.rosadowning.nocrastinate;
+
+import android.app.AppOpsManager;
+import android.app.Service;
+import android.app.usage.UsageStats;
+import android.app.usage.UsageStatsManager;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.IBinder;
+import android.util.Log;
+
+import com.example.rosadowning.nocrastinate.DBHelpers.BlockedAppsDBContract;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class BlockedAppsService extends Service {
+
+    private static Timer timer = new Timer();
+    public Boolean userAuth = false;
+    private Context context;
+    public String pActivity = "";
+
+    public BlockedAppsService(Context applicationContext) {
+        super();
+        Log.d("BLOCKED SERVICE", "STARTED!");
+    }
+
+    public BlockedAppsService() {
+
+    }
+
+
+    public IBinder onBind(Intent arg0) {
+        return null;
+    }
+
+    public void onCreate() {
+        super.onCreate();
+        context = this;
+        startService();
+    }
+
+    private void startService() {
+        Log.d("BLOCKED SERVICE", "start service reached - timer task initalizing");
+        if (!needPermissionForBlocking(context)){
+        timer.scheduleAtFixedRate(new mainTask(), 0, 500);}
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+
+        Log.d("BLOCKED SERVICE", "onStart command reached");
+
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+    public boolean showHomeScreen() {
+        Log.d("BLOCKED SERVICE", "showing home screen");
+
+        Intent startMain = new Intent(Intent.ACTION_MAIN);
+        startMain.addCategory(Intent.CATEGORY_HOME);
+        startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(startMain);
+        return true;
+    }
+
+    private class mainTask extends TimerTask {
+        public void run() {
+
+            Log.d("BLOCKED SERVICE", "thread started");
+
+            BlockedAppsDBContract.BlockedAppsDBHelper dbHelper = new BlockedAppsDBContract.BlockedAppsDBHelper(context);
+            SQLiteDatabase sqlBlockedApps = dbHelper.getReadableDatabase();
+            List<String> blockedNames = dbHelper.getBlockedApps();
+
+            for (String packageName : blockedNames) {
+                Log.d("BLOCKED SERVICE", "blocked package name = " + packageName);
+
+                if (getTopPackage().equals(packageName)) {
+                    showHomeScreen();
+                }
+            }
+        }
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d("BLOCKED SERVICE", "Stopped");
+    }
+
+    public String getTopPackage() {
+        long ts = System.currentTimeMillis();
+        UsageStatsManager mUsageStatsManager = (UsageStatsManager) getSystemService(Context.USAGE_STATS_SERVICE);
+        List<UsageStats> usageStats = mUsageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_BEST, ts - 1000, ts);
+        if (usageStats == null || usageStats.size() == 0) {
+            return "0000";
+        }
+        Collections.sort(usageStats, new RecentUseComparator());
+        return usageStats.get(0).getPackageName();
+    }
+
+    public static class RecentUseComparator implements Comparator<UsageStats> {
+
+        @Override
+        public int compare(UsageStats lhs, UsageStats rhs) {
+            return (lhs.getLastTimeUsed() > rhs.getLastTimeUsed()) ? -1 : (lhs.getLastTimeUsed() == rhs.getLastTimeUsed()) ? 0 : 1;
+        }
+    }
+
+    public static boolean needPermissionForBlocking(Context context) {
+        try {
+            PackageManager packageManager = context.getPackageManager();
+            ApplicationInfo applicationInfo = packageManager.getApplicationInfo(context.getPackageName(), 0);
+            AppOpsManager appOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+            int mode = appOpsManager.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, applicationInfo.uid, applicationInfo.packageName);
+            return (mode != AppOpsManager.MODE_ALLOWED);
+        } catch (PackageManager.NameNotFoundException e) {
+            return true;
+        }
+    }
+}

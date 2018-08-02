@@ -27,13 +27,13 @@ public final class R {
         public static final int secondary_text_default_material_light = 0x7f060088;
     }
     public static final class dimen {
-        public static final int compat_button_inset_horizontal_material = 0x7f070050;
-        public static final int compat_button_inset_vertical_material = 0x7f070051;
-        public static final int compat_button_padding_horizontal_material = 0x7f070052;
-        public static final int compat_button_padding_vertical_material = 0x7f070053;
-        public static final int compat_control_corner_material = 0x7f070054;
-        public static final int compat_notification_large_icon_max_height = 0x7f070055;
-        public static final int compat_notification_large_icon_max_width = 0x7f070056;
+        public static final int compat_button_inset_horizontal_material = 0x7f070051;
+        public static final int compat_button_inset_vertical_material = 0x7f070052;
+        public static final int compat_button_padding_horizontal_material = 0x7f070053;
+        public static final int compat_button_padding_vertical_material = 0x7f070054;
+        public static final int compat_control_corner_material = 0x7f070055;
+        public static final int compat_notification_large_icon_max_height = 0x7f070056;
+        public static final int compat_notification_large_icon_max_width = 0x7f070057;
         public static final int notification_action_icon_size = 0x7f0700c5;
         public static final int notification_action_text_size = 0x7f0700c6;
         public static final int notification_big_circle_margin = 0x7f0700c7;

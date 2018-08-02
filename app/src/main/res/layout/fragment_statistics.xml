@@ -27,12 +27,12 @@
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="65dp"
+        android:layout_height="match_parent"
         android:gravity="center_vertical"
+        android:layout_marginTop="60dp"
         android:orientation="vertical"
         android:padding="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/navigation_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
@@ -43,7 +43,6 @@
             android:layout_height="match_parent"
             android:background="@color/colorWhite"
             android:gravity="center"
-            app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/icon_group_main"
@@ -203,14 +202,17 @@
                 android:textAlignment="center" />
         </LinearLayout>
 
+
+
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview_app_usage"
             android:layout_width="match_parent"
-            android:layout_height="190dp"
+            android:layout_height="0dp"
             android:scrollbars="vertical"
             android:layout_margin="@dimen/margin_small"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/navigation_bar"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/spinner_group" />

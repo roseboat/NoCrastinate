@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.rosadowning.nocrastinate.Adapters.BlockAppsAdapter;
+import com.example.rosadowning.nocrastinate.BlockedAppsService;
 import com.example.rosadowning.nocrastinate.DBHelpers.BlockedAppsDBContract;
 import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
 import com.example.rosadowning.nocrastinate.DataModels.CustomAppHolder;
@@ -74,6 +75,7 @@ public class BlockAppsFragment extends Fragment {
         for (PackageInfo packageInfo : installedPackages) {
 
             if ((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
+                if (!packageInfo.packageName.contains("nocrastinate")){
                 CustomAppHolder customAppHolder = new CustomAppHolder();
                 customAppHolder.appName = packageInfo.applicationInfo.loadLabel(getContext().getPackageManager()).toString();
                 customAppHolder.packageName = packageInfo.packageName;
@@ -87,7 +89,7 @@ public class BlockAppsFragment extends Fragment {
                 customAppHolder.appIcon = getActivity().getPackageManager()
                         .getApplicationIcon(packageInfo.applicationInfo);
                 customAppHolders.add(customAppHolder);
-            }
+            }}
         }
         Collections.sort(customAppHolders, new AppAlphaOrder());
         Collections.reverse(customAppHolders);

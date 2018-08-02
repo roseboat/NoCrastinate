@@ -6,7 +6,7 @@
     <dimen name="margin_small">5dp</dimen>
     <dimen name="margin_medium">10dp</dimen>
     <dimen name="margin_large">15dp</dimen>
-    <dimen name="container_size">440dp</dimen>
+    <dimen name="bottom_nav_margin">65dp</dimen>
     <dimen name="large_font_size">17sp</dimen>
     <dimen name="x_large_font_size">24sp</dimen>
     <dimen name="small_font_size">12sp</dimen>

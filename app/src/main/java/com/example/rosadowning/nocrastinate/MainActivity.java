@@ -1,5 +1,6 @@
 package com.example.rosadowning.nocrastinate;
 
+import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.AppOpsManager;
 import android.app.Notification;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     public static final String TAG = "MAIN ACTIVITY";
     private BroadcastReceiver mReceiver;
+    private BlockedAppsService mBlockingService;
     public static final String CHANNEL_ID = "4855";
     public static final CharSequence CHANNEL_NAME = "com.example.rosadowning.nocrastinate";
     public static final String CHANNEL_DESCRIPTION = "NoCrastinate Notification Channel";
@@ -56,6 +58,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView navigation = findViewById(R.id.navigation_bar);
@@ -67,10 +74,30 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         final IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
         filter.addAction(Intent.ACTION_BOOT_COMPLETED);
         filter.addAction(Intent.ACTION_USER_PRESENT);
+        filter.addAction(Intent.ACTION_SCREEN_ON);
         registerReceiver(mReceiver, filter);
+
+
+        mBlockingService = new BlockedAppsService(this);
+        Intent mServiceIntent = new Intent(this, mBlockingService.getClass());
+        if (!isMyServiceRunning(mBlockingService.getClass())) {
+            startService(mServiceIntent);
+        }
 
         scheduleMidnightAlarm();
         createNotificationChannel();
+    }
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                Log.i ("isMyServiceRunning?", true+"");
+                return true;
+            }
+        }
+        Log.i ("isMyServiceRunning?", false+"");
+        return false;
     }
 
     private void scheduleMidnightAlarm() {
@@ -85,7 +112,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         AlarmDBContract.AlarmDBHelper alarmDBHelper = new AlarmDBContract.AlarmDBHelper(this);
         SQLiteDatabase sqlRead = alarmDBHelper.getReadableDatabase();
 
-        if (!alarmDBHelper.isAlarmSet(today.getMillis()) && alarmDBHelper.getNoAlarmEntries() > 0) {
+        Log.d(TAG, "set today = " + alarmDBHelper.isAlarmSet(today.getMillis()));
+        Log.d(TAG, "num of entries = " + alarmDBHelper.getNoAlarmEntries());
+
+        if (!alarmDBHelper.isAlarmSet(today.getMillis())) {
             alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
         }
         Log.d(TAG, "Midnight Alarm Set For = " + tomorrow.toString());

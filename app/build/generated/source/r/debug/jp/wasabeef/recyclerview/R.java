@@ -37,11 +37,11 @@ public final class R {
         public static final int secondary_text_default_material_light = 0x7f060088;
     }
     public static final class dimen {
-        public static final int compat_button_inset_horizontal_material = 0x7f070050;
-        public static final int compat_button_inset_vertical_material = 0x7f070051;
-        public static final int compat_button_padding_horizontal_material = 0x7f070052;
-        public static final int compat_button_padding_vertical_material = 0x7f070053;
-        public static final int compat_control_corner_material = 0x7f070054;
+        public static final int compat_button_inset_horizontal_material = 0x7f070051;
+        public static final int compat_button_inset_vertical_material = 0x7f070052;
+        public static final int compat_button_padding_horizontal_material = 0x7f070053;
+        public static final int compat_button_padding_vertical_material = 0x7f070054;
+        public static final int compat_control_corner_material = 0x7f070055;
         public static final int fastscroll_default_thickness = 0x7f070086;
         public static final int fastscroll_margin = 0x7f070087;
         public static final int fastscroll_minimum_range = 0x7f070088;

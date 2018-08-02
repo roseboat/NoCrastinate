@@ -50,6 +50,10 @@ public class ScreenReceiver extends BroadcastReceiver {
             } finally {
                 reentrantLock.lock();
             }
+        } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
+            Log.e(TAG, "SCREEN ON");
+
+            resetAlarm();
 
         } else if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
             Log.e(TAG, "PHONE UNLOCKED");
@@ -89,17 +93,7 @@ public class ScreenReceiver extends BroadcastReceiver {
         } else if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)){
             Log.e(TAG, "PHONE TURNED ON");
 
-            DateTime today = new DateTime().withTimeAtStartOfDay();
-
-                AlarmDBContract.AlarmDBHelper alarmDBHelper = new AlarmDBContract.AlarmDBHelper(context);
-                SQLiteDatabase sqlRead = alarmDBHelper.getReadableDatabase();
-
-                if (!alarmDBHelper.isAlarmSet(today.getMillis()) && alarmDBHelper.getNoAlarmEntries() > 0) {
-                    Intent midnightIntent = new Intent(context, MidnightDataResetReceiver.class);
-                    PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, midnightIntent, 0);
-                    AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-                    alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
-            }
+            resetAlarm();
         }
     }
 
@@ -113,5 +107,21 @@ public class ScreenReceiver extends BroadcastReceiver {
         PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
         AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
         alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
+    }
+
+    public void resetAlarm(){
+
+        DateTime today = new DateTime().withTimeAtStartOfDay();
+
+        AlarmDBContract.AlarmDBHelper alarmDBHelper = new AlarmDBContract.AlarmDBHelper(context);
+        SQLiteDatabase sqlRead = alarmDBHelper.getReadableDatabase();
+
+        if (!alarmDBHelper.isAlarmSet(today.getMillis())) {
+            Intent midnightIntent = new Intent(context, MidnightDataResetReceiver.class);
+            PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, midnightIntent, 0);
+            AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+            alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
+        }
+
     }
 }
