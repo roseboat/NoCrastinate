@@ -1,6 +1,7 @@
 package com.example.rosadowning.nocrastinate.Fragments;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AppOpsManager;
 import android.app.PendingIntent;
@@ -117,6 +118,14 @@ public class StatisticsFragment extends Fragment {
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview_app_usage);
         mSpinner = (Spinner) rootView.findViewById(R.id.spinner_time_span);
 
+        mOpenUsageSettingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+            }
+
+        });
+
         // Sets the Recylcer view's Adapter and Animator
         mUsageListAdapter = new AppStatisticsAdapter(context);
         mRecyclerView.scrollToPosition(0);
@@ -136,54 +145,69 @@ public class StatisticsFragment extends Fragment {
                 intervalString = strings[position];
 
                 if (intervalString != null) {
-                    List<UsageStats> usageStatsList = getUsageStatistics(intervalString);
 
                     SharedPreferences usagePref = context.getSharedPreferences("UsageSettings", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = usagePref.edit();
+                    final SharedPreferences.Editor editor = usagePref.edit();
 
-                        if (usageStatsList.size() == 0 || usageStatsList.isEmpty()) {
-                            Log.i(TAG, "The user may not allow the access to apps usage. ");
+                    final Timer timerCheckUsage = new Timer();
+                    TimerTask timerTaskCheckUsage = new TimerTask() {
+                        @Override
+                        public void run() {
 
-                            editor.putBoolean("SettingsOn", false);
-                            editor.apply();
-                            mUsagePopUp.setVisibility(View.VISIBLE);
-                            mUsagePopUp.bringToFront();
-                            mOpenUsageSettingButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
-                                }
+                            List<UsageStats> usageStatsList = getUsageStatistics(intervalString);
 
-                            });
+                            if (usageStatsList.size() == 0 || usageStatsList.isEmpty()) {
+                                Log.i(TAG, "The user may not allow the access to apps usage. ");
 
-                        } else {
-                        mUsagePopUp.setVisibility(View.GONE);
-                        editor.putBoolean("SettingsOn", true);
-                        editor.apply();
+                                editor.putBoolean("SettingsOn", false);
+                                editor.apply();
 
-                        updateAppsList(usageStatsList);
+                                getActivity().runOnUiThread(new Runnable() {
 
-                        long overallTime = sharedPreferences.getLong("totalDuration", 0);
-                        SharedPreferences notiPreferences = context.getSharedPreferences("NotificationCheckboxes", Context.MODE_PRIVATE);
-                        notiSettingsOne = notiPreferences.getBoolean("checkbox1", false);
+                                    @Override
+                                    public void run() {
+                                        mUsagePopUp.setVisibility(View.VISIBLE);
+                                        mUsagePopUp.bringToFront();
+                                    }
+                                });
+                            } else {
 
-                        if (notiSettingsOne) {
-                            Duration remainingTime = Duration.millis(overallTime);
-                            hours = remainingTime.getStandardHours();
-                            preHours = hours;
-                        }
-                        Timer timerAsync = new Timer();
-                        timerTaskAsync = new TimerTask() {
-                            @Override
-                            public void run() {
-                                UpdateIcons newIcons = new UpdateIcons();
-                                synchronized (newIcons) {
-                                    newIcons.execute(intervalString);
-                                }
+                                getActivity().runOnUiThread(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        mUsagePopUp.setVisibility(View.GONE);
+                                        updateAppsList(getUsageStatistics(intervalString));
+                                    }
+                                });
+                                editor.putBoolean("SettingsOn", true);
+                                editor.apply();
+                                timerCheckUsage.cancel();
                             }
-                        };
-                        timerAsync.schedule(timerTaskAsync, 0, 5000);
+                        }
+                    };
+                    timerCheckUsage.schedule(timerTaskCheckUsage, 0, 3000);
+
+                    long overallTime = sharedPreferences.getLong("totalDuration", 0);
+                    SharedPreferences notiPreferences = context.getSharedPreferences("NotificationCheckboxes", Context.MODE_PRIVATE);
+                    notiSettingsOne = notiPreferences.getBoolean("checkbox1", false);
+
+                    if (notiSettingsOne) {
+                        Duration remainingTime = Duration.millis(overallTime);
+                        hours = remainingTime.getStandardHours();
+                        preHours = hours;
                     }
+                    Timer timerAsync = new Timer();
+                    timerTaskAsync = new TimerTask() {
+                        @Override
+                        public void run() {
+                            UpdateIcons newIcons = new UpdateIcons();
+                            synchronized (newIcons) {
+                                newIcons.execute(intervalString);
+                            }
+                        }
+                    };
+                    timerAsync.schedule(timerTaskAsync, 0, 5000);
                 }
             }
 

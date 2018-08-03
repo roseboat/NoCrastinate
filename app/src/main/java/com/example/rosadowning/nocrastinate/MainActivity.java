@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         filter.addAction(Intent.ACTION_USER_PRESENT);
         filter.addAction(Intent.ACTION_SCREEN_ON);
         registerReceiver(mReceiver, filter);
-
 
         mBlockingService = new BlockedAppsService(this);
         Intent mServiceIntent = new Intent(this, mBlockingService.getClass());
@@ -136,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private boolean loadFragment(Fragment fragment) {
         if (fragment != null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
             return true;
         }
         return false;

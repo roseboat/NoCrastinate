@@ -2704,7 +2704,7 @@ public final class R {
      * <tr><td>barrier</td><td>2</td><td></td></tr>
      * <tr><td>chains</td><td>4</td><td></td></tr>
      * <tr><td>dimensions</td><td>8</td><td></td></tr>
-     * <tr><td>direct</td><td>1</td><td>for now only direct & barriers</td></tr>
+     * <tr><td>direct</td><td>1</td><td></td></tr>
      * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>standard</td><td>3</td><td></td></tr>
      * </table>
@@ -4451,17 +4451,17 @@ public final class R {
     public static final int abc_text_size_title_material_toolbar=0x7f07004a;
     public static final int activity_horizontal_margin=0x7f07004b;
     public static final int activity_vertical_margin=0x7f07004c;
-    public static final int cardview_compat_inset_shadow=0x7f07004d;
-    public static final int cardview_default_elevation=0x7f07004e;
-    public static final int cardview_default_radius=0x7f07004f;
-    public static final int compat_button_inset_horizontal_material=0x7f070050;
-    public static final int compat_button_inset_vertical_material=0x7f070051;
-    public static final int compat_button_padding_horizontal_material=0x7f070052;
-    public static final int compat_button_padding_vertical_material=0x7f070053;
-    public static final int compat_control_corner_material=0x7f070054;
-    public static final int compat_notification_large_icon_max_height=0x7f070055;
-    public static final int compat_notification_large_icon_max_width=0x7f070056;
-    public static final int container_size=0x7f070057;
+    public static final int bottom_nav_margin=0x7f07004d;
+    public static final int cardview_compat_inset_shadow=0x7f07004e;
+    public static final int cardview_default_elevation=0x7f07004f;
+    public static final int cardview_default_radius=0x7f070050;
+    public static final int compat_button_inset_horizontal_material=0x7f070051;
+    public static final int compat_button_inset_vertical_material=0x7f070052;
+    public static final int compat_button_padding_horizontal_material=0x7f070053;
+    public static final int compat_button_padding_vertical_material=0x7f070054;
+    public static final int compat_control_corner_material=0x7f070055;
+    public static final int compat_notification_large_icon_max_height=0x7f070056;
+    public static final int compat_notification_large_icon_max_width=0x7f070057;
     public static final int design_appbar_elevation=0x7f070058;
     public static final int design_bottom_navigation_active_item_max_width=0x7f070059;
     public static final int design_bottom_navigation_active_item_min_width=0x7f07005a;
@@ -11470,7 +11470,7 @@ public final class R {
      * <tr><td>barrier</td><td>2</td><td></td></tr>
      * <tr><td>chains</td><td>4</td><td></td></tr>
      * <tr><td>dimensions</td><td>8</td><td></td></tr>
-     * <tr><td>direct</td><td>1</td><td>for now only direct & barriers</td></tr>
+     * <tr><td>direct</td><td>1</td><td></td></tr>
      * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>standard</td><td>3</td><td></td></tr>
      * </table>
