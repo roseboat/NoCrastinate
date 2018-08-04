@@ -4,21 +4,20 @@ import android.app.usage.UsageStats;
 import android.graphics.drawable.Drawable;
 
 public class CustomAppHolder {
-    public UsageStats usageStats;
     public Drawable appIcon;
     public long timeInForeground;
     public String appName, packageName;
     public Boolean isBlocked = false;
 
-    public CustomAppHolder(){
+    public CustomAppHolder() {
 
     }
 
-    public CustomAppHolder(String packageNameKey){
+    public CustomAppHolder(String packageNameKey) {
         this.packageName = packageNameKey;
     }
 
-    public String getPackageName(){
+    public String getPackageName() {
         return packageName;
     }
 

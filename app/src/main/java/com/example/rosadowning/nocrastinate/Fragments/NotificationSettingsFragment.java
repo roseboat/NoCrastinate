@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
+import com.example.rosadowning.nocrastinate.BlockedAppsService;
 import com.example.rosadowning.nocrastinate.BroadcastReceivers.NotificationReceiver;
 import com.example.rosadowning.nocrastinate.R;
 
@@ -71,7 +72,7 @@ public class NotificationSettingsFragment extends Fragment {
 
         SharedPreferences usagePref = context.getSharedPreferences("UsageSettings", Context.MODE_PRIVATE);
 
-        if (!usagePref.getBoolean("SettingsOn", false)) {
+        if (!BlockedAppsService.hasUsagePermission(context)) {
 
             freq1.setEnabled(false);
             freq2.setEnabled(false);
@@ -192,16 +193,12 @@ public class NotificationSettingsFragment extends Fragment {
 
         DateTime dailyReport = new DateTime().withTime(22, 0, 0, 0);
 
-//        Calendar dailyReport = Calendar.getInstance();
-//        dailyReport.add(SECOND, 5);
-
         Intent freq2intent = new Intent(getContext(), NotificationReceiver.class);
         freq2intent.putExtra("Title", "NoCrastinate Daily Report");
         freq2intent.putExtra("AlarmID", FREQ_2_ALARM_1);
 
         PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, freq2intent, PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-//        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, dailyReport.getTimeInMillis(), startPIntent);
 
         alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, dailyReport.getMillis(), startPIntent);
     }

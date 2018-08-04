@@ -203,18 +203,11 @@ public class StatisticsFragment extends Fragment {
                         public void run() {
                             UpdateIcons newIcons = new UpdateIcons();
                             synchronized (newIcons) {
-                                Log.d(TAG, "in thread 1");
                                 newIcons.execute(intervalString);
                             }
                         }
                     };
                     timerAsync.schedule(timerTaskAsync, 0, 5000);
-//                    updateAppsList(getStats(intervalString));
-//
-//                    mUsageListAdapter.setCustomAppList(updatedAppsList);
-//                    mUsageListAdapter.notifyDataSetChanged();
-//                    mRecyclerView.scrollToPosition(0);
-
                 }
             }
             @Override
@@ -255,6 +248,7 @@ public class StatisticsFragment extends Fragment {
         while (mEvents.hasNextEvent()) {
             currentEvent = new UsageEvents.Event();
             mEvents.getNextEvent(currentEvent);
+
             if (currentEvent.getEventType() == UsageEvents.Event.MOVE_TO_FOREGROUND ||
                     currentEvent.getEventType() == UsageEvents.Event.MOVE_TO_BACKGROUND) {
                 allEvents.add(currentEvent);
@@ -265,17 +259,23 @@ public class StatisticsFragment extends Fragment {
             }
         }
         for (int i = 0; i < allEvents.size()-1; i++) {
-            UsageEvents.Event E0 = allEvents.get(i);
-            UsageEvents.Event E1 = allEvents.get(i + 1);
+            UsageEvents.Event preEvent = allEvents.get(i);
+            UsageEvents.Event postEvent = allEvents.get(i + 1);
 
 
-
-            if (E0.getEventType() == 1 && E1.getEventType() == 2
-                    && E0.getClassName().equals(E1.getClassName())) {
-                long diff = E1.getTimeStamp() - E0.getTimeStamp();
-                map.get(E0.getPackageName()).timeInForeground += diff;
+            if (preEvent.getEventType() == 1 && postEvent.getEventType() == 2
+                    && preEvent.getClassName().equals(postEvent.getClassName())) {
+                long diff = postEvent.getTimeStamp() - preEvent.getTimeStamp();
+                map.get(preEvent.getPackageName()).timeInForeground += diff;
             }
         }
+        UsageEvents.Event finalEvent = allEvents.get(allEvents.size()-1);
+
+        if (finalEvent.getEventType() == 1 && finalEvent.getPackageName().contains("nocrastinate")){
+            long diff = System.currentTimeMillis() - finalEvent.getTimeStamp();
+            map.get(finalEvent.getPackageName()).timeInForeground+= diff;
+        }
+
         List <CustomAppHolder> allEventsList = new ArrayList<>(map.values());
         return allEventsList;
     }
@@ -337,19 +337,25 @@ public class StatisticsFragment extends Fragment {
             SharedPreferences.Editor editor = sharedPreferences.edit();
 
             try {
+
+                reentrantLock.lock();
                 int unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
                 long screenOn = sharedPreferences.getLong("screenOn", System.currentTimeMillis());
                 long screenOff = sharedPreferences.getLong("screenOff", 0);
                 long overallTime = sharedPreferences.getLong("totalDuration", 0);
 
-                reentrantLock.lock();
-
                 if (screenOn != 0) {
-                    if (screenOn > screenOff) {
+                    if (screenOn > screenOff && screenOn < System.currentTimeMillis()) {
                         long currentTime = System.currentTimeMillis();
+                        Log.d(TAG, "current time = " + currentTime);
+
                         long difference = currentTime - screenOn;
+                        Log.d(TAG, "currentTime - screenOn = " + difference);
+
                         overallTime = difference + overallTime;
                         editor.putLong("totalDuration", overallTime);
+                        Log.d(TAG, "overall time += difference =  " + overallTime);
+
                         editor.putLong("screenOn", System.currentTimeMillis());
                         editor.apply();
 
@@ -434,7 +440,6 @@ public class StatisticsFragment extends Fragment {
                 }
 
                 if ((Long) iconData.getOverallTime() != null) {
-                    Log.d(TAG, ""+iconData.getOverallTime());
                     String timeString = "";
                     if (iconData.getOverallTime() < 60000) {
                         timeString = "0m";
