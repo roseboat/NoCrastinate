@@ -72,7 +72,7 @@ public class ScreenReceiver extends BroadcastReceiver {
                         unlockNotification();
                     }
                 }
-                long screenOn = statsPreferences.getLong("screenOn", 0);
+                long screenOn = statsPreferences.getLong("screenOn", System.currentTimeMillis());
 
                 if (screenOn != 0) {
                     long screenOff = statsPreferences.getLong("screenOff", 0);
@@ -83,8 +83,7 @@ public class ScreenReceiver extends BroadcastReceiver {
                     statsEditor.apply();
                 }
 
-                screenOn = System.currentTimeMillis();
-                statsEditor.putLong("screenOn", screenOn);
+                statsEditor.putLong("screenOn", System.currentTimeMillis());
                 statsEditor.apply();
 
             } finally {
@@ -92,7 +91,6 @@ public class ScreenReceiver extends BroadcastReceiver {
             }
         } else if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)){
             Log.e(TAG, "PHONE TURNED ON");
-
             resetAlarm();
         }
     }

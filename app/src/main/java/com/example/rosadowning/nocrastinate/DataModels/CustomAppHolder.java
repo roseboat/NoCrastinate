@@ -6,8 +6,20 @@ import android.graphics.drawable.Drawable;
 public class CustomAppHolder {
     public UsageStats usageStats;
     public Drawable appIcon;
-    public String appName;
+    public long timeInForeground;
+    public String appName, packageName;
     public Boolean isBlocked = false;
-    public String packageName;
+
+    public CustomAppHolder(){
+
+    }
+
+    public CustomAppHolder(String packageNameKey){
+        this.packageName = packageNameKey;
+    }
+
+    public String getPackageName(){
+        return packageName;
+    }
 
 }

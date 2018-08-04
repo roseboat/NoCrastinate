@@ -32,10 +32,7 @@ public class BlockedAppsService extends Service {
         Log.d("BLOCKED SERVICE", "STARTED!");
     }
 
-    public BlockedAppsService() {
-
-    }
-
+    public BlockedAppsService() {}
 
     public IBinder onBind(Intent arg0) {
         return null;
@@ -48,7 +45,6 @@ public class BlockedAppsService extends Service {
     }
 
     private void startService() {
-        Log.d("BLOCKED SERVICE", "start service reached - timer task initalizing");
         if (!needPermissionForBlocking(context)){
         timer.scheduleAtFixedRate(new mainTask(), 0, 500);}
     }
@@ -56,14 +52,10 @@ public class BlockedAppsService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        Log.d("BLOCKED SERVICE", "onStart command reached");
-
         return super.onStartCommand(intent, flags, startId);
     }
 
     public boolean showHomeScreen() {
-        Log.d("BLOCKED SERVICE", "showing home screen");
-
         Intent startMain = new Intent(Intent.ACTION_MAIN);
         startMain.addCategory(Intent.CATEGORY_HOME);
         startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -73,16 +65,11 @@ public class BlockedAppsService extends Service {
 
     private class mainTask extends TimerTask {
         public void run() {
-
-            Log.d("BLOCKED SERVICE", "thread started");
-
             BlockedAppsDBContract.BlockedAppsDBHelper dbHelper = new BlockedAppsDBContract.BlockedAppsDBHelper(context);
             SQLiteDatabase sqlBlockedApps = dbHelper.getReadableDatabase();
             List<String> blockedNames = dbHelper.getBlockedApps();
 
             for (String packageName : blockedNames) {
-                Log.d("BLOCKED SERVICE", "blocked package name = " + packageName);
-
                 if (getTopPackage().equals(packageName)) {
                     showHomeScreen();
                 }

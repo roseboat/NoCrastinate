@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class StatsIconData {
 
@@ -14,6 +15,7 @@ public class StatsIconData {
     private int noOfUnlocks;
     private long overallTime;
     private long tasksCompleted;
+    private List<CustomAppHolder> appsList;
 
     public StatsIconData(){
 
@@ -55,5 +57,10 @@ public class StatsIconData {
         return tasksCompleted;
     }
 
+    public List<CustomAppHolder> getAppsList(){ return appsList; }
+
+    public void setAppsList(List<CustomAppHolder> apps){
+        this.appsList = apps;
+    }
 
 }

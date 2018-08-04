@@ -25,7 +25,6 @@ public class AppStatisticsAdapter extends RecyclerView.Adapter<AppStatisticsAdap
     private PackageManager packageManager;
     private Context context;
 
-
     public AppStatisticsAdapter(Context context){
         this.context = context;
     }
@@ -41,9 +40,11 @@ public class AppStatisticsAdapter extends RecyclerView.Adapter<AppStatisticsAdap
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
-        viewHolder.getPackageName().setText(customAppHolders.get(position).appName);
+        viewHolder.getAppName().setText(customAppHolders.get(position).appName);
         viewHolder.getAppIcon().setImageDrawable(customAppHolders.get(position).appIcon);
-        long dur = customAppHolders.get(position).usageStats.getTotalTimeInForeground();
+        long dur = customAppHolders.get(position).timeInForeground;
+
+//        long dur = customAppHolders.get(position).usageStats.getTotalTimeInForeground();
         String time = TimeHelper.formatDuration(dur);
         viewHolder.mOverallTime.setText(time);
     }
@@ -58,22 +59,21 @@ public class AppStatisticsAdapter extends RecyclerView.Adapter<AppStatisticsAdap
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView mPackageName;
+        private final TextView mAppName;
         private final ImageView mAppIcon;
         private final TextView mOverallTime;
 
         public ViewHolder(View v) {
             super(v);
-            mPackageName = (TextView) v.findViewById(R.id.textview_package_name);
+            mAppName = (TextView) v.findViewById(R.id.textview_package_name);
             mOverallTime = (TextView) v.findViewById(R.id.text_view_app_time_spent);
             mAppIcon = (ImageView) v.findViewById(R.id.app_icon);
         }
 
+        public TextView getOverallTime() { return mOverallTime; }
 
-        public TextView getmOverallTime() { return mOverallTime; }
-
-        public TextView getPackageName() {
-            return mPackageName;
+        public TextView getAppName() {
+            return mAppName;
         }
 
         public ImageView getAppIcon() {

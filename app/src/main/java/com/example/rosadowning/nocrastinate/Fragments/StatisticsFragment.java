@@ -1,10 +1,9 @@
 package com.example.rosadowning.nocrastinate.Fragments;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.AlarmManager;
-import android.app.AppOpsManager;
 import android.app.PendingIntent;
+import android.app.usage.UsageEvents;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
@@ -30,7 +29,6 @@ import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
 import com.example.rosadowning.nocrastinate.DataModels.StatsIconData;
 import com.example.rosadowning.nocrastinate.DataModels.TimeHelper;
 
-import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -51,9 +49,8 @@ import org.joda.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.locks.ReentrantLock;
@@ -149,68 +146,77 @@ public class StatisticsFragment extends Fragment {
                     SharedPreferences usagePref = context.getSharedPreferences("UsageSettings", Context.MODE_PRIVATE);
                     final SharedPreferences.Editor editor = usagePref.edit();
 
-                    final Timer timerCheckUsage = new Timer();
-                    TimerTask timerTaskCheckUsage = new TimerTask() {
-                        @Override
-                        public void run() {
+                    if (!usagePref.getBoolean("SettingsOn", false)) {
+                        final Timer timerCheckUsage = new Timer();
+                        TimerTask timerTaskCheckUsage = new TimerTask() {
+                            @Override
+                            public void run() {
 
-                            List<UsageStats> usageStatsList = getUsageStatistics(intervalString);
+                                List<CustomAppHolder> usageStatsList = getStats(intervalString);
 
-                            if (usageStatsList.size() == 0 || usageStatsList.isEmpty()) {
-                                Log.i(TAG, "The user may not allow the access to apps usage. ");
+                                if (usageStatsList.size() == 0 || usageStatsList.isEmpty()) {
+                                    Log.i(TAG, "The user may not allow the access to apps usage. ");
 
-                                editor.putBoolean("SettingsOn", false);
-                                editor.apply();
+                                    editor.putBoolean("SettingsOn", false);
+                                    editor.apply();
 
-                                getActivity().runOnUiThread(new Runnable() {
+                                    getActivity().runOnUiThread(new Runnable() {
 
-                                    @Override
-                                    public void run() {
-                                        mUsagePopUp.setVisibility(View.VISIBLE);
-                                        mUsagePopUp.bringToFront();
-                                    }
-                                });
-                            } else {
+                                        @Override
+                                        public void run() {
+                                            mUsagePopUp.setVisibility(View.VISIBLE);
+                                            mUsagePopUp.bringToFront();
+                                        }
+                                    });
+                                } else {
 
-                                getActivity().runOnUiThread(new Runnable() {
+                                    getActivity().runOnUiThread(new Runnable() {
 
-                                    @Override
-                                    public void run() {
-                                        mUsagePopUp.setVisibility(View.GONE);
-                                        updateAppsList(getUsageStatistics(intervalString));
-                                    }
-                                });
-                                editor.putBoolean("SettingsOn", true);
-                                editor.apply();
-                                timerCheckUsage.cancel();
+                                        @Override
+                                        public void run() {
+                                            mUsagePopUp.setVisibility(View.GONE);
+                                        }
+                                    });
+                                    editor.putBoolean("SettingsOn", true);
+                                    editor.apply();
+                                    timerCheckUsage.cancel();
+                                }
                             }
-                        }
-                    };
-                    timerCheckUsage.schedule(timerTaskCheckUsage, 0, 3000);
+                        };
+                        timerCheckUsage.schedule(timerTaskCheckUsage, 0, 3000);
+                    }
 
                     long overallTime = sharedPreferences.getLong("totalDuration", 0);
                     SharedPreferences notiPreferences = context.getSharedPreferences("NotificationCheckboxes", Context.MODE_PRIVATE);
                     notiSettingsOne = notiPreferences.getBoolean("checkbox1", false);
 
+                    //// PROBLEM - DOES THIS WORK? SHOULD THIS ONLY BE SET ONCE?
                     if (notiSettingsOne) {
                         Duration remainingTime = Duration.millis(overallTime);
                         hours = remainingTime.getStandardHours();
                         preHours = hours;
                     }
+
                     Timer timerAsync = new Timer();
                     timerTaskAsync = new TimerTask() {
                         @Override
                         public void run() {
                             UpdateIcons newIcons = new UpdateIcons();
                             synchronized (newIcons) {
+                                Log.d(TAG, "in thread 1");
                                 newIcons.execute(intervalString);
                             }
                         }
                     };
                     timerAsync.schedule(timerTaskAsync, 0, 5000);
+//                    updateAppsList(getStats(intervalString));
+//
+//                    mUsageListAdapter.setCustomAppList(updatedAppsList);
+//                    mUsageListAdapter.notifyDataSetChanged();
+//                    mRecyclerView.scrollToPosition(0);
+
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -218,58 +224,65 @@ public class StatisticsFragment extends Fragment {
         });
     }
 
-    public static boolean hasPermission(@NonNull final Context context) {
-        // Usage Stats is theoretically available on API v19+, but official/reliable support starts with API v21.
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            return false;
-        }
+    public List<CustomAppHolder> getStats(String interval) {
 
-        final AppOpsManager appOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+        long startTime = 0;
+        long endTime = System.currentTimeMillis();
 
-        if (appOpsManager == null) {
-            return false;
-        }
-
-        final int mode = appOpsManager.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, android.os.Process.myUid(), context.getPackageName());
-        if (mode != AppOpsManager.MODE_ALLOWED) {
-            return false;
-        }
-
-        // Verify that access is possible. Some devices "lie" and return MODE_ALLOWED even when it's not.
-        final long now = System.currentTimeMillis();
-        final UsageStatsManager mUsageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
-        final List<UsageStats> stats = mUsageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, now - 1000 * 10, now);
-        return (stats != null && !stats.isEmpty());
-    }
-
-    public List<UsageStats> getUsageStatistics(String intervalType) {
-
-        long queryTime = 0;
-        switch (intervalType) {
-
+        switch (interval) {
             case "Daily":
-                queryTime = new DateTime().withTimeAtStartOfDay().getMillis();
+                startTime = new DateTime().withTimeAtStartOfDay().getMillis();
                 break;
             case "Weekly":
-                queryTime = new DateTime().minusWeeks(1).getMillis();
+                startTime = new DateTime().minusWeeks(1).getMillis();
                 break;
             case "Monthly":
-                queryTime = new DateTime().minusMonths(1).getMillis();
+                startTime = new DateTime().minusMonths(1).getMillis();
                 break;
             case "Yearly":
-                queryTime = new DateTime().minusYears(1).getMillis();
+                startTime = new DateTime().minusYears(1).getMillis();
                 break;
         }
-        Log.d(TAG, "Query time = " + new Date(queryTime).toString());
 
-        Map<String, UsageStats> usageStats = mUsageStatsManager.queryAndAggregateUsageStats(queryTime, System.currentTimeMillis());
-        List<UsageStats> queryUsageStats = new ArrayList<>();
-        queryUsageStats.addAll(usageStats.values());
-        return queryUsageStats;
+        mUsageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
+
+        UsageEvents.Event currentEvent;
+        List<UsageEvents.Event> allEvents = new ArrayList<>();
+        HashMap<String, CustomAppHolder> map = new HashMap<>();
+
+        UsageEvents mEvents = mUsageStatsManager.queryEvents(startTime, endTime);
+
+        while (mEvents.hasNextEvent()) {
+            currentEvent = new UsageEvents.Event();
+            mEvents.getNextEvent(currentEvent);
+            if (currentEvent.getEventType() == UsageEvents.Event.MOVE_TO_FOREGROUND ||
+                    currentEvent.getEventType() == UsageEvents.Event.MOVE_TO_BACKGROUND) {
+                allEvents.add(currentEvent);
+                String key = currentEvent.getPackageName();
+
+                if (map.get(key) == null)
+                    map.put(key, new CustomAppHolder(key));
+            }
+        }
+        for (int i = 0; i < allEvents.size()-1; i++) {
+            UsageEvents.Event E0 = allEvents.get(i);
+            UsageEvents.Event E1 = allEvents.get(i + 1);
+
+
+
+            if (E0.getEventType() == 1 && E1.getEventType() == 2
+                    && E0.getClassName().equals(E1.getClassName())) {
+                long diff = E1.getTimeStamp() - E0.getTimeStamp();
+                map.get(E0.getPackageName()).timeInForeground += diff;
+            }
+        }
+        List <CustomAppHolder> allEventsList = new ArrayList<>(map.values());
+        return allEventsList;
     }
 
-    private void updateAppsList(List<UsageStats> usageStatsList) {
-        List<CustomAppHolder> customAppHolders = new ArrayList<>();
+    private List<CustomAppHolder> updateAppsList(List<CustomAppHolder> allEventsList){
+
+        List<CustomAppHolder> updatedAppsList = new ArrayList<>();
 
         List<PackageInfo> installedPackages = context.getPackageManager()
                 .getInstalledPackages(0);
@@ -278,28 +291,28 @@ public class StatisticsFragment extends Fragment {
 
             if ((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
 
-                for (int i = 0; i < usageStatsList.size(); i++) {
+                for (int i = 0; i < allEventsList.size(); i++) {
                     CustomAppHolder customAppHolder = new CustomAppHolder();
-                    customAppHolder.usageStats = usageStatsList.get(i);
-                    if (packageInfo.packageName.equals(usageStatsList.get(i).getPackageName())) {
+                    if (packageInfo.packageName.equals(allEventsList.get(i).packageName)){
+                        customAppHolder.timeInForeground = allEventsList.get(i).timeInForeground;
+                        customAppHolder.packageName = packageInfo.packageName;
                         customAppHolder.appName = packageInfo.applicationInfo.loadLabel(context.getPackageManager()).toString();
                         try {
                             customAppHolder.appIcon = getActivity().getPackageManager()
-                                    .getApplicationIcon(customAppHolder.usageStats.getPackageName());
+                                    .getApplicationIcon(customAppHolder.packageName);
                         } catch (PackageManager.NameNotFoundException e) {
                             Log.w(TAG, String.format("App Icon is not found for %s",
-                                    customAppHolder.usageStats.getPackageName()));
+                                    customAppHolder.packageName));
                             customAppHolder.appIcon = getActivity().getDrawable(R.drawable.ic_nocrastinate_logo_only_transparent);
                         }
-                        customAppHolders.add(customAppHolder);
+                        updatedAppsList.add(customAppHolder);
                     }
                 }
             }
         }
-        Collections.sort(customAppHolders, new UsedMostOftenComparatorDesc());
-        mUsageListAdapter.setCustomAppList(customAppHolders);
-        mUsageListAdapter.notifyDataSetChanged();
-        mRecyclerView.scrollToPosition(0);
+
+        Collections.sort(updatedAppsList, new UsedMostOftenComparatorDesc());
+        return updatedAppsList;
     }
 
     private static class UsedMostOftenComparatorDesc implements Comparator<CustomAppHolder> {
@@ -307,7 +320,7 @@ public class StatisticsFragment extends Fragment {
         @Override
         public int compare(CustomAppHolder left, CustomAppHolder right) {
 
-            return Long.compare(right.usageStats.getTotalTimeInForeground(), left.usageStats.getTotalTimeInForeground());
+            return Long.compare(right.timeInForeground, left.timeInForeground);
         }
     }
 
@@ -324,11 +337,12 @@ public class StatisticsFragment extends Fragment {
             SharedPreferences.Editor editor = sharedPreferences.edit();
 
             try {
-                reentrantLock.lock();
                 int unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
-                long screenOn = sharedPreferences.getLong("screenOn", 0);
+                long screenOn = sharedPreferences.getLong("screenOn", System.currentTimeMillis());
                 long screenOff = sharedPreferences.getLong("screenOff", 0);
                 long overallTime = sharedPreferences.getLong("totalDuration", 0);
+
+                reentrantLock.lock();
 
                 if (screenOn != 0) {
                     if (screenOn > screenOff) {
@@ -337,6 +351,7 @@ public class StatisticsFragment extends Fragment {
                         overallTime = difference + overallTime;
                         editor.putLong("totalDuration", overallTime);
                         editor.putLong("screenOn", System.currentTimeMillis());
+                        editor.apply();
 
                         if (notiSettingsOne) {
                             Duration remainingTime = Duration.millis(overallTime);
@@ -358,8 +373,8 @@ public class StatisticsFragment extends Fragment {
                 } else {
                     editor.putLong("screenOn", System.currentTimeMillis());
                     editor.putLong("totalDuration", 0);
+                    editor.apply();
                 }
-                editor.apply();
 
                 ToDoReaderContract.ToDoListDbHelper toDoHelper = new ToDoReaderContract.ToDoListDbHelper(context);
                 SQLiteDatabase sql = toDoHelper.getWritableDatabase();
@@ -394,6 +409,10 @@ public class StatisticsFragment extends Fragment {
                 stats.setNoOfUnlocks(collectedUnlocks);
                 stats.setOverallTime(collectedTime);
             }
+
+            List<CustomAppHolder> appList = updateAppsList(getStats(timeInterval));
+            stats.setAppsList(appList);
+
             return stats;
         }
 
@@ -401,6 +420,10 @@ public class StatisticsFragment extends Fragment {
         protected synchronized void onPostExecute(StatsIconData iconData) {
 
             if (getView() == statsView) {
+
+                mRecyclerView.setAdapter(mUsageListAdapter);
+                mUsageListAdapter.setCustomAppList(iconData.getAppsList());
+                mUsageListAdapter.notifyDataSetChanged();
 
                 TextView timeHeader = (TextView) getView().findViewById(R.id.stats_header);
                 timeHeader.setText(TimeHelper.getHeadingString(timeInterval));
@@ -411,9 +434,11 @@ public class StatisticsFragment extends Fragment {
                 }
 
                 if ((Long) iconData.getOverallTime() != null) {
+                    Log.d(TAG, ""+iconData.getOverallTime());
                     String timeString = "";
                     if (iconData.getOverallTime() < 60000) {
                         timeString = "0m";
+
                     } else {
                         timeString = TimeHelper.formatDuration(iconData.getOverallTime());
                     }
