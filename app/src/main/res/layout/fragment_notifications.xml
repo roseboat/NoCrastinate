@@ -23,6 +23,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/settings_popup"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/icon_group_main"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+    <TextView
+        android:id="@+id/title_usage_off"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_large"
+        android:gravity="center"
+        style="@style/UsageOffText"
+        android:text="@string/usage_settings_off" />
+
+    <TextView
+        android:id="@+id/text_usage_off"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_large"
+        android:gravity="center"
+        android:text="@string/noti_settings_off"
+        android:textSize="@dimen/large_font_size" />
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="491dp"

@@ -71,7 +71,7 @@ public class StatisticsFragment extends Fragment {
     private LinearLayout mUsagePopUp;
     private String intervalString;
     private Context context;
-    private TimerTask timerTaskAsync;
+    private TimerTask timerTaskCheckUsage;
     private SharedPreferences sharedPreferences;
     private View statsView;
     private ReentrantLock reentrantLock;
@@ -102,6 +102,12 @@ public class StatisticsFragment extends Fragment {
     public void onResume() {
         super.onResume();
         this.onCreate(null);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        timerTaskCheckUsage.cancel();
     }
 
     @Override
@@ -146,70 +152,62 @@ public class StatisticsFragment extends Fragment {
                     SharedPreferences usagePref = context.getSharedPreferences("UsageSettings", Context.MODE_PRIVATE);
                     final SharedPreferences.Editor editor = usagePref.edit();
 
-                    if (!usagePref.getBoolean("SettingsOn", false)) {
-                        final Timer timerCheckUsage = new Timer();
-                        TimerTask timerTaskCheckUsage = new TimerTask() {
-                            @Override
-                            public void run() {
-
-                                List<CustomAppHolder> usageStatsList = getStats(intervalString);
-
-                                if (usageStatsList.size() == 0 || usageStatsList.isEmpty()) {
-                                    Log.i(TAG, "The user may not allow the access to apps usage. ");
-
-                                    editor.putBoolean("SettingsOn", false);
-                                    editor.apply();
-
-                                    getActivity().runOnUiThread(new Runnable() {
-
-                                        @Override
-                                        public void run() {
-                                            mUsagePopUp.setVisibility(View.VISIBLE);
-                                            mUsagePopUp.bringToFront();
-                                        }
-                                    });
-                                } else {
-
-                                    getActivity().runOnUiThread(new Runnable() {
-
-                                        @Override
-                                        public void run() {
-                                            mUsagePopUp.setVisibility(View.GONE);
-                                        }
-                                    });
-                                    editor.putBoolean("SettingsOn", true);
-                                    editor.apply();
-                                    timerCheckUsage.cancel();
-                                }
-                            }
-                        };
-                        timerCheckUsage.schedule(timerTaskCheckUsage, 0, 3000);
-                    }
-
                     long overallTime = sharedPreferences.getLong("totalDuration", 0);
                     SharedPreferences notiPreferences = context.getSharedPreferences("NotificationCheckboxes", Context.MODE_PRIVATE);
                     notiSettingsOne = notiPreferences.getBoolean("checkbox1", false);
 
-                    //// PROBLEM - DOES THIS WORK? SHOULD THIS ONLY BE SET ONCE?
                     if (notiSettingsOne) {
-                        Duration remainingTime = Duration.millis(overallTime);
-                        hours = remainingTime.getStandardHours();
+                        Duration timeOnPhone = Duration.millis(overallTime);
+                        hours = timeOnPhone.getStandardHours();
                         preHours = hours;
                     }
 
-                    Timer timerAsync = new Timer();
-                    timerTaskAsync = new TimerTask() {
+                    Timer timerCheckUsage = new Timer();
+                    timerTaskCheckUsage = new TimerTask() {
                         @Override
                         public void run() {
-                            UpdateIcons newIcons = new UpdateIcons();
-                            synchronized (newIcons) {
-                                newIcons.execute(intervalString);
+
+                            List<CustomAppHolder> usageStatsList = getStats(intervalString);
+
+                            if (usageStatsList.size() == 0 || usageStatsList.isEmpty()) {
+                                Log.i(TAG, "The user may not allow the access to apps usage. ");
+
+                                editor.putBoolean("SettingsOn", false);
+                                editor.apply();
+
+                                getActivity().runOnUiThread(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        mUsagePopUp.setVisibility(View.VISIBLE);
+                                        mUsagePopUp.bringToFront();
+                                    }
+                                });
+                            } else {
+                                Log.i(TAG, "Usage access settings ON");
+
+                                editor.putBoolean("SettingsOn", true);
+                                editor.apply();
+
+                                getActivity().runOnUiThread(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        mUsagePopUp.setVisibility(View.GONE);
+                                    }
+                                });
+
+                                UpdateIcons newIcons = new UpdateIcons();
+                                synchronized (newIcons) {
+                                    newIcons.execute(intervalString);
+                                }
                             }
                         }
                     };
-                    timerAsync.schedule(timerTaskAsync, 0, 5000);
+                    timerCheckUsage.schedule(timerTaskCheckUsage, 0, 4000);
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -269,12 +267,13 @@ public class StatisticsFragment extends Fragment {
                 map.get(preEvent.getPackageName()).timeInForeground += diff;
             }
         }
+        if (allEvents.size() > 0){
         UsageEvents.Event finalEvent = allEvents.get(allEvents.size()-1);
 
         if (finalEvent.getEventType() == 1 && finalEvent.getPackageName().contains("nocrastinate")){
             long diff = System.currentTimeMillis() - finalEvent.getTimeStamp();
             map.get(finalEvent.getPackageName()).timeInForeground+= diff;
-        }
+        }}
 
         List <CustomAppHolder> allEventsList = new ArrayList<>(map.values());
         return allEventsList;
@@ -298,6 +297,7 @@ public class StatisticsFragment extends Fragment {
                         customAppHolder.packageName = packageInfo.packageName;
                         customAppHolder.appName = packageInfo.applicationInfo.loadLabel(context.getPackageManager()).toString();
                         try {
+                            if (getActivity() != null)
                             customAppHolder.appIcon = getActivity().getPackageManager()
                                     .getApplicationIcon(customAppHolder.packageName);
                         } catch (PackageManager.NameNotFoundException e) {
@@ -345,24 +345,21 @@ public class StatisticsFragment extends Fragment {
                 long overallTime = sharedPreferences.getLong("totalDuration", 0);
 
                 if (screenOn != 0) {
-                    if (screenOn > screenOff && screenOn < System.currentTimeMillis()) {
+                    if (screenOn > screenOff) {
                         long currentTime = System.currentTimeMillis();
                         Log.d(TAG, "current time = " + currentTime);
+                        Log.d(TAG, "screen on = " + screenOn);
 
                         long difference = currentTime - screenOn;
-                        Log.d(TAG, "currentTime - screenOn = " + difference);
-
                         overallTime = difference + overallTime;
                         editor.putLong("totalDuration", overallTime);
-                        Log.d(TAG, "overall time += difference =  " + overallTime);
-
                         editor.putLong("screenOn", System.currentTimeMillis());
                         editor.apply();
 
                         if (notiSettingsOne) {
-                            Duration remainingTime = Duration.millis(overallTime);
-                            hours = remainingTime.getStandardHours();
-                            if (preHours != hours && hours != 0 && hours - preHours == 1) {
+                            Duration timeOnPhone = Duration.millis(overallTime);
+                            hours = timeOnPhone.getStandardHours();
+                            if (preHours != hours && hours != 0) {
                                 Log.d(TAG, "UPDATE : prehours = " + preHours + " hours = " + hours);
                                 Intent intent = new Intent(context, NotificationReceiver.class);
                                 intent.putExtra("Title", "NoCrastinate Usage Time Alert!");

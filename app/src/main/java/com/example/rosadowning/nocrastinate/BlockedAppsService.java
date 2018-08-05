@@ -46,7 +46,10 @@ public class BlockedAppsService extends Service {
 
     private void startService() {
         if (hasUsagePermission(context)){
-        timer.scheduleAtFixedRate(new mainTask(), 0, 500);}
+//        timer.scheduleAtFixedRate(new mainTask(), 0, 500);
+            timer.schedule(new mainTask(), 0, 500);
+
+        }
     }
 
     @Override
@@ -68,8 +71,8 @@ public class BlockedAppsService extends Service {
             BlockedAppsDBContract.BlockedAppsDBHelper dbHelper = new BlockedAppsDBContract.BlockedAppsDBHelper(context);
             SQLiteDatabase sqlBlockedApps = dbHelper.getReadableDatabase();
             List<String> blockedNames = dbHelper.getBlockedApps();
-
             for (String packageName : blockedNames) {
+                if (packageName != null && getTopPackage() != null)
                 if (getTopPackage().equals(packageName)) {
                     showHomeScreen();
                 }

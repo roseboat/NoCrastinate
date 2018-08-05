@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         if (!isMyServiceRunning(mBlockingService.getClass())) {
             startService(mServiceIntent);
         }
-
         scheduleMidnightAlarm();
         createNotificationChannel();
     }

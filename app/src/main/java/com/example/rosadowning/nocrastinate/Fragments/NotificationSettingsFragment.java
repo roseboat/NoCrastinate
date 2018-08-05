@@ -19,13 +19,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 
 import com.example.rosadowning.nocrastinate.BlockedAppsService;
 import com.example.rosadowning.nocrastinate.BroadcastReceivers.NotificationReceiver;
 import com.example.rosadowning.nocrastinate.R;
 
 import org.joda.time.DateTime;
-import org.joda.time.Duration;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -60,37 +60,28 @@ public class NotificationSettingsFragment extends Fragment {
         this.context = getContext();
         this.reentrantLock = new ReentrantLock();
 
-            notiPreferences = getContext().getSharedPreferences("NotificationCheckboxes", Context.MODE_PRIVATE);
-            editor = notiPreferences.edit();
+        notiPreferences = getContext().getSharedPreferences("NotificationCheckboxes", Context.MODE_PRIVATE);
+        editor = notiPreferences.edit();
 
-            notificationManager = NotificationManagerCompat.from(context);
+        notificationManager = NotificationManagerCompat.from(context);
 
-            freq1 = (CheckBox) view.findViewById(R.id.notification_checkbox_1);
-            freq2 = (CheckBox) view.findViewById(R.id.notification_checkbox_2);
-            freq3 = (CheckBox) view.findViewById(R.id.notification_checkbox_3);
+        freq1 = (CheckBox) view.findViewById(R.id.notification_checkbox_1);
+        freq2 = (CheckBox) view.findViewById(R.id.notification_checkbox_2);
+        freq3 = (CheckBox) view.findViewById(R.id.notification_checkbox_3);
 
-
-        SharedPreferences usagePref = context.getSharedPreferences("UsageSettings", Context.MODE_PRIVATE);
+        LinearLayout settingsPopup = (LinearLayout) view.findViewById(R.id.settings_popup);
 
         if (!BlockedAppsService.hasUsagePermission(context)) {
+            settingsPopup.setVisibility(View.VISIBLE);
+            settingsPopup.bringToFront();
 
             freq1.setEnabled(false);
             freq2.setEnabled(false);
             freq3.setEnabled(false);
 
-            AlertDialog alertDialog = new AlertDialog.Builder(context)
-                    .setMessage(R.string.dialog_message_noti_settings_off)
-                    .setTitle(R.string.dialog_title_noti_settings_off)
-                    .setPositiveButton("Take me there!", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
-                        }
-                    }).setNegativeButton("Cancel", null).create();
-            alertDialog.show();
-        }
+        } else {
 
-        else {
+            settingsPopup.setVisibility(View.GONE);
 
             freq1.setChecked(notiPreferences.getBoolean("checkbox1", false));
             freq2.setChecked(notiPreferences.getBoolean("checkbox2", false));
@@ -185,7 +176,6 @@ public class NotificationSettingsFragment extends Fragment {
                 }
             });
         }
-
         return view;
     }
 

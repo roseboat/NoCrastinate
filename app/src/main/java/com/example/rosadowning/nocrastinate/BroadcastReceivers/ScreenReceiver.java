@@ -41,20 +41,16 @@ public class ScreenReceiver extends BroadcastReceiver {
         if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
             Log.e(TAG, "PHONE LOCKED");
 
-            long screenOff = System.currentTimeMillis();
-
             try {
                 reentrantLock.lock();
-                statsEditor.putLong("screenOff", screenOff);
+                statsEditor.putLong("screenOff", System.currentTimeMillis());
                 statsEditor.apply();
             } finally {
                 reentrantLock.lock();
             }
         } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
             Log.e(TAG, "SCREEN ON");
-
             resetAlarm();
-
         } else if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
             Log.e(TAG, "PHONE UNLOCKED");
 
@@ -72,7 +68,7 @@ public class ScreenReceiver extends BroadcastReceiver {
                         unlockNotification();
                     }
                 }
-                long screenOn = statsPreferences.getLong("screenOn", System.currentTimeMillis());
+                long screenOn = statsPreferences.getLong("screenOn", 0);
 
                 if (screenOn != 0) {
                     long screenOff = statsPreferences.getLong("screenOff", 0);
@@ -82,7 +78,6 @@ public class ScreenReceiver extends BroadcastReceiver {
                     statsEditor.putLong("totalDuration", newDuration);
                     statsEditor.apply();
                 }
-
                 statsEditor.putLong("screenOn", System.currentTimeMillis());
                 statsEditor.apply();
 

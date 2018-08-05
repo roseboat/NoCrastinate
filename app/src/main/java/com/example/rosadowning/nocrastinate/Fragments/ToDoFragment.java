@@ -65,8 +65,8 @@ public class ToDoFragment extends Fragment {
             public void onItemCheck(ToDoItem item, int position) {
 
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
-                dbHelper.setCompleted(item, true);
                 int id = dbHelper.getID(item);
+                dbHelper.setCompleted(item, true);
                 Toast.makeText(getContext(), "'"+ item.getName() + "' is completed!", Toast.LENGTH_LONG).show();
                 NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getContext());
                 notificationManager.cancel(id);

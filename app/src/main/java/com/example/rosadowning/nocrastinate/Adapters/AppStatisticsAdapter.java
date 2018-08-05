@@ -43,9 +43,12 @@ public class AppStatisticsAdapter extends RecyclerView.Adapter<AppStatisticsAdap
         viewHolder.getAppName().setText(customAppHolders.get(position).appName);
         viewHolder.getAppIcon().setImageDrawable(customAppHolders.get(position).appIcon);
         long dur = customAppHolders.get(position).timeInForeground;
-
-//        long dur = customAppHolders.get(position).usageStats.getTotalTimeInForeground();
-        String time = TimeHelper.formatDuration(dur);
+        String time = "";
+        if (dur < 60000){
+          time = "0m";
+        } else {
+           time = TimeHelper.formatDuration(dur);
+        }
         viewHolder.mOverallTime.setText(time);
     }
 
