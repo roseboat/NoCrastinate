@@ -57,7 +57,6 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
-import jp.wasabeef.recyclerview.adapters.AnimationAdapter;
 
 import static android.content.Context.ALARM_SERVICE;
 
@@ -114,6 +113,7 @@ public class StatisticsFragment extends Fragment {
         this.statsView = getView();
 
         editor.putLong("statisticsLaunch", System.currentTimeMillis());
+        editor.putBoolean("statisticsFragmentLaunched", true);
         editor.apply();
 
         // Gets the elements in the view
@@ -197,15 +197,16 @@ public class StatisticsFragment extends Fragment {
                                         mSpinner.setVisibility(View.VISIBLE);
                                     }
                                 });
-                                if (!sharedPreferences.getBoolean("InReceiver", true)) {
-                                UpdateIcons newIcons = new UpdateIcons();
+
+                                if (!sharedPreferences.getBoolean("InReceiver", true) && !sharedPreferences.getBoolean("screenOffBoolean", true)) {
+                                    UpdateIcons newIcons = new UpdateIcons();
                                 synchronized (newIcons) {
                                     newIcons.execute(intervalString);
                                 }}
                             }
                         }
                     };
-                    timerCheckUsage.schedule(timerTaskCheckUsage, 0, 4000);
+                    timerCheckUsage.schedule(timerTaskCheckUsage, 500, 4000);
                 }
             }
 
@@ -344,34 +345,35 @@ public class StatisticsFragment extends Fragment {
                     long overallTime = sharedPreferences.getLong("totalDuration", 0);
                     long fragmentLaunched = sharedPreferences.getLong("statisticsLaunch", 0);
 
+
                     if (screenOn != 0) {
-                        if (screenOn > screenOff || fragmentLaunched > screenOff) {
-                            long currentTime = System.currentTimeMillis();
-                            long difference = currentTime - screenOn;
-                            overallTime = difference + overallTime;
-                            editor.putLong("totalDuration", overallTime);
-                            editor.putLong("screenOn", System.currentTimeMillis());
-                            editor.apply();
+                            if (screenOn > screenOff || fragmentLaunched > screenOff) {
+                                long currentTime = System.currentTimeMillis();
+                                long difference = currentTime - screenOn;
+                                overallTime = difference + overallTime;
+                                editor.putLong("totalDuration", overallTime);
+                                editor.putLong("screenOn", System.currentTimeMillis());
+                                editor.apply();
 
-                            Log.d(TAG, "duration = " + TimeHelper.formatDuration(overallTime));
+                                Log.d(TAG, "duration = " + TimeHelper.formatDuration(overallTime));
 
-                            if (notiSettingsOne) {
-                                Duration timeOnPhone = Duration.millis(overallTime);
-                                hours = timeOnPhone.getStandardHours();
-                                if (preHours != hours && hours != 0) {
-                                    Log.d(TAG, "UPDATE : prehours = " + preHours + " hours = " + hours);
-                                    Intent intent = new Intent(context, NotificationReceiver.class);
-                                    intent.putExtra("Title", "NoCrastinate Usage Time Alert!");
-                                    intent.putExtra("AlarmID", 10001);
-                                    intent.putExtra("Content", "You've been using your phone for " + hours + " hours today! :(");
-                                    PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-                                    AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-                                    alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
-                                    preHours = hours;
-                                } else preHours = hours;
+                                if (notiSettingsOne) {
+                                    Duration timeOnPhone = Duration.millis(overallTime);
+                                    hours = timeOnPhone.getStandardHours();
+                                    if (preHours != hours && hours != 0) {
+                                        Log.d(TAG, "UPDATE : prehours = " + preHours + " hours = " + hours);
+                                        Intent intent = new Intent(context, NotificationReceiver.class);
+                                        intent.putExtra("Title", "NoCrastinate Usage Time Alert!");
+                                        intent.putExtra("AlarmID", 10001);
+                                        intent.putExtra("Content", "You've been using your phone for " + hours + " hours today! :(");
+                                        PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                                        AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+                                        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
+                                        preHours = hours;
+                                    } else preHours = hours;
+                                }
                             }
-                        }}
-                        else {
+                        } else {
                             editor.putLong("screenOn", System.currentTimeMillis());
                             editor.putLong("totalDuration", 0);
                             editor.apply();

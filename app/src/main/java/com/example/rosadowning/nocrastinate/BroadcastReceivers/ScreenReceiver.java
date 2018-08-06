@@ -55,25 +55,27 @@ public class ScreenReceiver extends BroadcastReceiver {
             Log.e(TAG, "PHONE UNLOCKED");
 
              try {
+                reentrantLock.lock();
+
                  statsEditor.putBoolean("screenOffBoolean", false);
                  statsEditor.putBoolean("InReceiver", true);
                  statsEditor.apply();
 
-                reentrantLock.lock();
-
                 // HANDLES SCREEN ON, OFF & OVERALL TIME
                 long screenOn = statsPreferences.getLong("screenOn", 0);
+                long newScreenOn = System.currentTimeMillis();
+                statsEditor.putLong("screenOn", newScreenOn);
+                statsEditor.apply();
 
                 if (screenOn != 0) {
                     long screenOff = statsPreferences.getLong("screenOff", 0);
-                    long duration = screenOff - screenOn;
-                    long currentDuration = statsPreferences.getLong("totalDuration", 0);
-                    long newDuration = currentDuration + duration;
-                    statsEditor.putLong("totalDuration", newDuration);
+                    long durationPreviousSession = screenOff - screenOn;
+                    long durationSoFar = statsPreferences.getLong("totalDuration", 0);
+                    long updatedDuration = durationSoFar + durationPreviousSession;
+                    statsEditor.putLong("totalDuration", updatedDuration);
                     statsEditor.apply();
                 }
-                long now = System.currentTimeMillis();
-                statsEditor.putLong("screenOn", now);
+                statsEditor.putLong("screenOn", System.currentTimeMillis());
                 statsEditor.apply();
 
                 // HANDLES UNLOCKS
@@ -92,7 +94,6 @@ public class ScreenReceiver extends BroadcastReceiver {
                 }
             } finally {
                 reentrantLock.unlock();
-//                 StatisticsFragment.screenReceiverFinished.signalAll();
                  statsEditor.putBoolean("InReceiver", false);
                  statsEditor.apply();
 
