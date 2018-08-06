@@ -17,8 +17,4 @@ public class CustomAppHolder {
         this.packageName = packageNameKey;
     }
 
-    public String getPackageName() {
-        return packageName;
-    }
-
 }

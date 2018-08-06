@@ -73,7 +73,6 @@ public class BlockedAppsDBContract {
             db.close();
         }
 
-
         public boolean isAppBlocked(String packageName) {
 
             SQLiteDatabase db = this.getReadableDatabase();

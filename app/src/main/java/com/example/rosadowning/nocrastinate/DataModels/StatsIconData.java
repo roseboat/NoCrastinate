@@ -17,7 +17,7 @@ public class StatsIconData {
     private long tasksCompleted;
     private List<CustomAppHolder> appsList;
 
-    public StatsIconData(){
+    public StatsIconData() {
 
         date = null;
         noOfUnlocks = 0;
@@ -25,11 +25,11 @@ public class StatsIconData {
         tasksCompleted = 0;
     }
 
-    public void setDate(Date date){
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public Date getDate(){
+    public Date getDate() {
         return date;
     }
 
@@ -49,17 +49,19 @@ public class StatsIconData {
         this.overallTime = overallTime;
     }
 
-    public void setTasksCompleted(long tasksCompleted){
+    public void setTasksCompleted(long tasksCompleted) {
         this.tasksCompleted = tasksCompleted;
     }
 
-    public long getTasksCompleted(){
+    public long getTasksCompleted() {
         return tasksCompleted;
     }
 
-    public List<CustomAppHolder> getAppsList(){ return appsList; }
+    public List<CustomAppHolder> getAppsList() {
+        return appsList;
+    }
 
-    public void setAppsList(List<CustomAppHolder> apps){
+    public void setAppsList(List<CustomAppHolder> apps) {
         this.appsList = apps;
     }
 

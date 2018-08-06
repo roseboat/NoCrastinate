@@ -70,7 +70,7 @@ public class ToDoFragment extends Fragment {
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
                 int id = dbHelper.getID(item);
                 dbHelper.setCompleted(item, true);
-                Toast.makeText(getContext(), "'"+ item.getName() + "' is completed!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "'" + item.getName() + "' is completed!", Toast.LENGTH_LONG).show();
                 NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getContext());
                 notificationManager.cancel(id);
 
@@ -111,9 +111,9 @@ public class ToDoFragment extends Fragment {
         });
 
         Button completedToDos = (Button) view.findViewById(R.id.button_view_completed_todos);
-        completedToDos.setOnClickListener(new View.OnClickListener(){
+        completedToDos.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container, new CompletedToDoFragment()).addToBackStack(null).commit();
             }
         });

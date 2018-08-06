@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Mon Aug 06 19:50:26 BST 2018
+#Mon Aug 06 23:18:53 BST 2018
 1.base=/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/transforms/dexMerger/debug/149
 2.path=classes.dex
 0.baseType=DIRECTORY

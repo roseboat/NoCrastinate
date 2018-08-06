@@ -62,7 +62,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
             viewHolder.getDueDate().setText("");
         }
 
-        if (alarm.getTime() != 0){
+        if (alarm.getTime() != 0) {
             viewHolder.getHasAlarm().setVisibility(View.VISIBLE);
         }
 
@@ -109,7 +109,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
         });
     }
 
-    public void remove(int position){
+    public void remove(int position) {
 
         toDoList.remove(position);
         notifyItemRemoved(position);
@@ -157,16 +157,25 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
         public CheckBox getIsCompleted() {
             return isCompleted;
         }
+
         public CheckBox getIsStarred() {
             return isStarred;
         }
+
         public TextView getName() {
             return name;
         }
+
         public TextView getDueDate() {
             return dueDate;
         }
-        public ImageView getHasAlarm() { return hasAlarm;};
+
+        public ImageView getHasAlarm() {
+            return hasAlarm;
+        }
+
+        ;
+
         public RelativeLayout getWholeToDoItem() {
             return wholeToDoItem;
         }

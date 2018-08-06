@@ -203,13 +203,13 @@ public class NotificationSettingsFragment extends Fragment {
         alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, weekly.getTimeInMillis(), startPIntent);
     }
 
-    public void deleteNotificationAlarm(int deleteNotificationID){
+    public void deleteNotificationAlarm(int deleteNotificationID) {
 
         String title = "";
 
-        if (deleteNotificationID == FREQ_2_ALARM_1){
+        if (deleteNotificationID == FREQ_2_ALARM_1) {
             title = FREQ_2_ALARM_TITLE;
-        } else if (deleteNotificationID == FREQ_3_ALARM_1){
+        } else if (deleteNotificationID == FREQ_3_ALARM_1) {
             title = FREQ_3_ALARM_TITLE;
         }
 

@@ -124,8 +124,10 @@ public class CompletedToDoListAdapter extends RecyclerView.Adapter<CompletedToDo
         }
 
     }
+
     public interface OnItemClickListener {
-        void onItemClick(ToDoItem item);}
+        void onItemClick(ToDoItem item);
+    }
 
 
 }

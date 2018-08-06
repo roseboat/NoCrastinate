@@ -13,7 +13,7 @@ import java.util.Locale;
 
 public class TimeHelper {
 
-    public static String formatDuration(long duration){
+    public static String formatDuration(long duration) {
 
         Duration dur = new Duration(duration);
         PeriodFormatter formatter = new PeriodFormatterBuilder()
@@ -28,7 +28,7 @@ public class TimeHelper {
         return formatted;
     }
 
-    public static String getHeadingString(String interval){
+    public static String getHeadingString(String interval) {
 
         StringBuilder headingString = new StringBuilder();
 
@@ -53,6 +53,4 @@ public class TimeHelper {
         }
         return headingString.toString();
     }
-
-
 }

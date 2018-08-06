@@ -26,9 +26,9 @@ public class BlockAppsAdapter extends RecyclerView.Adapter<BlockAppsAdapter.View
     private Context context;
     private final OnItemClickListener blockAppListeners;
 
-    public BlockAppsAdapter(List<CustomAppHolder> holders, OnItemClickListener listener){
-           this.mApplicationsList = holders;
-            this.blockAppListeners = listener;
+    public BlockAppsAdapter(List<CustomAppHolder> holders, OnItemClickListener listener) {
+        this.mApplicationsList = holders;
+        this.blockAppListeners = listener;
 
     }
 
@@ -104,9 +104,13 @@ public class BlockAppsAdapter extends RecyclerView.Adapter<BlockAppsAdapter.View
             return mAppIcon;
         }
 
-        public Switch getSwitch() { return mSwitch; }
+        public Switch getSwitch() {
+            return mSwitch;
+        }
 
-        public ImageView getLockIcon() { return mLockIcon; }
+        public ImageView getLockIcon() {
+            return mLockIcon;
+        }
 
         public void bind(final CustomAppHolder item, final BlockAppsAdapter.OnItemClickListener listener) {
             itemView.setOnClickListener(new View.OnClickListener() {

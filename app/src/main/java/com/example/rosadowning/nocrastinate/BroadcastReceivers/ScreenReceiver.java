@@ -54,12 +54,12 @@ public class ScreenReceiver extends BroadcastReceiver {
         } else if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
             Log.e(TAG, "PHONE UNLOCKED");
 
-             try {
+            try {
                 reentrantLock.lock();
 
-                 statsEditor.putBoolean("screenOffBoolean", false);
-                 statsEditor.putBoolean("InReceiver", true);
-                 statsEditor.apply();
+                statsEditor.putBoolean("screenOffBoolean", false);
+                statsEditor.putBoolean("InReceiver", true);
+                statsEditor.apply();
 
                 // HANDLES SCREEN ON, OFF & OVERALL TIME
                 long screenOn = statsPreferences.getLong("screenOn", 0);
@@ -94,8 +94,8 @@ public class ScreenReceiver extends BroadcastReceiver {
                 }
             } finally {
                 reentrantLock.unlock();
-                 statsEditor.putBoolean("InReceiver", false);
-                 statsEditor.apply();
+                statsEditor.putBoolean("InReceiver", false);
+                statsEditor.apply();
 
             }
         } else if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {

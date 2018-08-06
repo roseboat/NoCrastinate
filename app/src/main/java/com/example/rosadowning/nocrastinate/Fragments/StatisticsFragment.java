@@ -200,9 +200,10 @@ public class StatisticsFragment extends Fragment {
 
                                 if (!sharedPreferences.getBoolean("InReceiver", true) && !sharedPreferences.getBoolean("screenOffBoolean", true)) {
                                     UpdateIcons newIcons = new UpdateIcons();
-                                synchronized (newIcons) {
-                                    newIcons.execute(intervalString);
-                                }}
+                                    synchronized (newIcons) {
+                                        newIcons.execute(intervalString);
+                                    }
+                                }
                             }
                         }
                     };
@@ -258,7 +259,7 @@ public class StatisticsFragment extends Fragment {
                     map.put(key, new CustomAppHolder(key));
             }
         }
-        for (int i = 0; i < allEvents.size()-1; i++) {
+        for (int i = 0; i < allEvents.size() - 1; i++) {
             UsageEvents.Event preEvent = allEvents.get(i);
             UsageEvents.Event postEvent = allEvents.get(i + 1);
 
@@ -269,19 +270,20 @@ public class StatisticsFragment extends Fragment {
                 map.get(preEvent.getPackageName()).timeInForeground += diff;
             }
         }
-        if (allEvents.size() > 0){
-        UsageEvents.Event finalEvent = allEvents.get(allEvents.size()-1);
+        if (allEvents.size() > 0) {
+            UsageEvents.Event finalEvent = allEvents.get(allEvents.size() - 1);
 
-        if (finalEvent.getEventType() == 1 && finalEvent.getPackageName().contains("nocrastinate")){
-            long diff = System.currentTimeMillis() - finalEvent.getTimeStamp();
-            map.get(finalEvent.getPackageName()).timeInForeground+= diff;
-        }}
+            if (finalEvent.getEventType() == 1 && finalEvent.getPackageName().contains("nocrastinate")) {
+                long diff = System.currentTimeMillis() - finalEvent.getTimeStamp();
+                map.get(finalEvent.getPackageName()).timeInForeground += diff;
+            }
+        }
 
-        List <CustomAppHolder> allEventsList = new ArrayList<>(map.values());
+        List<CustomAppHolder> allEventsList = new ArrayList<>(map.values());
         return allEventsList;
     }
 
-    private List<CustomAppHolder> updateAppsList(List<CustomAppHolder> allEventsList){
+    private List<CustomAppHolder> updateAppsList(List<CustomAppHolder> allEventsList) {
 
         List<CustomAppHolder> updatedAppsList = new ArrayList<>();
 
@@ -294,14 +296,14 @@ public class StatisticsFragment extends Fragment {
 
                 for (int i = 0; i < allEventsList.size(); i++) {
                     CustomAppHolder customAppHolder = new CustomAppHolder();
-                    if (packageInfo.packageName.equals(allEventsList.get(i).packageName)){
+                    if (packageInfo.packageName.equals(allEventsList.get(i).packageName)) {
                         customAppHolder.timeInForeground = allEventsList.get(i).timeInForeground;
                         customAppHolder.packageName = packageInfo.packageName;
                         customAppHolder.appName = packageInfo.applicationInfo.loadLabel(context.getPackageManager()).toString();
                         try {
                             if (getActivity() != null)
-                            customAppHolder.appIcon = getActivity().getPackageManager()
-                                    .getApplicationIcon(customAppHolder.packageName);
+                                customAppHolder.appIcon = getActivity().getPackageManager()
+                                        .getApplicationIcon(customAppHolder.packageName);
                         } catch (PackageManager.NameNotFoundException e) {
                             Log.w(TAG, String.format("App Icon is not found for %s",
                                     customAppHolder.packageName));
@@ -336,86 +338,86 @@ public class StatisticsFragment extends Fragment {
             this.timeInterval = strings[0];
             StatsIconData stats = new StatsIconData();
 
-                try {
-                    reentrantLock.lock();
+            try {
+                reentrantLock.lock();
 
-                    int unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
-                    long screenOn = sharedPreferences.getLong("screenOn", 0);
-                    long screenOff = sharedPreferences.getLong("screenOff", 0);
-                    long overallTime = sharedPreferences.getLong("totalDuration", 0);
-                    long fragmentLaunched = sharedPreferences.getLong("statisticsLaunch", 0);
+                int unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
+                long screenOn = sharedPreferences.getLong("screenOn", 0);
+                long screenOff = sharedPreferences.getLong("screenOff", 0);
+                long overallTime = sharedPreferences.getLong("totalDuration", 0);
+                long fragmentLaunched = sharedPreferences.getLong("statisticsLaunch", 0);
 
 
-                    if (screenOn != 0) {
-                            if (screenOn > screenOff || fragmentLaunched > screenOff) {
-                                long currentTime = System.currentTimeMillis();
-                                long difference = currentTime - screenOn;
-                                overallTime = difference + overallTime;
-                                editor.putLong("totalDuration", overallTime);
-                                editor.putLong("screenOn", System.currentTimeMillis());
-                                editor.apply();
+                if (screenOn != 0) {
+                    if (screenOn > screenOff || fragmentLaunched > screenOff) {
+                        long currentTime = System.currentTimeMillis();
+                        long difference = currentTime - screenOn;
+                        overallTime = difference + overallTime;
+                        editor.putLong("totalDuration", overallTime);
+                        editor.putLong("screenOn", System.currentTimeMillis());
+                        editor.apply();
 
-                                Log.d(TAG, "duration = " + TimeHelper.formatDuration(overallTime));
+                        Log.d(TAG, "duration = " + TimeHelper.formatDuration(overallTime));
 
-                                if (notiSettingsOne) {
-                                    Duration timeOnPhone = Duration.millis(overallTime);
-                                    hours = timeOnPhone.getStandardHours();
-                                    if (preHours != hours && hours != 0) {
-                                        Log.d(TAG, "UPDATE : prehours = " + preHours + " hours = " + hours);
-                                        Intent intent = new Intent(context, NotificationReceiver.class);
-                                        intent.putExtra("Title", "NoCrastinate Usage Time Alert!");
-                                        intent.putExtra("AlarmID", 10001);
-                                        intent.putExtra("Content", "You've been using your phone for " + hours + " hours today! :(");
-                                        PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-                                        AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-                                        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
-                                        preHours = hours;
-                                    } else preHours = hours;
-                                }
-                            }
-                        } else {
-                            editor.putLong("screenOn", System.currentTimeMillis());
-                            editor.putLong("totalDuration", 0);
-                            editor.apply();
+                        if (notiSettingsOne) {
+                            Duration timeOnPhone = Duration.millis(overallTime);
+                            hours = timeOnPhone.getStandardHours();
+                            if (preHours != hours && hours != 0) {
+                                Log.d(TAG, "UPDATE : prehours = " + preHours + " hours = " + hours);
+                                Intent intent = new Intent(context, NotificationReceiver.class);
+                                intent.putExtra("Title", "NoCrastinate Usage Time Alert!");
+                                intent.putExtra("AlarmID", 10001);
+                                intent.putExtra("Content", "You've been using your phone for " + hours + " hours today! :(");
+                                PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                                AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+                                alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
+                                preHours = hours;
+                            } else preHours = hours;
                         }
-
-                        ToDoReaderContract.ToDoListDbHelper toDoHelper = new ToDoReaderContract.ToDoListDbHelper(context);
-                        SQLiteDatabase sql = toDoHelper.getWritableDatabase();
-                        long beginTime = new DateTime().withTimeAtStartOfDay().getMillis();
-                        long endTime = new DateTime().plusDays(1).withTimeAtStartOfDay().getMillis();
-                        long tasksCompleted = toDoHelper.getNoOfCompletedToDos(beginTime, endTime);
-
-                        stats.setTasksCompleted(tasksCompleted);
-                        stats.setNoOfUnlocks(unlocks);
-                        stats.setOverallTime(overallTime);
-
-                } finally {
-                    reentrantLock.unlock();
-                }
-
-                if (!timeInterval.equals("Daily")) {
-
-                    StatsDBContract.StatsDBHelper statsHelper = new StatsDBContract.StatsDBHelper(context);
-                    SQLiteDatabase db = statsHelper.getReadableDatabase();
-                    ArrayList<StatsIconData> statsFromInterval = statsHelper.getStatsForInterval(timeInterval);
-
-                    int collectedUnlocks = stats.getNoOfUnlocks();
-                    long collectedCompleted = stats.getTasksCompleted();
-                    long collectedTime = stats.getOverallTime();
-
-                    for (StatsIconData queriedStats : statsFromInterval) {
-                        collectedUnlocks += queriedStats.getNoOfUnlocks();
-                        collectedCompleted += queriedStats.getTasksCompleted();
-                        collectedTime += queriedStats.getOverallTime();
                     }
-
-                    stats.setTasksCompleted(collectedCompleted);
-                    stats.setNoOfUnlocks(collectedUnlocks);
-                    stats.setOverallTime(collectedTime);
+                } else {
+                    editor.putLong("screenOn", System.currentTimeMillis());
+                    editor.putLong("totalDuration", 0);
+                    editor.apply();
                 }
 
-                List<CustomAppHolder> appList = updateAppsList(getStats(timeInterval));
-                stats.setAppsList(appList);
+                ToDoReaderContract.ToDoListDbHelper toDoHelper = new ToDoReaderContract.ToDoListDbHelper(context);
+                SQLiteDatabase sql = toDoHelper.getWritableDatabase();
+                long beginTime = new DateTime().withTimeAtStartOfDay().getMillis();
+                long endTime = new DateTime().plusDays(1).withTimeAtStartOfDay().getMillis();
+                long tasksCompleted = toDoHelper.getNoOfCompletedToDos(beginTime, endTime);
+
+                stats.setTasksCompleted(tasksCompleted);
+                stats.setNoOfUnlocks(unlocks);
+                stats.setOverallTime(overallTime);
+
+            } finally {
+                reentrantLock.unlock();
+            }
+
+            if (!timeInterval.equals("Daily")) {
+
+                StatsDBContract.StatsDBHelper statsHelper = new StatsDBContract.StatsDBHelper(context);
+                SQLiteDatabase db = statsHelper.getReadableDatabase();
+                ArrayList<StatsIconData> statsFromInterval = statsHelper.getStatsForInterval(timeInterval);
+
+                int collectedUnlocks = stats.getNoOfUnlocks();
+                long collectedCompleted = stats.getTasksCompleted();
+                long collectedTime = stats.getOverallTime();
+
+                for (StatsIconData queriedStats : statsFromInterval) {
+                    collectedUnlocks += queriedStats.getNoOfUnlocks();
+                    collectedCompleted += queriedStats.getTasksCompleted();
+                    collectedTime += queriedStats.getOverallTime();
+                }
+
+                stats.setTasksCompleted(collectedCompleted);
+                stats.setNoOfUnlocks(collectedUnlocks);
+                stats.setOverallTime(collectedTime);
+            }
+
+            List<CustomAppHolder> appList = updateAppsList(getStats(timeInterval));
+            stats.setAppsList(appList);
 
             return stats;
         }

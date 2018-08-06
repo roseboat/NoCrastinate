@@ -18,9 +18,6 @@ import static com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract.
 
 public class ToDoReaderContract {
 
-    // To prevent someone from accidentally instantiating the contract class,
-    // make the constructor private.
-
     private ToDoReaderContract() {
     }
 
@@ -54,7 +51,6 @@ public class ToDoReaderContract {
     }
 
     public static class ToDoListDbHelper extends SQLiteOpenHelper {
-        // If you change the database schema, you must increment the database version.
         public static final int DATABASE_VERSION = 6;
         public static final String DATABASE_NAME = "ToDoList.db";
 
@@ -150,7 +146,6 @@ public class ToDoReaderContract {
                 db.close();
             }
         }
-
 
         public void setStarred(ToDoItem toDoItem, boolean isStarred) {
             int isStarredInt = 0;

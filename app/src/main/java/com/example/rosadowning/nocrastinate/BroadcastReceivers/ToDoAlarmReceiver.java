@@ -22,13 +22,10 @@ import static com.example.rosadowning.nocrastinate.MainActivity.CHANNEL_ID;
 public class ToDoAlarmReceiver extends BroadcastReceiver {
 
     public static final String TAG = "TODOALARMRECEIVER";
-    private Context context;
-
 
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d(TAG, "IM HERE");
-        this.context = context;
         Bundle extras = intent.getExtras();
         String toDoName = extras.getString("ToDoName");
         int alarmID = extras.getInt("AlarmID");

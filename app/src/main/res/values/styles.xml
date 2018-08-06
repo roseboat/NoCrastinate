@@ -7,9 +7,8 @@
     </style>
 
     <style name="AppTheme.Launcher">
-     <item name="android:windowBackground">@drawable/launch_screen</item>
+        <item name="android:windowBackground">@drawable/launch_screen</item>
         <item name="colorPrimaryDark">@color/colorGradient2</item>
-
     </style>
 
     <style name="LargeFont" parent="Theme.AppCompat">
@@ -21,16 +20,13 @@
         <item name="android:textSize">@dimen/x_large_font_size</item>
         <item name="android:textColor">@color/colorFontStyle</item>
         <item name="android:fontFamily">@font/lato_bold</item>
-
     </style>
-
 
     <style name="StatsPageDateHeader" parent="Theme.AppCompat">
         <item name="android:textSize">@dimen/x_large_font_size</item>
         <item name="android:textColor">@color/colorThird</item>
         <item name="android:fontFamily">@font/lato_light</item>
     </style>
-
 
     <style name="SettingsButtons" parent="Theme.AppCompat">
         <item name="android:backgroundTint">@color/colorToDoBackground</item>
@@ -71,7 +67,6 @@
         <item name="android:minHeight">?attr/actionBarSize</item>
         <item name="android:theme">?attr/actionBarTheme</item>
     </style>
-
 
     <style name="ToolbarText" parent="Theme.AppCompat">
         <item name="android:layout_width">wrap_content</item>

@@ -25,7 +25,7 @@ public class AppStatisticsAdapter extends RecyclerView.Adapter<AppStatisticsAdap
     private PackageManager packageManager;
     private Context context;
 
-    public AppStatisticsAdapter(Context context){
+    public AppStatisticsAdapter(Context context) {
         this.context = context;
     }
 
@@ -44,10 +44,10 @@ public class AppStatisticsAdapter extends RecyclerView.Adapter<AppStatisticsAdap
         viewHolder.getAppIcon().setImageDrawable(customAppHolders.get(position).appIcon);
         long dur = customAppHolders.get(position).timeInForeground;
         String time = "";
-        if (dur < 60000){
-          time = "0m";
+        if (dur < 60000) {
+            time = "0m";
         } else {
-           time = TimeHelper.formatDuration(dur);
+            time = TimeHelper.formatDuration(dur);
         }
         viewHolder.mOverallTime.setText(time);
     }
@@ -73,7 +73,9 @@ public class AppStatisticsAdapter extends RecyclerView.Adapter<AppStatisticsAdap
             mAppIcon = (ImageView) v.findViewById(R.id.app_icon);
         }
 
-        public TextView getOverallTime() { return mOverallTime; }
+        public TextView getOverallTime() {
+            return mOverallTime;
+        }
 
         public TextView getAppName() {
             return mAppName;

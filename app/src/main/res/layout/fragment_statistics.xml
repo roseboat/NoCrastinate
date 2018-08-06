@@ -128,7 +128,8 @@
 
                 <TextView
                     style="@style/StatsIconBottomText"
-                    android:id="@+id/text_view_no_of_unlocks" />
+                    android:id="@+id/text_view_no_of_unlocks"
+                    android:layout_gravity="center"/>
             </LinearLayout>
 
             <LinearLayout
@@ -148,7 +149,8 @@
 
                 <TextView
                     style="@style/StatsIconBottomText"
-                    android:id="@+id/text_view_overall_time" />
+                    android:id="@+id/text_view_overall_time"
+                    android:layout_gravity="center"/>
             </LinearLayout>
 
 
@@ -169,7 +171,8 @@
 
                 <TextView
                     style="@style/StatsIconBottomText"
-                    android:id="@+id/text_view_tasks_completed"/>
+                    android:id="@+id/text_view_tasks_completed"
+                    android:layout_gravity="center"/>
             </LinearLayout>
         </LinearLayout>
         </LinearLayout>
@@ -196,14 +199,11 @@
             <Spinner
                 android:id="@+id/spinner_time_span"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:padding="@dimen/margin_small"
                 android:scrollbarSize="20dp"
                 android:textAlignment="center" />
         </LinearLayout>
-
-
-
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview_app_usage"

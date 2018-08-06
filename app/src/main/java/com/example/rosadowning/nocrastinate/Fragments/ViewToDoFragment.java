@@ -211,7 +211,6 @@ public class ViewToDoFragment extends Fragment {
                             }
                             getFragmentManager().beginTransaction().replace(R.id.fragment_container, new ToDoFragment()).addToBackStack(null).commit();
                         }
-
                     }
                 });
             }
@@ -357,7 +356,7 @@ public class ViewToDoFragment extends Fragment {
         };
     }
 
-    public void deleteAlarmSetUp(ToDoItem item){
+    public void deleteAlarmSetUp(ToDoItem item) {
         dbHelper = new ToDoReaderContract.ToDoListDbHelper(getContext());
         SQLiteDatabase sql = dbHelper.getWritableDatabase();
         int deletedToDoID = dbHelper.getID(item);

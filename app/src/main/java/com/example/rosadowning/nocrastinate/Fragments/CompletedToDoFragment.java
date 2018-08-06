@@ -52,7 +52,8 @@ public class CompletedToDoFragment extends Fragment {
                 transaction.replace(R.id.fragment_container, newFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
-            }});
+            }
+        });
         mRecyclerView = (RecyclerView) view.findViewById(R.id.completed_to_do_recycler_view);
         mLayoutManager = mRecyclerView.getLayoutManager();
         mRecyclerView.setAdapter(new AlphaInAnimationAdapter(mAdapter));
