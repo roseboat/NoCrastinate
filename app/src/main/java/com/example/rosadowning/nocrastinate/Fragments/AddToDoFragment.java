@@ -13,6 +13,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -241,6 +242,7 @@ public class AddToDoFragment extends Fragment {
                 Intent intent = new Intent(context, ToDoAlarmReceiver.class);
                 intent.putExtra("ToDoName", name);
                 intent.putExtra("AlarmID", alarmID);
+                Log.d(TAG, "alarm id = " + alarmID);
                 AlarmManager alarm = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
                 alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmDate.getTimeInMillis(), pendingIntent);

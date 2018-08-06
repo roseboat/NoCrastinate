@@ -41,7 +41,7 @@
         </receiver>
 
         <service
-            android:name=".BlockedAppsService"
+            android:name=".Services.BlockedAppsService"
             android:enabled="true"/>
 
     </application>

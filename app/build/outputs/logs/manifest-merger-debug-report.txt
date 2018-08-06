@@ -146,12 +146,12 @@ action#com.htc.intent.action.QUICKBOOT_POWERON
 ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:39:17-81
 	android:name
 		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:39:25-79
-service#com.example.rosadowning.nocrastinate.BlockedAppsService
+service#com.example.rosadowning.nocrastinate.Services.BlockedAppsService
 ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:43:9-45:37
 	android:enabled
 		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:45:13-35
 	android:name
-		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:44:13-47
+		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:44:13-56
 uses-sdk
 INJECTED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml

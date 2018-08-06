@@ -14,6 +14,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationManagerCompat;
@@ -26,7 +27,9 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.example.rosadowning.nocrastinate.MainActivity;
 import com.example.rosadowning.nocrastinate.R;
 import com.example.rosadowning.nocrastinate.BroadcastReceivers.ToDoAlarmReceiver;
 import com.example.rosadowning.nocrastinate.DataModels.ToDoItem;
@@ -125,9 +128,9 @@ public class ViewToDoFragment extends Fragment {
                         note = et_note.getText().toString();
                         isCompleted = completed_checkBox.isChecked();
                         isStarred = toDoItem.getStarred();
-                        boolean proceed = false;
+                        boolean proceed = true;
 
-                        if (isCompleted) {
+                        if (!isCompleted) {
                             if (dueDate != null) {
                                 Log.d(TAG, "due date is not null");
                                 if (dueDate.getTime() > 0 && dueDate.getTime() < System.currentTimeMillis()) {
@@ -144,8 +147,7 @@ public class ViewToDoFragment extends Fragment {
                                                 }
                                             }).create();
                                     alertDialog.show();
-                                } else {
-                                    proceed = true;
+                                    proceed = false;
                                 }
                             }
 
@@ -165,40 +167,28 @@ public class ViewToDoFragment extends Fragment {
                                                 }
                                             }).create();
                                     alertDialog.show();
-                                } else {
-                                    proceed = true;
+                                    proceed = false;
                                 }
                             }
                         } else {
-                            proceed = true;
+                            deleteAlarmSetUp(toDoItem);
                         }
 
                         if (proceed) {
                             Log.d(TAG, "due date and alarm date are fine");
 
                             ToDoItem editedToDo = new ToDoItem(name);
-                            Log.d(TAG, "name = " + name);
                             editedToDo.setDueDate(dueDate);
-                            Log.d(TAG, "due date = " + dueDate.toString());
                             editedToDo.setAlarmDate(alarmDate);
-                            Log.d(TAG, "alarm date = " + alarmDate.toString());
                             editedToDo.setNote(note);
-                            Log.d(TAG, "note = "+ note);
                             editedToDo.setCompleted(isCompleted);
-                            Log.d(TAG, "completed = "+ isCompleted);
                             editedToDo.setStarred(isStarred);
-                            Log.d(TAG, "starred = "+ isStarred);
-
-                            Log.d(TAG, "due date and alarm date are fine");
 
                             dbHelper = new ToDoReaderContract.ToDoListDbHelper(getContext());
                             SQLiteDatabase sql = dbHelper.getWritableDatabase();
 
                             if (oldAlarm != null) {
-                                int oldAlarmId = dbHelper.getID(toDoItem);
-                                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-                                notificationManager.cancel(oldAlarmId);
-                                Log.d(TAG, "old alarm = " + oldAlarmId + " deleted");
+                                deleteAlarmSetUp(toDoItem);
                             }
 
                             if (!toDoItem.equals(editedToDo)) {
@@ -214,9 +204,9 @@ public class ViewToDoFragment extends Fragment {
                                     intent.putExtra("ToDoName", name);
                                     int alarmId = dbHelper.getID(editedToDo);
                                     intent.putExtra("AlarmID", alarmId);
-                                    AlarmManager alarm = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+                                    AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
                                     PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-                                    alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmDate.getTime(), pendingIntent);
+                                    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmDate.getTime(), pendingIntent);
                                 }
                             }
                             getFragmentManager().beginTransaction().replace(R.id.fragment_container, new ToDoFragment()).addToBackStack(null).commit();
@@ -238,9 +228,9 @@ public class ViewToDoFragment extends Fragment {
                                 dbHelper = new ToDoReaderContract.ToDoListDbHelper(getContext());
                                 SQLiteDatabase sql = dbHelper.getWritableDatabase();
                                 int deletedToDoID = dbHelper.getID(toDoItem);
-                                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-                                notificationManager.cancel(deletedToDoID);
+                                deleteAlarmSetUp(toDoItem);
                                 dbHelper.deleteToDo(deletedToDoID);
+                                Toast.makeText(context, "To do \"" + toDoItem.getName() + "\" Deleted", Toast.LENGTH_LONG).show();
                                 getFragmentManager().beginTransaction().replace(R.id.fragment_container, new ToDoFragment()).addToBackStack(null).commit();
                             }
                         }).setNegativeButton("Cancel", null).create();
@@ -365,5 +355,17 @@ public class ViewToDoFragment extends Fragment {
                 }
             }
         };
+    }
+
+    public void deleteAlarmSetUp(ToDoItem item){
+        dbHelper = new ToDoReaderContract.ToDoListDbHelper(getContext());
+        SQLiteDatabase sql = dbHelper.getWritableDatabase();
+        int deletedToDoID = dbHelper.getID(item);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        notificationManager.cancel(deletedToDoID);
+        Intent intent = new Intent(context, ToDoAlarmReceiver.class);
+        intent.putExtra("ToDoName", item.getName());
+        intent.putExtra("AlarmID", deletedToDoID);
+        MainActivity.stopAlarm(context, intent);
     }
 }

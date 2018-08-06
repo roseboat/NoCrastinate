@@ -53,9 +53,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
+import jp.wasabeef.recyclerview.adapters.AnimationAdapter;
 
 import static android.content.Context.ALARM_SERVICE;
 
@@ -73,6 +75,7 @@ public class StatisticsFragment extends Fragment {
     private Context context;
     private TimerTask timerTaskCheckUsage;
     private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
     private View statsView;
     private ReentrantLock reentrantLock;
     private long hours, preHours;
@@ -95,6 +98,7 @@ public class StatisticsFragment extends Fragment {
         this.intervalString = "Daily";
         this.context = getContext();
         this.sharedPreferences = context.getSharedPreferences(STATS_PREF_NAME, Context.MODE_PRIVATE);
+        this.editor = sharedPreferences.edit();
         mUsageStatsManager = (UsageStatsManager) getActivity().getSystemService(Context.USAGE_STATS_SERVICE);
     }
 
@@ -105,15 +109,12 @@ public class StatisticsFragment extends Fragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        timerTaskCheckUsage.cancel();
-    }
-
-    @Override
     public void onViewCreated(View rootView, Bundle savedInstanceState) {
         super.onViewCreated(rootView, savedInstanceState);
         this.statsView = getView();
+
+        editor.putLong("statisticsLaunch", System.currentTimeMillis());
+        editor.apply();
 
         // Gets the elements in the view
         mUsagePopUp = (LinearLayout) rootView.findViewById(R.id.settings_popup);
@@ -180,12 +181,11 @@ public class StatisticsFragment extends Fragment {
                                     @Override
                                     public void run() {
                                         mUsagePopUp.setVisibility(View.VISIBLE);
+                                        mSpinner.setVisibility(View.GONE);
                                         mUsagePopUp.bringToFront();
                                     }
                                 });
                             } else {
-                                Log.i(TAG, "Usage access settings ON");
-
                                 editor.putBoolean("SettingsOn", true);
                                 editor.apply();
 
@@ -194,13 +194,14 @@ public class StatisticsFragment extends Fragment {
                                     @Override
                                     public void run() {
                                         mUsagePopUp.setVisibility(View.GONE);
+                                        mSpinner.setVisibility(View.VISIBLE);
                                     }
                                 });
-
+                                if (!sharedPreferences.getBoolean("InReceiver", true)) {
                                 UpdateIcons newIcons = new UpdateIcons();
                                 synchronized (newIcons) {
                                     newIcons.execute(intervalString);
-                                }
+                                }}
                             }
                         }
                     };
@@ -334,87 +335,85 @@ public class StatisticsFragment extends Fragment {
             this.timeInterval = strings[0];
             StatsIconData stats = new StatsIconData();
 
-            SharedPreferences.Editor editor = sharedPreferences.edit();
+                try {
+                    reentrantLock.lock();
 
-            try {
+                    int unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
+                    long screenOn = sharedPreferences.getLong("screenOn", 0);
+                    long screenOff = sharedPreferences.getLong("screenOff", 0);
+                    long overallTime = sharedPreferences.getLong("totalDuration", 0);
+                    long fragmentLaunched = sharedPreferences.getLong("statisticsLaunch", 0);
 
-                reentrantLock.lock();
-                int unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
-                long screenOn = sharedPreferences.getLong("screenOn", System.currentTimeMillis());
-                long screenOff = sharedPreferences.getLong("screenOff", 0);
-                long overallTime = sharedPreferences.getLong("totalDuration", 0);
+                    if (screenOn != 0) {
+                        if (screenOn > screenOff || fragmentLaunched > screenOff) {
+                            long currentTime = System.currentTimeMillis();
+                            long difference = currentTime - screenOn;
+                            overallTime = difference + overallTime;
+                            editor.putLong("totalDuration", overallTime);
+                            editor.putLong("screenOn", System.currentTimeMillis());
+                            editor.apply();
 
-                if (screenOn != 0) {
-                    if (screenOn > screenOff) {
-                        long currentTime = System.currentTimeMillis();
-                        Log.d(TAG, "current time = " + currentTime);
-                        Log.d(TAG, "screen on = " + screenOn);
+                            Log.d(TAG, "duration = " + TimeHelper.formatDuration(overallTime));
 
-                        long difference = currentTime - screenOn;
-                        overallTime = difference + overallTime;
-                        editor.putLong("totalDuration", overallTime);
-                        editor.putLong("screenOn", System.currentTimeMillis());
-                        editor.apply();
-
-                        if (notiSettingsOne) {
-                            Duration timeOnPhone = Duration.millis(overallTime);
-                            hours = timeOnPhone.getStandardHours();
-                            if (preHours != hours && hours != 0) {
-                                Log.d(TAG, "UPDATE : prehours = " + preHours + " hours = " + hours);
-                                Intent intent = new Intent(context, NotificationReceiver.class);
-                                intent.putExtra("Title", "NoCrastinate Usage Time Alert!");
-                                intent.putExtra("AlarmID", 10001);
-                                intent.putExtra("Content", "You've been using your phone for " + hours + " hours today! :(");
-                                PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-                                AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-                                alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
-                                preHours = hours;
+                            if (notiSettingsOne) {
+                                Duration timeOnPhone = Duration.millis(overallTime);
+                                hours = timeOnPhone.getStandardHours();
+                                if (preHours != hours && hours != 0) {
+                                    Log.d(TAG, "UPDATE : prehours = " + preHours + " hours = " + hours);
+                                    Intent intent = new Intent(context, NotificationReceiver.class);
+                                    intent.putExtra("Title", "NoCrastinate Usage Time Alert!");
+                                    intent.putExtra("AlarmID", 10001);
+                                    intent.putExtra("Content", "You've been using your phone for " + hours + " hours today! :(");
+                                    PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                                    AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+                                    alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
+                                    preHours = hours;
+                                } else preHours = hours;
                             }
-                            else preHours = hours;
+                        }}
+                        else {
+                            editor.putLong("screenOn", System.currentTimeMillis());
+                            editor.putLong("totalDuration", 0);
+                            editor.apply();
                         }
+
+                        ToDoReaderContract.ToDoListDbHelper toDoHelper = new ToDoReaderContract.ToDoListDbHelper(context);
+                        SQLiteDatabase sql = toDoHelper.getWritableDatabase();
+                        long beginTime = new DateTime().withTimeAtStartOfDay().getMillis();
+                        long endTime = new DateTime().plusDays(1).withTimeAtStartOfDay().getMillis();
+                        long tasksCompleted = toDoHelper.getNoOfCompletedToDos(beginTime, endTime);
+
+                        stats.setTasksCompleted(tasksCompleted);
+                        stats.setNoOfUnlocks(unlocks);
+                        stats.setOverallTime(overallTime);
+
+                } finally {
+                    reentrantLock.unlock();
+                }
+
+                if (!timeInterval.equals("Daily")) {
+
+                    StatsDBContract.StatsDBHelper statsHelper = new StatsDBContract.StatsDBHelper(context);
+                    SQLiteDatabase db = statsHelper.getReadableDatabase();
+                    ArrayList<StatsIconData> statsFromInterval = statsHelper.getStatsForInterval(timeInterval);
+
+                    int collectedUnlocks = stats.getNoOfUnlocks();
+                    long collectedCompleted = stats.getTasksCompleted();
+                    long collectedTime = stats.getOverallTime();
+
+                    for (StatsIconData queriedStats : statsFromInterval) {
+                        collectedUnlocks += queriedStats.getNoOfUnlocks();
+                        collectedCompleted += queriedStats.getTasksCompleted();
+                        collectedTime += queriedStats.getOverallTime();
                     }
-                } else {
-                    editor.putLong("screenOn", System.currentTimeMillis());
-                    editor.putLong("totalDuration", 0);
-                    editor.apply();
+
+                    stats.setTasksCompleted(collectedCompleted);
+                    stats.setNoOfUnlocks(collectedUnlocks);
+                    stats.setOverallTime(collectedTime);
                 }
 
-                ToDoReaderContract.ToDoListDbHelper toDoHelper = new ToDoReaderContract.ToDoListDbHelper(context);
-                SQLiteDatabase sql = toDoHelper.getWritableDatabase();
-                long beginTime = new DateTime().withTimeAtStartOfDay().getMillis();
-                long endTime = new DateTime().plusDays(1).withTimeAtStartOfDay().getMillis();
-                long tasksCompleted = toDoHelper.getNoOfCompletedToDos(beginTime, endTime);
-
-                stats.setTasksCompleted(tasksCompleted);
-                stats.setNoOfUnlocks(unlocks);
-                stats.setOverallTime(overallTime);
-            } finally {
-                reentrantLock.unlock();
-            }
-
-            if (!timeInterval.equals("Daily")) {
-
-                StatsDBContract.StatsDBHelper statsHelper = new StatsDBContract.StatsDBHelper(context);
-                SQLiteDatabase db = statsHelper.getReadableDatabase();
-                ArrayList<StatsIconData> statsFromInterval = statsHelper.getStatsForInterval(timeInterval);
-
-                int collectedUnlocks = stats.getNoOfUnlocks();
-                long collectedCompleted = stats.getTasksCompleted();
-                long collectedTime = stats.getOverallTime();
-
-                for (StatsIconData queriedStats : statsFromInterval) {
-                    collectedUnlocks += queriedStats.getNoOfUnlocks();
-                    collectedCompleted += queriedStats.getTasksCompleted();
-                    collectedTime += queriedStats.getOverallTime();
-                }
-
-                stats.setTasksCompleted(collectedCompleted);
-                stats.setNoOfUnlocks(collectedUnlocks);
-                stats.setOverallTime(collectedTime);
-            }
-
-            List<CustomAppHolder> appList = updateAppsList(getStats(timeInterval));
-            stats.setAppsList(appList);
+                List<CustomAppHolder> appList = updateAppsList(getStats(timeInterval));
+                stats.setAppsList(appList);
 
             return stats;
         }

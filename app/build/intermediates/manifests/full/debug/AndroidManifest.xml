@@ -51,7 +51,7 @@
         </receiver>
 
         <service
-            android:name="com.example.rosadowning.nocrastinate.BlockedAppsService"
+            android:name="com.example.rosadowning.nocrastinate.Services.BlockedAppsService"
             android:enabled="true" />
     </application>
 

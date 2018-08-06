@@ -1,5 +1,6 @@
 package com.example.rosadowning.nocrastinate.Fragments;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +17,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.rosadowning.nocrastinate.BroadcastReceivers.ToDoAlarmReceiver;
+import com.example.rosadowning.nocrastinate.MainActivity;
 import com.example.rosadowning.nocrastinate.R;
 import com.example.rosadowning.nocrastinate.DataModels.ToDoItem;
 import com.example.rosadowning.nocrastinate.Adapters.ToDoListAdapter;
@@ -70,6 +73,12 @@ public class ToDoFragment extends Fragment {
                 Toast.makeText(getContext(), "'"+ item.getName() + "' is completed!", Toast.LENGTH_LONG).show();
                 NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getContext());
                 notificationManager.cancel(id);
+
+                Intent intent = new Intent(getContext(), ToDoAlarmReceiver.class);
+                intent.putExtra("ToDoName", item.getName());
+                intent.putExtra("AlarmID", id);
+                MainActivity.stopAlarm(getContext(), intent);
+
                 mAdapter.notifyItemRemoved(position);
             }
 

@@ -1,15 +1,9 @@
 package com.example.rosadowning.nocrastinate.Fragments;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,7 +14,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.example.rosadowning.nocrastinate.Adapters.BlockAppsAdapter;
-import com.example.rosadowning.nocrastinate.BlockedAppsService;
+import com.example.rosadowning.nocrastinate.MainActivity;
+import com.example.rosadowning.nocrastinate.Services.BlockedAppsService;
 import com.example.rosadowning.nocrastinate.DBHelpers.BlockedAppsDBContract;
 import com.example.rosadowning.nocrastinate.DataModels.CustomAppHolder;
 import com.example.rosadowning.nocrastinate.R;
@@ -29,8 +24,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
 
@@ -49,7 +42,7 @@ public class BlockAppsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_block_apps, null);
         LinearLayout settingsPopup = (LinearLayout) view.findViewById(R.id.settings_popup);
 
-        if (!BlockedAppsService.hasUsagePermission(getContext())) {
+        if (!MainActivity.hasUsagePermission(getContext())) {
             settingsPopup.setVisibility(View.VISIBLE);
             settingsPopup.bringToFront();
 

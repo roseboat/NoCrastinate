@@ -61,11 +61,14 @@ public class AlarmDBContract {
 
         public void insertAlarm(long date) {
             SQLiteDatabase db = this.getWritableDatabase();
-            ContentValues values = new ContentValues();
-            values.put(AlarmEntry.COLUMN_NAME_DATE, date);
+            try {
+                ContentValues values = new ContentValues();
+                values.put(AlarmEntry.COLUMN_NAME_DATE, date);
 
-            db.insertWithOnConflict(AlarmEntry.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
-            db.close();
+                db.insertWithOnConflict(AlarmEntry.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+            } finally {
+                db.close();
+            }
         }
 
         public boolean isAlarmSet(long date) {
@@ -74,22 +77,29 @@ public class AlarmDBContract {
             boolean exists = false;
 
             Cursor cursor = db.rawQuery("SELECT EXISTS (SELECT 1 FROM " + AlarmEntry.TABLE_NAME + " WHERE " + AlarmEntry.COLUMN_NAME_DATE + " = " + date + ");", null);
+            try {
+                if (cursor.moveToFirst()) {
+                    exists = cursor.getInt(0) != 0;
+                }
 
-            if (cursor.moveToFirst()) {
-                exists = cursor.getInt(0) != 0;
+                return exists;
+            } finally {
+                cursor.close();
+                db.close();
             }
-            cursor.close();
-            db.close();
-            return exists;
         }
 
-        public long getNoAlarmEntries(){
+        public long getNoAlarmEntries() {
 
             SQLiteDatabase db = this.getReadableDatabase();
             long noOfEntries = 0;
-            noOfEntries = DatabaseUtils.queryNumEntries(db, AlarmEntry.TABLE_NAME, AlarmEntry.COLUMN_NAME_DATE + ";");
-            db.close();
-            return noOfEntries;
+            try {
+                noOfEntries = DatabaseUtils.queryNumEntries(db, AlarmEntry.TABLE_NAME, AlarmEntry.COLUMN_NAME_DATE + ";");
+                return noOfEntries;
+            } finally {
+                db.close();
+            }
+
         }
 
         public ArrayList<Long> getAlarmDates() {
@@ -98,19 +108,19 @@ public class AlarmDBContract {
             SQLiteDatabase db = this.getReadableDatabase();
 
             Cursor cursor = db.rawQuery("SELECT * FROM " + AlarmEntry.TABLE_NAME, null);
-            int dateIndex = cursor.getColumnIndex(AlarmEntry.COLUMN_NAME_DATE);
+            try {
+                int dateIndex = cursor.getColumnIndex(AlarmEntry.COLUMN_NAME_DATE);
 
-            if (cursor.moveToFirst()) {
-                do {
-                    allAlarms.add(cursor.getLong(dateIndex));
-                } while (cursor.moveToNext());
+                if (cursor.moveToFirst()) {
+                    do {
+                        allAlarms.add(cursor.getLong(dateIndex));
+                    } while (cursor.moveToNext());
+                }
+                return allAlarms;
+            } finally {
+                cursor.close();
+                db.close();
             }
-            cursor.close();
-            db.close();
-            return allAlarms;
         }
-
-        }
-
-
     }
+}

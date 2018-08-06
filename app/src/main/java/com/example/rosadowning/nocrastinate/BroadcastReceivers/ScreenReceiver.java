@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.rosadowning.nocrastinate.DBHelpers.AlarmDBContract;
-import com.example.rosadowning.nocrastinate.MainActivity;
+import com.example.rosadowning.nocrastinate.Fragments.StatisticsFragment;
 
 import org.joda.time.DateTime;
 
@@ -38,12 +38,12 @@ public class ScreenReceiver extends BroadcastReceiver {
         statsEditor = statsPreferences.edit();
         bootEditor = bootPreferences.edit();
 
-        if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
+        if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF) || intent.getAction().equals(Intent.ACTION_SHUTDOWN)) {
             Log.e(TAG, "PHONE LOCKED");
-
             try {
                 reentrantLock.lock();
                 statsEditor.putLong("screenOff", System.currentTimeMillis());
+                statsEditor.putBoolean("screenOffBoolean", true);
                 statsEditor.apply();
             } finally {
                 reentrantLock.lock();
@@ -54,20 +54,14 @@ public class ScreenReceiver extends BroadcastReceiver {
         } else if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
             Log.e(TAG, "PHONE UNLOCKED");
 
-            try {
+             try {
+                 statsEditor.putBoolean("screenOffBoolean", false);
+                 statsEditor.putBoolean("InReceiver", true);
+                 statsEditor.apply();
+
                 reentrantLock.lock();
 
-                int unlocks = statsPreferences.getInt("noOfUnlocks", 0);
-                statsEditor.putInt("noOfUnlocks", ++unlocks);
-                statsEditor.apply();
-                unlocks = statsPreferences.getInt("noOfUnlocks", 0);
-                if (unlocks % 25 == 0) {
-                    SharedPreferences notiPreferences = context.getSharedPreferences("NotificationCheckboxes", Context.MODE_PRIVATE);
-                    boolean notiSettings = notiPreferences.getBoolean("checkbox1", false);
-                    if (notiSettings) {
-                        unlockNotification();
-                    }
-                }
+                // HANDLES SCREEN ON, OFF & OVERALL TIME
                 long screenOn = statsPreferences.getLong("screenOn", 0);
 
                 if (screenOn != 0) {
@@ -78,13 +72,32 @@ public class ScreenReceiver extends BroadcastReceiver {
                     statsEditor.putLong("totalDuration", newDuration);
                     statsEditor.apply();
                 }
-                statsEditor.putLong("screenOn", System.currentTimeMillis());
+                long now = System.currentTimeMillis();
+                statsEditor.putLong("screenOn", now);
                 statsEditor.apply();
 
+                // HANDLES UNLOCKS
+                int unlocks = statsPreferences.getInt("noOfUnlocks", 0);
+                statsEditor.putInt("noOfUnlocks", ++unlocks);
+                statsEditor.apply();
+                unlocks = statsPreferences.getInt("noOfUnlocks", 0);
+
+                // If the number of unlocks is a multiple of 25, check if the user has set their notification preferences to alert them at such a time.
+                if (unlocks % 25 == 0) {
+                    SharedPreferences notificationCheckboxes = context.getSharedPreferences("NotificationCheckboxes", Context.MODE_PRIVATE);
+                    boolean notificationSettings = notificationCheckboxes.getBoolean("checkbox1", false);
+                    if (notificationSettings) {
+                        unlockNotification();
+                    }
+                }
             } finally {
                 reentrantLock.unlock();
+//                 StatisticsFragment.screenReceiverFinished.signalAll();
+                 statsEditor.putBoolean("InReceiver", false);
+                 statsEditor.apply();
+
             }
-        } else if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)){
+        } else if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
             Log.e(TAG, "PHONE TURNED ON");
             resetAlarm();
         }
@@ -102,7 +115,7 @@ public class ScreenReceiver extends BroadcastReceiver {
         alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
     }
 
-    public void resetAlarm(){
+    public void resetAlarm() {
 
         DateTime today = new DateTime().withTimeAtStartOfDay();
 

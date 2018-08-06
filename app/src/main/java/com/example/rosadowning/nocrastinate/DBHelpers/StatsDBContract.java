@@ -71,72 +71,87 @@ public class StatsDBContract {
 
         public void insertNewStat(StatsIconData stats) {
             SQLiteDatabase db = this.getWritableDatabase();
-            ContentValues values = new ContentValues();
-            values.put(StatsEntry.COLUMN_NAME_DATE, stats.getDate().getTime());
-            values.put(StatsEntry.COLUMN_NAME_UNLOCKS, stats.getNoOfUnlocks());
-            values.put(StatsEntry.COLUMN_NAME_TASKS_COMPLETED, stats.getTasksCompleted());
-            values.put(StatsEntry.COLUMN_NAME_OVERALL_TIME, stats.getOverallTime());
+            try {
+                ContentValues values = new ContentValues();
+                values.put(StatsEntry.COLUMN_NAME_DATE, stats.getDate().getTime());
+                values.put(StatsEntry.COLUMN_NAME_UNLOCKS, stats.getNoOfUnlocks());
+                values.put(StatsEntry.COLUMN_NAME_TASKS_COMPLETED, stats.getTasksCompleted());
+                values.put(StatsEntry.COLUMN_NAME_OVERALL_TIME, stats.getOverallTime());
 
-            db.insertWithOnConflict(StatsEntry.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
-            db.close();
+                db.insertWithOnConflict(StatsEntry.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+            } finally {
+                db.close();
+            }
         }
 
         public void deleteStat(StatsIconData statsComponent) {
             SQLiteDatabase db = this.getWritableDatabase();
-            db.delete(TABLE_NAME, StatsEntry.COLUMN_NAME_DATE + " = ?", new String[]{String.valueOf(statsComponent.getDate())});
-            db.close();
+            try {
+                db.delete(TABLE_NAME, StatsEntry.COLUMN_NAME_DATE + " = ?", new String[]{String.valueOf(statsComponent.getDate())});
+            } finally {
+                db.close();
+            }
         }
 
         public ArrayList<StatsIconData> getAllStats() {
 
-        ArrayList<StatsIconData> allStats = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
+            ArrayList<StatsIconData> allStats = new ArrayList<>();
+            SQLiteDatabase db = this.getReadableDatabase();
 
             Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-            int dateIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_DATE);
-            int timeIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_OVERALL_TIME);
-            int unlocksIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_UNLOCKS);
-            int tasksIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_TASKS_COMPLETED);
 
-            if (cursor.moveToFirst()) {
-                do {
-                    StatsIconData newestStat = new StatsIconData();
-                    newestStat.setNoOfUnlocks(cursor.getInt(unlocksIndex));
-                    newestStat.setDate(new Date(cursor.getLong(dateIndex)));
-                    newestStat.setTasksCompleted(cursor.getLong(tasksIndex));
-                    newestStat.setOverallTime(cursor.getLong(timeIndex));
-                    allStats.add(newestStat);
+            try {
+                int dateIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_DATE);
+                int timeIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_OVERALL_TIME);
+                int unlocksIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_UNLOCKS);
+                int tasksIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_TASKS_COMPLETED);
 
-                } while (cursor.moveToNext());
+                if (cursor.moveToFirst()) {
+                    do {
+                        StatsIconData newestStat = new StatsIconData();
+                        newestStat.setNoOfUnlocks(cursor.getInt(unlocksIndex));
+                        newestStat.setDate(new Date(cursor.getLong(dateIndex)));
+                        newestStat.setTasksCompleted(cursor.getLong(tasksIndex));
+                        newestStat.setOverallTime(cursor.getLong(timeIndex));
+                        allStats.add(newestStat);
+
+                    } while (cursor.moveToNext());
+                }
+                return allStats;
+            } finally {
+                cursor.close();
+                db.close();
             }
-            cursor.close();
-            db.close();
-            return allStats;
         }
 
-        public StatsIconData getStat(Date date){
+        public StatsIconData getStat(Date date) {
 
             SQLiteDatabase db = this.getReadableDatabase();
             Cursor cursor = db.rawQuery("SELECT *  FROM " + StatsEntry.TABLE_NAME + " WHERE " + StatsEntry.COLUMN_NAME_DATE + " = " + date.getTime(), null);
-            int dateIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_DATE);
-            int timeIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_OVERALL_TIME);
-            int unlocksIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_UNLOCKS);
-            int tasksIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_TASKS_COMPLETED);
             StatsIconData stat = new StatsIconData();
+            try {
+                int dateIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_DATE);
+                int timeIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_OVERALL_TIME);
+                int unlocksIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_UNLOCKS);
+                int tasksIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_TASKS_COMPLETED);
 
-            if (cursor.moveToFirst()) {
-                do {
-                    stat.setNoOfUnlocks(cursor.getInt(unlocksIndex));
-                    stat.setDate(new Date(cursor.getLong(dateIndex)));
-                    stat.setTasksCompleted(cursor.getLong(tasksIndex));
-                    stat.setOverallTime(cursor.getLong(timeIndex));
-                } while (cursor.moveToNext());
+                if (cursor.moveToFirst()) {
+                    do {
+                        stat.setNoOfUnlocks(cursor.getInt(unlocksIndex));
+                        stat.setDate(new Date(cursor.getLong(dateIndex)));
+                        stat.setTasksCompleted(cursor.getLong(tasksIndex));
+                        stat.setOverallTime(cursor.getLong(timeIndex));
+                    } while (cursor.moveToNext());
+                }
+
+                return stat;
+            } finally {
+                cursor.close();
+                db.close();
             }
-            db.close();
-            return stat;
         }
 
-        public ArrayList<StatsIconData> getStatsForInterval(String intervalString){
+        public ArrayList<StatsIconData> getStatsForInterval(String intervalString) {
 
             ArrayList<StatsIconData> statsForInterval = new ArrayList<>();
 
@@ -159,26 +174,29 @@ public class StatsDBContract {
 
             SQLiteDatabase db = getReadableDatabase();
             Cursor cursor = db.rawQuery("SELECT * FROM " + StatsEntry.TABLE_NAME + " WHERE " + StatsEntry.COLUMN_NAME_DATE + " BETWEEN " + queryTime + " AND " + now, null);
+            try {
+                int dateIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_DATE);
+                int timeIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_OVERALL_TIME);
+                int unlocksIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_UNLOCKS);
+                int tasksIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_TASKS_COMPLETED);
 
-            int dateIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_DATE);
-            int timeIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_OVERALL_TIME);
-            int unlocksIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_UNLOCKS);
-            int tasksIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_TASKS_COMPLETED);
+                if (cursor.moveToFirst()) {
+                    do {
+                        StatsIconData stat = new StatsIconData();
+                        stat.setNoOfUnlocks(cursor.getInt(unlocksIndex));
+                        stat.setDate(new Date(cursor.getLong(dateIndex)));
+                        stat.setTasksCompleted(cursor.getLong(tasksIndex));
+                        stat.setOverallTime(cursor.getLong(timeIndex));
+                        statsForInterval.add(stat);
+                    } while (cursor.moveToNext());
+                }
 
-            if (cursor.moveToFirst()) {
-                do {
-                    StatsIconData stat = new StatsIconData();
-                    stat.setNoOfUnlocks(cursor.getInt(unlocksIndex));
-                    stat.setDate(new Date(cursor.getLong(dateIndex)));
-                    stat.setTasksCompleted(cursor.getLong(tasksIndex));
-                    stat.setOverallTime(cursor.getLong(timeIndex));
-                    statsForInterval.add(stat);
-                } while (cursor.moveToNext());
+                return statsForInterval;
+            } finally {
+                cursor.close();
+                db.close();
+
             }
-            db.close();
-            return statsForInterval;
         }
-
-
     }
 }

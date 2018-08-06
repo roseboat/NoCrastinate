@@ -1,14 +1,11 @@
 package com.example.rosadowning.nocrastinate.Fragments;
 
 import android.app.AlarmManager;
-import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,8 +18,9 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
-import com.example.rosadowning.nocrastinate.BlockedAppsService;
+import com.example.rosadowning.nocrastinate.Services.BlockedAppsService;
 import com.example.rosadowning.nocrastinate.BroadcastReceivers.NotificationReceiver;
+import com.example.rosadowning.nocrastinate.MainActivity;
 import com.example.rosadowning.nocrastinate.R;
 
 import org.joda.time.DateTime;
@@ -30,8 +28,6 @@ import org.joda.time.DateTime;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static android.content.Context.ALARM_SERVICE;
@@ -43,14 +39,14 @@ public class NotificationSettingsFragment extends Fragment {
     private CheckBox freq1, freq2, freq3;
     private Context context;
     private NotificationManagerCompat notificationManager;
-    private long hours, preHours, minutes, preMinutes;
-    private SharedPreferences notiPreferences, statsPreferences;
+    private SharedPreferences notiPreferences;
     private SharedPreferences.Editor editor;
-    private TimerTask timerTaskAsync;
     private final int FREQ_1_ALARM_1 = 10001;
     private final int FREQ_1_ALARM_2 = 10002;
     private final int FREQ_2_ALARM_1 = 20001;
     private final int FREQ_3_ALARM_1 = 30001;
+    private final String FREQ_2_ALARM_TITLE = "NoCrastinate Daily Report";
+    private final String FREQ_3_ALARM_TITLE = "NoCrastinate Weekly Report";
     private ReentrantLock reentrantLock;
 
     @Nullable
@@ -71,7 +67,7 @@ public class NotificationSettingsFragment extends Fragment {
 
         LinearLayout settingsPopup = (LinearLayout) view.findViewById(R.id.settings_popup);
 
-        if (!BlockedAppsService.hasUsagePermission(context)) {
+        if (!MainActivity.hasUsagePermission(context)) {
             settingsPopup.setVisibility(View.VISIBLE);
             settingsPopup.bringToFront();
 
@@ -104,12 +100,6 @@ public class NotificationSettingsFragment extends Fragment {
                             reentrantLock.unlock();
                         }
                     } else {
-                        Log.d(TAG, "1 unchecked");
-                        notificationManager.cancel(FREQ_1_ALARM_1);
-                        notificationManager.cancel(FREQ_1_ALARM_2);
-                        if (timerTaskAsync != null) {
-                            timerTaskAsync.cancel();
-                        }
                         reentrantLock.lock();
                         editor.putBoolean("checkbox1", false);
                         editor.commit();
@@ -138,7 +128,7 @@ public class NotificationSettingsFragment extends Fragment {
                         }
                     } else {
                         Log.d(TAG, "2 unchecked");
-                        notificationManager.cancel(FREQ_2_ALARM_1);
+                        deleteNotificationAlarm(FREQ_2_ALARM_1);
                         reentrantLock.lock();
                         editor.putBoolean("checkbox2", false);
                         editor.commit();
@@ -167,7 +157,7 @@ public class NotificationSettingsFragment extends Fragment {
 
                     } else {
                         Log.d(TAG, "3 unchecked");
-                        notificationManager.cancel(FREQ_3_ALARM_1);
+                        deleteNotificationAlarm(FREQ_3_ALARM_1);
                         reentrantLock.lock();
                         editor.putBoolean("checkbox3", false);
                         editor.commit();
@@ -184,7 +174,7 @@ public class NotificationSettingsFragment extends Fragment {
         DateTime dailyReport = new DateTime().withTime(22, 0, 0, 0);
 
         Intent freq2intent = new Intent(getContext(), NotificationReceiver.class);
-        freq2intent.putExtra("Title", "NoCrastinate Daily Report");
+        freq2intent.putExtra("Title", FREQ_2_ALARM_TITLE);
         freq2intent.putExtra("AlarmID", FREQ_2_ALARM_1);
 
         PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, freq2intent, PendingIntent.FLAG_CANCEL_CURRENT);
@@ -206,12 +196,28 @@ public class NotificationSettingsFragment extends Fragment {
         weekly.add(SECOND, 5);
 
         Intent freq3intent = new Intent(getContext(), NotificationReceiver.class);
-        freq3intent.putExtra("Title", "NoCrastinate Weekly Report");
+        freq3intent.putExtra("Title", FREQ_3_ALARM_TITLE);
         freq3intent.putExtra("AlarmID", FREQ_3_ALARM_1);
         PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, freq3intent, PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-//        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, weeklyReport.getMillis(), startPIntent);
         alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, weekly.getTimeInMillis(), startPIntent);
-
     }
+
+    public void deleteNotificationAlarm(int deleteNotificationID){
+
+        String title = "";
+
+        if (deleteNotificationID == FREQ_2_ALARM_1){
+            title = FREQ_2_ALARM_TITLE;
+        } else if (deleteNotificationID == FREQ_3_ALARM_1){
+            title = FREQ_3_ALARM_TITLE;
+        }
+
+        Intent intent = new Intent(getContext(), NotificationReceiver.class);
+        intent.putExtra("Title", title);
+        intent.putExtra("AlarmID", deleteNotificationID);
+        MainActivity.stopAlarm(getContext(), intent);
+        notificationManager.cancel(deleteNotificationID);
+    }
+
 }

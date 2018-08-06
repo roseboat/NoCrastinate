@@ -81,45 +81,57 @@ public class ToDoReaderContract {
 
             SQLiteDatabase db = this.getReadableDatabase();
             Cursor cursor = db.rawQuery("SELECT " + TableEntry._ID + " FROM " + TABLE_NAME + " WHERE " + TableEntry.COLUMN_NAME_ADDED_DATE + " = ?", new String[]{String.valueOf(toDoItem.getAddedDate().getTime())});
+
             int id = -1;
-            if (cursor != null) {
-                cursor.moveToFirst();
+
+            try {
+                if (cursor != null) {
+                    cursor.moveToFirst();
+                }
+                if (cursor == null) {
+                } else if (cursor.moveToFirst()) {
+                    do {
+                        id = cursor.getInt(cursor.getColumnIndex(TableEntry._ID));
+                    } while (cursor.moveToNext());
+
+                    cursor.close();
+                }
+
+                return id;
+            } finally {
+                db.close();
             }
-            if (cursor == null) {
-            } else if (cursor.moveToFirst()) {
-                do {
-                    id = cursor.getInt(cursor.getColumnIndex(TableEntry._ID));
-                } while (cursor.moveToNext());
-                cursor.close();
-            }
-            db.close();
-            return id;
+
         }
 
         public void insertNewToDo(ToDoItem toDo) {
             SQLiteDatabase db = this.getWritableDatabase();
-            ContentValues values = new ContentValues();
-            values.put(TableEntry.COLUMN_NAME_NAME, toDo.getName());
-            values.put(TableEntry.COLUMN_NAME_NOTE, toDo.getNote());
-            values.put(TableEntry.COLUMN_NAME_COMPLETED, toDo.getCompleted());
-            values.put(TableEntry.COLUMN_NAME_STARRED, toDo.getStarred());
-            values.put(TableEntry.COLUMN_NAME_ADDED_DATE, toDo.getAddedDate().getTime());
+
+            try {
+                ContentValues values = new ContentValues();
+                values.put(TableEntry.COLUMN_NAME_NAME, toDo.getName());
+                values.put(TableEntry.COLUMN_NAME_NOTE, toDo.getNote());
+                values.put(TableEntry.COLUMN_NAME_COMPLETED, toDo.getCompleted());
+                values.put(TableEntry.COLUMN_NAME_STARRED, toDo.getStarred());
+                values.put(TableEntry.COLUMN_NAME_ADDED_DATE, toDo.getAddedDate().getTime());
 
 
-            if (toDo.getDueDate() != null) {
-                values.put(TableEntry.COLUMN_NAME_DUE_DATE, toDo.getDueDate().getTime());
+                if (toDo.getDueDate() != null) {
+                    values.put(TableEntry.COLUMN_NAME_DUE_DATE, toDo.getDueDate().getTime());
+                }
+                if (toDo.getAlarmDate() != null) {
+                    values.put(TableEntry.COLUMN_NAME_ALARM, toDo.getAlarmDate().getTime());
+                }
+
+                if (toDo.getStarred() == true && toDo.getCompletedDate() == null) {
+                    long completedTime = System.currentTimeMillis();
+                    values.put(TableEntry.COLUMN_NAME_COMPLETED_DATE, completedTime);
+                }
+
+                db.insertWithOnConflict(TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+            } finally {
+                db.close();
             }
-            if (toDo.getAlarmDate() != null) {
-                values.put(TableEntry.COLUMN_NAME_ALARM, toDo.getAlarmDate().getTime());
-            }
-
-            if (toDo.getStarred() == true && toDo.getCompletedDate() == null){
-                long completedTime = System.currentTimeMillis();
-                values.put(TableEntry.COLUMN_NAME_COMPLETED_DATE, completedTime);
-            }
-
-            db.insertWithOnConflict(TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
-            db.close();
         }
 
         public void setCompleted(ToDoItem toDoItem, boolean isCompleted) {
@@ -131,9 +143,12 @@ public class ToDoReaderContract {
                 isCompletedInt = 1;
                 completedTime = System.currentTimeMillis();
             }
-            db.execSQL("UPDATE " + TABLE_NAME + " SET " + TableEntry.COLUMN_NAME_COMPLETED_DATE + " = " + completedTime + " WHERE " + TableEntry.COLUMN_NAME_ADDED_DATE + " = '" + toDoItem.getAddedDate().getTime() + "';");
-            db.execSQL("UPDATE " + TABLE_NAME + " SET " + TableEntry.COLUMN_NAME_COMPLETED + " = " + isCompletedInt + " WHERE " + TableEntry.COLUMN_NAME_ADDED_DATE + " = '" + toDoItem.getAddedDate().getTime() + "';");
-            db.close();
+            try {
+                db.execSQL("UPDATE " + TABLE_NAME + " SET " + TableEntry.COLUMN_NAME_COMPLETED_DATE + " = " + completedTime + " WHERE " + TableEntry.COLUMN_NAME_ADDED_DATE + " = '" + toDoItem.getAddedDate().getTime() + "';");
+                db.execSQL("UPDATE " + TABLE_NAME + " SET " + TableEntry.COLUMN_NAME_COMPLETED + " = " + isCompletedInt + " WHERE " + TableEntry.COLUMN_NAME_ADDED_DATE + " = '" + toDoItem.getAddedDate().getTime() + "';");
+            } finally {
+                db.close();
+            }
         }
 
 
@@ -143,8 +158,11 @@ public class ToDoReaderContract {
                 isStarredInt = 1;
             }
             SQLiteDatabase db = this.getReadableDatabase();
-            db.execSQL("UPDATE " + TABLE_NAME + " SET " + TableEntry.COLUMN_NAME_STARRED + " = " + isStarredInt + " WHERE " + TableEntry.COLUMN_NAME_ADDED_DATE + " = '" + toDoItem.getAddedDate().getTime() + "';");
-            db.close();
+            try {
+                db.execSQL("UPDATE " + TABLE_NAME + " SET " + TableEntry.COLUMN_NAME_STARRED + " = " + isStarredInt + " WHERE " + TableEntry.COLUMN_NAME_ADDED_DATE + " = '" + toDoItem.getAddedDate().getTime() + "';");
+            } finally {
+                db.close();
+            }
         }
 
         public long getNoOfCompletedToDos(long beginTime, long endTime) {
@@ -152,15 +170,22 @@ public class ToDoReaderContract {
             long noOfCompletedToDos = 0;
             String newQuery = TableEntry.COLUMN_NAME_COMPLETED_DATE + " BETWEEN " + beginTime + " AND " + endTime + ";";
             SQLiteDatabase db = this.getReadableDatabase();
-            noOfCompletedToDos = DatabaseUtils.queryNumEntries(db, TABLE_NAME, newQuery);
-            db.close();
-            return noOfCompletedToDos;
+            try {
+                noOfCompletedToDos = DatabaseUtils.queryNumEntries(db, TABLE_NAME, newQuery);
+
+                return noOfCompletedToDos;
+            } finally {
+                db.close();
+            }
         }
 
         public void deleteToDo(int toDoID) {
             SQLiteDatabase db = this.getWritableDatabase();
-            db.delete(TABLE_NAME, TableEntry._ID + " = ?", new String[]{String.valueOf(toDoID)});
-            db.close();
+            try {
+                db.delete(TABLE_NAME, TableEntry._ID + " = ?", new String[]{String.valueOf(toDoID)});
+            } finally {
+                db.close();
+            }
         }
 
         public ArrayList<ToDoItem> getToDoList(boolean isCompleted) {
@@ -176,35 +201,41 @@ public class ToDoReaderContract {
 
             ArrayList<ToDoItem> toDoList = new ArrayList<>();
             SQLiteDatabase db = this.getReadableDatabase();
-
             Cursor cursor = db.rawQuery(query, null);
 
-            int nameIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_NAME);
-            int noteIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_NOTE);
-            int dateIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_DUE_DATE);
-            int starIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_STARRED);
-            int completedIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_COMPLETED);
-            int completedDateIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_COMPLETED_DATE);
-            int alarmDateIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_ALARM);
-            int addedDateIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_ADDED_DATE);
+            try {
 
-            if (cursor.moveToFirst()) {
+                int nameIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_NAME);
+                int noteIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_NOTE);
+                int dateIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_DUE_DATE);
+                int starIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_STARRED);
+                int completedIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_COMPLETED);
+                int completedDateIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_COMPLETED_DATE);
+                int alarmDateIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_ALARM);
+                int addedDateIndex = cursor.getColumnIndex(TableEntry.COLUMN_NAME_ADDED_DATE);
 
-                do {
-                    ToDoItem newestToDo = new ToDoItem(cursor.getString(nameIndex));
-                    newestToDo.setNote(cursor.getString(noteIndex));
-                    newestToDo.setDueDate(new Date(cursor.getLong(dateIndex)));
-                    newestToDo.setCompletedDate(new Date(cursor.getLong(completedDateIndex)));
-                    newestToDo.setCompleted(cursor.getInt(completedIndex) > 0);
-                    newestToDo.setStarred(cursor.getInt(starIndex) > 0);
-                    newestToDo.setAlarmDate(new Date(cursor.getLong(alarmDateIndex)));
-                    newestToDo.setAddedDate(new Date(cursor.getLong(addedDateIndex)));
-                    toDoList.add(newestToDo);
-                } while (cursor.moveToNext());
+                if (cursor.moveToFirst()) {
+
+                    do {
+                        ToDoItem newestToDo = new ToDoItem(cursor.getString(nameIndex));
+                        newestToDo.setNote(cursor.getString(noteIndex));
+                        newestToDo.setDueDate(new Date(cursor.getLong(dateIndex)));
+                        newestToDo.setCompletedDate(new Date(cursor.getLong(completedDateIndex)));
+                        newestToDo.setCompleted(cursor.getInt(completedIndex) > 0);
+                        newestToDo.setStarred(cursor.getInt(starIndex) > 0);
+                        newestToDo.setAlarmDate(new Date(cursor.getLong(alarmDateIndex)));
+                        newestToDo.setAddedDate(new Date(cursor.getLong(addedDateIndex)));
+                        toDoList.add(newestToDo);
+                    } while (cursor.moveToNext());
+                }
+
+
+                return toDoList;
+            } finally {
+                cursor.close();
+                db.close();
+
             }
-            cursor.close();
-            db.close();
-            return toDoList;
         }
     }
 }
