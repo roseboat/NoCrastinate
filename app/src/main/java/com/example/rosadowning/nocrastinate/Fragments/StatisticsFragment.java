@@ -207,7 +207,7 @@ public class StatisticsFragment extends Fragment {
                             }
                         }
                     };
-                    timerCheckUsage.schedule(timerTaskCheckUsage, 500, 4000);
+                    timerCheckUsage.schedule(timerTaskCheckUsage, 2000, 2000);
                 }
             }
 
