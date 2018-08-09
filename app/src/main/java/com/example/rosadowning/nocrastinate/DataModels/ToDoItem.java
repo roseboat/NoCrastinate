@@ -8,7 +8,7 @@ public class ToDoItem implements Serializable {
 
     private String name, note;
     private Boolean isStarred, isCompleted;
-    private Date dueDate, completedDate, alarmDate, addedDate;
+    private Date dueDate, alarmDate, completedDate, addedDate;
 
     public ToDoItem(String name) {
         this.name = name;

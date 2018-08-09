@@ -11,7 +11,7 @@ import android.util.Log;
 
 import com.example.rosadowning.nocrastinate.DBHelpers.AlarmDBContract;
 import com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract;
-import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
+import com.example.rosadowning.nocrastinate.DBHelpers.ToDoDBContract;
 import com.example.rosadowning.nocrastinate.DataModels.StatsIconData;
 
 import org.joda.time.DateTime;
@@ -61,7 +61,7 @@ public class MidnightDataResetReceiver extends BroadcastReceiver {
             try {
                 reentrantLock.lock();
 
-                ToDoReaderContract.ToDoListDbHelper toDoHelper = new ToDoReaderContract.ToDoListDbHelper(context);
+                ToDoDBContract.ToDoListDbHelper toDoHelper = new ToDoDBContract.ToDoListDbHelper(context);
                 SQLiteDatabase sqlToDo = toDoHelper.getReadableDatabase();
                 tasksCompleted = toDoHelper.getNoOfCompletedToDos(yesterday.getTime(), today.getMillis());
 

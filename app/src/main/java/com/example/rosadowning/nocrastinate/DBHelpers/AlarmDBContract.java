@@ -7,14 +7,8 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
-import android.util.Log;
-
-import com.example.rosadowning.nocrastinate.DataModels.StatsIconData;
 
 import java.util.ArrayList;
-import java.util.Date;
-
-import static com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract.TableEntry.TABLE_NAME;
 
 public class AlarmDBContract {
 

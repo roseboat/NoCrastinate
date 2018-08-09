@@ -14,9 +14,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,7 +31,7 @@ import com.example.rosadowning.nocrastinate.MainActivity;
 import com.example.rosadowning.nocrastinate.R;
 import com.example.rosadowning.nocrastinate.BroadcastReceivers.ToDoAlarmReceiver;
 import com.example.rosadowning.nocrastinate.DataModels.ToDoItem;
-import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
+import com.example.rosadowning.nocrastinate.DBHelpers.ToDoDBContract;
 
 import org.joda.time.DateTime;
 
@@ -53,7 +51,7 @@ public class ViewToDoFragment extends Fragment {
     private CheckBox completed_checkBox;
     private Button editButton, deleteButton;
     private DatePickerDialog.OnDateSetListener mDueDateSetListener, mAlarmDateSetListener;
-    private ToDoReaderContract.ToDoListDbHelper dbHelper;
+    private ToDoDBContract.ToDoListDbHelper dbHelper;
     private Calendar todaysDate, alarmCal;
     private Context context;
     private int year, month, day, hour, minute, alarmDay, alarmMonth, alarmYear, alarmHour, alarmMinute, alarmID, oldAlarmID;
@@ -184,7 +182,7 @@ public class ViewToDoFragment extends Fragment {
                             editedToDo.setCompleted(isCompleted);
                             editedToDo.setStarred(isStarred);
 
-                            dbHelper = new ToDoReaderContract.ToDoListDbHelper(getContext());
+                            dbHelper = new ToDoDBContract.ToDoListDbHelper(getContext());
                             SQLiteDatabase sql = dbHelper.getWritableDatabase();
 
                             if (oldAlarm != null) {
@@ -224,7 +222,7 @@ public class ViewToDoFragment extends Fragment {
                         .setTitle(R.string.dialog_title_confirm_delete)
                         .setPositiveButton("I'm sure!", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                dbHelper = new ToDoReaderContract.ToDoListDbHelper(getContext());
+                                dbHelper = new ToDoDBContract.ToDoListDbHelper(getContext());
                                 SQLiteDatabase sql = dbHelper.getWritableDatabase();
                                 int deletedToDoID = dbHelper.getID(toDoItem);
                                 deleteAlarmSetUp(toDoItem);
@@ -357,7 +355,7 @@ public class ViewToDoFragment extends Fragment {
     }
 
     public void deleteAlarmSetUp(ToDoItem item) {
-        dbHelper = new ToDoReaderContract.ToDoListDbHelper(getContext());
+        dbHelper = new ToDoDBContract.ToDoListDbHelper(getContext());
         SQLiteDatabase sql = dbHelper.getWritableDatabase();
         int deletedToDoID = dbHelper.getID(item);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);

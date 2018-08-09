@@ -10,17 +10,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.OvershootInterpolator;
 
 import com.example.rosadowning.nocrastinate.Adapters.CompletedToDoListAdapter;
 import com.example.rosadowning.nocrastinate.R;
 import com.example.rosadowning.nocrastinate.DataModels.ToDoItem;
-import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
+import com.example.rosadowning.nocrastinate.DBHelpers.ToDoDBContract;
 
 import java.util.ArrayList;
 
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
-import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 public class CompletedToDoFragment extends Fragment {
 
@@ -30,7 +28,7 @@ public class CompletedToDoFragment extends Fragment {
     private CompletedToDoListAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<ToDoItem> completedToDoList;
-    private ToDoReaderContract.ToDoListDbHelper dbHelper;
+    private ToDoDBContract.ToDoListDbHelper dbHelper;
 
     @Nullable
     @Override
@@ -38,7 +36,7 @@ public class CompletedToDoFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_completed_todo, null);
 
-        dbHelper = new ToDoReaderContract.ToDoListDbHelper(getContext());
+        dbHelper = new ToDoDBContract.ToDoListDbHelper(getContext());
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         completedToDoList = dbHelper.getToDoList(true);
         mAdapter = new CompletedToDoListAdapter(completedToDoList, new CompletedToDoListAdapter.OnItemClickListener() {

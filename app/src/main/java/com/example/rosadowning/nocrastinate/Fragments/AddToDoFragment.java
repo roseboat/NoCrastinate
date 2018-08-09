@@ -13,7 +13,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -29,13 +28,12 @@ import android.widget.Toast;
 import com.example.rosadowning.nocrastinate.R;
 import com.example.rosadowning.nocrastinate.BroadcastReceivers.ToDoAlarmReceiver;
 import com.example.rosadowning.nocrastinate.DataModels.ToDoItem;
-import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
+import com.example.rosadowning.nocrastinate.DBHelpers.ToDoDBContract;
 
 import org.joda.time.DateTime;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -47,7 +45,7 @@ public class AddToDoFragment extends Fragment {
     private TimePickerDialog.OnTimeSetListener mTimeSetListener;
     private DatePickerDialog.OnDateSetListener mDueDateSetListener, mAlarmDateSetListener;
     private static final String TAG = "AddToDoFragment";
-    private ToDoReaderContract.ToDoListDbHelper dbHelper;
+    private ToDoDBContract.ToDoListDbHelper dbHelper;
     private ToDoItem addToDo;
     private Context context;
     private Calendar todaysDate, alarmDate;
@@ -199,7 +197,7 @@ public class AddToDoFragment extends Fragment {
 
     public void addToDo() {
 
-        dbHelper = new ToDoReaderContract.ToDoListDbHelper(context);
+        dbHelper = new ToDoDBContract.ToDoListDbHelper(context);
         SQLiteDatabase dbRead = dbHelper.getReadableDatabase();
 
         name = et_name.getText().toString();
@@ -233,7 +231,7 @@ public class AddToDoFragment extends Fragment {
                 addToDo.setAlarmDate(null);
             }
 
-            dbHelper = new ToDoReaderContract.ToDoListDbHelper(context);
+            dbHelper = new ToDoDBContract.ToDoListDbHelper(context);
             SQLiteDatabase dbWrite = dbHelper.getWritableDatabase();
             dbHelper.insertNewToDo(addToDo);
 

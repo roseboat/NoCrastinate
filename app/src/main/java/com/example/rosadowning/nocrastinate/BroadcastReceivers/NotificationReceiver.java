@@ -1,14 +1,11 @@
 package com.example.rosadowning.nocrastinate.BroadcastReceivers;
 
 import android.app.AlarmManager;
-import android.app.Notification;
 import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,7 +17,7 @@ import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
 import com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract;
-import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
+import com.example.rosadowning.nocrastinate.DBHelpers.ToDoDBContract;
 import com.example.rosadowning.nocrastinate.DataModels.StatsIconData;
 import com.example.rosadowning.nocrastinate.DataModels.TimeHelper;
 import com.example.rosadowning.nocrastinate.MainActivity;
@@ -30,7 +27,6 @@ import org.joda.time.DateTime;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -108,7 +104,7 @@ public class NotificationReceiver extends BroadcastReceiver {
             SharedPreferences sharedPreferences = context.getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
             this.overallTime = sharedPreferences.getLong("totalDuration", 0);
             this.unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
-            ToDoReaderContract.ToDoListDbHelper toDoHelper = new ToDoReaderContract.ToDoListDbHelper(context);
+            ToDoDBContract.ToDoListDbHelper toDoHelper = new ToDoDBContract.ToDoListDbHelper(context);
             SQLiteDatabase sqlToDo = toDoHelper.getReadableDatabase();
             DateTime today = new DateTime().withTimeAtStartOfDay();
             DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();

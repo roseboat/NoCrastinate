@@ -11,8 +11,6 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-import static com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract.TableEntry.TABLE_NAME;
-
 public class BlockedAppsDBContract {
 
     private BlockedAppsDBContract() {

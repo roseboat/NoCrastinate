@@ -22,14 +22,11 @@ import com.example.rosadowning.nocrastinate.MainActivity;
 import com.example.rosadowning.nocrastinate.R;
 import com.example.rosadowning.nocrastinate.DataModels.ToDoItem;
 import com.example.rosadowning.nocrastinate.Adapters.ToDoListAdapter;
-import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
+import com.example.rosadowning.nocrastinate.DBHelpers.ToDoDBContract;
 
 import java.util.ArrayList;
 
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
-import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
-import jp.wasabeef.recyclerview.adapters.SlideInRightAnimationAdapter;
-import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 
@@ -40,7 +37,7 @@ public class ToDoFragment extends Fragment {
     private ToDoListAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<ToDoItem> toDoList;
-    private ToDoReaderContract.ToDoListDbHelper dbHelper;
+    private ToDoDBContract.ToDoListDbHelper dbHelper;
 
     @Nullable
     @Override
@@ -48,7 +45,7 @@ public class ToDoFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_todo, null);
 
-        dbHelper = new ToDoReaderContract.ToDoListDbHelper(getContext());
+        dbHelper = new ToDoDBContract.ToDoListDbHelper(getContext());
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         toDoList = dbHelper.getToDoList(false);
         mAdapter = new ToDoListAdapter(toDoList, new ToDoListAdapter.OnItemClickListener() {

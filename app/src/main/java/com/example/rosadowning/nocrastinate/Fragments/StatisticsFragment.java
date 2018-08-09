@@ -25,7 +25,7 @@ import com.example.rosadowning.nocrastinate.BroadcastReceivers.NotificationRecei
 import com.example.rosadowning.nocrastinate.DataModels.CustomAppHolder;
 import com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract;
 import com.example.rosadowning.nocrastinate.R;
-import com.example.rosadowning.nocrastinate.DBHelpers.ToDoReaderContract;
+import com.example.rosadowning.nocrastinate.DBHelpers.ToDoDBContract;
 import com.example.rosadowning.nocrastinate.DataModels.StatsIconData;
 import com.example.rosadowning.nocrastinate.DataModels.TimeHelper;
 
@@ -53,7 +53,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
@@ -105,6 +104,13 @@ public class StatisticsFragment extends Fragment {
     public void onResume() {
         super.onResume();
         this.onCreate(null);
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        editor.putLong("statisticsLaunch", System.currentTimeMillis());
+        editor.apply();
     }
 
     @Override
@@ -198,7 +204,7 @@ public class StatisticsFragment extends Fragment {
                                     }
                                 });
 
-                                if (!sharedPreferences.getBoolean("InReceiver", true) && !sharedPreferences.getBoolean("screenOffBoolean", true)) {
+                                if (!sharedPreferences.getBoolean("InReceiver", true)) {
                                     UpdateIcons newIcons = new UpdateIcons();
                                     synchronized (newIcons) {
                                         newIcons.execute(intervalString);
@@ -207,7 +213,7 @@ public class StatisticsFragment extends Fragment {
                             }
                         }
                     };
-                    timerCheckUsage.schedule(timerTaskCheckUsage, 2000, 2000);
+                    timerCheckUsage.schedule(timerTaskCheckUsage, 500, 4000);
                 }
             }
 
@@ -349,7 +355,7 @@ public class StatisticsFragment extends Fragment {
 
 
                 if (screenOn != 0) {
-                    if (screenOn > screenOff || fragmentLaunched > screenOff) {
+                    if (fragmentLaunched > screenOff) {
                         long currentTime = System.currentTimeMillis();
                         long difference = currentTime - screenOn;
                         overallTime = difference + overallTime;
@@ -381,7 +387,7 @@ public class StatisticsFragment extends Fragment {
                     editor.apply();
                 }
 
-                ToDoReaderContract.ToDoListDbHelper toDoHelper = new ToDoReaderContract.ToDoListDbHelper(context);
+                ToDoDBContract.ToDoListDbHelper toDoHelper = new ToDoDBContract.ToDoListDbHelper(context);
                 SQLiteDatabase sql = toDoHelper.getWritableDatabase();
                 long beginTime = new DateTime().withTimeAtStartOfDay().getMillis();
                 long endTime = new DateTime().plusDays(1).withTimeAtStartOfDay().getMillis();
@@ -427,7 +433,17 @@ public class StatisticsFragment extends Fragment {
 
             if (getView() == statsView) {
 
-                mRecyclerView.setAdapter(mUsageListAdapter);
+                long timeLaunched = sharedPreferences.getLong("statisticsLaunch", 0);
+
+                if (timeLaunched > System.currentTimeMillis() - 3000){
+                    mRecyclerView.setAdapter(new AlphaInAnimationAdapter(mUsageListAdapter));
+//                    TextView textViewUnlocks = (TextView) getView().findViewById(R.id.text_view_no_of_unlocks);
+//                    textViewUnlocks.animate().alpha(0).setDuration(1500);
+
+                }else {
+                    mRecyclerView.setAdapter(mUsageListAdapter);
+
+                }
                 mUsageListAdapter.setCustomAppList(iconData.getAppsList());
                 mUsageListAdapter.notifyDataSetChanged();
 
