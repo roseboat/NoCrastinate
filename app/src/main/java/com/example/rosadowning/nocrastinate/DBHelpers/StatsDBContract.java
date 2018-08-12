@@ -6,13 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
-import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
-import com.example.rosadowning.nocrastinate.DataModels.StatsIconData;
+import com.example.rosadowning.nocrastinate.DataModels.StatsData;
 
 import org.joda.time.DateTime;
 
@@ -69,7 +67,7 @@ public class StatsDBContract {
             onUpgrade(db, oldVersion, newVersion);
         }
 
-        public void insertNewStat(StatsIconData stats) {
+        public void insertNewStat(StatsData stats) {
             SQLiteDatabase db = this.getWritableDatabase();
             try {
                 ContentValues values = new ContentValues();
@@ -84,7 +82,7 @@ public class StatsDBContract {
             }
         }
 
-        public void deleteStat(StatsIconData statsComponent) {
+        public void deleteStat(StatsData statsComponent) {
             SQLiteDatabase db = this.getWritableDatabase();
             try {
                 db.delete(TABLE_NAME, StatsEntry.COLUMN_NAME_DATE + " = ?", new String[]{String.valueOf(statsComponent.getDate())});
@@ -93,9 +91,9 @@ public class StatsDBContract {
             }
         }
 
-        public ArrayList<StatsIconData> getAllStats() {
+        public ArrayList<StatsData> getAllStats() {
 
-            ArrayList<StatsIconData> allStats = new ArrayList<>();
+            ArrayList<StatsData> allStats = new ArrayList<>();
             SQLiteDatabase db = this.getReadableDatabase();
 
             Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
@@ -108,7 +106,7 @@ public class StatsDBContract {
 
                 if (cursor.moveToFirst()) {
                     do {
-                        StatsIconData newestStat = new StatsIconData();
+                        StatsData newestStat = new StatsData();
                         newestStat.setNoOfUnlocks(cursor.getInt(unlocksIndex));
                         newestStat.setDate(new Date(cursor.getLong(dateIndex)));
                         newestStat.setTasksCompleted(cursor.getLong(tasksIndex));
@@ -124,11 +122,11 @@ public class StatsDBContract {
             }
         }
 
-        public StatsIconData getStat(Date date) {
+        public StatsData getStat(Date date) {
 
             SQLiteDatabase db = this.getReadableDatabase();
             Cursor cursor = db.rawQuery("SELECT *  FROM " + StatsEntry.TABLE_NAME + " WHERE " + StatsEntry.COLUMN_NAME_DATE + " = " + date.getTime(), null);
-            StatsIconData stat = new StatsIconData();
+            StatsData stat = new StatsData();
             try {
                 int dateIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_DATE);
                 int timeIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_OVERALL_TIME);
@@ -151,9 +149,9 @@ public class StatsDBContract {
             }
         }
 
-        public ArrayList<StatsIconData> getStatsForInterval(String intervalString) {
+        public ArrayList<StatsData> getStatsForInterval(String intervalString) {
 
-            ArrayList<StatsIconData> statsForInterval = new ArrayList<>();
+            ArrayList<StatsData> statsForInterval = new ArrayList<>();
 
             DateTime today = new DateTime().withTimeAtStartOfDay();
             long now = today.toDate().getTime();
@@ -182,7 +180,7 @@ public class StatsDBContract {
 
                 if (cursor.moveToFirst()) {
                     do {
-                        StatsIconData stat = new StatsIconData();
+                        StatsData stat = new StatsData();
                         stat.setNoOfUnlocks(cursor.getInt(unlocksIndex));
                         stat.setDate(new Date(cursor.getLong(dateIndex)));
                         stat.setTasksCompleted(cursor.getLong(tasksIndex));

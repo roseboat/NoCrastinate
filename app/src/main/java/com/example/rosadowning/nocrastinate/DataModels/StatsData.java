@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class StatsIconData {
+public class StatsData {
 
     private Date date;
     private int noOfUnlocks;
@@ -17,7 +17,7 @@ public class StatsIconData {
     private long tasksCompleted;
     private List<CustomAppHolder> appsList;
 
-    public StatsIconData() {
+    public StatsData() {
 
         date = null;
         noOfUnlocks = 0;

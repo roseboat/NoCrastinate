@@ -34,6 +34,7 @@
 
 <TextView
     style="@style/HelpCenterText"
+    android:id="@+id/help_center_text"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="@string/help_center_string"

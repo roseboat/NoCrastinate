@@ -18,7 +18,7 @@ import android.util.Log;
 
 import com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract;
 import com.example.rosadowning.nocrastinate.DBHelpers.ToDoDBContract;
-import com.example.rosadowning.nocrastinate.DataModels.StatsIconData;
+import com.example.rosadowning.nocrastinate.DataModels.StatsData;
 import com.example.rosadowning.nocrastinate.DataModels.TimeHelper;
 import com.example.rosadowning.nocrastinate.MainActivity;
 import com.example.rosadowning.nocrastinate.R;
@@ -157,9 +157,9 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         StatsDBContract.StatsDBHelper statsHelper = new StatsDBContract.StatsDBHelper(context);
         SQLiteDatabase statsDB = statsHelper.getReadableDatabase();
-        ArrayList<StatsIconData> stats = statsHelper.getStatsForInterval("Weekly");
+        ArrayList<StatsData> stats = statsHelper.getStatsForInterval("Weekly");
 
-        for (StatsIconData queriedStats : stats) {
+        for (StatsData queriedStats : stats) {
             unlocks += queriedStats.getNoOfUnlocks();
             tasksCompleted += queriedStats.getTasksCompleted();
             overallTime += queriedStats.getOverallTime();

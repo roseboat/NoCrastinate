@@ -12,7 +12,7 @@ import android.util.Log;
 import com.example.rosadowning.nocrastinate.DBHelpers.AlarmDBContract;
 import com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract;
 import com.example.rosadowning.nocrastinate.DBHelpers.ToDoDBContract;
-import com.example.rosadowning.nocrastinate.DataModels.StatsIconData;
+import com.example.rosadowning.nocrastinate.DataModels.StatsData;
 
 import org.joda.time.DateTime;
 
@@ -31,7 +31,7 @@ public class MidnightDataResetReceiver extends BroadcastReceiver {
         Log.d(TAG, "Midnight Receiver Reached");
 
         ReentrantLock reentrantLock = new ReentrantLock();
-        StatsIconData midnightStat = new StatsIconData();
+        StatsData midnightStat = new StatsData();
 
         DateTime today = new DateTime().withTimeAtStartOfDay();
         Date yesterday = today.minusDays(1).withTimeAtStartOfDay().toDate();

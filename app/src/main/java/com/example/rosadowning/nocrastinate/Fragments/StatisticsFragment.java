@@ -26,7 +26,7 @@ import com.example.rosadowning.nocrastinate.DataModels.CustomAppHolder;
 import com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract;
 import com.example.rosadowning.nocrastinate.R;
 import com.example.rosadowning.nocrastinate.DBHelpers.ToDoDBContract;
-import com.example.rosadowning.nocrastinate.DataModels.StatsIconData;
+import com.example.rosadowning.nocrastinate.DataModels.StatsData;
 import com.example.rosadowning.nocrastinate.DataModels.TimeHelper;
 
 import android.app.usage.UsageStatsManager;
@@ -110,6 +110,7 @@ public class StatisticsFragment extends Fragment {
     public void onStart(){
         super.onStart();
         editor.putLong("statisticsLaunch", System.currentTimeMillis());
+        Log.e(TAG, "STATS LAUNCHED");
         editor.apply();
     }
 
@@ -118,9 +119,7 @@ public class StatisticsFragment extends Fragment {
         super.onViewCreated(rootView, savedInstanceState);
         this.statsView = getView();
 
-        editor.putLong("statisticsLaunch", System.currentTimeMillis());
         editor.putBoolean("statisticsFragmentLaunched", true);
-        editor.apply();
 
         // Gets the elements in the view
         mUsagePopUp = (LinearLayout) rootView.findViewById(R.id.settings_popup);
@@ -205,7 +204,7 @@ public class StatisticsFragment extends Fragment {
                                 });
 
                                 if (!sharedPreferences.getBoolean("InReceiver", true)) {
-                                    UpdateIcons newIcons = new UpdateIcons();
+                                    UpdateStats newIcons = new UpdateStats();
                                     synchronized (newIcons) {
                                         newIcons.execute(intervalString);
                                     }
@@ -213,7 +212,7 @@ public class StatisticsFragment extends Fragment {
                             }
                         }
                     };
-                    timerCheckUsage.schedule(timerTaskCheckUsage, 500, 4000);
+                    timerCheckUsage.schedule(timerTaskCheckUsage, 1000, 4000);
                 }
             }
 
@@ -334,15 +333,15 @@ public class StatisticsFragment extends Fragment {
         }
     }
 
-    private class UpdateIcons extends AsyncTask<String, Void, StatsIconData> {
+    private class UpdateStats extends AsyncTask<String, Void, StatsData> {
 
         private String timeInterval;
 
         @Override
-        protected StatsIconData doInBackground(String... strings) {
+        protected StatsData doInBackground(String... strings) {
 
             this.timeInterval = strings[0];
-            StatsIconData stats = new StatsIconData();
+            StatsData stats = new StatsData();
 
             try {
                 reentrantLock.lock();
@@ -355,7 +354,7 @@ public class StatisticsFragment extends Fragment {
 
 
                 if (screenOn != 0) {
-                    if (fragmentLaunched > screenOff) {
+                    if (fragmentLaunched > screenOff && screenOn > screenOff) {
                         long currentTime = System.currentTimeMillis();
                         long difference = currentTime - screenOn;
                         overallTime = difference + overallTime;
@@ -405,13 +404,13 @@ public class StatisticsFragment extends Fragment {
 
                 StatsDBContract.StatsDBHelper statsHelper = new StatsDBContract.StatsDBHelper(context);
                 SQLiteDatabase db = statsHelper.getReadableDatabase();
-                ArrayList<StatsIconData> statsFromInterval = statsHelper.getStatsForInterval(timeInterval);
+                ArrayList<StatsData> statsFromInterval = statsHelper.getStatsForInterval(timeInterval);
 
                 int collectedUnlocks = stats.getNoOfUnlocks();
                 long collectedCompleted = stats.getTasksCompleted();
                 long collectedTime = stats.getOverallTime();
 
-                for (StatsIconData queriedStats : statsFromInterval) {
+                for (StatsData queriedStats : statsFromInterval) {
                     collectedUnlocks += queriedStats.getNoOfUnlocks();
                     collectedCompleted += queriedStats.getTasksCompleted();
                     collectedTime += queriedStats.getOverallTime();
@@ -429,7 +428,7 @@ public class StatisticsFragment extends Fragment {
         }
 
         @Override
-        protected synchronized void onPostExecute(StatsIconData iconData) {
+        protected synchronized void onPostExecute(StatsData iconData) {
 
             if (getView() == statsView) {
 

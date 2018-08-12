@@ -7,8 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.rosadowning.nocrastinate.R;
+
+import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
 
 public class HelpCenterFragment extends Fragment {
 

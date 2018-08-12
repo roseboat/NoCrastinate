@@ -184,12 +184,12 @@
         "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/res/layout/select_dialog_singlechoice_material.xml"
     },
     {
-        "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_ab_share_pack_mtrl_alpha.9.png.flat",
-        "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/res/drawable-hdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png"
-    },
-    {
         "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_textfield_activated_mtrl_alpha.9.png.flat",
         "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/res/drawable-hdpi-v4/abc_textfield_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_ab_share_pack_mtrl_alpha.9.png.flat",
+        "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/res/drawable-hdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable-ldrtl-hdpi-v17_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
@@ -212,12 +212,12 @@
         "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/design-28.0.0-alpha3.aar/318479f286338043ac0c24ab014d5e5a/res/animator/mtrl_fab_show_motion_spec.xml"
     },
     {
-        "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_scrubber_control_to_pressed_mtrl_005.png.flat",
-        "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/res/drawable-xhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png"
-    },
-    {
         "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_textfield_activated_mtrl_alpha.9.png.flat",
         "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/res/drawable-xxhdpi-v4/abc_textfield_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_scrubber_control_to_pressed_mtrl_005.png.flat",
+        "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/res/drawable-xhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
         "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/layout_select_dialog_multichoice_material.xml.flat",
@@ -372,12 +372,12 @@
         "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/res/layout/abc_screen_simple.xml"
     },
     {
-        "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
-        "source": "/Users/RosaDowning/Downloads/NoCrastinate/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png"
-    },
-    {
         "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_notification_bg_low_normal.9.png.flat",
         "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0-alpha3.aar/794540b23e835c4b6f02a7931ac8d7e5/res/drawable-xhdpi-v4/notification_bg_low_normal.9.png"
+    },
+    {
+        "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/RosaDowning/Downloads/NoCrastinate/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png"
     },
     {
         "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable_abc_ic_search_api_material.xml.flat",
@@ -508,12 +508,12 @@
         "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/res/drawable-xxxhdpi-v4/abc_btn_check_to_on_mtrl_015.png"
     },
     {
-        "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_design_ic_visibility.png.flat",
-        "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/design-28.0.0-alpha3.aar/318479f286338043ac0c24ab014d5e5a/res/drawable-xhdpi-v4/design_ic_visibility.png"
-    },
-    {
         "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable-xhdpi_ic_action_add_circle_outline.png.flat",
         "source": "/Users/RosaDowning/Downloads/NoCrastinate/app/src/main/res/drawable-xhdpi/ic_action_add_circle_outline.png"
+    },
+    {
+        "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_design_ic_visibility.png.flat",
+        "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/design-28.0.0-alpha3.aar/318479f286338043ac0c24ab014d5e5a/res/drawable-xhdpi-v4/design_ic_visibility.png"
     },
     {
         "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable_design_fab_background.xml.flat",
@@ -832,12 +832,12 @@
         "source": "/Users/RosaDowning/Downloads/NoCrastinate/app/src/main/res/drawable-xxhdpi/ic_todo_icon.png"
     },
     {
-        "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable-ldrtl-mdpi-v17_abc_spinner_mtrl_am_alpha.9.png.flat",
-        "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/res/drawable-ldrtl-mdpi-v17/abc_spinner_mtrl_am_alpha.9.png"
-    },
-    {
         "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ic_action_add_circle_outline.png.flat",
         "source": "/Users/RosaDowning/Downloads/NoCrastinate/app/src/main/res/drawable-xxxhdpi/ic_action_add_circle_outline.png"
+    },
+    {
+        "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable-ldrtl-mdpi-v17_abc_spinner_mtrl_am_alpha.9.png.flat",
+        "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/res/drawable-ldrtl-mdpi-v17/abc_spinner_mtrl_am_alpha.9.png"
     },
     {
         "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_notification_bg_low_normal.9.png.flat",
@@ -956,12 +956,12 @@
         "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/res/drawable-xxhdpi-v4/abc_btn_check_to_on_mtrl_000.png"
     },
     {
-        "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/color-v23_abc_color_highlight_material.xml.flat",
-        "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/res/color-v23/abc_color_highlight_material.xml"
-    },
-    {
         "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable_ic_alarm_on_black_24dp.xml.flat",
         "source": "/Users/RosaDowning/Downloads/NoCrastinate/app/src/main/res/drawable/ic_alarm_on_black_24dp.xml"
+    },
+    {
+        "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/color-v23_abc_color_highlight_material.xml.flat",
+        "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/res/color-v23/abc_color_highlight_material.xml"
     },
     {
         "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/layout_todo_list_item.xml.flat",
@@ -1136,16 +1136,16 @@
         "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/res/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png"
     },
     {
+        "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/RosaDowning/Downloads/NoCrastinate/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
         "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_btn_switch_to_on_mtrl_00012.9.png.flat",
         "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/res/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png"
     },
     {
         "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_ic_star_black_48dp.png.flat",
         "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/res/drawable-hdpi-v4/abc_ic_star_black_48dp.png"
-    },
-    {
-        "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher_round.png.flat",
-        "source": "/Users/RosaDowning/Downloads/NoCrastinate/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
     },
     {
         "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_ic_star_black_36dp.png.flat",
@@ -1460,12 +1460,12 @@
         "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/res/drawable-hdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png"
     },
     {
-        "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_popup_background_mtrl_mult.9.png.flat",
-        "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/res/drawable-xhdpi-v4/abc_popup_background_mtrl_mult.9.png"
-    },
-    {
         "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/mipmap-mdpi_ic_launcher_round.png.flat",
         "source": "/Users/RosaDowning/Downloads/NoCrastinate/app/src/main/res/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_popup_background_mtrl_mult.9.png.flat",
+        "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/res/drawable-xhdpi-v4/abc_popup_background_mtrl_mult.9.png"
     },
     {
         "merged": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/res/merged/debug/color_mtrl_btn_text_color_selector.xml.flat",

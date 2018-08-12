@@ -49,7 +49,7 @@ public class ViewToDoFragment extends Fragment {
     private Boolean isCompleted, isStarred;
     private EditText et_name, et_dueDate, et_note, et_alarm;
     private CheckBox completed_checkBox;
-    private Button editButton, deleteButton;
+    private Button saveButton, deleteButton;
     private DatePickerDialog.OnDateSetListener mDueDateSetListener, mAlarmDateSetListener;
     private ToDoDBContract.ToDoListDbHelper dbHelper;
     private Calendar todaysDate, alarmCal;
@@ -68,7 +68,7 @@ public class ViewToDoFragment extends Fragment {
         et_note = (EditText) view.findViewById(R.id.toDoNote);
         et_alarm = (EditText) view.findViewById(R.id.toDoAlarmDate);
         completed_checkBox = (CheckBox) view.findViewById(R.id.to_do_check_box);
-        editButton = (Button) view.findViewById(R.id.button_edit_to_do);
+        saveButton = (Button) view.findViewById(R.id.button_save_to_do);
         deleteButton = (Button) view.findViewById(R.id.button_delete_to_do);
 
         name = toDoItem.getName();
@@ -101,27 +101,17 @@ public class ViewToDoFragment extends Fragment {
         } else
             completed_checkBox.setChecked(false);
 
-        et_name.setEnabled(false);
-        et_dueDate.setEnabled(false);
-        et_note.setEnabled(false);
-        et_alarm.setEnabled(false);
-        completed_checkBox.setEnabled(false);
+        et_name.setEnabled(true);
+        et_dueDate.setEnabled(true);
+        et_note.setEnabled(true);
+        et_alarm.setEnabled(true);
+        completed_checkBox.setEnabled(true);
+        datePickerSetUp();
+        alarmPickerSetUp();
 
-        editButton.setOnClickListener(new View.OnClickListener() {
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                et_name.setEnabled(true);
-                et_dueDate.setEnabled(true);
-                et_note.setEnabled(true);
-                et_alarm.setEnabled(true);
-                completed_checkBox.setEnabled(true);
-                datePickerSetUp();
-                alarmPickerSetUp();
-                editButton.setText("Save To Do");
-                editButton.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
                         name = et_name.getText().toString();
                         note = et_note.getText().toString();
                         isCompleted = completed_checkBox.isChecked();
@@ -211,8 +201,8 @@ public class ViewToDoFragment extends Fragment {
                         }
                     }
                 });
-            }
-        });
+
+
 
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override

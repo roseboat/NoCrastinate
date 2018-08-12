@@ -41,8 +41,6 @@ public class NotificationSettingsFragment extends Fragment {
     private NotificationManagerCompat notificationManager;
     private SharedPreferences notiPreferences;
     private SharedPreferences.Editor editor;
-    private final int FREQ_1_ALARM_1 = 10001;
-    private final int FREQ_1_ALARM_2 = 10002;
     private final int FREQ_2_ALARM_1 = 20001;
     private final int FREQ_3_ALARM_1 = 30001;
     private final String FREQ_2_ALARM_TITLE = "NoCrastinate Daily Report";
@@ -190,17 +188,13 @@ public class NotificationSettingsFragment extends Fragment {
 
         Date week = weeklyReport.toDate();
         SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy, hh:MM:ss");
-        Log.d(TAG, "next week date = " + sdf2.format(week));
-
-        Calendar weekly = Calendar.getInstance();
-        weekly.add(SECOND, 5);
 
         Intent freq3intent = new Intent(getContext(), NotificationReceiver.class);
         freq3intent.putExtra("Title", FREQ_3_ALARM_TITLE);
         freq3intent.putExtra("AlarmID", FREQ_3_ALARM_1);
         PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, freq3intent, PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, weekly.getTimeInMillis(), startPIntent);
+        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, weeklyReport.getMillis(), startPIntent);
     }
 
     public void deleteNotificationAlarm(int deleteNotificationID) {
