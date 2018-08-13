@@ -20,8 +20,8 @@ import static android.content.Context.ALARM_SERVICE;
 
 public class ScreenReceiver extends BroadcastReceiver {
 
-    private SharedPreferences statsPreferences, bootPreferences;
-    private SharedPreferences.Editor statsEditor, bootEditor;
+    private SharedPreferences statsPreferences;
+    private SharedPreferences.Editor statsEditor;
     private Context context;
     private ReentrantLock reentrantLock;
     private final int FREQ_1_ALARM_2 = 10002;
@@ -34,21 +34,9 @@ public class ScreenReceiver extends BroadcastReceiver {
         this.context = context;
         this.reentrantLock = new ReentrantLock();
         statsPreferences = context.getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
-        bootPreferences = context.getSharedPreferences("BootData", Context.MODE_PRIVATE);
         statsEditor = statsPreferences.edit();
-        bootEditor = bootPreferences.edit();
 
-        if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF) || intent.getAction().equals(Intent.ACTION_SHUTDOWN)) {
-            Log.e(TAG, "PHONE LOCKED");
-            try {
-                reentrantLock.lock();
-                statsEditor.putLong("screenOff", System.currentTimeMillis());
-                statsEditor.putBoolean("screenOffBoolean", true);
-                statsEditor.apply();
-            } finally {
-                reentrantLock.lock();
-            }
-        } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
+        if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
             Log.e(TAG, "SCREEN ON");
             resetAlarm();
         } else if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
@@ -56,27 +44,6 @@ public class ScreenReceiver extends BroadcastReceiver {
 
             try {
                 reentrantLock.lock();
-
-                statsEditor.putBoolean("screenOffBoolean", false);
-                statsEditor.putBoolean("InReceiver", true);
-                statsEditor.apply();
-
-                // HANDLES SCREEN ON, OFF & OVERALL TIME
-                long screenOn = statsPreferences.getLong("screenOn", 0);
-                long newScreenOn = System.currentTimeMillis();
-                statsEditor.putLong("screenOn", newScreenOn);
-                statsEditor.apply();
-
-                if (screenOn != 0) {
-                    long screenOff = statsPreferences.getLong("screenOff", 0);
-                    long durationPreviousSession = screenOff - screenOn;
-                    long durationSoFar = statsPreferences.getLong("totalDuration", 0);
-                    long updatedDuration = durationSoFar + durationPreviousSession;
-                    statsEditor.putLong("totalDuration", updatedDuration);
-                    statsEditor.apply();
-                }
-                statsEditor.putLong("screenOn", System.currentTimeMillis());
-                statsEditor.apply();
 
                 // HANDLES UNLOCKS
                 int unlocks = statsPreferences.getInt("noOfUnlocks", 0);
@@ -94,9 +61,6 @@ public class ScreenReceiver extends BroadcastReceiver {
                 }
             } finally {
                 reentrantLock.unlock();
-                statsEditor.putBoolean("InReceiver", false);
-                statsEditor.apply();
-
             }
         } else if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
             Log.e(TAG, "PHONE TURNED ON");

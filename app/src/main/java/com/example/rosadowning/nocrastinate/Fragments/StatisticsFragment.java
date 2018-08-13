@@ -45,6 +45,7 @@ import android.widget.TextView;
 
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -107,7 +108,7 @@ public class StatisticsFragment extends Fragment {
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         editor.putLong("statisticsLaunch", System.currentTimeMillis());
         Log.e(TAG, "STATS LAUNCHED");
@@ -203,16 +204,20 @@ public class StatisticsFragment extends Fragment {
                                     }
                                 });
 
-                                if (!sharedPreferences.getBoolean("InReceiver", true)) {
-                                    UpdateStats newIcons = new UpdateStats();
-                                    synchronized (newIcons) {
-                                        newIcons.execute(intervalString);
-                                    }
+                                UpdateStats newIcons = new UpdateStats();
+                                synchronized (newIcons) {
+                                    newIcons.execute(intervalString);
+
                                 }
                             }
                         }
                     };
-                    timerCheckUsage.schedule(timerTaskCheckUsage, 1000, 4000);
+                    if (sharedPreferences.getBoolean("SettingsOn", false)) {
+                        timerCheckUsage.schedule(timerTaskCheckUsage, 1000, 3000);
+                    } else {
+                        timerCheckUsage.schedule(timerTaskCheckUsage, 1000, 30000);
+                    }
+
                 }
             }
 
@@ -283,8 +288,17 @@ public class StatisticsFragment extends Fragment {
                 map.get(finalEvent.getPackageName()).timeInForeground += diff;
             }
         }
-
         List<CustomAppHolder> allEventsList = new ArrayList<>(map.values());
+
+        if (interval.equals("Daily")) {
+            long totalTime = 0;
+            for (CustomAppHolder event : allEventsList) {
+                totalTime += event.timeInForeground;
+            }
+            editor.putLong("totalDuration", totalTime);
+            editor.apply();
+        }
+
         return allEventsList;
     }
 
@@ -347,43 +361,23 @@ public class StatisticsFragment extends Fragment {
                 reentrantLock.lock();
 
                 int unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
-                long screenOn = sharedPreferences.getLong("screenOn", 0);
-                long screenOff = sharedPreferences.getLong("screenOff", 0);
-                long overallTime = sharedPreferences.getLong("totalDuration", 0);
-                long fragmentLaunched = sharedPreferences.getLong("statisticsLaunch", 0);
+                long totalDuration = sharedPreferences.getLong("totalDuration", 0);
+                Log.d(TAG, "duration = " + TimeHelper.formatDuration(totalDuration));
 
-
-                if (screenOn != 0) {
-                    if (fragmentLaunched > screenOff && screenOn > screenOff) {
-                        long currentTime = System.currentTimeMillis();
-                        long difference = currentTime - screenOn;
-                        overallTime = difference + overallTime;
-                        editor.putLong("totalDuration", overallTime);
-                        editor.putLong("screenOn", System.currentTimeMillis());
-                        editor.apply();
-
-                        Log.d(TAG, "duration = " + TimeHelper.formatDuration(overallTime));
-
-                        if (notiSettingsOne) {
-                            Duration timeOnPhone = Duration.millis(overallTime);
-                            hours = timeOnPhone.getStandardHours();
-                            if (preHours != hours && hours != 0) {
-                                Log.d(TAG, "UPDATE : prehours = " + preHours + " hours = " + hours);
-                                Intent intent = new Intent(context, NotificationReceiver.class);
-                                intent.putExtra("Title", "NoCrastinate Usage Time Alert!");
-                                intent.putExtra("AlarmID", 10001);
-                                intent.putExtra("Content", "You've been using your phone for " + hours + " hours today! :(");
-                                PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-                                AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-                                alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
-                                preHours = hours;
-                            } else preHours = hours;
-                        }
-                    }
-                } else {
-                    editor.putLong("screenOn", System.currentTimeMillis());
-                    editor.putLong("totalDuration", 0);
-                    editor.apply();
+                if (notiSettingsOne) {
+                    Duration timeOnPhone = Duration.millis(totalDuration);
+                    hours = timeOnPhone.getStandardHours();
+                    if (preHours != hours && hours != 0) {
+                        Log.d(TAG, "UPDATE : prehours = " + preHours + " hours = " + hours);
+                        Intent intent = new Intent(context, NotificationReceiver.class);
+                        intent.putExtra("Title", "NoCrastinate Usage Time Alert!");
+                        intent.putExtra("AlarmID", 10001);
+                        intent.putExtra("Content", "You've been using your phone for " + hours + " hours today! :(");
+                        PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                        AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+                        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
+                        preHours = hours;
+                    } else preHours = hours;
                 }
 
                 ToDoDBContract.ToDoListDbHelper toDoHelper = new ToDoDBContract.ToDoListDbHelper(context);
@@ -394,7 +388,7 @@ public class StatisticsFragment extends Fragment {
 
                 stats.setTasksCompleted(tasksCompleted);
                 stats.setNoOfUnlocks(unlocks);
-                stats.setOverallTime(overallTime);
+                stats.setOverallTime(totalDuration);
 
             } finally {
                 reentrantLock.unlock();
@@ -432,44 +426,43 @@ public class StatisticsFragment extends Fragment {
 
             if (getView() == statsView) {
 
+                TextView timeHeader = (TextView) getView().findViewById(R.id.stats_header);
+                TextView textViewUnlocks = (TextView) getView().findViewById(R.id.text_view_no_of_unlocks);
+                TextView textViewOverallTime = (TextView) getView().findViewById(R.id.text_view_overall_time);
+                TextView textViewTasks = (TextView) getView().findViewById(R.id.text_view_tasks_completed);
+                TextView textViewTimeSpan = (TextView) getView().findViewById(R.id.time_span);
+
+
                 long timeLaunched = sharedPreferences.getLong("statisticsLaunch", 0);
 
-                if (timeLaunched > System.currentTimeMillis() - 3000){
+                if (timeLaunched > System.currentTimeMillis() - 1500) {
                     mRecyclerView.setAdapter(new AlphaInAnimationAdapter(mUsageListAdapter));
-//                    TextView textViewUnlocks = (TextView) getView().findViewById(R.id.text_view_no_of_unlocks);
-//                    textViewUnlocks.animate().alpha(0).setDuration(1500);
-
-                }else {
+                    timeHeader.setAlpha(0);
+                    textViewUnlocks.setAlpha(0);
+                    textViewOverallTime.setAlpha(0);
+                    textViewTasks.setAlpha(0);
+                    timeHeader.animate().alpha(1).setDuration(200);
+                    textViewUnlocks.animate().alpha(1).setDuration(200);
+                    textViewOverallTime.animate().alpha(1).setDuration(200);
+                    textViewTasks.animate().alpha(1).setDuration(200);
+                    textViewTimeSpan.animate().alpha(1).setDuration(200);
+                } else {
                     mRecyclerView.setAdapter(mUsageListAdapter);
-
+                    textViewTimeSpan.setAlpha(1);
                 }
                 mUsageListAdapter.setCustomAppList(iconData.getAppsList());
-                mUsageListAdapter.notifyDataSetChanged();
 
-                TextView timeHeader = (TextView) getView().findViewById(R.id.stats_header);
                 timeHeader.setText(TimeHelper.getHeadingString(timeInterval));
+                textViewUnlocks.setText(iconData.getNoOfUnlocks() + "");
 
-                if ((Integer) iconData.getNoOfUnlocks() != null) {
-                    TextView textViewUnlocks = (TextView) getView().findViewById(R.id.text_view_no_of_unlocks);
-                    textViewUnlocks.setText(iconData.getNoOfUnlocks() + "");
+                String timeString = "";
+                if (iconData.getOverallTime() < 60000) {
+                    timeString = "0m";
+                } else {
+                    timeString = TimeHelper.formatDuration(iconData.getOverallTime());
                 }
-
-                if ((Long) iconData.getOverallTime() != null) {
-                    String timeString = "";
-                    if (iconData.getOverallTime() < 60000) {
-                        timeString = "0m";
-
-                    } else {
-                        timeString = TimeHelper.formatDuration(iconData.getOverallTime());
-                    }
-                    TextView textViewOverallTime = (TextView) getView().findViewById(R.id.text_view_overall_time);
-                    textViewOverallTime.setText(timeString);
-                }
-
-                if ((Long) iconData.getTasksCompleted() != null) {
-                    TextView textViewTasks = (TextView) getView().findViewById(R.id.text_view_tasks_completed);
-                    textViewTasks.setText(iconData.getTasksCompleted() + "");
-                }
+                textViewOverallTime.setText(timeString);
+                textViewTasks.setText(iconData.getTasksCompleted() + "");
 
             }
         }

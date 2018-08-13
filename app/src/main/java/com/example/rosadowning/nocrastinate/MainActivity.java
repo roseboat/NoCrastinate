@@ -79,11 +79,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (serviceClass.getName().equals(service.service.getClassName())) {
-                Log.i("isMyServiceRunning?", true + "");
                 return true;
             }
         }
-        Log.i("isMyServiceRunning?", false + "");
         return false;
     }
 

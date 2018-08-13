@@ -189,11 +189,13 @@
             app:layout_constraintTop_toBottomOf="@id/icon_group_main">
 
             <TextView
+                android:id="@+id/time_span"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato_italic"
                 android:padding="@dimen/margin_small"
                 android:text="Time Span"
+                android:alpha="0"
                 android:textSize="16sp" />
 
             <Spinner
