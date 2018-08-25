@@ -5,36 +5,36 @@ INJECTED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidMani
 INJECTED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:2:1-49:12
 INJECTED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:2:1-49:12
 MERGED from [jp.wasabeef:recyclerview-animators:2.3.0] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/recyclerview-animators-2.3.0.aar/bda930df5268aa18f570ed2bc414dcc8/AndroidManifest.xml:2:1-12:12
-MERGED from [com.android.support:design:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/design-28.0.0-alpha3.aar/318479f286338043ac0c24ab014d5e5a/AndroidManifest.xml:17:1-24:12
-MERGED from [com.android.support:appcompat-v7:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:design:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/design-28.0.0-rc01.aar/ecd87164c2b40a99e09f73db8fcd2aa9/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:appcompat-v7:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-rc01.aar/ac62232eb220014c037614347f922f4d/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.2.aar/d8232d88e9057f7b10386ed082a1ebbc/AndroidManifest.xml:2:1-11:12
-MERGED from [com.android.support:animated-vector-drawable:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0-alpha3.aar/c784ce63c75deb6a3c1e272f7372552d/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-vector-drawable:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0-alpha3.aar/80b3d006365d19b8506fce521c3c51a4/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:recyclerview-v7:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0-alpha3.aar/7b3559b99fb4df1a7393ef5b7fe04a1d/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-fragment:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0-alpha3.aar/eb7fc6b82f3a37780f6ecc945bed343c/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-ui:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0-alpha3.aar/6a97ef94c83fb7bb2e84f58c59256a60/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-utils:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0-alpha3.aar/7d7b0a7784f89e3599dc5832d976665e/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:transition:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/transition-28.0.0-alpha3.aar/b2d99fcc14e9d6d80d64344f58ae74a0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:loader:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/loader-28.0.0-alpha3.aar/9e7ca6da7f3f9e2c0c2aeecdfa201ac8/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:viewpager:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0-alpha3.aar/b87f26c67792bd01b008a0af1c9c06e1/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:coordinatorlayout:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0-alpha3.aar/edfaf53afce36901d9928a266a4bea67/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:drawerlayout:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0-alpha3.aar/2d80772dc5be635b31307006cf1a7a0c/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:slidingpanelayout:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0-alpha3.aar/57f2bdd834d50aefedca053da92559b2/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:customview:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/customview-28.0.0-alpha3.aar/054aa58b4a7261ad3433fca72c39d7b3/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:swiperefreshlayout:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0-alpha3.aar/885b001df2e865f952fec2203e6571ba/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:asynclayoutinflater:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0-alpha3.aar/5299a3d64bfb5b4088cbe932498ff51a/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-compat:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0-alpha3.aar/794540b23e835c4b6f02a7931ac8d7e5/AndroidManifest.xml:17:1-24:12
-MERGED from [com.android.support:cursoradapter:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0-alpha3.aar/7fd2debc5edf0449228b0f1153696565/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:cardview-v7:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0-alpha3.aar/8541944ffd81c1a4a45c383af266aed6/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:documentfile:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0-alpha3.aar/80b3f0a9f4eb195dfd1366d241363a94/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:localbroadcastmanager:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0-alpha3.aar/9f5394900a16603e1506970fb9773a13/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:print:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/print-28.0.0-alpha3.aar/268a27669200993ef9e8d2edcc9fcf0b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0-rc01.aar/115e0fd71acee25e50a4bd7f4db065c0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0-rc01.aar/6f6ac45ca25a42218bff107bfeb1a687/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:recyclerview-v7:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0-rc01.aar/41d79917e7453eeee6b35ae194b64047/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0-rc01.aar/a1bea74a8a4a5cb6dbf0bcff1a127802/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0-rc01.aar/12e8cdf361f2c897576414ec3f29305d/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0-rc01.aar/e2518bbb213b9cac12576b9cf38949fe/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/transition-28.0.0-rc01.aar/32c89d41daa4aa69327beac9bccaceb8/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/loader-28.0.0-rc01.aar/0fb939de81b5c1e81aba25874af0ebaf/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0-rc01.aar/824a511b61fe59b4375e7b9a636e48e1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0-rc01.aar/8f64595dad198f1a9cb94add3ee1a68d/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0-rc01.aar/5df525a9c7394ef1e3f651b312889ac0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0-rc01.aar/64747ee9c54a6486422bf53fc71242db/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/customview-28.0.0-rc01.aar/1e5f9d6b295e122b6ab993077becd79f/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0-rc01.aar/b29363c452a7a42880cf8e9f4bd1083e/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0-rc01.aar/d2d12b125b750f0e25bb27cd02836e9e/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0-rc01.aar/dfb0391e0deda088d1010ebb8babcb56/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0-rc01.aar/9fa2fd0f778e2acbd5d10cbc8a6b79aa/AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0-rc01.aar/5248996fcae602554158db84b0269956/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:cardview-v7:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0-rc01.aar/56650a4289bbdb8c266143a6475cb2f1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0-rc01.aar/3740ffc4fd896e36da040fe8c149dc20/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0-rc01.aar/dbed98d9adcd4951bd0674f29dc903e7/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/print-28.0.0-rc01.aar/e2f34d9dd445bf5c40c765753e79806b/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/15d893873395df1d1206c20010bfb3e7/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/b452a68ba9c5e6f778ec04afb277d6ce/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/3fc1604c61e7c9ba784ef10e4727f355/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/ad3512376f2e9e8228e016e1f44123c5/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:versionedparcelable:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0-alpha3.aar/ed9ed30254f7b58a4a1638ccc27b0f6f/AndroidManifest.xml:17:1-25:12
-MERGED from [com.android.support:interpolator:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0-alpha3.aar/78d3aced7c62289fefdb2be1ba8a152f/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0-rc01.aar/cf40c12ea0a53898fb06f18b09ab75b3/AndroidManifest.xml:17:1-22:12
 INJECTED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:2:1-49:12
 INJECTED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:2:1-49:12
 INJECTED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:2:1-49:12
@@ -66,16 +66,16 @@ ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifes
 		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:7:22-78
 application
 ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:10:5-47:19
-MERGED from [com.android.support:design:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/design-28.0.0-alpha3.aar/318479f286338043ac0c24ab014d5e5a/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:design:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/design-28.0.0-alpha3.aar/318479f286338043ac0c24ab014d5e5a/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:design:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/design-28.0.0-rc01.aar/ecd87164c2b40a99e09f73db8fcd2aa9/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:design:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/design-28.0.0-rc01.aar/ecd87164c2b40a99e09f73db8fcd2aa9/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.2.aar/d8232d88e9057f7b10386ed082a1ebbc/AndroidManifest.xml:9:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.2.aar/d8232d88e9057f7b10386ed082a1ebbc/AndroidManifest.xml:9:5-20
-MERGED from [com.android.support:support-compat:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0-alpha3.aar/794540b23e835c4b6f02a7931ac8d7e5/AndroidManifest.xml:22:5-94
-MERGED from [com.android.support:support-compat:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0-alpha3.aar/794540b23e835c4b6f02a7931ac8d7e5/AndroidManifest.xml:22:5-94
-MERGED from [com.android.support:versionedparcelable:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0-alpha3.aar/ed9ed30254f7b58a4a1638ccc27b0f6f/AndroidManifest.xml:22:5-23:19
-MERGED from [com.android.support:versionedparcelable:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0-alpha3.aar/ed9ed30254f7b58a4a1638ccc27b0f6f/AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:support-compat:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0-rc01.aar/dfb0391e0deda088d1010ebb8babcb56/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0-rc01.aar/dfb0391e0deda088d1010ebb8babcb56/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0-rc01.aar/9fa2fd0f778e2acbd5d10cbc8a6b79aa/AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0-rc01.aar/9fa2fd0f778e2acbd5d10cbc8a6b79aa/AndroidManifest.xml:22:5-23:19
 	android:appComponentFactory
-		ADDED from [com.android.support:support-compat:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0-alpha3.aar/794540b23e835c4b6f02a7931ac8d7e5/AndroidManifest.xml:22:18-91
+		ADDED from [com.android.support:support-compat:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0-rc01.aar/dfb0391e0deda088d1010ebb8babcb56/AndroidManifest.xml:22:18-91
 	android:supportsRtl
 		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:15:9-35
 	android:label
@@ -158,54 +158,56 @@ INJECTED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidMani
 INJECTED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml
 MERGED from [jp.wasabeef:recyclerview-animators:2.3.0] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/recyclerview-animators-2.3.0.aar/bda930df5268aa18f570ed2bc414dcc8/AndroidManifest.xml:8:5-10:41
 MERGED from [jp.wasabeef:recyclerview-animators:2.3.0] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/recyclerview-animators-2.3.0.aar/bda930df5268aa18f570ed2bc414dcc8/AndroidManifest.xml:8:5-10:41
-MERGED from [com.android.support:design:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/design-28.0.0-alpha3.aar/318479f286338043ac0c24ab014d5e5a/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:design:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/design-28.0.0-alpha3.aar/318479f286338043ac0c24ab014d5e5a/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:appcompat-v7:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:appcompat-v7:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/design-28.0.0-rc01.aar/ecd87164c2b40a99e09f73db8fcd2aa9/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/design-28.0.0-rc01.aar/ecd87164c2b40a99e09f73db8fcd2aa9/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-rc01.aar/ac62232eb220014c037614347f922f4d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-rc01.aar/ac62232eb220014c037614347f922f4d/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.2.aar/d8232d88e9057f7b10386ed082a1ebbc/AndroidManifest.xml:5:5-7:41
 MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.2.aar/d8232d88e9057f7b10386ed082a1ebbc/AndroidManifest.xml:5:5-7:41
-MERGED from [com.android.support:animated-vector-drawable:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0-alpha3.aar/c784ce63c75deb6a3c1e272f7372552d/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0-alpha3.aar/c784ce63c75deb6a3c1e272f7372552d/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0-alpha3.aar/80b3d006365d19b8506fce521c3c51a4/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0-alpha3.aar/80b3d006365d19b8506fce521c3c51a4/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:recyclerview-v7:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0-alpha3.aar/7b3559b99fb4df1a7393ef5b7fe04a1d/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:recyclerview-v7:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0-alpha3.aar/7b3559b99fb4df1a7393ef5b7fe04a1d/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0-alpha3.aar/eb7fc6b82f3a37780f6ecc945bed343c/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0-alpha3.aar/eb7fc6b82f3a37780f6ecc945bed343c/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0-alpha3.aar/6a97ef94c83fb7bb2e84f58c59256a60/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0-alpha3.aar/6a97ef94c83fb7bb2e84f58c59256a60/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0-alpha3.aar/7d7b0a7784f89e3599dc5832d976665e/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0-alpha3.aar/7d7b0a7784f89e3599dc5832d976665e/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:transition:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/transition-28.0.0-alpha3.aar/b2d99fcc14e9d6d80d64344f58ae74a0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:transition:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/transition-28.0.0-alpha3.aar/b2d99fcc14e9d6d80d64344f58ae74a0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:loader:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/loader-28.0.0-alpha3.aar/9e7ca6da7f3f9e2c0c2aeecdfa201ac8/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:loader:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/loader-28.0.0-alpha3.aar/9e7ca6da7f3f9e2c0c2aeecdfa201ac8/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:viewpager:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0-alpha3.aar/b87f26c67792bd01b008a0af1c9c06e1/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:viewpager:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0-alpha3.aar/b87f26c67792bd01b008a0af1c9c06e1/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:coordinatorlayout:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0-alpha3.aar/edfaf53afce36901d9928a266a4bea67/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:coordinatorlayout:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0-alpha3.aar/edfaf53afce36901d9928a266a4bea67/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:drawerlayout:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0-alpha3.aar/2d80772dc5be635b31307006cf1a7a0c/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:drawerlayout:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0-alpha3.aar/2d80772dc5be635b31307006cf1a7a0c/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:slidingpanelayout:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0-alpha3.aar/57f2bdd834d50aefedca053da92559b2/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:slidingpanelayout:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0-alpha3.aar/57f2bdd834d50aefedca053da92559b2/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:customview:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/customview-28.0.0-alpha3.aar/054aa58b4a7261ad3433fca72c39d7b3/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:customview:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/customview-28.0.0-alpha3.aar/054aa58b4a7261ad3433fca72c39d7b3/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:swiperefreshlayout:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0-alpha3.aar/885b001df2e865f952fec2203e6571ba/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:swiperefreshlayout:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0-alpha3.aar/885b001df2e865f952fec2203e6571ba/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:asynclayoutinflater:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0-alpha3.aar/5299a3d64bfb5b4088cbe932498ff51a/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:asynclayoutinflater:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0-alpha3.aar/5299a3d64bfb5b4088cbe932498ff51a/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0-alpha3.aar/794540b23e835c4b6f02a7931ac8d7e5/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0-alpha3.aar/794540b23e835c4b6f02a7931ac8d7e5/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:cursoradapter:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0-alpha3.aar/7fd2debc5edf0449228b0f1153696565/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:cursoradapter:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0-alpha3.aar/7fd2debc5edf0449228b0f1153696565/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:cardview-v7:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0-alpha3.aar/8541944ffd81c1a4a45c383af266aed6/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:cardview-v7:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0-alpha3.aar/8541944ffd81c1a4a45c383af266aed6/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:documentfile:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0-alpha3.aar/80b3f0a9f4eb195dfd1366d241363a94/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:documentfile:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0-alpha3.aar/80b3f0a9f4eb195dfd1366d241363a94/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:localbroadcastmanager:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0-alpha3.aar/9f5394900a16603e1506970fb9773a13/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:localbroadcastmanager:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0-alpha3.aar/9f5394900a16603e1506970fb9773a13/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:print:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/print-28.0.0-alpha3.aar/268a27669200993ef9e8d2edcc9fcf0b/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:print:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/print-28.0.0-alpha3.aar/268a27669200993ef9e8d2edcc9fcf0b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0-rc01.aar/115e0fd71acee25e50a4bd7f4db065c0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0-rc01.aar/115e0fd71acee25e50a4bd7f4db065c0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0-rc01.aar/6f6ac45ca25a42218bff107bfeb1a687/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0-rc01.aar/6f6ac45ca25a42218bff107bfeb1a687/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0-rc01.aar/41d79917e7453eeee6b35ae194b64047/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0-rc01.aar/41d79917e7453eeee6b35ae194b64047/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0-rc01.aar/a1bea74a8a4a5cb6dbf0bcff1a127802/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0-rc01.aar/a1bea74a8a4a5cb6dbf0bcff1a127802/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0-rc01.aar/12e8cdf361f2c897576414ec3f29305d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0-rc01.aar/12e8cdf361f2c897576414ec3f29305d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0-rc01.aar/e2518bbb213b9cac12576b9cf38949fe/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0-rc01.aar/e2518bbb213b9cac12576b9cf38949fe/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/transition-28.0.0-rc01.aar/32c89d41daa4aa69327beac9bccaceb8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/transition-28.0.0-rc01.aar/32c89d41daa4aa69327beac9bccaceb8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/loader-28.0.0-rc01.aar/0fb939de81b5c1e81aba25874af0ebaf/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/loader-28.0.0-rc01.aar/0fb939de81b5c1e81aba25874af0ebaf/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0-rc01.aar/824a511b61fe59b4375e7b9a636e48e1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0-rc01.aar/824a511b61fe59b4375e7b9a636e48e1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0-rc01.aar/8f64595dad198f1a9cb94add3ee1a68d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0-rc01.aar/8f64595dad198f1a9cb94add3ee1a68d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0-rc01.aar/5df525a9c7394ef1e3f651b312889ac0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0-rc01.aar/5df525a9c7394ef1e3f651b312889ac0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0-rc01.aar/64747ee9c54a6486422bf53fc71242db/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0-rc01.aar/64747ee9c54a6486422bf53fc71242db/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/customview-28.0.0-rc01.aar/1e5f9d6b295e122b6ab993077becd79f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/customview-28.0.0-rc01.aar/1e5f9d6b295e122b6ab993077becd79f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0-rc01.aar/b29363c452a7a42880cf8e9f4bd1083e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0-rc01.aar/b29363c452a7a42880cf8e9f4bd1083e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0-rc01.aar/d2d12b125b750f0e25bb27cd02836e9e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0-rc01.aar/d2d12b125b750f0e25bb27cd02836e9e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0-rc01.aar/dfb0391e0deda088d1010ebb8babcb56/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0-rc01.aar/dfb0391e0deda088d1010ebb8babcb56/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0-rc01.aar/9fa2fd0f778e2acbd5d10cbc8a6b79aa/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0-rc01.aar/9fa2fd0f778e2acbd5d10cbc8a6b79aa/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0-rc01.aar/5248996fcae602554158db84b0269956/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0-rc01.aar/5248996fcae602554158db84b0269956/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0-rc01.aar/56650a4289bbdb8c266143a6475cb2f1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0-rc01.aar/56650a4289bbdb8c266143a6475cb2f1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0-rc01.aar/3740ffc4fd896e36da040fe8c149dc20/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0-rc01.aar/3740ffc4fd896e36da040fe8c149dc20/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0-rc01.aar/dbed98d9adcd4951bd0674f29dc903e7/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0-rc01.aar/dbed98d9adcd4951bd0674f29dc903e7/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/print-28.0.0-rc01.aar/e2f34d9dd445bf5c40c765753e79806b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/print-28.0.0-rc01.aar/e2f34d9dd445bf5c40c765753e79806b/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/15d893873395df1d1206c20010bfb3e7/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/15d893873395df1d1206c20010bfb3e7/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/b452a68ba9c5e6f778ec04afb277d6ce/AndroidManifest.xml:20:5-44
@@ -214,10 +216,8 @@ MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/RosaDowning/.gradle/ca
 MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/3fc1604c61e7c9ba784ef10e4727f355/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.core:runtime:1.1.1] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/ad3512376f2e9e8228e016e1f44123c5/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.core:runtime:1.1.1] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/ad3512376f2e9e8228e016e1f44123c5/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:versionedparcelable:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0-alpha3.aar/ed9ed30254f7b58a4a1638ccc27b0f6f/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:versionedparcelable:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0-alpha3.aar/ed9ed30254f7b58a4a1638ccc27b0f6f/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:interpolator:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0-alpha3.aar/78d3aced7c62289fefdb2be1ba8a152f/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:interpolator:28.0.0-alpha3] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0-alpha3.aar/78d3aced7c62289fefdb2be1ba8a152f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0-rc01.aar/cf40c12ea0a53898fb06f18b09ab75b3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0-rc01.aar/cf40c12ea0a53898fb06f18b09ab75b3/AndroidManifest.xml:20:5-44
 INJECTED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml
 INJECTED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml
 	android:targetSdkVersion

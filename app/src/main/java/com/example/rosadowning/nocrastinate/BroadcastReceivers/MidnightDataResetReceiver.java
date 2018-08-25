@@ -10,13 +10,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.rosadowning.nocrastinate.DBHelpers.AlarmDBContract;
+import com.example.rosadowning.nocrastinate.DBHelpers.AppStatsDBContract;
 import com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract;
 import com.example.rosadowning.nocrastinate.DBHelpers.ToDoDBContract;
+import com.example.rosadowning.nocrastinate.DataModels.CustomAppHolder;
 import com.example.rosadowning.nocrastinate.DataModels.StatsData;
+import com.example.rosadowning.nocrastinate.Fragments.StatisticsFragment;
 
 import org.joda.time.DateTime;
 
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static android.content.Context.ALARM_SERVICE;
@@ -86,6 +90,25 @@ public class MidnightDataResetReceiver extends BroadcastReceiver {
             SQLiteDatabase sqlStats = statsHelper.getWritableDatabase();
             statsHelper.insertNewStat(midnightStat);
 
+            StatisticsFragment statsFragment = new StatisticsFragment();
+            List<CustomAppHolder> appList = statsFragment.updateAppsList(statsFragment.getStats("Yesterday", context), context);
+
+            AppStatsDBContract.AppStatsDbHelper appsHelper = new AppStatsDBContract.AppStatsDbHelper(context);
+            SQLiteDatabase sqlApps = appsHelper.getReadableDatabase();
+            String[] appsAlreadyInTable = appsHelper.getApps();
+
+            for (int i = 0; i < appList.size(); i++) {
+                int j;
+                for (j = 0; j < appsAlreadyInTable.length; j++) {
+                    if (appList.get(i).packageName.equals(appsAlreadyInTable[j]))
+                        break;
+                }
+                if (j == appsAlreadyInTable.length)
+                    appsHelper.addAppColumn(appList.get(i).packageName);
+            }
+
+            appsHelper.addStats(yesterday, appList);
+
             DateTime tomorrow = today.withTimeAtStartOfDay().plusDays(1);
             Intent midnightIntent = new Intent(context, MidnightDataResetReceiver.class);
             PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, midnightIntent, 0);
@@ -94,3 +117,4 @@ public class MidnightDataResetReceiver extends BroadcastReceiver {
         }
     }
 }
+

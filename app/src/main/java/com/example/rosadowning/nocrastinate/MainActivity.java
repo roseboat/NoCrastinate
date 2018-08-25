@@ -28,6 +28,7 @@ import android.view.MenuItem;
 import com.example.rosadowning.nocrastinate.BroadcastReceivers.MidnightDataResetReceiver;
 import com.example.rosadowning.nocrastinate.BroadcastReceivers.ScreenReceiver;
 import com.example.rosadowning.nocrastinate.DBHelpers.AlarmDBContract;
+import com.example.rosadowning.nocrastinate.DBHelpers.AppStatsDBContract;
 import com.example.rosadowning.nocrastinate.Fragments.*;
 import com.example.rosadowning.nocrastinate.Services.BlockedAppsService;
 
@@ -75,6 +76,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         createNotificationChannel();
     }
 
+    public Context getContext(){
+        return this.getApplicationContext();
+    }
+
     private boolean isMyServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
@@ -114,6 +119,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
     private void scheduleResetAlarm() {
+
         DateTime today = new DateTime().withTimeAtStartOfDay();
         DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
 

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:background="@color/colorWhite"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/Toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/toolBarHeaderToDo"
+        android:text="@string/title_activity_statistics"
+        style="@style/ToolbarText"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:layout_marginTop="60dp"
+        android:orientation="vertical"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <LinearLayout
+            android:id="@+id/settings_popup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/icon_group_main"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:gravity="center_vertical"
+                android:src="@drawable/ic_nocrastinate_logo" />
+
+            <TextView
+                android:id="@+id/text_open_usage_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_large"
+                android:gravity="center"
+                android:text="@string/app_usage_settings_text"
+                android:textSize="@dimen/large_font_size" />
+
+            <Button
+                android:id="@+id/button_open_usage_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_large"
+                android:padding="@dimen/margin_large"
+                android:text="@string/app_usage_settings_button"
+                android:textSize="@dimen/large_font_size"
+              />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/icon_group_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/spinner_group"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/StatsPageDateHeader"
+                    android:id="@+id/stats_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/margin_small"
+                    android:paddingBottom="@dimen/margin_small"
+                    android:textAlignment="center"
+                    android:gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/margin_small"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/margin_small"
+                >
+
+            <LinearLayout
+                android:id="@+id/icon_group_no_of_unlocks"
+                style="@style/StatsIconLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/icon_group_overall_time_spent">
+
+                <ImageView
+                    style="@style/StatsIconImage"
+                    android:src="@drawable/ic_lock_open_black_24dp"
+                    android:contentDescription="Number of unlocks"/>
+
+                <TextView
+                    android:text="@string/stats_icon_unlocks"
+                    style="@style/StatsIconTopText" />
+
+                <TextView
+                    style="@style/StatsIconBottomText"
+                    android:id="@+id/text_view_no_of_unlocks"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/icon_group_overall_time_spent"
+                style="@style/StatsIconLayout"
+                app:layout_constraintEnd_toStartOf="@id/icon_group_tasks_achieved"
+                app:layout_constraintStart_toEndOf="@id/icon_group_no_of_unlocks">
+
+                <ImageView
+                    style="@style/StatsIconImage"
+                    android:src="@drawable/ic_access_time_black_24dp"
+                    android:contentDescription="Overall time on phone" />
+
+                <TextView
+                    android:text="@string/stats_icon_overall_time"
+                    style="@style/StatsIconTopText" />
+
+                <TextView
+                    style="@style/StatsIconBottomText"
+                    android:id="@+id/text_view_overall_time"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/icon_group_tasks_achieved"
+                style="@style/StatsIconLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/icon_group_overall_time_spent">
+
+                <ImageView
+                    style="@style/StatsIconImage"
+                    android:src="@drawable/ic_thumb_up_black_24dp"
+                    android:contentDescription="Tasks achieved" />
+
+                <TextView
+                    android:text="@string/stats_icon_tasks_achieved"
+                    style="@style/StatsIconTopText" />
+
+                <TextView
+                    style="@style/StatsIconBottomText"
+                    android:id="@+id/text_view_tasks_completed"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+        </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/spinner_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="18dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/icon_group_main">
+
+            <TextView
+                android:id="@+id/time_span"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_italic"
+                android:padding="@dimen/margin_small"
+                android:text="Time Span"
+                android:alpha="0"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinner_time_span"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="@dimen/margin_small"
+                android:scrollbarSize="20dp"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_app_usage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scrollbars="vertical"
+            android:layout_margin="@dimen/margin_small"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner_group" />
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

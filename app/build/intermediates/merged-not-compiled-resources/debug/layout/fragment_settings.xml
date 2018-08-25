@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.SettingsFragment">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/Toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/toolBarHeaderToDo"
+        android:text="@string/title_activity_settings"
+        style="@style/ToolbarText"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="360dp"
+        android:layout_height="454dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/navigation_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        tools:layout_editor_absoluteX="0dp">
+
+        <TextView
+            android:id="@+id/help_center"
+            style="@style/SettingsButtons"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Help Center" />
+
+        <View style="@style/SettingsDivider"/>
+
+        <TextView
+            android:id="@+id/notification_settings"
+            style="@style/SettingsButtons"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Notification Settings" />
+
+        <View style="@style/SettingsDivider"/>
+
+        <TextView
+            android:id="@+id/block_apps"
+            style="@style/SettingsButtons"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Block Applications" />
+
+        <View style="@style/SettingsDivider"/>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

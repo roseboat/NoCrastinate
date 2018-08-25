@@ -4,7 +4,7 @@
             "outputFile": "/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v23/values-v23.xml",
             "map": [
                 {
-                    "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-alpha3.aar/e5796a65f4899d937a21c1fc93086e91/res/values-v23/values-v23.xml",
+                    "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0-rc01.aar/ac62232eb220014c037614347f922f4d/res/values-v23/values-v23.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,19,32,33,34,35,36",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
@@ -15,7 +15,7 @@
                     }
                 },
                 {
-                    "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0-alpha3.aar/8541944ffd81c1a4a45c383af266aed6/res/values-v23/values-v23.xml",
+                    "source": "/Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0-rc01.aar/56650a4289bbdb8c266143a6475cb2f1/res/values-v23/values-v23.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

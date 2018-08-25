@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.usage.UsageEvents;
+import android.app.usage.UsageStats;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
@@ -22,8 +23,10 @@ import android.view.ViewGroup;
 
 import com.example.rosadowning.nocrastinate.Adapters.AppStatisticsAdapter;
 import com.example.rosadowning.nocrastinate.BroadcastReceivers.NotificationReceiver;
+import com.example.rosadowning.nocrastinate.DBHelpers.AppStatsDBContract;
 import com.example.rosadowning.nocrastinate.DataModels.CustomAppHolder;
 import com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract;
+import com.example.rosadowning.nocrastinate.MainActivity;
 import com.example.rosadowning.nocrastinate.R;
 import com.example.rosadowning.nocrastinate.DBHelpers.ToDoDBContract;
 import com.example.rosadowning.nocrastinate.DataModels.StatsData;
@@ -174,7 +177,12 @@ public class StatisticsFragment extends Fragment {
                         @Override
                         public void run() {
 
-                            List<CustomAppHolder> usageStatsList = getStats(intervalString);
+
+                            List<UsageStats> usageStatsList = mUsageStatsManager
+                                    .queryUsageStats(UsageStatsManager.INTERVAL_BEST, new DateTime().minusDays(1).getMillis(),
+                                            System.currentTimeMillis());
+
+//                            List<CustomAppHolder> usageStatsList = getStats(intervalString);
 
                             if (usageStatsList.size() == 0 || usageStatsList.isEmpty()) {
                                 Log.i(TAG, "The user may not allow the access to apps usage. ");
@@ -228,27 +236,26 @@ public class StatisticsFragment extends Fragment {
         });
     }
 
-    public List<CustomAppHolder> getStats(String interval) {
+    public List<CustomAppHolder> getStats(String interval, Context context) {
 
         long startTime = 0;
         long endTime = System.currentTimeMillis();
 
-        switch (interval) {
-            case "Daily":
-                startTime = new DateTime().withTimeAtStartOfDay().getMillis();
-                break;
-            case "Weekly":
-                startTime = new DateTime().minusWeeks(1).getMillis();
-                break;
-            case "Monthly":
-                startTime = new DateTime().minusMonths(1).getMillis();
-                break;
-            case "Yearly":
-                startTime = new DateTime().minusYears(1).getMillis();
-                break;
+        if (interval.equals("Daily")) {
+            startTime = new DateTime().withTimeAtStartOfDay().getMillis();
+        } else if (interval.equals("Yesterday")){
+            startTime = new DateTime().withTimeAtStartOfDay().minusDays(1).getMillis();
+        }
+        else {
+            AppStatsDBContract.AppStatsDbHelper dbHelper = new AppStatsDBContract.AppStatsDbHelper(context);
+            SQLiteDatabase sql = dbHelper.getReadableDatabase();
+            List<CustomAppHolder> apps = dbHelper.getStatsForInterval(interval);
+            return apps;
         }
 
+
         mUsageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
+
 
         UsageEvents.Event currentEvent;
         List<UsageEvents.Event> allEvents = new ArrayList<>();
@@ -272,7 +279,6 @@ public class StatisticsFragment extends Fragment {
         for (int i = 0; i < allEvents.size() - 1; i++) {
             UsageEvents.Event preEvent = allEvents.get(i);
             UsageEvents.Event postEvent = allEvents.get(i + 1);
-
 
             if (preEvent.getEventType() == 1 && postEvent.getEventType() == 2
                     && preEvent.getClassName().equals(postEvent.getClassName())) {
@@ -302,7 +308,7 @@ public class StatisticsFragment extends Fragment {
         return allEventsList;
     }
 
-    private List<CustomAppHolder> updateAppsList(List<CustomAppHolder> allEventsList) {
+    public List<CustomAppHolder> updateAppsList(List<CustomAppHolder> allEventsList, Context context) {
 
         List<CustomAppHolder> updatedAppsList = new ArrayList<>();
 
@@ -390,9 +396,13 @@ public class StatisticsFragment extends Fragment {
                 stats.setNoOfUnlocks(unlocks);
                 stats.setOverallTime(totalDuration);
 
+
+
             } finally {
                 reentrantLock.unlock();
             }
+
+            List<CustomAppHolder> appStatList = updateAppsList(getStats("Daily", context), context);
 
             if (!timeInterval.equals("Daily")) {
 
@@ -409,14 +419,28 @@ public class StatisticsFragment extends Fragment {
                     collectedCompleted += queriedStats.getTasksCompleted();
                     collectedTime += queriedStats.getOverallTime();
                 }
-
                 stats.setTasksCompleted(collectedCompleted);
                 stats.setNoOfUnlocks(collectedUnlocks);
                 stats.setOverallTime(collectedTime);
+
+                List<CustomAppHolder> intervalList = updateAppsList(getStats(timeInterval, context), context);
+
+                // Compares the daily appStatList with the intervalList, adds daily stats to interval stats
+                // Finds the elements which are present in intervalList but not in the daily appStatList
+                // Adds any missing elements to the appStatList for display
+                for (int i = 0; i < intervalList.size(); i++) {
+                    int j;
+                    for (j = 0; j < appStatList.size(); j++) {
+                        if (appStatList.get(j).packageName.equals(intervalList.get(i).packageName))
+                            appStatList.get(j).timeInForeground += intervalList.get(i).timeInForeground;
+                        break;
+                    }
+                    if (j == appStatList.size())
+                        appStatList.add(intervalList.get(i));
+                }
             }
 
-            List<CustomAppHolder> appList = updateAppsList(getStats(timeInterval));
-            stats.setAppsList(appList);
+            stats.setAppsList(appStatList);
 
             return stats;
         }
@@ -431,7 +455,6 @@ public class StatisticsFragment extends Fragment {
                 TextView textViewOverallTime = (TextView) getView().findViewById(R.id.text_view_overall_time);
                 TextView textViewTasks = (TextView) getView().findViewById(R.id.text_view_tasks_completed);
                 TextView textViewTimeSpan = (TextView) getView().findViewById(R.id.time_span);
-
 
                 long timeLaunched = sharedPreferences.getLong("statisticsLaunch", 0);
 
