@@ -39,7 +39,7 @@ public class AppStatsDBContract {
     public static class AppStatsDbHelper extends SQLiteOpenHelper {
         public static final int DATABASE_VERSION = 4;
         public static final String DATABASE_NAME = "AppStats.db";
-        public static final String TAG = "App-Stats_DB";
+        public static final String TAG = "App-Stats-DB";
 
         public AppStatsDbHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);

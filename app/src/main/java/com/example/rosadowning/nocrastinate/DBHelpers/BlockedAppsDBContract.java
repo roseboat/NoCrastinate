@@ -53,6 +53,12 @@ public class BlockedAppsDBContract {
             onUpgrade(db, oldVersion, newVersion);
         }
 
+        public void clearDatabase() {
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL("DELETE FROM " + BlockedAppEntry.TABLE_NAME);
+            db.close();
+        }
+
         public void insertApp(String packageName) {
             Log.d(TAG, "inserting app = " + packageName);
 
@@ -69,30 +75,6 @@ public class BlockedAppsDBContract {
             SQLiteDatabase db = this.getWritableDatabase();
             db.delete(BlockedAppEntry.TABLE_NAME, BlockedAppEntry.COLUMN_NAME_PACKAGE_NAME + " = ?", new String[]{String.valueOf(packageName)});
             db.close();
-        }
-
-        public boolean isAppBlocked(String packageName) {
-
-            SQLiteDatabase db = this.getReadableDatabase();
-            boolean exists = false;
-
-            Cursor cursor = db.rawQuery("SELECT EXISTS (SELECT 1 FROM " + BlockedAppEntry.TABLE_NAME + " WHERE " + BlockedAppEntry.COLUMN_NAME_PACKAGE_NAME + " = " + packageName + ");", null);
-
-            if (cursor.moveToFirst()) {
-                exists = cursor.getInt(0) != 0;
-            }
-            cursor.close();
-            db.close();
-            return exists;
-        }
-
-        public long getNoAlarmEntries() {
-
-            SQLiteDatabase db = this.getReadableDatabase();
-            long noOfEntries = 0;
-            noOfEntries = DatabaseUtils.queryNumEntries(db, BlockedAppEntry.TABLE_NAME, BlockedAppEntry.COLUMN_NAME_PACKAGE_NAME + ";");
-            db.close();
-            return noOfEntries;
         }
 
         public ArrayList<String> getBlockedApps() {

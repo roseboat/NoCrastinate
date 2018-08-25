@@ -96,7 +96,6 @@ public class ToDoDBContract {
             } finally {
                 db.close();
             }
-
         }
 
         public void insertNewToDo(ToDoItem toDo) {
@@ -171,6 +170,12 @@ public class ToDoDBContract {
             } finally {
                 db.close();
             }
+        }
+
+        public void clearToDoList(){
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL("DELETE FROM "+ TableEntry.TABLE_NAME);
+            db.close();
         }
 
         public void deleteToDo(int toDoID) {

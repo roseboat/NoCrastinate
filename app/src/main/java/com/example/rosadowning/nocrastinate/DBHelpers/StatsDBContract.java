@@ -16,7 +16,6 @@ import org.joda.time.DateTime;
 
 import static com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract.StatsEntry.TABLE_NAME;
 
-
 public class StatsDBContract {
 
     private StatsDBContract() {
@@ -87,64 +86,6 @@ public class StatsDBContract {
             try {
                 db.delete(TABLE_NAME, StatsEntry.COLUMN_NAME_DATE + " = ?", new String[]{String.valueOf(statsComponent.getDate())});
             } finally {
-                db.close();
-            }
-        }
-
-        public ArrayList<StatsData> getAllStats() {
-
-            ArrayList<StatsData> allStats = new ArrayList<>();
-            SQLiteDatabase db = this.getReadableDatabase();
-
-            Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-
-            try {
-                int dateIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_DATE);
-                int timeIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_OVERALL_TIME);
-                int unlocksIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_UNLOCKS);
-                int tasksIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_TASKS_COMPLETED);
-
-                if (cursor.moveToFirst()) {
-                    do {
-                        StatsData newestStat = new StatsData();
-                        newestStat.setNoOfUnlocks(cursor.getInt(unlocksIndex));
-                        newestStat.setDate(new Date(cursor.getLong(dateIndex)));
-                        newestStat.setTasksCompleted(cursor.getLong(tasksIndex));
-                        newestStat.setOverallTime(cursor.getLong(timeIndex));
-                        allStats.add(newestStat);
-
-                    } while (cursor.moveToNext());
-                }
-                return allStats;
-            } finally {
-                cursor.close();
-                db.close();
-            }
-        }
-
-        public StatsData getStat(Date date) {
-
-            SQLiteDatabase db = this.getReadableDatabase();
-            Cursor cursor = db.rawQuery("SELECT *  FROM " + StatsEntry.TABLE_NAME + " WHERE " + StatsEntry.COLUMN_NAME_DATE + " = " + date.getTime(), null);
-            StatsData stat = new StatsData();
-            try {
-                int dateIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_DATE);
-                int timeIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_OVERALL_TIME);
-                int unlocksIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_UNLOCKS);
-                int tasksIndex = cursor.getColumnIndex(StatsEntry.COLUMN_NAME_TASKS_COMPLETED);
-
-                if (cursor.moveToFirst()) {
-                    do {
-                        stat.setNoOfUnlocks(cursor.getInt(unlocksIndex));
-                        stat.setDate(new Date(cursor.getLong(dateIndex)));
-                        stat.setTasksCompleted(cursor.getLong(tasksIndex));
-                        stat.setOverallTime(cursor.getLong(timeIndex));
-                    } while (cursor.moveToNext());
-                }
-
-                return stat;
-            } finally {
-                cursor.close();
                 db.close();
             }
         }

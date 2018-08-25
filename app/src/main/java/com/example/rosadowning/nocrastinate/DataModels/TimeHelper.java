@@ -34,7 +34,6 @@ public class TimeHelper {
 
         DateTime now = new DateTime().withTimeAtStartOfDay();
         Date today = now.toDate();
-        String todayDate = new SimpleDateFormat("dd/MM/yyyy").format(today);
 
         switch (interval) {
             case "Daily":

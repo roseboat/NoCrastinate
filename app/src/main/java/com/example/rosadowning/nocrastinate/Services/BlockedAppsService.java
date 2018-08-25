@@ -55,7 +55,6 @@ public class BlockedAppsService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -70,11 +69,9 @@ public class BlockedAppsService extends Service {
     private class mainTask extends TimerTask {
         public void run() {
             BlockedAppsDBContract.BlockedAppsDBHelper dbHelper = new BlockedAppsDBContract.BlockedAppsDBHelper(context);
-            SQLiteDatabase sqlBlockedApps = dbHelper.getReadableDatabase();
             List<String> blockedNames = dbHelper.getBlockedApps();
             for (String packageName : blockedNames) {
                 if (packageName != null && getForegroundApp() != null)
-//                    if (getTopPackage().equals(packageName)) {
                     if (getForegroundApp().equals(packageName)) {
                         showHomeScreen();
                     }
@@ -86,18 +83,6 @@ public class BlockedAppsService extends Service {
         super.onDestroy();
         Log.d(TAG, "Stopped");
     }
-
-//    public String getTopPackage() {
-//        long ts = System.currentTimeMillis();
-//
-//        UsageStatsManager mUsageStatsManager = (UsageStatsManager) getSystemService(Context.USAGE_STATS_SERVICE);
-//        List<UsageStats> usageStats = mUsageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_BEST, ts - 86400000, ts);
-//        if (usageStats == null || usageStats.size() == 0) {
-//            return null;
-//        }
-//        Collections.sort(usageStats, new RecentUseComparator());
-//        return usageStats.get(0).getPackageName();
-//    }
 
     public String getForegroundApp() {
         String currentApp = "NULL";
@@ -121,13 +106,4 @@ public class BlockedAppsService extends Service {
         }
         return currentApp;
     }
-
-    public static class RecentUseComparator implements Comparator<UsageStats> {
-
-        @Override
-        public int compare(UsageStats lhs, UsageStats rhs) {
-            return Long.compare(rhs.getLastTimeUsed(), lhs.getLastTimeUsed());
-        }
-    }
-
 }

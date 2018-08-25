@@ -10,6 +10,8 @@ import android.provider.BaseColumns;
 
 import java.util.ArrayList;
 
+import static com.example.rosadowning.nocrastinate.DBHelpers.ToDoDBContract.TableEntry.TABLE_NAME;
+
 public class AlarmDBContract {
 
     private AlarmDBContract() {
@@ -83,38 +85,20 @@ public class AlarmDBContract {
             }
         }
 
-        public long getNoAlarmEntries() {
-
-            SQLiteDatabase db = this.getReadableDatabase();
-            long noOfEntries = 0;
+        public void removeAlarm(long alarmTime){
+            SQLiteDatabase db = this.getWritableDatabase();
             try {
-                noOfEntries = DatabaseUtils.queryNumEntries(db, AlarmEntry.TABLE_NAME, AlarmEntry.COLUMN_NAME_DATE + ";");
-                return noOfEntries;
+                db.delete(AlarmEntry.TABLE_NAME, AlarmEntry.COLUMN_NAME_DATE + " = ?", new String[]{String.valueOf(alarmTime)});
             } finally {
                 db.close();
             }
-
         }
 
-        public ArrayList<Long> getAlarmDates() {
-
-            ArrayList<Long> allAlarms = new ArrayList<>();
-            SQLiteDatabase db = this.getReadableDatabase();
-
-            Cursor cursor = db.rawQuery("SELECT * FROM " + AlarmEntry.TABLE_NAME, null);
-            try {
-                int dateIndex = cursor.getColumnIndex(AlarmEntry.COLUMN_NAME_DATE);
-
-                if (cursor.moveToFirst()) {
-                    do {
-                        allAlarms.add(cursor.getLong(dateIndex));
-                    } while (cursor.moveToNext());
-                }
-                return allAlarms;
-            } finally {
-                cursor.close();
-                db.close();
-            }
+        public void clearDatabase(){
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL("DELETE FROM "+ ToDoDBContract.TableEntry.TABLE_NAME);
+            db.close();
         }
+
     }
 }

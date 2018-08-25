@@ -65,7 +65,7 @@ ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifes
 	android:name
 		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:7:22-78
 application
-ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:10:5-47:19
+ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:9:5-47:19
 MERGED from [com.android.support:design:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/design-28.0.0-rc01.aar/ecd87164c2b40a99e09f73db8fcd2aa9/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/design-28.0.0-rc01.aar/ecd87164c2b40a99e09f73db8fcd2aa9/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.2.aar/d8232d88e9057f7b10386ed082a1ebbc/AndroidManifest.xml:9:5-20
@@ -77,17 +77,23 @@ MERGED from [com.android.support:versionedparcelable:28.0.0-rc01] /Users/RosaDow
 	android:appComponentFactory
 		ADDED from [com.android.support:support-compat:28.0.0-rc01] /Users/RosaDowning/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0-rc01.aar/dfb0391e0deda088d1010ebb8babcb56/AndroidManifest.xml:22:18-91
 	android:supportsRtl
-		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:15:9-35
+		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:14:9-35
 	android:label
-		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:13:9-41
+		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:12:9-41
 	android:roundIcon
-		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:14:9-54
+		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:13:9-54
 	android:icon
-		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:12:9-43
+		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:11:9-43
 	android:allowBackup
-		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:11:9-35
+		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:10:9-35
 	android:theme
-		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:16:5-45
+		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:15:5-45
+uses-library#android.test.runner
+ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:16:9-17:40
+	android:required
+		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:17:13-37
+	android:name
+		ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:16:23-57
 activity#com.example.rosadowning.nocrastinate.MainActivity
 ADDED from /Users/RosaDowning/Downloads/NoCrastinate/app/src/main/AndroidManifest.xml:18:5-27:20
 	android:label

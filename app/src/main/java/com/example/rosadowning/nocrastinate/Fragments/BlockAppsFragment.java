@@ -1,5 +1,6 @@
 package com.example.rosadowning.nocrastinate.Fragments;
 
+import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.database.sqlite.SQLiteDatabase;
@@ -29,6 +30,7 @@ import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
 
 public class BlockAppsFragment extends Fragment {
 
+    private Context context;
     private RecyclerView mRecyclerView;
     private BlockAppsAdapter mBlockAppsAdapter;
     private SQLiteDatabase sql;
@@ -42,6 +44,8 @@ public class BlockAppsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_block_apps, null);
         LinearLayout settingsPopup = (LinearLayout) view.findViewById(R.id.settings_popup);
 
+        context = getContext();
+
         if (!MainActivity.hasUsagePermission(getContext())) {
             settingsPopup.setVisibility(View.VISIBLE);
             settingsPopup.bringToFront();
@@ -52,9 +56,8 @@ public class BlockAppsFragment extends Fragment {
 
             dbHelper = new BlockedAppsDBContract.BlockedAppsDBHelper(getContext());
             sql = dbHelper.getReadableDatabase();
-            blockedApps = dbHelper.getBlockedApps();
             mRecyclerView = (RecyclerView) view.findViewById(R.id.block_apps_recycler_view);
-            mBlockAppsAdapter = new BlockAppsAdapter(getApps(), new BlockAppsAdapter.OnItemClickListener() {
+            mBlockAppsAdapter = new BlockAppsAdapter(getApps(context), new BlockAppsAdapter.OnItemClickListener() {
                 @Override
                 public void onSwitchCheck(CustomAppHolder customAppHolder) {
                     sql = dbHelper.getWritableDatabase();
@@ -75,11 +78,17 @@ public class BlockAppsFragment extends Fragment {
         return view;
     }
 
-    public List<CustomAppHolder> getApps() {
+    public List<CustomAppHolder> getApps(Context context) {
+
+        if(dbHelper == null){
+            dbHelper = new BlockedAppsDBContract.BlockedAppsDBHelper(context);
+            sql = dbHelper.getReadableDatabase();
+        }
+        blockedApps = dbHelper.getBlockedApps();
 
         List<CustomAppHolder> customAppHolders = new ArrayList<>();
 
-        List<PackageInfo> installedPackages = getContext().getPackageManager()
+        List<PackageInfo> installedPackages = context.getPackageManager()
                 .getInstalledPackages(0);
 
         for (PackageInfo packageInfo : installedPackages) {
@@ -87,7 +96,7 @@ public class BlockAppsFragment extends Fragment {
             if ((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
                 if (!packageInfo.packageName.contains("nocrastinate")) {
                     CustomAppHolder customAppHolder = new CustomAppHolder();
-                    customAppHolder.appName = packageInfo.applicationInfo.loadLabel(getContext().getPackageManager()).toString();
+                    customAppHolder.appName = packageInfo.applicationInfo.loadLabel(context.getPackageManager()).toString();
                     customAppHolder.packageName = packageInfo.packageName;
                     customAppHolder.isBlocked = false;
 
@@ -96,7 +105,7 @@ public class BlockAppsFragment extends Fragment {
                             customAppHolder.isBlocked = true;
                         }
                     }
-                    customAppHolder.appIcon = getActivity().getPackageManager()
+                    customAppHolder.appIcon = context.getPackageManager()
                             .getApplicationIcon(packageInfo.applicationInfo);
                     customAppHolders.add(customAppHolder);
                 }

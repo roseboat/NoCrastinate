@@ -1,19 +1,7 @@
 #Internal package file, do not edit.
-#Tue Aug 07 10:12:43 BST 2018
-1.base=/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/transforms/dexMerger/debug/149
-2.path=classes.dex
+#Sat Aug 25 20:35:17 BST 2018
 0.baseType=DIRECTORY
-3.baseType=DIRECTORY
-2.base=/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/transforms/dexMerger/debug/150
-3.set=DEX
-2.set=DEX
-1.baseType=DIRECTORY
-3.path=classes.dex
-count=4
-1.set=DEX
+0.base=/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/transforms/dexMerger/debug/187
 0.path=classes.dex
-3.base=/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/transforms/dexMerger/debug/151
 0.set=DEX
-0.base=/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/transforms/dexMerger/debug/148
-2.baseType=DIRECTORY
-1.path=classes.dex
+count=1

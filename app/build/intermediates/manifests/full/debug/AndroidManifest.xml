@@ -21,6 +21,10 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme.Launcher" >
+        <uses-library
+            android:name="android.test.runner"
+            android:required="false" />
+
         <activity
             android:name="com.example.rosadowning.nocrastinate.MainActivity"
             android:exported="true"

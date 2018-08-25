@@ -243,19 +243,16 @@ public class StatisticsFragment extends Fragment {
 
         if (interval.equals("Daily")) {
             startTime = new DateTime().withTimeAtStartOfDay().getMillis();
-        } else if (interval.equals("Yesterday")){
+        } else if (interval.equals("Yesterday")) {
             startTime = new DateTime().withTimeAtStartOfDay().minusDays(1).getMillis();
-        }
-        else {
+        } else {
             AppStatsDBContract.AppStatsDbHelper dbHelper = new AppStatsDBContract.AppStatsDbHelper(context);
             SQLiteDatabase sql = dbHelper.getReadableDatabase();
             List<CustomAppHolder> apps = dbHelper.getStatsForInterval(interval);
             return apps;
         }
 
-
         mUsageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
-
 
         UsageEvents.Event currentEvent;
         List<UsageEvents.Event> allEvents = new ArrayList<>();
@@ -301,9 +298,10 @@ public class StatisticsFragment extends Fragment {
             for (CustomAppHolder event : allEventsList) {
                 totalTime += event.timeInForeground;
             }
+            if (editor != null){
             editor.putLong("totalDuration", totalTime);
             editor.apply();
-        }
+        }}
 
         return allEventsList;
     }
@@ -395,7 +393,6 @@ public class StatisticsFragment extends Fragment {
                 stats.setTasksCompleted(tasksCompleted);
                 stats.setNoOfUnlocks(unlocks);
                 stats.setOverallTime(totalDuration);
-
 
 
             } finally {
