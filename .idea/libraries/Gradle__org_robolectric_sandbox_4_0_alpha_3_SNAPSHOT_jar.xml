@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.robolectric:sandbox:4.0-alpha-3-SNAPSHOT@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.robolectric/sandbox/4.0-alpha-3-SNAPSHOT/84c9d805e5013e11282303e17460cd905dc47237/sandbox-4.0-alpha-3-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.robolectric/sandbox/4.0-alpha-3-SNAPSHOT/3dc616fdf8f5f6e5219664196b12d5527b4bcb5b/sandbox-4.0-alpha-3-SNAPSHOT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

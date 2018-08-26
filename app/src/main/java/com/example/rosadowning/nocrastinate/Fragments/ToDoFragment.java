@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
-
 public class ToDoFragment extends Fragment {
 
     private static final String TAG = "To Do Fragment";
@@ -42,11 +41,9 @@ public class ToDoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_todo, null);
 
         dbHelper = new ToDoDBContract.ToDoListDbHelper(getContext());
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
         toDoList = dbHelper.getToDoList(false);
         mAdapter = new ToDoListAdapter(toDoList, new ToDoListAdapter.OnItemClickListener() {
             @Override

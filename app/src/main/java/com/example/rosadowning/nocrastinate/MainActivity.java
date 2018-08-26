@@ -65,10 +65,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         filter.addAction(Intent.ACTION_SCREEN_ON);
         registerReceiver(mReceiver, filter);
 
-
-        SharedPreferences testPreferences = getSharedPreferences("TestPreferences", MODE_PRIVATE);
-        boolean testActivated = testPreferences.getBoolean("TestActivated", false);
-        if (!testActivated) {
             BlockedAppsService mBlockingService = new BlockedAppsService(this);
             Intent mServiceIntent = new Intent(this, mBlockingService.getClass());
             if (!isMyServiceRunning(mBlockingService.getClass())) {
@@ -76,7 +72,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             }
             scheduleResetAlarm();
             createNotificationChannel();
-        }
     }
 
     private boolean isMyServiceRunning(Class<?> serviceClass) {

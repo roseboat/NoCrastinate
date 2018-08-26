@@ -9,6 +9,7 @@ import android.provider.BaseColumns;
 import android.util.Log;
 
 import com.example.rosadowning.nocrastinate.DataModels.CustomAppHolder;
+import com.example.rosadowning.nocrastinate.DataModels.StatsData;
 import com.example.rosadowning.nocrastinate.DataModels.TimeHelper;
 
 import org.joda.time.DateTime;
@@ -16,6 +17,8 @@ import org.joda.time.DateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract.StatsEntry.TABLE_NAME;
 
 public class AppStatsDBContract {
 
@@ -168,5 +171,21 @@ public class AppStatsDBContract {
                 db.close();
             }
         }
+
+        public void clearDatabase() {
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL("DELETE FROM " + AppEntry.TABLE_NAME);
+            db.close();
+        }
+
+        public void deleteStats(Date date) {
+            SQLiteDatabase db = this.getWritableDatabase();
+            try {
+                db.delete(TABLE_NAME, AppEntry.COLUMN_NAME_DATE + " = ?", new String[]{String.valueOf(date)});
+            } finally {
+                db.close();
+            }
+        }
+
     }
 }

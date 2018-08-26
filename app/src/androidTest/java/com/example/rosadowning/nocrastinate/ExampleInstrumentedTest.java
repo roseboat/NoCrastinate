@@ -6,9 +6,14 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.Espresso;
+import android.support.test.espresso.NoMatchingViewException;
+import android.support.test.espresso.ViewAssertion;
 import android.support.test.espresso.intent.Intents;
+import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.v4.app.Fragment;
+import android.view.View;
 
 import com.example.rosadowning.nocrastinate.BroadcastReceivers.ScreenReceiver;
 import com.example.rosadowning.nocrastinate.DBHelpers.AlarmDBContract;
@@ -26,6 +31,7 @@ import com.example.rosadowning.nocrastinate.Services.BlockedAppsService;
 import org.joda.time.DateTime;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -33,6 +39,10 @@ import java.util.Date;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
 
@@ -52,6 +62,7 @@ public class ExampleInstrumentedTest {
     private AppStatsDBContract.AppStatsDbHelper appStatsDbHelper;
     private StatsDBContract.StatsDBHelper statsDBHelper;
     private StatsData testStat;
+    private String fakePackageName;
 
     @Before
     public void setUp() throws Exception {
@@ -62,6 +73,8 @@ public class ExampleInstrumentedTest {
         this.alarmDBHelper = new AlarmDBContract.AlarmDBHelper(appContext);
         this.appStatsDbHelper = new AppStatsDBContract.AppStatsDbHelper(appContext);
         this.statsDBHelper = new StatsDBContract.StatsDBHelper(appContext);
+        this.fakePackageName = "com.example.fake.application";
+
         Intents.init();
     }
 
@@ -118,7 +131,6 @@ public class ExampleInstrumentedTest {
         assertEquals(true, inMonthly);
     }
 
-
     @Test
     public void iconStats_testIfInYearlyInterval() {
         // TESTS YEARLY
@@ -133,9 +145,41 @@ public class ExampleInstrumentedTest {
         assertEquals(true, inYearly);
     }
 
+    @Test
+    public void usageStats_isCorrect() {
+
+        StatisticsFragment statisticsFragment = new StatisticsFragment();
+        List<CustomAppHolder> statsList = statisticsFragment.getStats("Daily", appContext);
+
+        CustomAppHolder fakeApp = new CustomAppHolder("fakeApp");
+        statsList.add(fakeApp);
+        List<CustomAppHolder> updatedStatsList = statisticsFragment.updateAppsList(statsList, appContext);
+
+        boolean fakeAppPresent = false;
+        for (CustomAppHolder app : updatedStatsList) {
+            if (app.packageName.equals("fakeApp")) {
+                fakeAppPresent = true;
+                break;
+            }
+        }
+        assertEquals("Fake App should not be present", false, fakeAppPresent);
+    }
+
+    @Test
+    public void alarmDB_checkIfAlarmSet() {
+
+        long timeNow = System.currentTimeMillis();
+        alarmDBHelper.insertAlarm(timeNow);
+        boolean isAlarmSet = alarmDBHelper.isAlarmSet(timeNow);
+
+        assertEquals("Alarm is set", true, isAlarmSet);
+        alarmDBHelper.removeAlarm(timeNow);
+    }
+
     /*
-    TESTS TO DO LIST AND TO DO DATABASE
+    TO DO LIST AND TO DO DATABASE TESTS
      */
+
     @Test
     public void toDo_InsertedThenDeletedFromDatabase() {
 
@@ -335,37 +379,6 @@ public class ExampleInstrumentedTest {
         assertEquals("Foreground app is NoCrastinate", "com.example.rosadowning.nocrastinate", foregroundApp);
     }
 
-    @Test
-    public void usageEvents_isCorrect() {
-
-        StatisticsFragment statisticsFragment = new StatisticsFragment();
-        List<CustomAppHolder> statsList = statisticsFragment.getStats("Daily", appContext);
-
-        CustomAppHolder fakeApp = new CustomAppHolder("fakeApp");
-        statsList.add(fakeApp);
-        List<CustomAppHolder> updatedStatsList = statisticsFragment.updateAppsList(statsList, appContext);
-
-        boolean fakeAppPresent = false;
-        for (CustomAppHolder app : updatedStatsList) {
-            if (app.packageName.equals("fakeApp")) {
-                fakeAppPresent = true;
-                break;
-            }
-        }
-        assertEquals("Fake App should not be present", false, fakeAppPresent);
-    }
-
-    @Test
-    public void alarmDB_checkIfAlarmSet() {
-
-        long timeNow = System.currentTimeMillis();
-        alarmDBHelper.insertAlarm(timeNow);
-        boolean isAlarmSet = alarmDBHelper.isAlarmSet(timeNow);
-
-        assertEquals("Alarm is set", true, isAlarmSet);
-        alarmDBHelper.removeAlarm(timeNow);
-    }
-
     @After
     public void tearDown() {
 
@@ -374,54 +387,5 @@ public class ExampleInstrumentedTest {
         statsDBHelper.deleteStat(testStat);
         Intents.release();
     }
-
-
-
-    /////////////////////////////////////////
-
-//    @Test
-//    public void clickingStats_shouldStartStatsFragment() {
-//
-//        SharedPreferences testPreferences = appContext.getSharedPreferences("TestPreferences", MODE_PRIVATE);
-//        SharedPreferences.Editor testEditor = testPreferences.edit();
-//        testEditor.putBoolean("TestActivated", true);
-//        testEditor.apply();
-//
-//        InstrumentationRegistry.getInstrumentation().runOnMainSync(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                MainActivity main = new MainActivity();
-//                main.setContentView(R.layout.activity_main);
-//                main.onCreate(null);
-//                main.findViewById(R.id.navigation_settings).performClick();
-//
-//               final Fragment expectedFrag = new StatisticsFragment();
-//               final Fragment actualFrag = main.getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-//                assertEquals(expectedFrag, actualFrag);
-//
-//            }
-//        });
-//    }
-//
-//    @Test
-//    public void clickingToDo_shouldStartToDoFragment() {
-//        MainActivity activity = Robolectric.setupActivity(MainActivity.class);
-//        activity.findViewById(R.id.navigation_todo).performClick();
-//
-//        Intent expectedIntent = new Intent(activity, StatisticsFragment.class);
-//        Intent actual = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
-//        assertEquals(expectedIntent.getComponent(), actual.getComponent());
-//    }
-//
-//    @Test
-//    public void clickingSettings_shouldStartSettingsFragment() {
-//        MainActivity activity = Robolectric.setupActivity(MainActivity.class);
-//        activity.findViewById(R.id.navigation_settings).performClick();
-//
-//        Intent expectedIntent = new Intent(activity, StatisticsFragment.class);
-//        Intent actual = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
-//        assertEquals(expectedIntent.getComponent(), actual.getComponent());
-//    }
 
 }
