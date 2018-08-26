@@ -54,7 +54,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.locks.ReentrantLock;
@@ -247,9 +249,7 @@ public class StatisticsFragment extends Fragment {
             startTime = new DateTime().withTimeAtStartOfDay().minusDays(1).getMillis();
         } else {
             AppStatsDBContract.AppStatsDbHelper dbHelper = new AppStatsDBContract.AppStatsDbHelper(context);
-            SQLiteDatabase sql = dbHelper.getReadableDatabase();
-            List<CustomAppHolder> apps = dbHelper.getStatsForInterval(interval);
-            return apps;
+            return dbHelper.getStatsForInterval(interval);
         }
 
         mUsageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
@@ -314,9 +314,7 @@ public class StatisticsFragment extends Fragment {
                 .getInstalledPackages(0);
 
         for (PackageInfo packageInfo : installedPackages) {
-
             if ((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
-
                 for (int i = 0; i < allEventsList.size(); i++) {
                     CustomAppHolder customAppHolder = new CustomAppHolder();
                     if (packageInfo.packageName.equals(allEventsList.get(i).packageName)) {
@@ -337,8 +335,6 @@ public class StatisticsFragment extends Fragment {
                 }
             }
         }
-
-        Collections.sort(updatedAppsList, new UsedMostOftenComparatorDesc());
         return updatedAppsList;
     }
 
@@ -366,7 +362,6 @@ public class StatisticsFragment extends Fragment {
 
                 int unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
                 long totalDuration = sharedPreferences.getLong("totalDuration", 0);
-                Log.d(TAG, "duration = " + TimeHelper.formatDuration(totalDuration));
 
                 if (notiSettingsOne) {
                     Duration timeOnPhone = Duration.millis(totalDuration);
@@ -385,7 +380,6 @@ public class StatisticsFragment extends Fragment {
                 }
 
                 ToDoDBContract.ToDoListDbHelper toDoHelper = new ToDoDBContract.ToDoListDbHelper(context);
-                SQLiteDatabase sql = toDoHelper.getWritableDatabase();
                 long beginTime = new DateTime().withTimeAtStartOfDay().getMillis();
                 long endTime = new DateTime().plusDays(1).withTimeAtStartOfDay().getMillis();
                 long tasksCompleted = toDoHelper.getNoOfCompletedToDos(beginTime, endTime);
@@ -427,18 +421,22 @@ public class StatisticsFragment extends Fragment {
                 // Adds any missing elements to the appStatList for display
                 for (int i = 0; i < intervalList.size(); i++) {
                     int j;
+                    boolean found = false;
                     for (j = 0; j < appStatList.size(); j++) {
-                        if (appStatList.get(j).packageName.equals(intervalList.get(i).packageName))
-                            appStatList.get(j).timeInForeground += intervalList.get(i).timeInForeground;
-                        break;
+                        if (appStatList.get(j).packageName.equals(intervalList.get(i).packageName)) {
+                            Long time = intervalList.get(i).timeInForeground;
+                            appStatList.get(j).timeInForeground += time;
+                            found = true;
+                            break;
+                        }
                     }
-                    if (j == appStatList.size())
+                    if (!found) {
                         appStatList.add(intervalList.get(i));
+                    }
                 }
             }
-
+            Collections.sort(appStatList, new UsedMostOftenComparatorDesc());
             stats.setAppsList(appStatList);
-
             return stats;
         }
 

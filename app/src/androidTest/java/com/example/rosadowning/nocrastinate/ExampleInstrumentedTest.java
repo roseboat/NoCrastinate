@@ -1,11 +1,16 @@
 package com.example.rosadowning.nocrastinate;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.intent.Intents;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.v4.app.Fragment;
 
+import com.example.rosadowning.nocrastinate.BroadcastReceivers.ScreenReceiver;
 import com.example.rosadowning.nocrastinate.DBHelpers.AlarmDBContract;
 import com.example.rosadowning.nocrastinate.DBHelpers.AppStatsDBContract;
 import com.example.rosadowning.nocrastinate.DBHelpers.BlockedAppsDBContract;
@@ -27,7 +32,9 @@ import org.junit.runner.RunWith;
 import java.util.Date;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -307,7 +314,7 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void blockedAppsService_foregroundAppIsNoCrastinate() {
+    public void blockedAppsService_foregroundAppIsCorrect() {
 
         // Launches NoCrastinate app for the purposes of testing
         Intent startMain = new Intent(appContext, MainActivity.class);
@@ -369,15 +376,32 @@ public class ExampleInstrumentedTest {
     }
 
 
+
     /////////////////////////////////////////
 
-    //    @Test
+//    @Test
 //    public void clickingStats_shouldStartStatsFragment() {
-//        mainActivity.findViewById(R.id.navigation_stats).performClick();
 //
-//        Intent expectedIntent = new Intent(mainActivity, StatisticsFragment.class);
-//        Intent actual = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
-//        assertEquals(expectedIntent.getComponent(), actual.getComponent());
+//        SharedPreferences testPreferences = appContext.getSharedPreferences("TestPreferences", MODE_PRIVATE);
+//        SharedPreferences.Editor testEditor = testPreferences.edit();
+//        testEditor.putBoolean("TestActivated", true);
+//        testEditor.apply();
+//
+//        InstrumentationRegistry.getInstrumentation().runOnMainSync(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                MainActivity main = new MainActivity();
+//                main.setContentView(R.layout.activity_main);
+//                main.onCreate(null);
+//                main.findViewById(R.id.navigation_settings).performClick();
+//
+//               final Fragment expectedFrag = new StatisticsFragment();
+//               final Fragment actualFrag = main.getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+//                assertEquals(expectedFrag, actualFrag);
+//
+//            }
+//        });
 //    }
 //
 //    @Test

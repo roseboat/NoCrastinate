@@ -21,10 +21,7 @@ import static android.content.Context.ALARM_SERVICE;
 public class ScreenReceiver extends BroadcastReceiver {
 
     private SharedPreferences statsPreferences;
-    private SharedPreferences.Editor statsEditor;
     private Context context;
-    private ReentrantLock reentrantLock;
-    private final int FREQ_1_ALARM_2 = 10002;
     private final String TAG = "SCREEN RECEIVER";
 
 
@@ -32,9 +29,9 @@ public class ScreenReceiver extends BroadcastReceiver {
     public void onReceive(final Context context, final Intent intent) {
 
         this.context = context;
-        this.reentrantLock = new ReentrantLock();
+        ReentrantLock reentrantLock = new ReentrantLock();
         statsPreferences = context.getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
-        statsEditor = statsPreferences.edit();
+        SharedPreferences.Editor statsEditor = statsPreferences.edit();
 
         if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
             Log.e(TAG, "SCREEN ON");
@@ -73,7 +70,7 @@ public class ScreenReceiver extends BroadcastReceiver {
         int unlocks = statsPreferences.getInt("noOfUnlocks", 0);
         Intent intent = new Intent(context, NotificationReceiver.class);
         intent.putExtra("Title", "NoCrastinate Unlock Alert!");
-        intent.putExtra("AlarmID", FREQ_1_ALARM_2);
+        intent.putExtra("AlarmID", 10002);
         intent.putExtra("Content", "You've unlocked your phone " + unlocks + " times today! :(");
         PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
         AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
@@ -85,7 +82,6 @@ public class ScreenReceiver extends BroadcastReceiver {
         DateTime today = new DateTime().withTimeAtStartOfDay();
 
         AlarmDBContract.AlarmDBHelper alarmDBHelper = new AlarmDBContract.AlarmDBHelper(context);
-        SQLiteDatabase sqlRead = alarmDBHelper.getReadableDatabase();
 
         if (!alarmDBHelper.isAlarmSet(today.getMillis())) {
             Intent midnightIntent = new Intent(context, MidnightDataResetReceiver.class);

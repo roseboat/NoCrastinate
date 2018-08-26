@@ -198,7 +198,6 @@ public class AddToDoFragment extends Fragment {
     public void addToDo() {
 
         dbHelper = new ToDoDBContract.ToDoListDbHelper(context);
-        SQLiteDatabase dbRead = dbHelper.getReadableDatabase();
 
         name = et_name.getText().toString();
 

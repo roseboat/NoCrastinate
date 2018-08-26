@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     public static final String TAG = "MAIN ACTIVITY";
     private BroadcastReceiver mReceiver;
-    private BlockedAppsService mBlockingService;
     public static final String CHANNEL_ID = "4855";
     public static final CharSequence CHANNEL_NAME = "com.example.rosadowning.nocrastinate";
     public static final String CHANNEL_DESCRIPTION = "NoCrastinate Notification Channel";
@@ -64,16 +63,20 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         filter.addAction(Intent.ACTION_BOOT_COMPLETED);
         filter.addAction(Intent.ACTION_USER_PRESENT);
         filter.addAction(Intent.ACTION_SCREEN_ON);
-        filter.addAction(Intent.ACTION_SHUTDOWN);
         registerReceiver(mReceiver, filter);
 
-        mBlockingService = new BlockedAppsService(this);
-        Intent mServiceIntent = new Intent(this, mBlockingService.getClass());
-        if (!isMyServiceRunning(mBlockingService.getClass())) {
-            startService(mServiceIntent);
+
+        SharedPreferences testPreferences = getSharedPreferences("TestPreferences", MODE_PRIVATE);
+        boolean testActivated = testPreferences.getBoolean("TestActivated", false);
+        if (!testActivated) {
+            BlockedAppsService mBlockingService = new BlockedAppsService(this);
+            Intent mServiceIntent = new Intent(this, mBlockingService.getClass());
+            if (!isMyServiceRunning(mBlockingService.getClass())) {
+                startService(mServiceIntent);
+            }
+            scheduleResetAlarm();
+            createNotificationChannel();
         }
-        scheduleResetAlarm();
-        createNotificationChannel();
     }
 
     private boolean isMyServiceRunning(Class<?> serviceClass) {
@@ -119,14 +122,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         DateTime today = new DateTime().withTimeAtStartOfDay();
         DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
 
+
         Intent midnightIntent = new Intent(this, MidnightDataResetReceiver.class);
         PendingIntent startPIntent = PendingIntent.getBroadcast(this, 0, midnightIntent, 0);
         AlarmManager alarm = (AlarmManager) this.getSystemService(ALARM_SERVICE);
         alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, tomorrow.getMillis(), startPIntent);
 
         AlarmDBContract.AlarmDBHelper alarmDBHelper = new AlarmDBContract.AlarmDBHelper(this);
-        SQLiteDatabase sqlRead = alarmDBHelper.getReadableDatabase();
-
         Log.d(TAG, "Reset alarm set today = " + alarmDBHelper.isAlarmSet(today.getMillis()));
 
         if (!alarmDBHelper.isAlarmSet(today.getMillis())) {

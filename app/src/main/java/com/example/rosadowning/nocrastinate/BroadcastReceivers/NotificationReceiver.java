@@ -105,7 +105,6 @@ public class NotificationReceiver extends BroadcastReceiver {
             this.overallTime = sharedPreferences.getLong("totalDuration", 0);
             this.unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
             ToDoDBContract.ToDoListDbHelper toDoHelper = new ToDoDBContract.ToDoListDbHelper(context);
-            SQLiteDatabase sqlToDo = toDoHelper.getReadableDatabase();
             DateTime today = new DateTime().withTimeAtStartOfDay();
             DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
             long beginTime = today.getMillis();

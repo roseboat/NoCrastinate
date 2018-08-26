@@ -9,6 +9,7 @@ import android.provider.BaseColumns;
 import android.util.Log;
 
 import com.example.rosadowning.nocrastinate.DataModels.CustomAppHolder;
+import com.example.rosadowning.nocrastinate.DataModels.TimeHelper;
 
 import org.joda.time.DateTime;
 
@@ -110,6 +111,7 @@ public class AppStatsDBContract {
                     c.packageName = c.packageName.replaceAll("\\.", "_");
 
                     values.put("'" + c.packageName + "'", c.timeInForeground);
+                    Log.d(TAG, "ADDING = " + c.packageName + " time = " + TimeHelper.formatDuration(c.timeInForeground));
                 }
                 db.insertWithOnConflict(AppEntry.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
             } finally {
@@ -117,7 +119,7 @@ public class AppStatsDBContract {
             }
         }
 
-        public ArrayList<CustomAppHolder> getStatsForInterval(String intervalString) {
+        public List<CustomAppHolder> getStatsForInterval(String intervalString) {
 
             ArrayList<CustomAppHolder> appsForInterval = new ArrayList<>();
 
@@ -138,23 +140,25 @@ public class AppStatsDBContract {
                     break;
             }
 
-            SQLiteDatabase db = getReadableDatabase();
+            SQLiteDatabase db = this.getReadableDatabase();
             Cursor cursor = db.rawQuery("SELECT * FROM " + AppEntry.TABLE_NAME + " WHERE " + AppEntry.COLUMN_NAME_DATE + " BETWEEN " + queryTime + " AND " + now, null);
             try {
                 String[] columnNames = cursor.getColumnNames();
                 for (String column : columnNames) {
-                    if (!column.equals(AppEntry.COLUMN_NAME_DATE)) {
+                    if (!column.equals(AppEntry._ID) | !column.equals(AppEntry.COLUMN_NAME_DATE)) {
                         CustomAppHolder newApp = new CustomAppHolder();
                         newApp.packageName = column.replaceAll("_", "\\.");
 
-                        int appIndex = cursor.getColumnIndex("'" + column + "'");
-                        if (appIndex > 0) {
-                            if (cursor.moveToFirst()) {
-                                do {
-                                    newApp.timeInForeground += cursor.getLong(appIndex);
-                                } while (cursor.moveToNext());
+                        if (cursor.moveToFirst()) {
+                            cursor.moveToFirst();
+                            while (!cursor.isAfterLast()) {
+
+
+                                newApp.timeInForeground += cursor.getLong(cursor.getColumnIndex(column));
+                                cursor.moveToNext();
                             }
                         }
+
                         appsForInterval.add(newApp);
                     }
                 }
