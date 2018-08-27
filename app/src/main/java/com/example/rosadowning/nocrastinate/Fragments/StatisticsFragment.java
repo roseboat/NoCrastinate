@@ -316,21 +316,24 @@ public class StatisticsFragment extends Fragment {
         for (PackageInfo packageInfo : installedPackages) {
             if ((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
                 for (int i = 0; i < allEventsList.size(); i++) {
-                    CustomAppHolder customAppHolder = new CustomAppHolder();
-                    if (packageInfo.packageName.equals(allEventsList.get(i).packageName)) {
-                        customAppHolder.timeInForeground = allEventsList.get(i).timeInForeground;
-                        customAppHolder.packageName = packageInfo.packageName;
-                        customAppHolder.appName = packageInfo.applicationInfo.loadLabel(context.getPackageManager()).toString();
-                        try {
-                            if (getActivity() != null)
-                                customAppHolder.appIcon = getActivity().getPackageManager()
-                                        .getApplicationIcon(customAppHolder.packageName);
-                        } catch (PackageManager.NameNotFoundException e) {
-                            Log.w(TAG, String.format("App Icon is not found for %s",
-                                    customAppHolder.packageName));
-                            customAppHolder.appIcon = getActivity().getDrawable(R.drawable.ic_nocrastinate_logo_only_transparent);
+                    if (allEventsList.get(i).timeInForeground > 60000) {
+                        CustomAppHolder customAppHolder = new CustomAppHolder();
+                        if (packageInfo.packageName.equals(allEventsList.get(i).packageName)) {
+                            customAppHolder.timeInForeground = allEventsList.get(i).timeInForeground;
+                            customAppHolder.packageName = packageInfo.packageName;
+                            customAppHolder.appName = packageInfo.applicationInfo.loadLabel(context.getPackageManager()).toString();
+                            try {
+                                if (getActivity() != null)
+                                    customAppHolder.appIcon = getActivity().getPackageManager()
+                                            .getApplicationIcon(customAppHolder.packageName);
+                            } catch (PackageManager.NameNotFoundException e) {
+                                Log.w(TAG, String.format("App Icon is not found for %s",
+                                        customAppHolder.packageName));
+                                customAppHolder.appIcon = getActivity().getDrawable(R.drawable.ic_nocrastinate_logo_only_transparent);
+                            }
+
+                            updatedAppsList.add(customAppHolder);
                         }
-                        updatedAppsList.add(customAppHolder);
                     }
                 }
             }
@@ -472,14 +475,7 @@ public class StatisticsFragment extends Fragment {
 
                 timeHeader.setText(TimeHelper.getHeadingString(timeInterval));
                 textViewUnlocks.setText(iconData.getNoOfUnlocks() + "");
-
-                String timeString = "";
-                if (iconData.getOverallTime() < 60000) {
-                    timeString = "0m";
-                } else {
-                    timeString = TimeHelper.formatDuration(iconData.getOverallTime());
-                }
-                textViewOverallTime.setText(timeString);
+                textViewOverallTime.setText(TimeHelper.formatDuration(iconData.getOverallTime()));
                 textViewTasks.setText(iconData.getTasksCompleted() + "");
 
             }

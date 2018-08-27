@@ -28,6 +28,7 @@ import org.joda.time.DateTime;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static android.content.Context.ALARM_SERVICE;
@@ -63,12 +64,13 @@ public class NotificationReceiver extends BroadcastReceiver {
             content = extras.getString("Content", "Not found");
             subheading = content;
         } else if (alarmID == FREQ_2_ALARM_1) {
+            setNextAlarm(2);
             content = freq2setUp();
             subheading = "Click here to view your Daily Report";
         } else if (alarmID == FREQ_3_ALARM_1) {
+            setNextAlarm(3);
             content = freq3setUp();
             subheading = "Click here to view your Weekly Report";
-
         }
         Bitmap appLogo = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_nocrastinate_logo_only_transparent);
 
@@ -102,13 +104,13 @@ public class NotificationReceiver extends BroadcastReceiver {
         try {
             reentrantLock.lock();
             SharedPreferences sharedPreferences = context.getSharedPreferences("StatisticsInfo", Context.MODE_PRIVATE);
+            ToDoDBContract.ToDoListDbHelper toDoHelper = new ToDoDBContract.ToDoListDbHelper(context);
+
+            long beginTime = new DateTime().withTimeAtStartOfDay().getMillis();
+            long endTime = new DateTime().plusDays(1).withTimeAtStartOfDay().getMillis();
+
             this.overallTime = sharedPreferences.getLong("totalDuration", 0);
             this.unlocks = sharedPreferences.getInt("noOfUnlocks", 0);
-            ToDoDBContract.ToDoListDbHelper toDoHelper = new ToDoDBContract.ToDoListDbHelper(context);
-            DateTime today = new DateTime().withTimeAtStartOfDay();
-            DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
-            long beginTime = today.getMillis();
-            long endTime = tomorrow.getMillis();
             this.tasksCompleted = toDoHelper.getNoOfCompletedToDos(beginTime, endTime);
         } finally {
             reentrantLock.unlock();
@@ -117,45 +119,23 @@ public class NotificationReceiver extends BroadcastReceiver {
 
     public String freq2setUp() {
 
-        Log.d(TAG, "in frequency 2 setup");
-
         getDailyStatsSoFar();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date dateDate = new Date();
-        String date = sdf.format(dateDate);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.UK);
+        String date = sdf.format(new Date());
 
-        String content = date + " - You have spent " + TimeHelper.formatDuration(this.overallTime) + " on your phone, unlocked your phone " + this.unlocks + " times and completed " + this.tasksCompleted + " of your tasks.";
-
-        DateTime daily = new DateTime().withTime(22, 0, 0, 0);
-        Date dailyDate = daily.plusHours(24).toDate();
-        SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy, hh:MM:ss");
-        Log.d(TAG, "next time = " + sdf2.format(dailyDate));
-
-        Intent nextIntent = new Intent(context, NotificationReceiver.class);
-        nextIntent.putExtra("Type", 2);
-        nextIntent.putExtra("Title", "NoCrastinate Daily Report");
-        nextIntent.putExtra("AlarmID", FREQ_2_ALARM_1);
-        PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, nextIntent, 0);
-        AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, daily.getMillis(), startPIntent);
-
-        return content;
+        return date + " - You have spent " + TimeHelper.formatDuration(this.overallTime) + " on your phone, unlocked your phone " + this.unlocks + " times and completed " + this.tasksCompleted + " of your tasks.";
     }
 
     public String freq3setUp() {
-        Log.d(TAG, "in frequency 3 setup");
 
         getDailyStatsSoFar();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date now = new Date();
-        String nowString = sdf.format(now);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.UK);
+        String nowString = sdf.format(new Date());
         Date lastWeek = new DateTime().minusWeeks(1).toDate();
         String lastWeekString = sdf.format(lastWeek);
         String date = lastWeekString + " - " + nowString;
-        Log.d(TAG, "Dates = " + date);
 
         StatsDBContract.StatsDBHelper statsHelper = new StatsDBContract.StatsDBHelper(context);
-        SQLiteDatabase statsDB = statsHelper.getReadableDatabase();
         ArrayList<StatsData> stats = statsHelper.getStatsForInterval("Weekly");
 
         for (StatsData queriedStats : stats) {
@@ -164,22 +144,29 @@ public class NotificationReceiver extends BroadcastReceiver {
             overallTime += queriedStats.getOverallTime();
         }
 
-        String content = date + " - This week, you spent " + TimeHelper.formatDuration(overallTime) + " on your phone, unlocked your phone " + unlocks + " times and completed " + tasksCompleted + " of your tasks.";
+        return date + " - This week, you spent " + TimeHelper.formatDuration(overallTime) + " on your phone, unlocked your phone " + unlocks + " times and completed " + tasksCompleted + " of your tasks.";
 
-        DateTime weeklyReport = new DateTime().withTime(22, 0, 0, 0);
-        weeklyReport = weeklyReport.plusWeeks(1);
-        Date week = weeklyReport.toDate();
-        SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy, hh:MM:ss");
-        Log.d(TAG, "next alarm date = " + sdf2.format(week));
+    }
 
+    public void setNextAlarm(int id) {
+
+        DateTime nextReport = null;
         Intent nextIntent = new Intent(context, NotificationReceiver.class);
-        nextIntent.putExtra("Title", "NoCrastinate Weekly Report");
-        nextIntent.putExtra("AlarmID", FREQ_3_ALARM_1);
+
+        if (id == 2) {
+            nextReport = new DateTime().withTime(22, 0, 0, 0).plusDays(1);
+            nextIntent.putExtra("Title", "NoCrastinate Daily Report");
+            nextIntent.putExtra("AlarmID", FREQ_2_ALARM_1);
+
+        } else if (id == 3) {
+            nextReport = new DateTime().withTime(22, 0, 0, 0).plusWeeks(1);
+            nextIntent.putExtra("Title", "NoCrastinate Weekly Report");
+            nextIntent.putExtra("AlarmID", FREQ_3_ALARM_1);
+        }
         PendingIntent startPIntent = PendingIntent.getBroadcast(context, 0, nextIntent, 0);
         AlarmManager alarm = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, weeklyReport.getMillis(), startPIntent);
+        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, nextReport.getMillis(), startPIntent);
 
-        return content;
     }
 
 }

@@ -3,6 +3,7 @@ package com.example.rosadowning.nocrastinate.DataModels;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.LocalDate;
+import org.joda.time.Period;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 
@@ -15,17 +16,15 @@ public class TimeHelper {
 
     public static String formatDuration(long duration) {
 
-        Duration dur = new Duration(duration);
-        PeriodFormatter formatter = new PeriodFormatterBuilder()
-                .appendDays()
-                .appendSuffix("d")
-                .appendHours()
-                .appendSuffix("h")
-                .appendMinutes()
-                .appendSuffix("m")
+        PeriodFormatter periodFormatter = new PeriodFormatterBuilder()
+                .appendYears().appendSuffix("y")
+                .appendMonths().appendSuffix("m")
+                .appendWeeks().appendSuffix("w")
+                .appendDays().appendSuffix("d")
+                .appendHours().appendSuffix("h")
+                .appendMinutes().appendSuffix("m")
                 .toFormatter();
-        String formatted = formatter.print(dur.toPeriod());
-        return formatted;
+        return periodFormatter.print(new Period(new Duration(duration)).normalizedStandard());
     }
 
     public static String getHeadingString(String interval) {
@@ -37,7 +36,7 @@ public class TimeHelper {
 
         switch (interval) {
             case "Daily":
-                String todayDay = new SimpleDateFormat("EEEE, MMMM, dd, yyyy").format(today.getTime());
+                String todayDay = new SimpleDateFormat("EEEE, MMMM, dd, yyyy", Locale.UK).format(today.getTime());
                 headingString.append(todayDay);
                 break;
             case "Weekly":

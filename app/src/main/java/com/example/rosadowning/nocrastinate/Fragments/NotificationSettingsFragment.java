@@ -91,7 +91,7 @@ public class NotificationSettingsFragment extends Fragment {
                             editor.putBoolean("checkbox1", true);
                             editor.putBoolean("checkbox2", false);
                             editor.putBoolean("checkbox3", false);
-                            editor.commit();
+                            editor.apply();
                             freq2.setChecked(false);
                             freq3.setChecked(false);
                         } finally {
