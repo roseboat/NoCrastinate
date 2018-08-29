@@ -1,4 +1,7 @@
 package com.example.rosadowning.nocrastinate;
+/*
+Main Activity of the NoCrastinate application. Sets up the ScreenReceiver, the BlockedApps Service, the bottom navigation bar, creates the notification channel and schedules the midnight data reset alarm.
+ */
 
 import android.app.ActivityManager;
 import android.app.AlarmManager;
@@ -11,7 +14,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -29,10 +31,16 @@ import com.example.rosadowning.nocrastinate.BroadcastReceivers.MidnightDataReset
 import com.example.rosadowning.nocrastinate.BroadcastReceivers.ScreenReceiver;
 import com.example.rosadowning.nocrastinate.DBHelpers.AlarmDBContract;
 import com.example.rosadowning.nocrastinate.DBHelpers.AppStatsDBContract;
-import com.example.rosadowning.nocrastinate.Fragments.*;
+import com.example.rosadowning.nocrastinate.DataModels.CustomAppHolder;
+import com.example.rosadowning.nocrastinate.DataModels.TimeHelper;
+import com.example.rosadowning.nocrastinate.Fragments.SettingsFragment;
+import com.example.rosadowning.nocrastinate.Fragments.StatisticsFragment;
+import com.example.rosadowning.nocrastinate.Fragments.ToDoFragment;
 import com.example.rosadowning.nocrastinate.Services.BlockedAppsService;
 
 import org.joda.time.DateTime;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -42,10 +50,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     public static final CharSequence CHANNEL_NAME = "com.example.rosadowning.nocrastinate";
     public static final String CHANNEL_DESCRIPTION = "NoCrastinate Notification Channel";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
+        // Keeps the splash screen visible for an extra 3 seconds
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -56,8 +64,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         BottomNavigationView navigation = findViewById(R.id.navigation_bar);
         navigation.setOnNavigationItemSelectedListener(this);
 
+        // StatisticsFragment is the default, first loaded screen of the application
         loadFragment(new StatisticsFragment());
 
+        // Sets up the ScreenReceiver class to receive intents from the phone's hardware
         mReceiver = new ScreenReceiver();
         final IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
         filter.addAction(Intent.ACTION_BOOT_COMPLETED);
@@ -65,15 +75,26 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         filter.addAction(Intent.ACTION_SCREEN_ON);
         registerReceiver(mReceiver, filter);
 
-            BlockedAppsService mBlockingService = new BlockedAppsService(this);
-            Intent mServiceIntent = new Intent(this, mBlockingService.getClass());
-            if (!isMyServiceRunning(mBlockingService.getClass())) {
-                startService(mServiceIntent);
-            }
-            scheduleResetAlarm();
-            createNotificationChannel();
+        // Sets up the BlockedAppsService
+        BlockedAppsService mBlockingService = new BlockedAppsService(this);
+        Intent mServiceIntent = new Intent(this, mBlockingService.getClass());
+        if (!isMyServiceRunning(mBlockingService.getClass())) {
+            startService(mServiceIntent);
+        }
+
+        AppStatsDBContract.AppStatsDbHelper appDB = new AppStatsDBContract.AppStatsDbHelper(getApplicationContext());
+        List<CustomAppHolder> list = appDB.returnAllStats();
+        for(CustomAppHolder a : list){
+            Log.e(TAG, a.packageName + ", time = " + TimeHelper.formatDuration(a.timeInForeground));
+        }
+
+        // Schedules up the Midnight Data Reset Alarm
+        scheduleResetAlarm();
+        // Sets up the notification channel
+        createNotificationChannel();
     }
 
+    // Checks if the BlockedAppsService is already running
     private boolean isMyServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
@@ -84,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return false;
     }
 
+    // OnClick listener for the bottom navigation. When a tab is selected the corresponding fragment is loaded
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
@@ -104,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return loadFragment(fragment);
     }
 
+    // Loads the fragment corresponding to the bottom navigation item selected
     private boolean loadFragment(Fragment fragment) {
         if (fragment != null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
@@ -112,25 +135,27 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return false;
     }
 
+    // Schedules the MidnightDataResetAlarm for midnight if it has not already been scheduled.
     private void scheduleResetAlarm() {
 
         DateTime today = new DateTime().withTimeAtStartOfDay();
         DateTime tomorrow = today.plusDays(1).withTimeAtStartOfDay();
 
-
+        AlarmDBContract.AlarmDBHelper alarmDBHelper = new AlarmDBContract.AlarmDBHelper(this);
+        // Sets up an intent and an alarm
         Intent midnightIntent = new Intent(this, MidnightDataResetReceiver.class);
         PendingIntent startPIntent = PendingIntent.getBroadcast(this, 0, midnightIntent, 0);
         AlarmManager alarm = (AlarmManager) this.getSystemService(ALARM_SERVICE);
-        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, tomorrow.getMillis(), startPIntent);
 
-        AlarmDBContract.AlarmDBHelper alarmDBHelper = new AlarmDBContract.AlarmDBHelper(this);
-        Log.d(TAG, "Reset alarm set today = " + alarmDBHelper.isAlarmSet(today.getMillis()));
-
+        // Checks alarm database whether the MidnightDataResetReceiver has been reached that day, if not then schedules a reset immediately
         if (!alarmDBHelper.isAlarmSet(today.getMillis())) {
             alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), startPIntent);
         }
+        // Schedules an alarm for midnight
+        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, tomorrow.getMillis(), startPIntent);
     }
 
+    // Creates a notification channel for the application
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
@@ -144,6 +169,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
     }
 
+    // When the application is destroyed (completed exited) the screen receivers are unregistered and a push notification is set to the user to alert them that all usage monitoring will be switched off until the application has resumed.
     public void onDestroy() {
         super.onDestroy();
         unregisterReceiver(mReceiver);
@@ -164,15 +190,16 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(0, mBuilder.build());
-
     }
 
+    // Static method to cancel a notification alarm
     public static void stopAlarm(Context context, Intent intent) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
         alarmManager.cancel(pendingIntent);
     }
 
+    // Static method to determine whether or not the user has switched on their Usage Access Settings
     public static boolean hasUsagePermission(Context context) {
         SharedPreferences usagePref = context.getSharedPreferences("UsageSettings", Context.MODE_PRIVATE);
         return usagePref.getBoolean("SettingsOn", false);

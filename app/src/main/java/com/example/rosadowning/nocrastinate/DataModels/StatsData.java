@@ -1,11 +1,9 @@
 package com.example.rosadowning.nocrastinate.DataModels;
 
+/*
+Models the stats present in the StatisticsFragment, both those in the top three icons and the list of CustomAppHolders in the bottom recycler view.
+ */
 
-import android.app.usage.UsageStats;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,14 +15,15 @@ public class StatsData {
     private long tasksCompleted;
     private List<CustomAppHolder> appsList;
 
+    // Default constructor sets variables to null or 0;
     public StatsData() {
-
         date = null;
         noOfUnlocks = 0;
         overallTime = 0;
         tasksCompleted = 0;
     }
 
+    // Accessor and mutator methods
     public void setDate(Date date) {
         this.date = date;
     }
@@ -64,5 +63,4 @@ public class StatsData {
     public void setAppsList(List<CustomAppHolder> apps) {
         this.appsList = apps;
     }
-
 }

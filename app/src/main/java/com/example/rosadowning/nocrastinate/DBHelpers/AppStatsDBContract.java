@@ -9,14 +9,15 @@ import android.provider.BaseColumns;
 import android.util.Log;
 
 import com.example.rosadowning.nocrastinate.DataModels.CustomAppHolder;
-import com.example.rosadowning.nocrastinate.DataModels.StatsData;
 import com.example.rosadowning.nocrastinate.DataModels.TimeHelper;
 
 import org.joda.time.DateTime;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static com.example.rosadowning.nocrastinate.DBHelpers.StatsDBContract.StatsEntry.TABLE_NAME;
 
@@ -166,6 +167,37 @@ public class AppStatsDBContract {
                     }
                 }
                 return appsForInterval;
+            } finally {
+                cursor.close();
+                db.close();
+            }
+        }
+
+        public List<CustomAppHolder> returnAllStats(){
+
+            List<CustomAppHolder> listOfStats = new ArrayList<>();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy", Locale.UK);
+
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.rawQuery("SELECT * FROM " + AppEntry.TABLE_NAME + ";", null);
+            try {
+                String[] columnNames = cursor.getColumnNames();
+                for (String column : columnNames) {
+                    if (!column.equals(AppEntry._ID) || !column.equals(AppEntry.COLUMN_NAME_DATE)) {
+                        CustomAppHolder newApp = new CustomAppHolder();
+                        newApp.packageName = column.replaceAll("_", "\\.");
+
+                        if (cursor.moveToFirst()) {
+                            cursor.moveToFirst();
+                            while (!cursor.isAfterLast()) {
+                                newApp.timeInForeground += cursor.getLong(cursor.getColumnIndex(column));
+                                cursor.moveToNext();
+                            }
+                        }
+                        listOfStats.add(newApp);
+                    }
+                }
+                return listOfStats;
             } finally {
                 cursor.close();
                 db.close();

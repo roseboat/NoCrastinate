@@ -1,15 +1,21 @@
 package com.example.rosadowning.nocrastinate.DataModels;
 
+/*
+Models a To Do item which may appear in the main to do list, the completed to do list or individually in the View To Do screen.
+ */
 
 import java.io.Serializable;
 import java.util.Date;
 
+// Implements Serializable so that it can be passed in a Bundle
 public class ToDoItem implements Serializable {
 
+    // Instance variables which represent the various attributes a To Do Item may have
     private String name, note;
     private Boolean isStarred, isCompleted;
     private Date dueDate, alarmDate, completedDate, addedDate;
 
+    // Default constructor for a ToDoItem. They must have a name. All other attributes are set to null or false with the exception of the addedDate which functions as a primary key, and is set to the exact time in which the ToDoItem is created.
     public ToDoItem(String name) {
         this.name = name;
         this.note = null;
@@ -21,6 +27,7 @@ public class ToDoItem implements Serializable {
         this.addedDate = new Date(System.currentTimeMillis());
     }
 
+    // Accessor and mutator methods for a ToDoItem
     public String getName() {
         return name;
     }
@@ -85,6 +92,7 @@ public class ToDoItem implements Serializable {
         this.addedDate = addDate;
     }
 
+    // Equals method determines whether or not one ToDoItem is equal to another. Compares all of their attributes against one another, if any are different then the ToDoItems are not equal.
     public boolean equals(ToDoItem otherItem) {
         boolean isEqual = false;
         if (name.equals(otherItem.getName()) && note.equals(otherItem.getNote())) {

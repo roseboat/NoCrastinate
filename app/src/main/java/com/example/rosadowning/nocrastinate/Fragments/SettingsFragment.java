@@ -1,4 +1,8 @@
 package com.example.rosadowning.nocrastinate.Fragments;
+/*
+Represents the Settings screen of the application.
+Simply sets up links to other fragments
+ */
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,11 +15,9 @@ import android.widget.TextView;
 
 import com.example.rosadowning.nocrastinate.R;
 
-import org.w3c.dom.Text;
-
 public class SettingsFragment extends Fragment {
 
-
+    // Sets listeners on each menu item on the Statistics screen and what fragment they should redirect to if clicked.
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,5 +49,4 @@ public class SettingsFragment extends Fragment {
         });
         return view;
     }
-
 }

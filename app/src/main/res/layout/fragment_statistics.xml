@@ -135,22 +135,26 @@
             <LinearLayout
                 android:id="@+id/icon_group_overall_time_spent"
                 style="@style/StatsIconLayout"
+                android:layout_width="100dp"
                 app:layout_constraintEnd_toStartOf="@id/icon_group_tasks_achieved"
                 app:layout_constraintStart_toEndOf="@id/icon_group_no_of_unlocks">
 
                 <ImageView
                     style="@style/StatsIconImage"
+                    android:id="@+id/time_on_phone_icon"
                     android:src="@drawable/ic_access_time_black_24dp"
                     android:contentDescription="Overall time on phone" />
 
                 <TextView
-                    android:text="@string/stats_icon_overall_time"
-                    style="@style/StatsIconTopText" />
+                    style="@style/StatsIconTopText"
+                    android:layout_width="match_parent"
+                    android:text="@string/stats_icon_overall_time" />
 
                 <TextView
-                    style="@style/StatsIconBottomText"
                     android:id="@+id/text_view_overall_time"
-                    android:layout_gravity="center"/>
+                    style="@style/StatsIconBottomText"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center" />
             </LinearLayout>
 
 
