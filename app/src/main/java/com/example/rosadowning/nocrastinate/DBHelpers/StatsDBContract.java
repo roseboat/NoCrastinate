@@ -1,4 +1,7 @@
 package com.example.rosadowning.nocrastinate.DBHelpers;
+/*
+Database which stores the unlocks, total time on phone and tasks completed each day along with the day's date.
+ */
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -21,6 +24,7 @@ public class StatsDBContract {
     private StatsDBContract() {
     }
 
+    // Inner class StatsEntry which defines all of the main Strings that will be used frequently by the DBHelper
     public static class StatsEntry implements BaseColumns {
         public static final String TABLE_NAME = "statsTable";
         public static final String COLUMN_NAME_DATE = "stats_date";
@@ -41,6 +45,8 @@ public class StatsDBContract {
                 "DROP TABLE IF EXISTS " + TABLE_NAME;
     }
 
+    // DBHelper class which provides an interface between the rest of the code and the database
+    // Provides a variety of useful methods with which to interact with the Stats database
     public static class StatsDBHelper extends SQLiteOpenHelper {
         // If you change the database schema, you must increment the database version.
         public static final int DATABASE_VERSION = 4;
@@ -51,10 +57,12 @@ public class StatsDBContract {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
         }
 
+        // Create the database
         public void onCreate(SQLiteDatabase db) {
             db.execSQL(StatsEntry.SQL_CREATE_ENTRIES);
         }
 
+        // Delete then recreate the database
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // This database is only a cache for online data, so its upgrade policy is
             // to simply to discard the data and start over
@@ -62,10 +70,12 @@ public class StatsDBContract {
             onCreate(db);
         }
 
+        // Same as above
         public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             onUpgrade(db, oldVersion, newVersion);
         }
 
+        // Insert a new row of stats into the database
         public void insertNewStat(StatsData stats) {
             SQLiteDatabase db = this.getWritableDatabase();
             try {
@@ -81,6 +91,7 @@ public class StatsDBContract {
             }
         }
 
+        // Delete a row of stats from the database
         public void deleteStat(StatsData statsComponent) {
             SQLiteDatabase db = this.getWritableDatabase();
             try {
@@ -90,6 +101,7 @@ public class StatsDBContract {
             }
         }
 
+        // Get an array of StatsData objects for a given interval, Weekly, Monthly or Yearly
         public ArrayList<StatsData> getStatsForInterval(String intervalString) {
 
             ArrayList<StatsData> statsForInterval = new ArrayList<>();
@@ -126,15 +138,13 @@ public class StatsDBContract {
                         stat.setDate(new Date(cursor.getLong(dateIndex)));
                         stat.setTasksCompleted(cursor.getLong(tasksIndex));
                         stat.setOverallTime(cursor.getLong(timeIndex));
-                        statsForInterval.add(stat);
+                        statsForInterval.add(stat); // Add the StatsData object to the arraylist statsForInterval
                     } while (cursor.moveToNext());
                 }
-
                 return statsForInterval;
             } finally {
                 cursor.close();
                 db.close();
-
             }
         }
     }

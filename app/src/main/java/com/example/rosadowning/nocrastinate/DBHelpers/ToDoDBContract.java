@@ -1,4 +1,7 @@
 package com.example.rosadowning.nocrastinate.DBHelpers;
+/*
+Class which sets up a database for all of the user's incomplete and complete to do's.
+ */
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -49,6 +52,8 @@ public class ToDoDBContract {
                 "DROP TABLE IF EXISTS " + TABLE_NAME;
     }
 
+    // ToDoListDbHelper class which provides an interface between the rest of the code and the database
+    // Provides a variety of useful methods with which to interact with the To Do database
     public static class ToDoListDbHelper extends SQLiteOpenHelper {
         public static final int DATABASE_VERSION = 6;
         public static final String DATABASE_NAME = "ToDoList.db";
@@ -57,10 +62,12 @@ public class ToDoDBContract {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
         }
 
+        // Create the database
         public void onCreate(SQLiteDatabase db) {
             db.execSQL(TableEntry.SQL_CREATE_ENTRIES);
         }
 
+        // Delete then recreate the database
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // This database is only a cache for online data, so its upgrade policy is
             // to simply to discard the data and start over
@@ -68,10 +75,12 @@ public class ToDoDBContract {
             onCreate(db);
         }
 
+        // Same as above
         public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             onUpgrade(db, oldVersion, newVersion);
         }
 
+        // Gets the unique ID of a to do item
         public int getID(ToDoItem toDoItem) {
 
             SQLiteDatabase db = this.getReadableDatabase();
@@ -88,16 +97,15 @@ public class ToDoDBContract {
                     do {
                         id = cursor.getInt(cursor.getColumnIndex(TableEntry._ID));
                     } while (cursor.moveToNext());
-
                     cursor.close();
                 }
-
                 return id;
             } finally {
                 db.close();
             }
         }
 
+        // Insert a new to do item into the database
         public void insertNewToDo(ToDoItem toDo) {
             SQLiteDatabase db = this.getWritableDatabase();
 
@@ -128,12 +136,13 @@ public class ToDoDBContract {
             }
         }
 
+        // Set a to do's Completed column as true or false
         public void setCompleted(ToDoItem toDoItem, boolean isCompleted) {
 
             SQLiteDatabase db = this.getReadableDatabase();
             int isCompletedInt = 0;
             long completedTime = 0;
-            if (isCompleted = true) {
+            if (isCompleted) {
                 isCompletedInt = 1;
                 completedTime = System.currentTimeMillis();
             }
@@ -145,6 +154,7 @@ public class ToDoDBContract {
             }
         }
 
+        // Set a to do's Starred column as true or false
         public void setStarred(ToDoItem toDoItem, boolean isStarred) {
             int isStarredInt = 0;
             if (isStarred) {
@@ -158,13 +168,14 @@ public class ToDoDBContract {
             }
         }
 
+        // Gets the number of completed to dos for a time interval
         public long getNoOfCompletedToDos(long beginTime, long endTime) {
 
             long noOfCompletedToDos = 0;
             String newQuery = TableEntry.COLUMN_NAME_COMPLETED_DATE + " BETWEEN " + beginTime + " AND " + endTime + ";";
             SQLiteDatabase db = this.getReadableDatabase();
             try {
-                noOfCompletedToDos = DatabaseUtils.queryNumEntries(db, TABLE_NAME, newQuery);
+                noOfCompletedToDos = DatabaseUtils.queryNumEntries(db, TABLE_NAME, newQuery); // returns the number of entries that match the condition
 
                 return noOfCompletedToDos;
             } finally {
@@ -172,12 +183,14 @@ public class ToDoDBContract {
             }
         }
 
-        public void clearToDoList(){
+        // Clear all the entries in the to-do list
+        public void clearToDoList() {
             SQLiteDatabase db = this.getWritableDatabase();
-            db.execSQL("DELETE FROM "+ TableEntry.TABLE_NAME);
+            db.execSQL("DELETE FROM " + TableEntry.TABLE_NAME);
             db.close();
         }
 
+        // Delete a particular to-do
         public void deleteToDo(int toDoID) {
             SQLiteDatabase db = this.getWritableDatabase();
             try {
@@ -187,6 +200,9 @@ public class ToDoDBContract {
             }
         }
 
+        // Method to get a list of to do items. Is given a parameter 'true' or 'false' representing whether the to dos are incomplete or complete
+        // ToDoFragment calls this method passing 'false'
+        // CompletedToDoFragment calls this method passing 'true'
         public ArrayList<ToDoItem> getToDoList(boolean isCompleted) {
 
             String query = null;
