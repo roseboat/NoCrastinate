@@ -9,6 +9,7 @@ much time they have spent on each application. All stats can be viewed for daily
  */
 
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.usage.UsageEvents;
@@ -83,6 +84,7 @@ public class StatisticsFragment extends Fragment {
     private ReentrantLock reentrantLock;
     private long hours, preHours;
     private boolean notiSettingsOne;
+    private Activity activity;
 
     @Nullable
     @Override
@@ -99,9 +101,10 @@ public class StatisticsFragment extends Fragment {
         this.reentrantLock = new ReentrantLock();
         this.intervalString = "Daily";
         this.context = getContext();
+        this.activity = getActivity();
         this.sharedPreferences = context.getSharedPreferences(STATS_PREF_NAME, Context.MODE_PRIVATE);
         this.editor = sharedPreferences.edit();
-        mUsageStatsManager = (UsageStatsManager) getActivity().getSystemService(Context.USAGE_STATS_SERVICE);
+        mUsageStatsManager = (UsageStatsManager) activity.getSystemService(Context.USAGE_STATS_SERVICE);
     }
 
     // Recalls the onCreate() method in the event that the fragment resumes
@@ -145,7 +148,7 @@ public class StatisticsFragment extends Fragment {
         mRecyclerView.setAdapter(new AlphaInAnimationAdapter(mUsageListAdapter));
 
         // Sets the Spinner's Adapter and onClick listener
-        SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
+        SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(activity,
                 R.array.action_list, android.R.layout.simple_spinner_dropdown_item);
         mSpinner.setAdapter(spinnerAdapter);
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -195,7 +198,7 @@ public class StatisticsFragment extends Fragment {
                                 editor.apply();
 
                                 // Pop up prompting user to change their usage access settings is made visible
-                                getActivity().runOnUiThread(new Runnable() {
+                                activity.runOnUiThread(new Runnable() {
 
                                     @Override
                                     public void run() {
@@ -210,7 +213,7 @@ public class StatisticsFragment extends Fragment {
                                 editor.apply();
 
                                 // Pop up prompting user to change their settings is made invisible and the spinner is set to visible
-                                getActivity().runOnUiThread(new Runnable() {
+                                activity.runOnUiThread(new Runnable() {
 
                                     @Override
                                     public void run() {
@@ -354,13 +357,13 @@ public class StatisticsFragment extends Fragment {
                             customAppHolder.packageName = packageInfo.packageName;
                             customAppHolder.appName = packageInfo.applicationInfo.loadLabel(context.getPackageManager()).toString();
                             try {
-                                if (getActivity() != null)
-                                    customAppHolder.appIcon = getActivity().getPackageManager()
+                                if (activity != null)
+                                    customAppHolder.appIcon = activity.getPackageManager()
                                             .getApplicationIcon(customAppHolder.packageName);
                             } catch (PackageManager.NameNotFoundException e) {
                                 Log.w(TAG, String.format("App Icon is not found for %s",
                                         customAppHolder.packageName));
-                                customAppHolder.appIcon = getActivity().getDrawable(R.drawable.ic_nocrastinate_logo_only_transparent);
+                                customAppHolder.appIcon = activity.getDrawable(R.drawable.ic_nocrastinate_logo_only_transparent);
                             }
 
                             updatedAppsList.add(customAppHolder);
@@ -454,6 +457,7 @@ public class StatisticsFragment extends Fragment {
                     collectedCompleted += queriedStats.getTasksCompleted();
                     collectedTime += queriedStats.getOverallTime();
                 }
+
                 // Stores unlocks, total duration and tasks completed for the specific interval in the StatsData object, replacing those for the 'Daily' interval
                 stats.setTasksCompleted(collectedCompleted);
                 stats.setNoOfUnlocks(collectedUnlocks);
@@ -509,24 +513,32 @@ public class StatisticsFragment extends Fragment {
                     textViewUnlocks.setAlpha(0);
                     textViewOverallTime.setAlpha(0);
                     textViewTasks.setAlpha(0);
-                    timeHeader.animate().alpha(1).setDuration(200);
-                    textViewUnlocks.animate().alpha(1).setDuration(200);
-                    textViewOverallTime.animate().alpha(1).setDuration(200);
-                    textViewTasks.animate().alpha(1).setDuration(200);
-                    textViewTimeSpan.animate().alpha(1).setDuration(200);
+                    timeHeader.animate().alpha(1).setDuration(100);
+                    textViewUnlocks.animate().alpha(1).setDuration(100);
+                    textViewOverallTime.animate().alpha(1).setDuration(100);
+                    textViewTasks.animate().alpha(1).setDuration(100);
+                    textViewTimeSpan.animate().alpha(1).setDuration(100);
                 } else {
                     mRecyclerView.setAdapter(mUsageListAdapter);
                     textViewTimeSpan.setAlpha(1);
                 }
-                // Give the adapter which displays the recycler view of apps and their time in the foreground the list of apps form iconData
+                // Give the adapter which displays the recycler view of apps and their time in the foreground the list of apps from iconData
                 mUsageListAdapter.setCustomAppList(iconData.getAppsList());
+
+
+                // If the overall time is less than one minute, format it as "0m"
+                String timeString;
+                if (iconData.getOverallTime() < 60000) {
+                    timeString = "0m";
+                } else {
+                    timeString = TimeHelper.formatDuration(iconData.getOverallTime());
+                }
 
                 // Set the top header and the text on each of the top icons
                 timeHeader.setText(TimeHelper.getHeadingString(timeInterval));
                 textViewUnlocks.setText(iconData.getNoOfUnlocks() + "");
-                textViewOverallTime.setText(TimeHelper.formatDuration(iconData.getOverallTime()));
+                textViewOverallTime.setText(timeString);
                 textViewTasks.setText(iconData.getTasksCompleted() + "");
-
             }
         }
     }

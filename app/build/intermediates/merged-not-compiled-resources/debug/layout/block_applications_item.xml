@@ -10,7 +10,6 @@
     android:theme="@style/AppTheme"
     android:id="@+id/block_layout"
     >
-
     <ImageView android:id="@+id/app_icon"
         android:layout_width="50dp"
         android:layout_height="50dp"

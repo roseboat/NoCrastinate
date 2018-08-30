@@ -27,17 +27,661 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a5b528ce-38ba-4135-854e-9b3524d2728f" name="Default" comment="nocrastinate project first commit">
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/resourceHashesCache.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/resourceHashesCache.bin" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/jarAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/jarAnalysis.bin" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskJars.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskJars.bin" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Fragments/CompletedToDoFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Fragments/CompletedToDoFragment.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment.java" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/debug.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/debug.json" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/build-info/debug/build-info.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/build-info/debug/build-info.xml" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes-jar/debug/classes.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/classes-jar/debug/classes.jar" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/androidTest/debug/com/example/rosadowning/nocrastinate/NoCrastinateInstrumentedTest.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/androidTest/debug/com/example/rosadowning/nocrastinate/NoCrastinateInstrumentedTest.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/BroadcastReceivers/NotificationReceiver.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/BroadcastReceivers/NotificationReceiver.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/BroadcastReceivers/ScreenReceiver.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/BroadcastReceivers/ScreenReceiver.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/BroadcastReceivers/ToDoAlarmReceiver.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/BroadcastReceivers/ToDoAlarmReceiver.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract$AlarmDBHelper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract$AlarmDBHelper.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract$AlarmEntry.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract$AlarmEntry.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract$AppEntry.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract$AppEntry.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract$AppStatsDbHelper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract$AppStatsDbHelper.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract$BlockedAppEntry.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract$BlockedAppEntry.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract$BlockedAppsDBHelper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract$BlockedAppsDBHelper.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract$StatsDBHelper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract$StatsDBHelper.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract$StatsEntry.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract$StatsEntry.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract$TableEntry.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract$TableEntry.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract$ToDoListDbHelper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract$ToDoListDbHelper.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$3.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$4.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$5$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$5$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$5.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment$AppAlphaOrder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment$AppAlphaOrder.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/CompletedToDoFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/CompletedToDoFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/CompletedToDoFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/CompletedToDoFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/HelpCenterFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/HelpCenterFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$3.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$3.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$UpdateStats.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$UpdateStats.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$UsedMostOftenComparatorDesc.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$UsedMostOftenComparatorDesc.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$3.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$2$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$2$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$3.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$4.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$5.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$6$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$6$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$6.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/BroadcastReceivers/NotificationReceiver.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/BroadcastReceivers/NotificationReceiver.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/BroadcastReceivers/ScreenReceiver.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/BroadcastReceivers/ScreenReceiver.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/BroadcastReceivers/ToDoAlarmReceiver.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/BroadcastReceivers/ToDoAlarmReceiver.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract$AlarmDBHelper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract$AlarmDBHelper.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract$AlarmEntry.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract$AlarmEntry.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract$AppEntry.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract$AppEntry.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract$AppStatsDbHelper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract$AppStatsDbHelper.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract$BlockedAppEntry.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract$BlockedAppEntry.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract$BlockedAppsDBHelper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract$BlockedAppsDBHelper.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract$StatsDBHelper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract$StatsDBHelper.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract$StatsEntry.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract$StatsEntry.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract$TableEntry.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract$TableEntry.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract$ToDoListDbHelper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract$ToDoListDbHelper.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$3.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$4.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$5$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$5$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$5.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment$AppAlphaOrder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment$AppAlphaOrder.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/CompletedToDoFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/CompletedToDoFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/CompletedToDoFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/CompletedToDoFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/HelpCenterFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/HelpCenterFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$3.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$3.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$UpdateStats.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$UpdateStats.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$UsedMostOftenComparatorDesc.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$UsedMostOftenComparatorDesc.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$3.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$2$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$2$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$3.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$4.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$5.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$6$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$6$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$6.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/ir_slices/debug/package_slice_5/dex-renamer-state.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/ir_slices/debug/package_slice_5/dex-renamer-state.txt" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/ir_slices/debug/package_slice_7/dex-renamer-state.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/ir_slices/debug/package_slice_7/dex-renamer-state.txt" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/file-input-save-data.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/file-input-save-data.txt" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/eHZASTlvQegPMpOSUsVkQVstPQ0=" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/eHZASTlvQegPMpOSUsVkQVstPQ0=" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebugAndroidTest/tmp/debugAndroidTest/dex-renamer-state.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebugAndroidTest/tmp/debugAndroidTest/dex-renamer-state.txt" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageInstantRunResourcesDebug/tmp/debug/dex-renamer-state.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageInstantRunResourcesDebug/tmp/debug/dex-renamer-state.txt" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageInstantRunResourcesDebug/tmp/debug/zip-cache/eHZASTlvQegPMpOSUsVkQVstPQ0=" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageInstantRunResourcesDebug/tmp/debug/zip-cache/eHZASTlvQegPMpOSUsVkQVstPQ0=" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/instant-run-apk/debug/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/intermediates/instant-run-apk/debug/app-debug.apk" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/instant-run-resources/resources-debug.ir.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/instant-run-resources/resources-debug.ir.ap_" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/merged-not-compiled-resources/debug/layout/block_applications_item.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/merged-not-compiled-resources/debug/layout/block_applications_item.xml" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/resources-debug.ap_" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout_block_applications_item.xml.flat" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout_block_applications_item.xml.flat" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/split-apk/debug/slices/slice_5.apk" afterPath="$PROJECT_DIR$/app/build/intermediates/split-apk/debug/slices/slice_5.apk" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/split-apk/debug/slices/slice_7.apk" afterPath="$PROJECT_DIR$/app/build/intermediates/split-apk/debug/slices/slice_7.apk" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/androidTest/debug/60/com/example/rosadowning/nocrastinate/NoCrastinateInstrumentedTest.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/androidTest/debug/60/com/example/rosadowning/nocrastinate/NoCrastinateInstrumentedTest.dex" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/640.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/641.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/642.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/643.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/646/android/arch/lifecycle/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/646/android/support/transition/R$attr.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/646/android/support/transition/R$color.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/646/android/support/transition/R$dimen.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/646/android/support/transition/R$drawable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/646/android/support/transition/R$id.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/646/android/support/transition/R$integer.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/646/android/support/transition/R$layout.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/646/android/support/transition/R$string.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/646/android/support/transition/R$style.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/646/android/support/transition/R$styleable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/646/android/support/transition/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/646/com/android/tools/ir/dummy/slice_0.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/android/arch/lifecycle/livedata/core/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/android/support/customview/R$attr.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/android/support/customview/R$color.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/android/support/customview/R$dimen.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/android/support/customview/R$drawable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/android/support/customview/R$id.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/android/support/customview/R$integer.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/android/support/customview/R$layout.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/android/support/customview/R$string.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/android/support/customview/R$style.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/android/support/customview/R$styleable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/android/support/customview/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/android/support/v7/recyclerview/R$attr.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/android/support/v7/recyclerview/R$color.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/android/support/v7/recyclerview/R$dimen.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/android/support/v7/recyclerview/R$drawable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/android/support/v7/recyclerview/R$id.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/android/support/v7/recyclerview/R$integer.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/android/support/v7/recyclerview/R$layout.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/android/support/v7/recyclerview/R$string.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/android/support/v7/recyclerview/R$style.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/android/support/v7/recyclerview/R$styleable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/android/support/v7/recyclerview/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/com/android/tools/ir/dummy/slice_1.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/com/example/rosadowning/nocrastinate/BuildConfig.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/com/example/rosadowning/nocrastinate/MainActivity.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/com/example/rosadowning/nocrastinate/R$anim.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/com/example/rosadowning/nocrastinate/R$animator.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/com/example/rosadowning/nocrastinate/R$array.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/com/example/rosadowning/nocrastinate/R$attr.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/com/example/rosadowning/nocrastinate/R$bool.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/com/example/rosadowning/nocrastinate/R$color.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/com/example/rosadowning/nocrastinate/R$dimen.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/com/example/rosadowning/nocrastinate/R$drawable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/com/example/rosadowning/nocrastinate/R$font.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/com/example/rosadowning/nocrastinate/R$id.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/com/example/rosadowning/nocrastinate/R$integer.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/com/example/rosadowning/nocrastinate/R$interpolator.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/com/example/rosadowning/nocrastinate/R$layout.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/com/example/rosadowning/nocrastinate/R$menu.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/com/example/rosadowning/nocrastinate/R$mipmap.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/com/example/rosadowning/nocrastinate/R$string.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/com/example/rosadowning/nocrastinate/R$style.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/com/example/rosadowning/nocrastinate/R$styleable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/647/com/example/rosadowning/nocrastinate/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/648/android/support/interpolator/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/648/android/support/loader/R$attr.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/648/android/support/loader/R$color.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/648/android/support/loader/R$dimen.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/648/android/support/loader/R$drawable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/648/android/support/loader/R$id.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/648/android/support/loader/R$integer.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/648/android/support/loader/R$layout.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/648/android/support/loader/R$string.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/648/android/support/loader/R$style.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/648/android/support/loader/R$styleable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/648/android/support/loader/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/648/android/support/localbroadcastmanager/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/648/com/android/tools/ir/dummy/slice_2.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/649/android/support/fragment/R$attr.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/649/android/support/fragment/R$color.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/649/android/support/fragment/R$dimen.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/649/android/support/fragment/R$drawable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/649/android/support/fragment/R$id.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/649/android/support/fragment/R$integer.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/649/android/support/fragment/R$layout.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/649/android/support/fragment/R$string.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/649/android/support/fragment/R$style.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/649/android/support/fragment/R$styleable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/649/android/support/fragment/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/649/android/support/v7/viewpager/R$attr.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/649/android/support/v7/viewpager/R$color.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/649/android/support/v7/viewpager/R$dimen.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/649/android/support/v7/viewpager/R$drawable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/649/android/support/v7/viewpager/R$id.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/649/android/support/v7/viewpager/R$integer.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/649/android/support/v7/viewpager/R$layout.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/649/android/support/v7/viewpager/R$string.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/649/android/support/v7/viewpager/R$style.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/649/android/support/v7/viewpager/R$styleable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/649/android/support/v7/viewpager/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/649/com/android/tools/ir/dummy/slice_3.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/coreui/R$attr.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/coreui/R$color.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/coreui/R$dimen.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/coreui/R$drawable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/coreui/R$id.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/coreui/R$integer.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/coreui/R$layout.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/coreui/R$string.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/coreui/R$style.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/coreui/R$styleable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/coreui/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/cursoradapter/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/drawerlayout/R$attr.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/drawerlayout/R$color.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/drawerlayout/R$dimen.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/drawerlayout/R$drawable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/drawerlayout/R$id.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/drawerlayout/R$integer.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/drawerlayout/R$layout.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/drawerlayout/R$string.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/drawerlayout/R$style.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/drawerlayout/R$styleable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/drawerlayout/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/swiperefreshlayout/R$attr.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/swiperefreshlayout/R$color.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/swiperefreshlayout/R$dimen.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/swiperefreshlayout/R$drawable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/swiperefreshlayout/R$id.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/swiperefreshlayout/R$integer.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/swiperefreshlayout/R$layout.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/swiperefreshlayout/R$string.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/swiperefreshlayout/R$style.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/swiperefreshlayout/R$styleable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/swiperefreshlayout/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/v7/appcompat/R$anim.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/v7/appcompat/R$attr.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/v7/appcompat/R$bool.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/v7/appcompat/R$color.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/v7/appcompat/R$dimen.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/v7/appcompat/R$drawable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/v7/appcompat/R$id.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/v7/appcompat/R$integer.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/v7/appcompat/R$layout.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/v7/appcompat/R$string.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/v7/appcompat/R$style.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/v7/appcompat/R$styleable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/android/support/v7/appcompat/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/com/android/tools/ir/dummy/slice_4.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/com/example/rosadowning/nocrastinate/DataModels/CustomAppHolder.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/com/example/rosadowning/nocrastinate/DataModels/StatsData.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/com/example/rosadowning/nocrastinate/DataModels/TimeHelper.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/com/example/rosadowning/nocrastinate/DataModels/ToDoItem.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/com/example/rosadowning/nocrastinate/Services/BlockedAppsService$1.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/com/example/rosadowning/nocrastinate/Services/BlockedAppsService$mainTask.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/650/com/example/rosadowning/nocrastinate/Services/BlockedAppsService.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/android/arch/core/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/android/support/coreutils/R$attr.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/android/support/coreutils/R$color.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/android/support/coreutils/R$dimen.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/android/support/coreutils/R$drawable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/android/support/coreutils/R$id.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/android/support/coreutils/R$integer.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/android/support/coreutils/R$layout.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/android/support/coreutils/R$string.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/android/support/coreutils/R$style.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/android/support/coreutils/R$styleable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/android/support/coreutils/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/com/android/tools/ir/dummy/slice_5.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/com/example/rosadowning/nocrastinate/BroadcastReceivers/MidnightDataResetReceiver.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/com/example/rosadowning/nocrastinate/BroadcastReceivers/NotificationReceiver.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/com/example/rosadowning/nocrastinate/BroadcastReceivers/ScreenReceiver.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/com/example/rosadowning/nocrastinate/BroadcastReceivers/ToDoAlarmReceiver.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract$AlarmDBHelper.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract$AlarmEntry.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract$AppEntry.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract$AppStatsDbHelper.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract$BlockedAppEntry.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract$BlockedAppsDBHelper.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract$StatsDBHelper.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract$StatsEntry.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract$TableEntry.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract$ToDoListDbHelper.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/jp/wasabeef/recyclerview/R$attr.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/jp/wasabeef/recyclerview/R$bool.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/jp/wasabeef/recyclerview/R$color.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/jp/wasabeef/recyclerview/R$dimen.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/jp/wasabeef/recyclerview/R$drawable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/jp/wasabeef/recyclerview/R$id.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/jp/wasabeef/recyclerview/R$integer.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/jp/wasabeef/recyclerview/R$layout.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/jp/wasabeef/recyclerview/R$string.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/jp/wasabeef/recyclerview/R$style.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/jp/wasabeef/recyclerview/R$styleable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/651/jp/wasabeef/recyclerview/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/652/android/support/asynclayoutinflater/R$attr.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/652/android/support/asynclayoutinflater/R$color.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/652/android/support/asynclayoutinflater/R$dimen.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/652/android/support/asynclayoutinflater/R$drawable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/652/android/support/asynclayoutinflater/R$id.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/652/android/support/asynclayoutinflater/R$integer.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/652/android/support/asynclayoutinflater/R$layout.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/652/android/support/asynclayoutinflater/R$string.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/652/android/support/asynclayoutinflater/R$style.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/652/android/support/asynclayoutinflater/R$styleable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/652/android/support/asynclayoutinflater/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/652/android/support/constraint/R$attr.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/652/android/support/constraint/R$id.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/652/android/support/constraint/R$styleable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/652/android/support/constraint/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/652/android/support/documentfile/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/652/android/support/print/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/652/com/android/tools/ir/dummy/slice_6.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/compat/R$attr.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/compat/R$color.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/compat/R$dimen.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/compat/R$drawable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/compat/R$id.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/compat/R$integer.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/compat/R$layout.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/compat/R$string.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/compat/R$style.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/compat/R$styleable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/compat/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/design/R$anim.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/design/R$animator.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/design/R$attr.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/design/R$bool.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/design/R$color.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/design/R$dimen.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/design/R$drawable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/design/R$id.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/design/R$integer.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/design/R$interpolator.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/design/R$layout.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/design/R$string.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/design/R$style.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/design/R$styleable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/design/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/graphics/drawable/R$attr.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/graphics/drawable/R$color.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/graphics/drawable/R$dimen.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/graphics/drawable/R$drawable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/graphics/drawable/R$id.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/graphics/drawable/R$integer.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/graphics/drawable/R$layout.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/graphics/drawable/R$string.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/graphics/drawable/R$style.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/graphics/drawable/R$styleable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/android/support/graphics/drawable/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/androidx/versionedparcelable/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/android/tools/ir/dummy/slice_7.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$1.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$2.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$3.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$4.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$5$1.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$5.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment$1.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment$AppAlphaOrder.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/CompletedToDoFragment$1.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/CompletedToDoFragment.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/HelpCenterFragment.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$1.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$2.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$3.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$1.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$2.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$3.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$1.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1$1.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1$2.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$UpdateStats.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$UsedMostOftenComparatorDesc.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$1.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$2.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$3.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1$1.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1$2.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$2$1.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$2.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$3.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$4.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$5.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$6$1.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$6.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/653/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/android/support/v7/cardview/R$attr.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/android/support/v7/cardview/R$color.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/android/support/v7/cardview/R$dimen.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/android/support/v7/cardview/R$style.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/android/support/v7/cardview/R$styleable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/android/support/v7/cardview/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/com/android/tools/ir/dummy/slice_8.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/com/example/rosadowning/nocrastinate/Adapters/AppStatisticsAdapter$ViewHolder.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/com/example/rosadowning/nocrastinate/Adapters/AppStatisticsAdapter.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/com/example/rosadowning/nocrastinate/Adapters/BlockAppsAdapter$1.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/com/example/rosadowning/nocrastinate/Adapters/BlockAppsAdapter$OnItemClickListener.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/com/example/rosadowning/nocrastinate/Adapters/BlockAppsAdapter$ViewHolder$1.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/com/example/rosadowning/nocrastinate/Adapters/BlockAppsAdapter$ViewHolder.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/com/example/rosadowning/nocrastinate/Adapters/BlockAppsAdapter.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/com/example/rosadowning/nocrastinate/Adapters/CompletedToDoListAdapter$OnItemClickListener.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/com/example/rosadowning/nocrastinate/Adapters/CompletedToDoListAdapter$ViewHolder$1.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/com/example/rosadowning/nocrastinate/Adapters/CompletedToDoListAdapter$ViewHolder.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/com/example/rosadowning/nocrastinate/Adapters/CompletedToDoListAdapter.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/com/example/rosadowning/nocrastinate/Adapters/ToDoListAdapter$1.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/com/example/rosadowning/nocrastinate/Adapters/ToDoListAdapter$2.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/com/example/rosadowning/nocrastinate/Adapters/ToDoListAdapter$OnItemClickListener.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/com/example/rosadowning/nocrastinate/Adapters/ToDoListAdapter$ViewHolder$1.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/com/example/rosadowning/nocrastinate/Adapters/ToDoListAdapter$ViewHolder.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/654/com/example/rosadowning/nocrastinate/Adapters/ToDoListAdapter.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/android/arch/lifecycle/viewmodel/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/android/support/coordinatorlayout/R$attr.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/android/support/coordinatorlayout/R$color.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/android/support/coordinatorlayout/R$dimen.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/android/support/coordinatorlayout/R$drawable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/android/support/coordinatorlayout/R$id.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/android/support/coordinatorlayout/R$integer.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/android/support/coordinatorlayout/R$layout.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/android/support/coordinatorlayout/R$string.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/android/support/coordinatorlayout/R$style.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/android/support/coordinatorlayout/R$styleable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/android/support/coordinatorlayout/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/android/support/slidingpanelayout/R$attr.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/android/support/slidingpanelayout/R$color.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/android/support/slidingpanelayout/R$dimen.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/android/support/slidingpanelayout/R$drawable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/android/support/slidingpanelayout/R$id.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/android/support/slidingpanelayout/R$integer.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/android/support/slidingpanelayout/R$layout.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/android/support/slidingpanelayout/R$string.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/android/support/slidingpanelayout/R$style.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/android/support/slidingpanelayout/R$styleable.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/android/support/slidingpanelayout/R.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/655/com/android/tools/ir/dummy/slice_9.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/__content__.json" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/__content__.json" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/androidTest/debug/0/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/androidTest/debug/0/classes.dex" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/androidTest/debug/__content__.json" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/androidTest/debug/__content__.json" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/205/classes.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/206/classes.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/207/classes.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/208/classes.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/209/classes.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/210/classes.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/211/classes.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/212/classes.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/213/classes.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/214/classes.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/215/classes.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/216/classes.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/217/classes.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/218/classes.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/219/classes.dex" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/__content__.json" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/__content__.json" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/BroadcastReceivers/NotificationReceiver.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/BroadcastReceivers/NotificationReceiver.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/BroadcastReceivers/ScreenReceiver.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/BroadcastReceivers/ScreenReceiver.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/BroadcastReceivers/ToDoAlarmReceiver.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/BroadcastReceivers/ToDoAlarmReceiver.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract$AlarmDBHelper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract$AlarmDBHelper.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract$AlarmEntry.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract$AlarmEntry.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract$AppEntry.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract$AppEntry.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract$AppStatsDbHelper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract$AppStatsDbHelper.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract$BlockedAppEntry.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract$BlockedAppEntry.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract$BlockedAppsDBHelper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract$BlockedAppsDBHelper.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract$StatsDBHelper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract$StatsDBHelper.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract$StatsEntry.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract$StatsEntry.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract$TableEntry.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract$TableEntry.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract$ToDoListDbHelper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract$ToDoListDbHelper.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$3.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$4.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$5$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$5$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$5.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment$AppAlphaOrder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment$AppAlphaOrder.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/CompletedToDoFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/CompletedToDoFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/CompletedToDoFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/CompletedToDoFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/HelpCenterFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/HelpCenterFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$3.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$3.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$UpdateStats.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$UpdateStats.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$UsedMostOftenComparatorDesc.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$UsedMostOftenComparatorDesc.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$3.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$2$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$2$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$3.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$4.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$5.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$6$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$6$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$6.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/0/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/buildId.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/buildId.txt" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/BroadcastReceivers/NotificationReceiver.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/BroadcastReceivers/NotificationReceiver.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/BroadcastReceivers/ScreenReceiver.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/BroadcastReceivers/ScreenReceiver.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/BroadcastReceivers/ToDoAlarmReceiver.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/BroadcastReceivers/ToDoAlarmReceiver.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract$AlarmDBHelper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract$AlarmDBHelper.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract$AlarmEntry.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract$AlarmEntry.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/AlarmDBContract.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract$AppEntry.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract$AppEntry.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract$AppStatsDbHelper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract$AppStatsDbHelper.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/AppStatsDBContract.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract$BlockedAppEntry.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract$BlockedAppEntry.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract$BlockedAppsDBHelper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract$BlockedAppsDBHelper.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/BlockedAppsDBContract.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract$StatsDBHelper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract$StatsDBHelper.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract$StatsEntry.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract$StatsEntry.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/StatsDBContract.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract$TableEntry.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract$TableEntry.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract$ToDoListDbHelper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract$ToDoListDbHelper.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/5/com/example/rosadowning/nocrastinate/DBHelpers/ToDoDBContract.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/buildId.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/buildId.txt" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$3.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$4.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$5$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$5$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment$5.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment$AppAlphaOrder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment$AppAlphaOrder.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/BlockAppsFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/CompletedToDoFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/CompletedToDoFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/CompletedToDoFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/CompletedToDoFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/HelpCenterFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/HelpCenterFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment$3.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/NotificationSettingsFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment$3.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/SettingsFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$UpdateStats.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$UpdateStats.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$UsedMostOftenComparatorDesc.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment$UsedMostOftenComparatorDesc.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment$3.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ToDoFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$2$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$2$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$3.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$4.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$5.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$6$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$6$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment$6.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRunSlicer/debug/7/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk" />
+      <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/rosadowning/nocrastinate/NoCrastinateInstrumentedTest.java" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/example/rosadowning/nocrastinate/NoCrastinateInstrumentedTest.java" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment.java" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/block_applications_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/block_applications_item.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/app/out/" />
@@ -72,14 +716,74 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ViewToDoFragment.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment.java">
+      <file leaf-file-name="NoCrastinateUnitTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/test/java/com/example/rosadowning/nocrastinate/NoCrastinateUnitTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="17" column="16" lean-forward="true" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+            <state relative-caret-position="845">
+              <caret line="435" column="59" lean-forward="false" selection-start-line="435" selection-start-column="59" selection-end-line="435" selection-end-column="59" />
               <folding>
-                <element signature="e#5395#11109#0" expanded="true" />
-                <element signature="e#11108#11109#0" expanded="true" />
+                <element signature="method#iconStats_setUp#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#useAppContext#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#iconStats_testIfInWeeklyInterval#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#iconStats_testIfInMonthlyInterval#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#iconStats_testIfInYearlyInterval#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#usageStats_isCorrect#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#alarmDB_checkIfAlarmSet#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#toDo_InsertedThenDeletedFromDatabase#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#toDo_clearToDoDatabase#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#toDo_addingMultipleToDosToDatabase#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#toDo_testCompleteAndIncompleteToDoLists#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#toDo_setToDoAsCompleted#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#toDo_setToDoAsStarred#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#blockedApps_databaseInsertion#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#blockedApps_databaseDeletion#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#blockedApps_fragmentMethodDoesNotReturnFakeApp#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#timeHelper_formatDurationIsCorrect#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#timeHelper_headingStringIsCorrect#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#mainActivity_viewsNotNull#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#mainActivity_clickNavigationButtons#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#statsFragment_viewsNotNull#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#toDoFragment_viewsNotNull#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#toDoFragment_clickViewCompletedToDoButton#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#toDoFragment_clickAddToDoButton#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#settingsFragment_viewsNotNull#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#notificationSettings_viewsNotNull#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#settingsFragment_menuClicks#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#tearDown#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#getActiveFragment#0;class#NoCrastinateUnitTest#0" expanded="false" />
+                <element signature="method#startFragment#0;class#NoCrastinateUnitTest#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NoCrastinateInstrumentedTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/example/rosadowning/nocrastinate/NoCrastinateInstrumentedTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-476">
+              <caret line="65" column="53" lean-forward="false" selection-start-line="65" selection-start-column="53" selection-end-line="65" selection-end-column="53" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StatisticsFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="249">
+              <caret line="109" column="59" lean-forward="false" selection-start-line="109" selection-start-column="59" selection-end-line="109" selection-end-column="59" />
+              <folding>
+                <element signature="e#3611#3620#0" expanded="false" />
+                <element signature="method#onCreateView#0;class#StatisticsFragment#0" expanded="false" />
+                <element signature="method#StatisticsFragment#0;class#StatisticsFragment#0" expanded="false" />
+                <element signature="method#onResume#0;class#StatisticsFragment#0" expanded="false" />
+                <element signature="method#onStart#0;class#StatisticsFragment#0" expanded="false" />
+                <element signature="e#10395#10742#0" expanded="true" />
+                <element signature="e#10741#10742#0" expanded="true" />
+                <element signature="method#onNothingSelected#0;class#6564:11699" expanded="false" />
+                <element signature="method#getStats#0;class#StatisticsFragment#0" expanded="false" />
+                <element signature="method#updateAppsList#0;class#StatisticsFragment#0" expanded="false" />
+                <element signature="class#UsedMostOftenComparatorDesc#0;class#StatisticsFragment#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -100,7 +804,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>_ID</find>
       <find>replace</find>
       <find>repla</find>
       <find>get</find>
@@ -130,6 +833,7 @@
       <find>getcon</find>
       <find>getName</find>
       <find>getCont</find>
+      <find>getAct</find>
     </findStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -2177,7 +2881,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_todo.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_completed_todo.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/DataModels/StatsIconData.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/block_applications_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_block_apps.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_notifications.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/BlockedAppsService.java" />
@@ -2194,7 +2897,6 @@
         <option value="$PROJECT_DIR$/app/src/androidTest/java/com/example/rosadowning/nocrastinate/MainActivityTest.java" />
         <option value="$PROJECT_DIR$/app/src/androidTest/java/com/example/rosadowning/nocrastinate/ExampleInstrumentedTest.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/androidTest/java/com/example/rosadowning/nocrastinate/NoCrastinateInstrumentedTest.java" />
         <option value="$PROJECT_DIR$/app/src/test/java/com/example/rosadowning/nocrastinate/NoCrastinateUnitTest.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_statistics.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/DataModels/TimeHelper.java" />
@@ -2208,7 +2910,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Services/BlockedAppsService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/BroadcastReceivers/MidnightDataResetReceiver.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/BroadcastReceivers/ScreenReceiver.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/BroadcastReceivers/ToDoAlarmReceiver.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/BroadcastReceivers/NotificationReceiver.java" />
@@ -2225,10 +2926,13 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Fragments/AddToDoFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Fragments/CompletedToDoFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/block_applications_item.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/androidTest/java/com/example/rosadowning/nocrastinate/NoCrastinateInstrumentedTest.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="x" value="77" />
     <option name="y" value="23" />
     <option name="width" value="1204" />
@@ -2276,14 +2980,30 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="nocrastinate" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="Fragments" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NoCrastinate" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="nocrastinate" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NoCrastinate" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="NoCrastinate" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="ProjectPane" />
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -2337,7 +3057,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Android App.app">
+  <component name="RunManager" selected="Android Instrumented Tests.NoCrastinateInstrume...">
     <configuration name="NoCrastinateUnitTest" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -2670,9 +3390,9 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Android JUnit.NoCrastinateUnitTest.timeHelper_formatDurationIsCorrect" />
-        <item index="1" class="java.lang.String" itemvalue="Android JUnit.NoCrastinateUnitTest" />
-        <item index="2" class="java.lang.String" itemvalue="Android Instrumented Tests.NoCrastinateInstrume..." />
+        <item index="0" class="java.lang.String" itemvalue="Android Instrumented Tests.NoCrastinateInstrume..." />
+        <item index="1" class="java.lang.String" itemvalue="Android JUnit.NoCrastinateUnitTest.timeHelper_formatDurationIsCorrect" />
+        <item index="2" class="java.lang.String" itemvalue="Android JUnit.NoCrastinateUnitTest" />
         <item index="3" class="java.lang.String" itemvalue="Android Instrumented Tests.MainActivityTest" />
         <item index="4" class="java.lang.String" itemvalue="Android JUnit.NoCrastinateUnitTest.addingToDo" />
       </list>
@@ -2703,23 +3423,23 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="NoCrastinateUnitTest - 2018.08.27 at 11h 34m 27s.xml">
-      <configuration name="NoCrastinateUnitTest" configurationId="AndroidJUnit" />
+    <history-entry file="NoCrastinateInstrume___ - 2018.08.30 at 16h 55m 43s.xml">
+      <configuration name="NoCrastinateInstrume..." configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="NoCrastinateUnitTest - 2018.08.27 at 12h 44m 56s.xml">
-      <configuration name="NoCrastinateUnitTest" configurationId="AndroidJUnit" />
+    <history-entry file="NoCrastinateInstrume___ - 2018.08.30 at 17h 29m 02s.xml">
+      <configuration name="NoCrastinateInstrume..." configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="NoCrastinateUnitTest - 2018.08.27 at 12h 46m 26s.xml">
-      <configuration name="NoCrastinateUnitTest" configurationId="AndroidJUnit" />
+    <history-entry file="NoCrastinateInstrume___ - 2018.08.30 at 17h 34m 29s.xml">
+      <configuration name="NoCrastinateInstrume..." configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="NoCrastinateUnitTest - 2018.08.27 at 12h 50m 53s.xml">
-      <configuration name="NoCrastinateUnitTest" configurationId="AndroidJUnit" />
+    <history-entry file="NoCrastinateInstrume___ - 2018.08.30 at 17h 36m 51s.xml">
+      <configuration name="NoCrastinateInstrume..." configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="NoCrastinateUnitTest - 2018.08.27 at 12h 52m 58s.xml">
-      <configuration name="NoCrastinateUnitTest" configurationId="AndroidJUnit" />
+    <history-entry file="NoCrastinateInstrume___ - 2018.08.30 at 17h 39m 20s.xml">
+      <configuration name="NoCrastinateInstrume..." configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="NoCrastinateUnitTest - 2018.08.27 at 14h 51m 09s.xml">
-      <configuration name="NoCrastinateUnitTest" configurationId="AndroidJUnit" />
+    <history-entry file="NoCrastinateInstrume___ - 2018.08.30 at 17h 41m 53s.xml">
+      <configuration name="NoCrastinateInstrume..." configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
     <history-entry file="NoCrastinateUnitTest - 2018.08.27 at 16h 16m 31s.xml">
       <configuration name="NoCrastinateUnitTest" configurationId="AndroidJUnit" />
@@ -2744,8 +3464,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1281" height="700" extended-state="6" />
-    <editor active="true" />
+    <frame x="77" y="23" width="1204" height="700" extended-state="0" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289256" sideWeight="0.49676898" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289256" sideWeight="0.49676898" order="6" side_tool="false" content_ui="tabs" />
@@ -2754,15 +3473,15 @@
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2609047" sideWeight="0.50598294" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.8479339" sideWeight="0.13974153" order="12" side_tool="true" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27764326" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6628099" sideWeight="0.86025846" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27710843" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6528926" sideWeight="0.86025846" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289256" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.021487603" sideWeight="0.49676898" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.08264463" sideWeight="0.49353796" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12561983" sideWeight="0.49676898" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.09421488" sideWeight="0.49353796" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24959612" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26634383" sideWeight="0.4940171" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2960413" sideWeight="0.4940171" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27107438" sideWeight="0.49676898" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24959612" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2855,26 +3574,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_add_todo_screen.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="43" column="52" lean-forward="false" selection-start-line="43" selection-start-column="52" selection-end-line="43" selection-end-column="52" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/todo_list_item.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="623">
-          <caret line="38" column="34" lean-forward="false" selection-start-line="38" selection-start-column="34" selection-end-line="38" selection-end-column="34" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1187">
@@ -2884,23 +3583,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/brain_graphic.png" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_help_center.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="648">
           <caret line="36" column="21" lean-forward="false" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_view_todo.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_view_todo.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1201">
           <caret line="162" column="68" lean-forward="false" selection-start-line="162" selection-start-column="68" selection-end-line="162" selection-end-column="68" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
@@ -2977,7 +3676,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="833" column="0" lean-forward="false" selection-start-line="833" selection-start-column="0" selection-end-line="833" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3002,26 +3700,20 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_statistics.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-449">
           <caret line="152" column="25" lean-forward="false" selection-start-line="152" selection-start-column="25" selection-end-line="152" selection-end-column="25" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Adapters/AppStatisticsAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-162">
           <caret line="39" column="16" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding>
-            <element signature="e#1023#1024#0" expanded="false" />
-            <element signature="e#1061#1062#0" expanded="false" />
-            <element signature="e#2055#2056#0" expanded="false" />
-            <element signature="e#2101#2102#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3051,7 +3743,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="880">
           <caret line="152" column="92" lean-forward="false" selection-start-line="152" selection-start-column="92" selection-end-line="152" selection-end-column="92" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3067,12 +3758,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414">
           <caret line="105" column="5" lean-forward="true" selection-start-line="105" selection-start-column="5" selection-end-line="105" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="method#ToDoItem#0;class#ToDoItem#0" expanded="false" />
-            <element signature="method#setCompletedDate#0;class#ToDoItem#0" expanded="false" />
-            <element signature="method#equals#0;class#ToDoItem#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3080,50 +3765,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="11" column="18" lean-forward="true" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/test/java/com/example/rosadowning/nocrastinate/NoCrastinateUnitTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-25">
-          <caret line="438" column="26" lean-forward="false" selection-start-line="438" selection-start-column="26" selection-end-line="438" selection-end-column="47" />
-          <folding>
-            <element signature="method#iconStats_setUp#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#useAppContext#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#iconStats_testIfInWeeklyInterval#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#iconStats_testIfInMonthlyInterval#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#iconStats_testIfInYearlyInterval#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#usageStats_isCorrect#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#alarmDB_checkIfAlarmSet#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#toDo_InsertedThenDeletedFromDatabase#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#toDo_clearToDoDatabase#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#toDo_addingMultipleToDosToDatabase#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#toDo_testCompleteAndIncompleteToDoLists#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#toDo_setToDoAsCompleted#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#toDo_setToDoAsStarred#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#blockedApps_databaseInsertion#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#blockedApps_databaseDeletion#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#blockedApps_fragmentMethodDoesNotReturnFakeApp#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#timeHelper_headingStringIsCorrect#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#mainActivity_viewsNotNull#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#mainActivity_clickNavigationButtons#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#statsFragment_viewsNotNull#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#toDoFragment_viewsNotNull#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#toDoFragment_clickAddToDoButton#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#settingsFragment_menuClicks#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#tearDown#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#getActiveFragment#0;class#NoCrastinateUnitTest#0" expanded="false" />
-            <element signature="method#startFragment#0;class#NoCrastinateUnitTest#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/example/rosadowning/nocrastinate/NoCrastinateInstrumentedTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-25">
-          <caret line="91" column="2" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3148,36 +3789,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="157">
           <caret line="12" column="27" lean-forward="true" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
-          <folding>
-            <element signature="method#setNoOfUnlocks#0;class#StatsData#0" expanded="false" />
-            <element signature="method#setOverallTime#0;class#StatsData#0" expanded="false" />
-            <element signature="method#setTasksCompleted#0;class#StatsData#0" expanded="false" />
-            <element signature="method#setAppsList#0;class#StatsData#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1341">
-          <caret line="8" column="3" lean-forward="true" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#3551#3560#0" expanded="false" />
-            <element signature="method#onCreateView#0;class#StatisticsFragment#0" expanded="false" />
-            <element signature="method#StatisticsFragment#0;class#StatisticsFragment#0" expanded="false" />
-            <element signature="method#onCreate#0;class#StatisticsFragment#0" expanded="false" />
-            <element signature="method#onResume#0;class#StatisticsFragment#0" expanded="false" />
-            <element signature="method#onStart#0;class#StatisticsFragment#0" expanded="false" />
-            <element signature="method#onViewCreated#0;class#StatisticsFragment#0" expanded="false" />
-            <element signature="method#onNothingSelected#0;class#6475:11620" expanded="false" />
-            <element signature="method#getStats#0;class#StatisticsFragment#0" expanded="false" />
-            <element signature="method#updateAppsList#0;class#StatisticsFragment#0" expanded="false" />
-            <element signature="class#UsedMostOftenComparatorDesc#0;class#StatisticsFragment#0" expanded="false" />
-            <element signature="class#UpdateStats#0;class#StatisticsFragment#0" expanded="false" />
-            <element signature="method#doInBackground#0;class#UpdateStats#0;class#StatisticsFragment#0" expanded="false" />
-            <element signature="method#onPostExecute#0;class#UpdateStats#0;class#StatisticsFragment#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3196,7 +3807,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3204,11 +3814,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
           <caret line="27" column="70" lean-forward="true" selection-start-line="27" selection-start-column="70" selection-end-line="27" selection-end-column="70" />
-          <folding>
-            <element signature="method#onReceive#0;class#ScreenReceiver#0" expanded="false" />
-            <element signature="method#unlockNotification#0;class#ScreenReceiver#0" expanded="false" />
-            <element signature="method#resetAlarm#0;class#ScreenReceiver#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3245,7 +3850,7 @@
         <state relative-caret-position="414">
           <caret line="23" column="24" lean-forward="false" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
             <element signature="method#AppStatsDbHelper#0;class#AppStatsDbHelper#0;class#AppStatsDBContract#0" expanded="false" />
             <element signature="method#onCreate#0;class#AppStatsDbHelper#0;class#AppStatsDBContract#0" expanded="false" />
             <element signature="method#onUpgrade#0;class#AppStatsDbHelper#0;class#AppStatsDBContract#0" expanded="false" />
@@ -3357,8 +3962,8 @@
           <folding>
             <element signature="e#863#872#0" expanded="false" />
             <element signature="method#onCreateView#0;class#CompletedToDoFragment#0" expanded="false" />
-            <element signature="e#1616#2456#0" expanded="true" />
-            <element signature="e#2455#2456#0" expanded="true" />
+            <element signature="e#1616#2456#0" expanded="false" />
+            <element signature="e#2455#2456#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3368,8 +3973,8 @@
         <state relative-caret-position="-1074">
           <caret line="71" column="45" lean-forward="false" selection-start-line="71" selection-start-column="45" selection-end-line="71" selection-end-column="45" />
           <folding>
-            <element signature="e#4810#4850#0" expanded="true" />
-            <element signature="e#4894#4932#0" expanded="true" />
+            <element signature="e#4810#4850#0" expanded="false" />
+            <element signature="e#4894#4932#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3379,19 +3984,105 @@
         <state relative-caret-position="-91">
           <caret line="33" column="13" lean-forward="false" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Fragments/ViewToDoFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="16" lean-forward="true" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+        <state relative-caret-position="18">
+          <caret line="17" column="16" lean-forward="false" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/block_applications_item.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/test/java/com/example/rosadowning/nocrastinate/NoCrastinateUnitTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="845">
+          <caret line="435" column="59" lean-forward="false" selection-start-line="435" selection-start-column="59" selection-end-line="435" selection-end-column="59" />
           <folding>
-            <element signature="e#5395#11109#0" expanded="true" />
-            <element signature="e#11108#11109#0" expanded="true" />
+            <element signature="method#iconStats_setUp#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#useAppContext#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#iconStats_testIfInWeeklyInterval#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#iconStats_testIfInMonthlyInterval#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#iconStats_testIfInYearlyInterval#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#usageStats_isCorrect#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#alarmDB_checkIfAlarmSet#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#toDo_InsertedThenDeletedFromDatabase#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#toDo_clearToDoDatabase#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#toDo_addingMultipleToDosToDatabase#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#toDo_testCompleteAndIncompleteToDoLists#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#toDo_setToDoAsCompleted#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#toDo_setToDoAsStarred#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#blockedApps_databaseInsertion#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#blockedApps_databaseDeletion#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#blockedApps_fragmentMethodDoesNotReturnFakeApp#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#timeHelper_formatDurationIsCorrect#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#timeHelper_headingStringIsCorrect#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#mainActivity_viewsNotNull#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#mainActivity_clickNavigationButtons#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#statsFragment_viewsNotNull#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#toDoFragment_viewsNotNull#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#toDoFragment_clickViewCompletedToDoButton#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#toDoFragment_clickAddToDoButton#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#settingsFragment_viewsNotNull#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#notificationSettings_viewsNotNull#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#settingsFragment_menuClicks#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#tearDown#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#getActiveFragment#0;class#NoCrastinateUnitTest#0" expanded="false" />
+            <element signature="method#startFragment#0;class#NoCrastinateUnitTest#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_add_todo_screen.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="126" column="12" lean-forward="false" selection-start-line="126" selection-start-column="12" selection-end-line="126" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/rosadowning/nocrastinate/Fragments/StatisticsFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="109" column="59" lean-forward="false" selection-start-line="109" selection-start-column="59" selection-end-line="109" selection-end-column="59" />
+          <folding>
+            <element signature="e#3611#3620#0" expanded="false" />
+            <element signature="method#onCreateView#0;class#StatisticsFragment#0" expanded="false" />
+            <element signature="method#StatisticsFragment#0;class#StatisticsFragment#0" expanded="false" />
+            <element signature="method#onResume#0;class#StatisticsFragment#0" expanded="false" />
+            <element signature="method#onStart#0;class#StatisticsFragment#0" expanded="false" />
+            <element signature="e#10395#10742#0" expanded="true" />
+            <element signature="e#10741#10742#0" expanded="true" />
+            <element signature="method#onNothingSelected#0;class#6564:11699" expanded="false" />
+            <element signature="method#getStats#0;class#StatisticsFragment#0" expanded="false" />
+            <element signature="method#updateAppsList#0;class#StatisticsFragment#0" expanded="false" />
+            <element signature="class#UsedMostOftenComparatorDesc#0;class#StatisticsFragment#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/example/rosadowning/nocrastinate/NoCrastinateInstrumentedTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-476">
+          <caret line="65" column="53" lean-forward="false" selection-start-line="65" selection-start-column="53" selection-end-line="65" selection-end-column="53" />
+          <folding />
         </state>
       </provider>
     </entry>
