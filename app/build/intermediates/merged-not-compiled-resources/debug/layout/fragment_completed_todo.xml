@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--Layout of the CompletedToDosFragment-->
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,6 +9,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!--Toolbar of the fragment-->
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         style="@style/Toolbar"
@@ -14,16 +17,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--Toolbar title of the fragment-->
     <TextView
-        android:id="@+id/toolBarHeaderToDo"
-        android:text="@string/title_completed_to_dos"
         style="@style/ToolbarText"
+        android:text="@string/title_completed_to_dos"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
+    <!--Recycler view which displays a list of completed to dos in the form of a todo_list_item-->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/completed_to_do_recycler_view"
         android:layout_width="match_parent"
@@ -34,9 +37,9 @@
         android:layout_marginTop="@dimen/margin_small"
         android:scrollbars="vertical"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
 </android.support.constraint.ConstraintLayout>

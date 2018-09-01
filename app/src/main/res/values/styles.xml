@@ -1,33 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?><!--Defines different styles that are used throughout the application's design-->
 <resources>
 
+    <!--General theme of the whole application-->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:colorBackground">@color/colorWhite</item>
         <item name="android:fontFamily">@font/lato_reg</item>
     </style>
 
+    <!--Style of the Splash Screen-->
     <style name="AppTheme.Launcher">
         <item name="android:windowBackground">@drawable/launch_screen</item>
         <item name="colorPrimaryDark">@color/colorGradient2</item>
     </style>
 
-    <style name="LargeFont" parent="Theme.AppCompat">
-        <item name="android:textSize">@dimen/large_font_size</item>
-        <item name="android:textColor">@color/colorPrimaryDark</item>
-    </style>
-
+    <!--Style of the pop up which alerts the user to change their Usage Access Settings-->
     <style name="UsageOffText" parent="Theme.AppCompat">
         <item name="android:textSize">@dimen/x_large_font_size</item>
         <item name="android:textColor">@color/colorFontStyle</item>
         <item name="android:fontFamily">@font/lato_bold</item>
     </style>
 
+    <!--Style of the Header in the StatisticsFragment-->
     <style name="StatsPageDateHeader" parent="Theme.AppCompat">
         <item name="android:textSize">@dimen/x_large_font_size</item>
         <item name="android:textColor">@color/colorThird</item>
         <item name="android:fontFamily">@font/lato_light</item>
     </style>
 
+    <!--Style of the 3 large buttons in the SettingsFragment-->
     <style name="SettingsButtons" parent="Theme.AppCompat">
         <item name="android:backgroundTint">@color/colorToDoBackground</item>
         <item name="android:textColor">@color/colorFontStyle</item>
@@ -36,7 +37,8 @@
         <item name="android:layout_margin">@dimen/margin_large</item>
     </style>
 
-    <style name="NotificationButtons" parent="Theme.AppCompat">
+    <!--Style of the Title of each kind of Notification option in NotificationSettingsFragment-->
+    <style name="NotificationTitle" parent="Theme.AppCompat">
         <item name="android:backgroundTint">@color/colorToDoBackground</item>
         <item name="android:textColor">@color/colorFontStyle</item>
         <item name="android:fontFamily">@font/lato_bold</item>
@@ -44,6 +46,7 @@
         <item name="android:layout_margin">@dimen/margin_small</item>
     </style>
 
+    <!--Style of the description of each kind of Notification option in NotificationSettingsFragment-->
     <style name="NotificationDescription" parent="Theme.AppCompat">
         <item name="android:backgroundTint">@color/colorToDoBackground</item>
         <item name="android:textColor">@color/colorFontStyle</item>
@@ -53,6 +56,7 @@
         <item name="android:layout_marginBottom">@dimen/margin_large</item>
     </style>
 
+    <!--Style of the text in the HelpCenterFragment-->
     <style name="HelpCenterText" parent="Theme.AppCompat">
         <item name="android:textColor">@color/colorFontStyle</item>
         <item name="android:fontFamily">@font/lato_light</item>
@@ -60,6 +64,7 @@
         <item name="android:layout_margin">@dimen/margin_large</item>
     </style>
 
+    <!--Style of the ToolBar used across each fragment in the application-->
     <style name="Toolbar" parent="Theme.AppCompat">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">60dp</item>
@@ -68,6 +73,7 @@
         <item name="android:theme">?attr/actionBarTheme</item>
     </style>
 
+    <!--Style of the text in the toolbar across each fragment in the application-->
     <style name="ToolbarText" parent="Theme.AppCompat">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -81,13 +87,14 @@
         <item name="android:fontFamily">@font/lato_bold</item>
     </style>
 
+    <!--Style of divider in SettingsFragment-->
     <style name="SettingsDivider" parent="Theme.AppCompat">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">3dp</item>
         <item name="android:background">?android:attr/listDivider</item>
     </style>
 
-
+    <!--Style of the top three icons in the StatisticsFragment-->
     <style name="StatsIconLayout" parent="Theme.AppCompat">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -96,6 +103,7 @@
         <item name="android:orientation">vertical</item>
     </style>
 
+    <!--Style of the image of each Stats Icon in the StatisticsFragment -->
     <style name="StatsIconImage" parent="Theme.AppCompat">
         <item name="android:layout_width">70dp</item>
         <item name="android:layout_height">70dp</item>
@@ -103,6 +111,7 @@
         <item name="android:scaleType">fitXY</item>
     </style>
 
+    <!--Style of the text used below each StatsIcon image in the StatisticsFragment-->
     <style name="StatsIconTopText" parent="Theme.AppCompat">
         <item name="android:layout_width">80dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -111,6 +120,7 @@
         <item name="android:textColor">@color/colorFontStyle</item>
     </style>
 
+    <!--Style of the changing text of each StatsIcon in StatisticsFragment-->
     <style name="StatsIconBottomText" parent="Theme.AppCompat">
         <item name="android:textSize">@dimen/large_font_size</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
@@ -118,5 +128,4 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAlignment">center</item>
     </style>
-
 </resources>

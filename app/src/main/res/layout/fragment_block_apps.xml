@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--Layout for the BlockAppsFragment-->
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,6 +9,7 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.SettingsFragment">
 
+    <!--Toolbar of fragment-->
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         style="@style/Toolbar"
@@ -14,8 +17,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--Toolbar title of fragment-->
     <TextView
-        android:id="@+id/toolBarHeaderToDo"
         style="@style/ToolbarText"
         android:text="@string/title_block_apps"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
@@ -23,29 +26,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--Pop up which is made visible if the user's Usage Access Settings for NoCrastinate is switched off. By default it is invisible.-->
     <LinearLayout
         android:id="@+id/settings_popup"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorWhite"
         android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/icon_group_main"
-        android:orientation="vertical"
-        android:visibility="gone">
+        app:layout_constraintTop_toTopOf="@id/icon_group_main">
 
         <TextView
-            android:id="@+id/title_usage_off"
+            style="@style/UsageOffText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_large"
             android:gravity="center"
-            style="@style/UsageOffText"
             android:text="@string/usage_settings_off" />
 
         <TextView
-            android:id="@+id/text_usage_off"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_large"
@@ -55,9 +57,7 @@
 
     </LinearLayout>
 
-
-
-
+    <!--Recycler view which will display a list of all the user's installed applications in the form of a block_applications_item-->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/block_apps_recycler_view"
         android:layout_width="match_parent"
@@ -68,9 +68,9 @@
         android:layout_marginTop="@dimen/margin_small"
         android:scrollbars="vertical"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
 </android.support.constraint.ConstraintLayout>

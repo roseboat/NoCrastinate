@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--XML that specifies the colours of the bottom navigation tabs when checked/unchecked-->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
         <item android:state_checked="true" android:color="@color/colorPrimaryDark" />
         <item android:state_checked="false" android:color="@color/colorFontStyle"/>

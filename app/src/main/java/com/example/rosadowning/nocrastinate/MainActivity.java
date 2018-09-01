@@ -76,17 +76,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         registerReceiver(mReceiver, filter);
 
         // Sets up the BlockedAppsService
-        BlockedAppsService mBlockingService = new BlockedAppsService(this);
-        Intent mServiceIntent = new Intent(this, mBlockingService.getClass());
-        if (!isMyServiceRunning(mBlockingService.getClass())) {
-            startService(mServiceIntent);
-        }
-
-        AppStatsDBContract.AppStatsDbHelper appDB = new AppStatsDBContract.AppStatsDbHelper(getApplicationContext());
-        List<CustomAppHolder> list = appDB.returnAllStats();
-        for(CustomAppHolder a : list){
-            Log.e(TAG, a.packageName + ", time = " + TimeHelper.formatDuration(a.timeInForeground));
-        }
+//        BlockedAppsService mBlockingService = new BlockedAppsService(this);
+//        Intent mServiceIntent = new Intent(this, mBlockingService.getClass());
+//        if (!isMyServiceRunning(mBlockingService.getClass())) {
+//            startService(mServiceIntent);
+//        }
 
         // Schedules up the Midnight Data Reset Alarm
         scheduleResetAlarm();

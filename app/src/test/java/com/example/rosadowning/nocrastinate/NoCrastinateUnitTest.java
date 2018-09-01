@@ -392,30 +392,6 @@ public class NoCrastinateUnitTest {
     }
 
     @Test
-    public void mainActivity_clickNavigationButtons(){
-        startFragment(new StatisticsFragment());
-
-        View toDoButton = mainActivity.findViewById(R.id.navigation_todo);
-        View settingsButton = mainActivity.findViewById(R.id.navigation_settings);
-        View statsButton = mainActivity.findViewById(R.id.navigation_stats);
-
-        toDoButton.performClick();
-        String expected = "ToDoFragment";
-        String actual = getActiveFragment();
-        assertEquals(expected, actual);
-
-        settingsButton.performClick();
-        expected = "SettingsFragment";
-        actual = getActiveFragment();
-        assertEquals(expected, actual);
-
-        statsButton.performClick();
-        expected = "StatisticsFragment";
-        actual = getActiveFragment();
-        assertEquals(expected, actual);
-    }
-
-    @Test
     public void statsFragment_viewsNotNull(){
         assertNotNull(mainActivity.findViewById(R.id.stats_header));
         assertNotNull(mainActivity.findViewById(R.id.icon_group_main));
@@ -430,24 +406,6 @@ public class NoCrastinateUnitTest {
         assertNotNull(mainActivity.findViewById(R.id.to_do_recycler_view));
         assertNotNull(mainActivity.findViewById(R.id.button_add_new_todo));
         assertNotNull(mainActivity.findViewById(R.id.button_view_completed_todos));
-    }
-
-    @Test
-    public void toDoFragment_clickViewCompletedToDoButton(){
-        startFragment(new ToDoFragment());
-        mainActivity.findViewById(R.id.button_view_completed_todos).performClick();
-        String expected = "CompletedToDoFragment";
-        String actual = getActiveFragment();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void toDoFragment_clickAddToDoButton(){
-        startFragment(new ToDoFragment());
-        mainActivity.findViewById(R.id.button_add_new_todo).performClick();
-        String expected = "AddToDoFragment";
-        String actual = getActiveFragment();
-        assertEquals(expected, actual);
     }
 
     @Test
@@ -470,30 +428,6 @@ public class NoCrastinateUnitTest {
         mainActivity.findViewById(R.id.notification_checkbox_1).setSelected(false);
     }
 
-    @Test
-    public void settingsFragment_menuClicks(){
-        startFragment(new SettingsFragment());
-
-        View helpCenterView = mainActivity.findViewById(R.id.help_center);
-        View notificationsView = mainActivity.findViewById(R.id.notification_settings);
-        View blockAppsView = mainActivity.findViewById(R.id.block_apps);
-
-        helpCenterView.performClick();
-        String expected = "HelpCenterFragment";
-        String actual = getActiveFragment();
-        assertEquals(expected, actual);
-
-        notificationsView.performClick();
-        expected = "NotificationSettingsFragment";
-        actual = getActiveFragment();
-        assertEquals(expected, actual);
-
-        blockAppsView.performClick();
-        expected = "BlockAppsFragment";
-        actual = getActiveFragment();
-        assertEquals(expected, actual);
-    }
-
     @After
     public void tearDown() {
 
@@ -509,6 +443,7 @@ public class NoCrastinateUnitTest {
     public void startFragment(Fragment fragment){
 
         mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+
     }
 
 }

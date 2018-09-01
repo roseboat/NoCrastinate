@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--Layout for the HelpCenterFragment-->
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,6 +9,7 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.SettingsFragment">
 
+    <!--Toolbar for the fragment-->
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         style="@style/Toolbar"
@@ -14,34 +17,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--Toolbar title-->
     <TextView
-        android:id="@+id/toolBarHeaderToDo"
-        android:text="@string/title_help_center"
         style="@style/ToolbarText"
+        android:text="@string/title_help_center"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
+    <!--Scrollview which contains the Help Center's text-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:id="@+id/help_center_scrollview"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-<TextView
-    style="@style/HelpCenterText"
-    android:id="@+id/help_center_text"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/help_center_string"
-    android:breakStrategy="balanced"
-    android:justificationMode="inter_word"/>
-
+        <!--Text view which contains information about how to use the application-->
+        <TextView
+            style="@style/HelpCenterText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:breakStrategy="balanced"
+            android:justificationMode="inter_word"
+            android:text="@string/help_center_string" />
     </ScrollView>
-
-
 </android.support.constraint.ConstraintLayout>

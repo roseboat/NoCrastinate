@@ -3,8 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.rosadowning.nocrastinate">
 
-    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" tools:ignore="ProtectedPermissions"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -12,38 +14,42 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-    android:theme="@style/AppTheme.Launcher">
-        <uses-library android:name="android.test.runner"
+        android:theme="@style/AppTheme.Launcher">
+        <uses-library
+            android:name="android.test.runner"
             android:required="false" />
-    <activity
+
+        <activity
             android:name=".MainActivity"
+            android:exported="true"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustNothing"
-            android:exported="true">
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <receiver android:name="com.example.rosadowning.nocrastinate.BroadcastReceivers.MidnightDataResetReceiver"/>
+        <receiver android:name="com.example.rosadowning.nocrastinate.BroadcastReceivers.MidnightDataResetReceiver" />
         <receiver android:name="com.example.rosadowning.nocrastinate.BroadcastReceivers.ToDoAlarmReceiver" />
         <receiver android:name="com.example.rosadowning.nocrastinate.BroadcastReceivers.NotificationReceiver" />
 
-        <receiver android:name=".BroadcastReceivers.ScreenReceiver" android:enabled="true" android:exported="true">
+        <receiver
+            android:name=".BroadcastReceivers.ScreenReceiver"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
                 <!--For HTC devices-->
-                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
             </intent-filter>
         </receiver>
 
         <service
             android:name=".Services.BlockedAppsService"
-            android:enabled="true"/>
+            android:enabled="true" />
 
     </application>
-
 </manifest>

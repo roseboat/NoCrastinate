@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--The individual items that appear in the Recycler views of the ToDoFragment and the CompletedToDoFragment.-->
+<!--Display a To Do, its name, due date, whether it has an alarm, a star button and checkbox.-->
+<!--In the ToDoFragment the checkbox and star are enabled, in the CompletedToDoFragment all clickable elements are disabled.-->
 <android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/to_do_item"
@@ -12,16 +15,15 @@
     android:background="@color/colorToDoBackground"
     android:gravity="center">
 
+    <!--Checkbox to 'check off' a to do as completed (ToDoFragment only)-->
     <CheckBox
         android:id="@+id/toDoCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="@dimen/margin_medium"
-
-        />
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/margin_medium" />
 
     <LinearLayout
         android:id="@+id/toDoLinearLayout"
@@ -32,6 +34,7 @@
         android:layout_marginStart="42dp"
         android:orientation="vertical">
 
+        <!--To Do's name-->
         <TextView
             android:id="@+id/toDoName"
             android:layout_width="match_parent"
@@ -43,6 +46,7 @@
             android:textColor="@color/colorBlack"
             android:textSize="17sp" />
 
+        <!--To Do's due date (if applicable)-->
         <TextView
             android:id="@+id/toDoDueDate"
             android:layout_width="match_parent"
@@ -53,27 +57,28 @@
             android:textSize="14sp"
             android:textStyle="italic"
             app:layout_constraintTop_toBottomOf="@+id/toDoName" />
-
     </LinearLayout>
 
+    <!--Alarm image which is by default invisible and is made visible if the to do has an alarm-->
     <ImageView
         android:id="@+id/toDoAlarm"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
+        android:layout_marginEnd="42dp"
         android:src="@drawable/ic_alarm_on_black_24dp"
-        android:visibility="gone"
-        android:layout_marginEnd="42dp" />
+        android:visibility="gone" />
 
+    <!--Star checkbox which can be clicked to make the to-do a different colour (to stand out)-->
     <CheckBox
         android:id="@+id/toDoStar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/margin_medium"
         android:button="@drawable/star_selector"
-        android:gravity="center"
-        android:layout_marginEnd="@dimen/margin_medium"/>
+        android:gravity="center" />
 
 </android.widget.RelativeLayout>

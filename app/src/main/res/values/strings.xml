@@ -1,9 +1,12 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<?xml version="1.0" encoding="utf-8"?>
+<!--Defines the Strings that are used in the applications layout xml docs-->
+<resources>
+    <!--General Strings for the application-->
     <string name="app_name">NoCrastinate</string>
     <string name="app_usage_settings_button">Open App Usage Settings</string>
     <string name="app_usage_settings_text">Welcome to NoCrastinate! \nFor this nifty little app to work, you\'ll need to adjust your usage settings - just click below and we\'ll take you there!\n Happy productivity! :)</string>
 
-
+    <!--Titles of different Fragments-->
     <string name="title_activity_to_do_list">To Do List!</string>
     <string name="title_activity_statistics">NoCrastinate</string>
     <string name="title_activity_settings">Settings</string>
@@ -12,12 +15,12 @@
     <string name="title_settings">Settings</string>
     <string name="title_add_to_do">Add a New To Do</string>
     <string name="title_completed_to_dos">Completed To Do\'s</string>
-    <string name="title_alarm">Set a To Do Alarm</string>
     <string name="title_view_to_do">View To Do</string>
     <string name="title_help_center">Help Center</string>
     <string name="title_notification_settings">Notify Me...</string>
     <string name="title_block_apps">Block Applications</string>
 
+    <!--Dialog text-->
     <string name="dialog_message_input_error_name">Please enter a name for your to-do.</string>
     <string name="dialog_title_input_error_name">Enter Name</string>
     <string name="dialog_message_input_error_date">Please enter a date in the future.</string>
@@ -26,8 +29,6 @@
     <string name="dialog_title_input_error_time">Enter Valid Time</string>
     <string name="dialog_message_confirm_delete">Are you sure you want to delete this to do?</string>
     <string name="dialog_title_confirm_delete">Confirm Deletion</string>
-    <string name="dialog_message_name_conflict">There is already a to-do with this name. Please choose another!</string>
-    <string name="dialog_title_name_conflict">Naming Conflict</string>
     <string name="dialog_message_due_date_past">This due date is no longer valid and will be cleared.</string>
     <string name="dialog_title_due_date_past">Old due date</string>
     <string name="dialog_message_alarm_date_past">Your alarm is no longer valid and will be cleared.</string>
@@ -36,24 +37,22 @@
     <string name="usage_settings_off">Usage Settings Switched Off</string>
     <string name="blocked_apps_settings_off">To block applications, please open your app usage settings via the Statistics tab.</string>
 
+    <!--Text which appears in the StatisticsFragment-->
     <string name="stats_icon_overall_time">Time on Phone</string>
     <string name="stats_icon_unlocks">No. of Unlocks</string>
     <string name="stats_icon_tasks_achieved">Tasks Achieved</string>
 
+    <!--Text which appears in the To Do Fragments-->
     <string name="add_to_do_name">Name of To Do:</string>
     <string name="add_to_do_due_date">Due Date: (Optional)</string>
     <string name="add_to_do_alarm_date">Alarm: (Optional)</string>
     <string name="add_to_do_note">Notes: (Optional)</string>
     <string name="save_new_to_do">Save New To Do</string>
     <string name="view_completed_to_dos">View Completed To Do\'s</string>
-
-    <!--<string name="view_to_do_edit_button">Edit To Do</string>-->
     <string name="save_to_do">Save To Do</string>
     <string name="delete_to_do">Delete To Do</string>
 
-    <string name="notification_title_on_destroy">You Closed NoCrastinate! :(</string>
-    <string name="notification_message_on_destroy">All phone usage monitoring will now be paused. Click me to resume usage monitoring!</string>
-
+    <!--Text which appears int he NotificationSettingsFragment-->
     <string name="notification_frequency_1">When I\'m on my phone a lot</string>
     <string name="notification_description_1">Every hour you spend on your phone and every 25 times you unlock it.</string>
     <string name="notification_frequency_2">Once Daily</string>
@@ -61,8 +60,6 @@
     <string name="notification_frequency_3">Once Weekly</string>
     <string name="notification_description_3">With your usage stats for the week scheduled at 10pm in weekly intervals.</string>
 
-
-    <string name="block_apps_text">App Usage Settings Disabled. Please adjust to make best use of the app.</string>
+    <!--Help Center Text-->
     <string name="help_center_string">Welcome to the NoCrastinate Help Center! Here you should find all the information you need to make the best use of NoCrastinate and beat your procrastination habits once and for all! \n\n<b>Statistics</b>\nOn the statistics screen you’ll see a regularly updated view of your phone usage stats. The top three icons display the number of times you have unlocked your phone, the overall time you have spent on your phone and the number of tasks you’ve completed. Below the icons a drop down menu allows you to adjust the time interval that the stats are gathered from. “Daily” stats correspond to the those gathered from midnight that day, “Weekly” to those from the week previous, “Monthly” to the past month and “Yearly” to the last year. Underneath the drop down you’ll find a list of all the applications with registered usage on your phone alongside the time they have been in your phone’s foreground. On adjusting the time interval these stats will change alongside the top 3 icons.\n\n<b>To Do List</b>\nNoCrastinate’s to do page offers an easy to use way of organising your tasks, setting due dates, alarms and tracking your completed todos. Simply add a to do by pressing the + ‘add’ button in the top right corner of the screen, enter your to do’s details and save. To do’s are listed in order of due date, with those with no due date listed last. To edit or delete a to do, simply click on it where you will be taken to a dedicated screen. To do’s are checked off as completed by simply clicking the checkboxes to each to do’s left. At the bottom of the screen, a button “View Completed ToDo’s” will take you to a list of all the to do’s that have been completed, once again to edit, delete or uncheck a to do, you can do so by pressing it.\n\n<b>Notifications</b>\nWant to give yourself the ultimate push to spending less time on your phone and start checking off those important tasks? Our flexible notification settings allow NoCrastinate to notify you when you’ve been spending too much time on your phone or with daily or weekly reports. For optimal use, we recommend allowing NoCrastinate to contact you when you’re spending too much time on your phone - you will receive notifications every hour of clocked screen time and every time you unlock your phone 25 times. Digital detox here we come!\n\n<b>Block Applications</b>\nIf you're still finding your phone that bit too distracting, use our Block Applications feature to shut down the apps that you're wasting the most time on. Just one click blocks the app from opening up, and another unblocks it if you're giving yourself a little break from digital detox!\n\n</string>
-
 </resources>

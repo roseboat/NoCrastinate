@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
+<!--This xml file defines the basic layout of the applicaiton, with container and bottom navigation-->
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,26 +8,28 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!--Bottom Navigation bar of the application-->
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation_bar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:background="@color/colorNavBackground"
         android:theme="@style/Base.AlertDialog.AppCompat.Light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:itemBackground="@color/colorNavBackground"
         app:itemIconTint="@color/bottom_nav_color"
         app:itemTextColor="@color/bottom_nav_color"
-        app:menu="@menu/navigation" >
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/navigation">
 
     </android.support.design.widget.BottomNavigationView>
 
+    <!--Container which will hold the application's fragments-->
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"

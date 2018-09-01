@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Simply defines the background colour of the splash screen-->
 <resources>
     <color name="ic_launcher_background">#FFDE59</color>
 </resources>

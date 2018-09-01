@@ -1,56 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--Defines the individual items that will appear in the StatisticsFragment's recycler view. Displays an application's icon, it's name and the total time it has spent in the phone's foreground for a given interval-->
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="60sp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
     android:layout_centerVertical="true"
     android:gravity="center_vertical"
-    >
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
 
-        <ImageView android:id="@+id/app_icon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:foregroundGravity="center"
-            android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginStart="@dimen/margin_small"
-            android:padding="@dimen/margin_small"
-            android:scaleType="centerInside"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
-            <TextView
-                android:id="@+id/textview_package_name"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingLeft="@dimen/margin_large"
-                android:layout_margin="@dimen/margin_small"
-                android:gravity="center_vertical"
-                android:text="App Name"
-                app:layout_constraintStart_toEndOf="@id/app_icon"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                />
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:padding="@dimen/margin_small"
-            android:text="mins"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:id="@+id/text_view_app_time_spent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
+    <!--Image will display the app's icon-->
+    <ImageView
+        android:id="@+id/app_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_small"
+        android:foregroundGravity="center"
+        android:padding="@dimen/margin_small"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <!--Display's the app's name-->
+    <TextView
+        android:id="@+id/textview_package_name"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_small"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/margin_large"
+        android:text="App Name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/app_icon"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <View android:id="@+id/divider"
+    <!--Displays the total time the app has spent in the phone's foreground for a given interval-->
+    <TextView
+        android:id="@+id/text_view_app_time_spent"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="@dimen/margin_small"
+        android:text="mins"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#bbbbbb"/>
+        android:background="#bbbbbb" />
 
 </android.support.constraint.ConstraintLayout>
 

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--Layout for the ViewToDoFragment-->
+<!--When the user clicks any to do in the ToDoFragment or CompletedToDoFragment, the specific to do is bundled to this layout and its information is displayed in the different text fields.-->
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,6 +10,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!--Toolbar of the fragment-->
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         style="@style/Toolbar"
@@ -14,34 +18,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--Toolbar title of the fragment-->
     <TextView
-        android:id="@+id/toolBarHeaderToDo"
-        android:text="@string/title_view_to_do"
         style="@style/ToolbarText"
+        android:text="@string/title_view_to_do"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--Scrollview which contains the input fields and buttons of the fragment-->
     <ScrollView
-        android:id="@+id/addToDoLayout"
+        android:id="@+id/viewToDo_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_large"
         android:background="@color/colorWhite"
         android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintBottom_toTopOf="@+id/navigation_bar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <!--Name of the To Do-->
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/toDoNameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -59,8 +64,8 @@
                     android:textColorLink="@color/colorFontStyle" />
             </android.support.design.widget.TextInputLayout>
 
+            <!--The To Do item's note-->
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/toDoNoteLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_large"
@@ -79,6 +84,7 @@
                     android:textColorHint="@color/colorFontStyle" />
             </android.support.design.widget.TextInputLayout>
 
+            <!--The To Do's due date-->
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/toDoDueDateLayout"
                 android:layout_width="match_parent"
@@ -100,8 +106,8 @@
                     app:layout_constraintStart_toStartOf="parent" />
             </android.support.design.widget.TextInputLayout>
 
+            <!--The To Do's alarm-->
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/toDoDueAlarmLayout"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginTop="@dimen/margin_small"
@@ -121,6 +127,7 @@
                     app:layout_constraintStart_toStartOf="parent" />
             </android.support.design.widget.TextInputLayout>
 
+            <!--Checkbox that can be checked/unchecked as to whether the to do is completed or not-->
             <android.support.v7.widget.AppCompatCheckBox
                 android:id="@+id/to_do_check_box"
                 android:layout_width="wrap_content"
@@ -131,6 +138,7 @@
                 android:text="Completed?"
                 android:textColor="@color/colorFontStyle" />
 
+            <!--Button to save the to do-->
             <Button
                 android:id="@+id/button_save_to_do"
                 android:layout_width="300dp"
@@ -146,6 +154,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
+            <!--Button to delete the to do completely-->
             <Button
                 android:id="@+id/button_delete_to_do"
                 android:layout_width="300dp"
@@ -164,6 +173,4 @@
 
         </LinearLayout>
     </ScrollView>
-
-
 </android.support.constraint.ConstraintLayout>

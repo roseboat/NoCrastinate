@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--Layout of the SettingsFragment-->
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.SettingsFragment">
+    tools:context=".Fragments.SettingsFragment"
+    >
 
+    <!--Toolbar of the fragment-->
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         style="@style/Toolbar"
@@ -14,16 +18,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--Toolbar title of the fragment-->
     <TextView
-        android:id="@+id/toolBarHeaderToDo"
-        android:text="@string/title_activity_settings"
         style="@style/ToolbarText"
+        android:text="@string/title_activity_settings"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--Layout which contains the 3 settings menu items-->
     <LinearLayout
+        android:id="@+id/settings_layout"
         android:layout_width="360dp"
         android:layout_height="454dp"
         android:orientation="vertical"
@@ -33,6 +39,7 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         tools:layout_editor_absoluteX="0dp">
 
+        <!--Help Center menu item-->
         <TextView
             android:id="@+id/help_center"
             style="@style/SettingsButtons"
@@ -40,8 +47,10 @@
             android:layout_height="60dp"
             android:text="Help Center" />
 
-        <View style="@style/SettingsDivider"/>
+        <!--Divider between settings menu items-->
+        <View style="@style/SettingsDivider" />
 
+        <!--Notification Settings menu item-->
         <TextView
             android:id="@+id/notification_settings"
             style="@style/SettingsButtons"
@@ -49,8 +58,10 @@
             android:layout_height="60dp"
             android:text="Notification Settings" />
 
-        <View style="@style/SettingsDivider"/>
+        <!--Divider between menu items-->
+        <View style="@style/SettingsDivider" />
 
+        <!--Block Application menu item-->
         <TextView
             android:id="@+id/block_apps"
             style="@style/SettingsButtons"
@@ -58,6 +69,6 @@
             android:layout_height="60dp"
             android:text="Block Applications" />
 
-        <View style="@style/SettingsDivider"/>
+        <View style="@style/SettingsDivider" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

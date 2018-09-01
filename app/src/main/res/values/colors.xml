@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Defines the colours that will be used in the application-->
 <resources>
-    <!--<color name="colorPrimary">#b0b1fd</color>-->
-    <!--<color name="colorAccent">#f77172c1</color>-->
     <color name="colorNavBackground">#f7f7f7</color>
     <color name="colorToDoBackground">#f2f2f2</color>
     <color name="colorFontStyle">#777777</color>
@@ -10,12 +9,9 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorThird">#7b8f8e</color>
     <color name="colorRed">#b3d97476</color>
-    <color name="colorDivider">#bbbbbb</color>
     <color name="colorGradient1">#f9e8a6</color>
     <color name="colorGradient2">#ffc64b</color>
     <color name="colorPrimaryDark">#02cbd2</color>
     <color name="colorStarredToDo">#e6d5ff</color>
     <color name="colorGreyLight">#0d6c6c6c</color>
-    <color name="colorGreyMedium">#356c6c6c</color>
-    <color name="colorGreyDark">#576c6c6c</color>
 </resources>
