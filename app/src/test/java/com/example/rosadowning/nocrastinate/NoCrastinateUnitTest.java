@@ -1,4 +1,8 @@
 package com.example.rosadowning.nocrastinate;
+/*
+Unit test class which tests the databases of the application, the most important methods
+and ensures than upon loading a fragment, all of its views are not null.
+ */
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -45,10 +49,7 @@ public class NoCrastinateUnitTest {
     private StatsDBContract.StatsDBHelper statsDBHelper;
     private StatsData testStat;
 
-    /*
-    TESTING SET UP
-     */
-
+    // Sets up the tests
     @Before
     public void setUp() throws Exception {
         mainActivity = Robolectric.buildActivity(MainActivity.class).create().start().resume().visible().get();
@@ -60,6 +61,7 @@ public class NoCrastinateUnitTest {
         this.statsDBHelper = new StatsDBContract.StatsDBHelper(appContext);
     }
 
+    // Sets up a StatsIcon object to be used by tests
     @Before
     public void iconStats_setUp() {
 
@@ -73,10 +75,7 @@ public class NoCrastinateUnitTest {
         statsDBHelper.insertNewStat(testStat);
     }
 
-    /*
-    CONTEXT TESTS
-     */
-
+    // Confirms that the app's context is correct
     @Test
     public void useAppContext() throws Exception {
         // Context of the app under test.
@@ -87,6 +86,7 @@ public class NoCrastinateUnitTest {
     STATS TESTS
      */
 
+    // Checks if the StatsIcon object created in the iconStats_setUp is present in the weekly list of StatsIcon objects
     @Test
     public void iconStats_testIfInWeeklyInterval() {
 
@@ -102,6 +102,7 @@ public class NoCrastinateUnitTest {
         assertEquals(false, inWeekly);
     }
 
+    // Checks if the StatsIcon object created in the iconStats_setUp is present in the monthly list of StatsIcon objects
     @Test
     public void iconStats_testIfInMonthlyInterval() {
         // TESTS MONTHLY
@@ -116,6 +117,7 @@ public class NoCrastinateUnitTest {
         assertEquals(true, inMonthly);
     }
 
+    // Checks if the StatsIcon object created in the iconStats_setUp is present in the yearly list of StatsIcon objects
     @Test
     public void iconStats_testIfInYearlyInterval() {
         // TESTS YEARLY
@@ -130,6 +132,7 @@ public class NoCrastinateUnitTest {
         assertEquals(true, inYearly);
     }
 
+    // Inserts a fake app into a list of CustomAppHolders and then calls a method to filter out any non-system, non-installed apps
     @Test
     public void usageStats_isCorrect() {
 
@@ -150,6 +153,7 @@ public class NoCrastinateUnitTest {
         assertEquals("Fake App should not be present", false, fakeAppPresent);
     }
 
+    // Checks that an alarm is successfully set in the alarm database
     @Test
     public void alarmDB_checkIfAlarmSet() {
 
@@ -161,10 +165,7 @@ public class NoCrastinateUnitTest {
         alarmDBHelper.removeAlarm(timeNow);
     }
 
-    /*
-    TO DO LIST AND TO DO DATABASE TESTS
-     */
-
+    // Checks whether a to do is inserted and deleted successfully from the To Do database
     @Test
     public void toDo_InsertedThenDeletedFromDatabase() {
 
@@ -205,6 +206,7 @@ public class NoCrastinateUnitTest {
         assertEquals("Test to do has been successfully deleted", true, deleted);
     }
 
+    // Checks whether the To Do database is cleared successfully
     @Test
     public void toDo_clearToDoDatabase() {
 
@@ -213,19 +215,7 @@ public class NoCrastinateUnitTest {
         assertEquals("Initial clearing. Database size should = 0", 0, items.size());
     }
 
-    @Test
-    public void toDo_addingMultipleToDosToDatabase() {
-
-        toDoListDbHelper.clearToDoList();
-        toDoListDbHelper.insertNewToDo(new ToDoItem("to do 1"));
-        toDoListDbHelper.insertNewToDo(new ToDoItem("to do 2"));
-        toDoListDbHelper.insertNewToDo(new ToDoItem("to do 3"));
-
-        List<ToDoItem> afterAddingItems = toDoListDbHelper.getToDoList(false);
-        assertEquals("After adding items. Database size should = 3", 3, afterAddingItems.size());
-
-    }
-
+    // Inserts two different to-dos to the to do database, each with different isCompleted booleans - then confirms that they appear in the correct kind of lists when queried
     @Test
     public void toDo_testCompleteAndIncompleteToDoLists() {
 
@@ -249,6 +239,7 @@ public class NoCrastinateUnitTest {
         assertEquals("Completed To Do Name = 'Complete'", "Complete", completeToDos.get(0).getName());
     }
 
+    // Tests that to dos are edited correctly
     @Test
     public void toDo_setToDoAsCompleted() {
 
@@ -262,6 +253,7 @@ public class NoCrastinateUnitTest {
         assertEquals("toDoItem in Completed To-Do List", "Switching from incomplete to complete", completeToDos.get(0).getName());
     }
 
+    // Tests that to dos are edited correctly
     @Test
     public void toDo_setToDoAsStarred() {
 
@@ -275,9 +267,7 @@ public class NoCrastinateUnitTest {
         assertEquals("toDoItem is starred", true, toDoItems.get(0).getStarred());
     }
 
-    /*
-    TESTS BLOCKED APPS DATABASE AND GETAPPS() METHOD IN BLOCKEDAPPSFRAGMENT
-     */
+    // Inserts a fake app into the BlockedAppsDB
     @Test
     public void blockedApps_databaseInsertion() {
 
@@ -294,6 +284,7 @@ public class NoCrastinateUnitTest {
         assertEquals("Insertion of fake app successful", true, containsFake);
     }
 
+    // Inserts and deletes a fake app
     @Test
     public void blockedApps_databaseDeletion() {
 
@@ -322,38 +313,37 @@ public class NoCrastinateUnitTest {
         assertEquals("ToBeDeleted deleted successfully", false, containsToBeDeleted);
     }
 
+    // Inserts a fake app into the BlockedAppsDB then checks that the BlockAppsFragment method getApps does NOT return the fake app
     @Test
     public void blockedApps_fragmentMethodDoesNotReturnFakeApp() {
 
-        blockedAppsDBHelper.insertApp("FakeApp");
+        blockedAppsDBHelper.insertApp("fakeApp");
 
         BlockAppsFragment blockAppsFragment = new BlockAppsFragment();
         List<CustomAppHolder> blockedApps = blockAppsFragment.getApps(appContext);
 
         boolean containsFakeApp = false;
         for (CustomAppHolder app : blockedApps) {
-            if (app.packageName.equals("FakeApp")) {
+            if (app.packageName.equals("fakeApp")) {
                 containsFakeApp = true;
                 break;
             }
         }
 
-        assertEquals("'FakeApp' should not be in blocked apps", false, containsFakeApp);
-        blockedAppsDBHelper.removeApp("FakeApp");
+        assertEquals("'fakeApp' should not be in blocked apps", false, containsFakeApp);
+        blockedAppsDBHelper.removeApp("fakeApp");
     }
 
-    /*
-    TIME HELPER METHODS
-     */
-
+    // Tests the static method formatDuration()
     @Test
     public void timeHelper_formatDurationIsCorrect(){
-        String time = "2d3h45m";
+        String time = "2d 3h 45m ";
         long testDuration = 186300000; // 2 days, 3 hours, 45 minutes
         String timeHelperString = TimeHelper.formatDuration(testDuration);
-        assertEquals("TimeHelper string reads \"2d3h45m\"", time, timeHelperString);
+        assertEquals("TimeHelper string reads \"2d 3h 45m \"", time, timeHelperString);
     }
 
+    // Tests the static method getHeadingString()
     @Test
     public void timeHelper_headingStringIsCorrect(){
 
@@ -374,9 +364,9 @@ public class NoCrastinateUnitTest {
         assertEquals(yearlyExpected, yearlyActual);
     }
 
-    /*
-    FUNCTIONAL TESTING STARTS HERE
-     */
+   /*
+   Tests that the views on each fragment are not null
+    */
     @Test
     public void mainActivity_isNotNull(){
         assertNotNull(mainActivity);
@@ -428,14 +418,17 @@ public class NoCrastinateUnitTest {
         mainActivity.findViewById(R.id.notification_checkbox_1).setSelected(false);
     }
 
+    // Post tests tear down
     @After
     public void tearDown() {
-
         blockedAppsDBHelper.clearDatabase();
         toDoListDbHelper.clearToDoList();
         statsDBHelper.deleteStat(testStat);
     }
 
+    /*
+    HELPER METHODS
+     */
     public String getActiveFragment(){
        return mainActivity.getSupportFragmentManager().findFragmentById(R.id.fragment_container).getClass().getSimpleName();
     }

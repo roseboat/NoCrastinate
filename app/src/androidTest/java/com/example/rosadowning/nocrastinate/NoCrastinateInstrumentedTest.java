@@ -185,7 +185,7 @@ public class NoCrastinateInstrumentedTest {
 
     // Checks a to-do as completed and then confirms that it has been removed from the incompleted to-dos list
     @Test
-    public void toDoList_checkToDoAsCompleted() {
+    public void toDo_checkToDoAsCompleted() {
         goToFragment(new ToDoFragment());
 
         ToDoDBContract.ToDoListDbHelper toDoListDbHelper = new ToDoDBContract.ToDoListDbHelper(context);
@@ -211,9 +211,36 @@ public class NoCrastinateInstrumentedTest {
         assertEquals(false, isPresent);
     }
 
+    // Stars a to-do and then confirms it has been starred in the database
+    @Test
+    public void toDo_starToDo() {
+        goToFragment(new ToDoFragment());
+
+        // Initially makes sure the first to do is NOT STARRED
+        onView(withId(R.id.to_do_recycler_view)).perform(
+                RecyclerViewActions.actionOnItemAtPosition(0, MyViewAction.setChecked(R.id.toDoStar, false)));
+
+        // Gets the boolean for whether the first item in the list is starred
+        ToDoDBContract.ToDoListDbHelper toDoListDbHelper = new ToDoDBContract.ToDoListDbHelper(context);
+        List<ToDoItem> preList = toDoListDbHelper.getToDoList(false);
+        boolean preItemStar = preList.get(0).getStarred();
+
+        // Stars the to do
+        onView(withId(R.id.to_do_recycler_view)).perform(
+                RecyclerViewActions.actionOnItemAtPosition(0, MyViewAction.clickChildViewWithId(R.id.toDoStar)));
+
+        // After starring the to-do, gets whether or not the to do has been starred
+        List<ToDoItem> postList = toDoListDbHelper.getToDoList(false);
+        boolean postItemStar = postList.get(0).getStarred();
+
+        assertEquals("To do was initially NOT STARRED", false, preItemStar);
+        assertEquals("To do was then starred", true, postItemStar);
+
+    }
+
     // Compares the contents of the ToDoDB with the amount of elements in the To Do List's recycler view
     @Test
-    public void toDoList_recyclerViewHasCorrectNumOfElements() {
+    public void toDo_recyclerViewHasCorrectNumOfElements() {
         goToFragment(new ToDoFragment());
         ToDoDBContract.ToDoListDbHelper dbHelper = new ToDoDBContract.ToDoListDbHelper(context);
         int expected = dbHelper.getToDoList(false).size();
@@ -259,7 +286,6 @@ public class NoCrastinateInstrumentedTest {
         }
         assertEquals("The To Do has been deleted", true, isDeleted);
     }
-
 
     // Compares the number of completed to dos in the ToDoDB to the number of elements in the CompletedToDoFragment's Recycler View
     @Test

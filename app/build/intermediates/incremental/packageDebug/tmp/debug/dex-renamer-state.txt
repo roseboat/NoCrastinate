@@ -1,4 +1,13 @@
-#Sat Sep 01 10:46:40 BST 2018
-base.0=/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/transforms/dexMerger/debug/238
+#Sun Sep 02 20:04:14 BST 2018
+path.3=classes.dex
+path.2=classes.dex
+path.1=classes.dex
 path.0=classes.dex
+renamed.3=classes4.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
 renamed.0=classes.dex
+base.3=/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/transforms/dexMerger/debug/253
+base.2=/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/transforms/dexMerger/debug/251
+base.1=/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/transforms/dexMerger/debug/252
+base.0=/Users/RosaDowning/Downloads/NoCrastinate/app/build/intermediates/transforms/dexMerger/debug/250
